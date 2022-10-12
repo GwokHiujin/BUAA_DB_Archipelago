@@ -27,7 +27,9 @@
 }
 
 .homepage {
-  background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/topography.png);
+  background-image:
+      linear-gradient(to top, transparent, white),
+      url(https://www.toptal.com/designers/subtlepatterns/uploads/topography.png);
   background-repeat: repeat;
 }
 </style>
