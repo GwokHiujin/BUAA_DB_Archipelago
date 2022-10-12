@@ -1,11 +1,7 @@
-<template xmlns="http://www.w3.org/1999/html">
+<template>
   <el-header>
-    <span class="el-descriptions" style="font-family: Gabriola; font-size: 21px">
-      Archipelago, help you discover amazing new music and directly support the artists who make it.
-    </span>
-  </el-header>
 
-  <el-space size="100px"></el-space>
+  </el-header>
 
   <el-carousel :interval="4000" type="card" height="300px">
     <el-carousel-item>
@@ -33,6 +29,11 @@
       />
     </el-carousel-item>
   </el-carousel>
+  <el-divider/>
+  <br>
+  <span class="el-descriptions" style="font-family: Gabriola; font-size: 21px">
+      Archipelago, help you discover amazing new music and directly support the artists who make it.
+  </span>
 </template>
 
 <style scoped>

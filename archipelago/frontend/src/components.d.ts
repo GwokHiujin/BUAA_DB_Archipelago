@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AlbumChange: typeof import('./components/Album/AlbumChange.vue')['default']
     AlbumTable: typeof import('./components/Album/AlbumTable.vue')['default']
+    AudienceIndex: typeof import('./components/AudienceIndex.vue')['default']
     AudienceSide: typeof import('./components/Admin/AudienceSide.vue')['default']
     BaseHeader: typeof import('./components/layouts/BaseHeader.vue')['default']
     BaseSide: typeof import('./components/layouts/BaseSide.vue')['default']
@@ -18,6 +19,7 @@ declare module '@vue/runtime-core' {
     ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElContainer: typeof import('element-plus/es')['ElContainer']
+    ElDivider: typeof import('element-plus/es')['ElDivider']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElMain: typeof import('element-plus/es')['ElMain']
@@ -28,6 +30,7 @@ declare module '@vue/runtime-core' {
     Index: typeof import('./components/Index.vue')['default']
     Login: typeof import('./components/Admin/Login.vue')['default']
     MusicianChange: typeof import('./components/Musician/MusicianChange.vue')['default']
+    MusicianIndex: typeof import('./components/MusicianIndex.vue')['default']
     MusicianProfile: typeof import('./components/Musician/MusicianProfile.vue')['default']
     MusicianSide: typeof import('./components/Admin/MusicianSide.vue')['default']
     Register: typeof import('./components/Admin/Register.vue')['default']

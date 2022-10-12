@@ -8,7 +8,7 @@
         <el-header height="70px">
           <BaseHeader/>
         </el-header>
-        <el-main>
+        <el-main class="homepage">
           <HelloWorld />
         </el-main>
       </el-container>
@@ -24,5 +24,10 @@
 
 .element-plus-logo {
   width: 50%;
+}
+
+.homepage {
+  background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/topography.png);
+  background-repeat: repeat;
 }
 </style>
