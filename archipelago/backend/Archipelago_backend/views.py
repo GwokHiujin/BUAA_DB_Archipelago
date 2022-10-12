@@ -1,9 +1,8 @@
-from django.shortcuts import render
-
 import json
+
 from django.db import connection
 # Create your views here.
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 
 
 # 10.12: 初步实验，注册及登录的部分逻辑
@@ -14,7 +13,7 @@ def login(request):
         email = payload.get("email")
         password = payload.get("password")
         cur = connection.cursor()
-        cur.execute("SELECT PW FROM users WHERE UE=%s", email)
+        cur.execute("SELECT PW FROM users WHERE UE=%s", (email,))
         sql_result = cur.fetchall()
         if len(sql_result) == 1:
             ref_password = sql_result[0][0]
@@ -37,7 +36,6 @@ def login(request):
 def register(request):
     if request.method == "POST":
         json_str = request.body.decode()
-        print(json_str)
         payload = json.loads(json_str)
         email = payload.get("email")
         nickname = payload.get("nickname")
@@ -46,7 +44,7 @@ def register(request):
         type_id = payload.get("type")
         bio = payload.get("bio")
         cur = connection.cursor()
-        cur.execute("SELECT * FROM users WHERE UE=%s", email)
+        cur.execute("SELECT * FROM users WHERE UE=%s", (email,))
         sql_result = cur.fetchall()
         if len(sql_result) != 0:
             return JsonResponse({"success": False, "message": "邮箱已注册"})
