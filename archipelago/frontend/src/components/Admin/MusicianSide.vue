@@ -9,7 +9,7 @@
           <img alt="Archipelago logo" src="src/assets/img/logo-long.png" width="220"/>
         </div>
       </div>
-      <el-menu-item index="/">
+      <el-menu-item index="/MusicianIndex">
         <template #title>
           <el-icon><HomeFilled /></el-icon>
           <span>Home</span>
