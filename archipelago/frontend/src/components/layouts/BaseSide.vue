@@ -5,7 +5,7 @@
         class="el-menu-vertical-demo"
       >
         <div style="display: flex">
-          <div>
+          <div >
             <img alt="Archipelago logo" src="src/assets/img/logo-long.png" width="220"/>
           </div>
         </div>

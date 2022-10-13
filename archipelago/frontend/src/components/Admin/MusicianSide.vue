@@ -1,8 +1,3 @@
-/*
-
-
-*/
-
 <template>
   <el-affix>
     <el-menu

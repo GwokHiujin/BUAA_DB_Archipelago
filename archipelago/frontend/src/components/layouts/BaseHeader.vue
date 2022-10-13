@@ -14,7 +14,7 @@
       </el-menu-item>
       <el-menu-item index="2">
         <el-icon><UserFilled /></el-icon>
-        REGISTER
+        SIGN UP
       </el-menu-item>
     </el-menu>
   </el-affix>
