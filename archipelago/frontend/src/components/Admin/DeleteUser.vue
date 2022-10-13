@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "SettingChange"
+  name: "DeleteUser"
 }
 </script>
 

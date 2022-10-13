@@ -8,13 +8,18 @@
     >
 
       <div class="flex-grow" />
-      <el-menu-item index="1">
-        <el-icon><Reading /></el-icon>
-        LOG IN
+      <el-menu-item index="/SettingPage">
+        <el-avatar>
+
+        </el-avatar>
       </el-menu-item>
-      <el-menu-item index="2">
-        <el-icon><UserFilled /></el-icon>
-        REGISTER
+      <el-menu-item index="/">
+        <el-icon><Promotion /></el-icon>
+        LOG OUT
+      </el-menu-item>
+      <el-menu-item index="/UserDelete" style="color: #b21a20">
+        <el-icon><DeleteFilled /></el-icon>
+        Delete
       </el-menu-item>
     </el-menu>
   </el-affix>

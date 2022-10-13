@@ -1,6 +1,6 @@
 <template>
   <el-config-provider namespace="ep">
-    <el-container>
+    <el-container class="page">
       <el-aside width="250px">
         <BaseSide/>
       </el-aside>
@@ -16,20 +16,21 @@
   </el-config-provider>
 </template>
 
+<script>
+export default {
+  name: "Index"
+}
+</script>
+
 <style>
 #app {
   text-align: center;
   color: var(--ep-text-color-primary);
 }
 
-.element-plus-logo {
-  width: 50%;
-}
-
 .homepage {
-  background-image:
-      linear-gradient(to top, transparent, white),
-      url(https://www.toptal.com/designers/subtlepatterns/uploads/topography.png);
-  background-repeat: repeat;
+  height: 100%;
+  background-image: url(src/assets/img/grey.png);
+  background-size: auto;
 }
 </style>
