@@ -23,6 +23,9 @@ import UserRegister from '../components/Admin/Register.vue'
 import UserLogin from '../components/Admin/Login.vue'
 import UserDelete from '../components/Admin/DeleteUser.vue'
 
+//LoginAndRegister page
+import LoginAndRegister from '../components/LogingAndRegister/LoginAndRegister.vue'
+
 const routes = [
     {
         path: "/",
@@ -94,6 +97,11 @@ const routes = [
         path: "/UserDelete",
         name: "UserDelete",
         component: UserDelete
+    },
+    {
+        path: "/Login&Register",
+        name: "Login&Register",
+        component: LoginAndRegister
     }
 ]
 

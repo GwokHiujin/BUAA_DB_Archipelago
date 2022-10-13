@@ -49,6 +49,7 @@ declare module '@vue/runtime-core' {
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     Index: typeof import('./components/Index.vue')['default']
     Login: typeof import('./components/Admin/Login.vue')['default']
+    LoginAndRegister: typeof import('./components/LogingAndRegister/LoginAndRegister.vue')['default']
     MusicianChange: typeof import('./components/Musician/MusicianChange.vue')['default']
     MusicianIndex: typeof import('./components/MusicianIndex.vue')['default']
     MusicianProfile: typeof import('./components/Musician/MusicianProfile.vue')['default']
