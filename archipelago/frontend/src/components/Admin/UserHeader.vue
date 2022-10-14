@@ -1,22 +1,22 @@
 <template>
   <el-affix>
     <el-menu
-        :default-active="this.$route.path" router
+        default-active="activeIndex"
         class="el-menu-demo"
         mode="horizontal"
         :ellipsis="false"
     >
 
-      <el-menu-item index="/SettingPage">
+      <el-menu-item index="1" @click="this.$router.push('/SettingPage')">
         <img src="src/assets/img/avatar-default.jpg" class="head-avatar" />
       </el-menu-item>
 
       <div class="flex-grow" />
-      <el-menu-item index="/">
+      <el-menu-item index="2" @click="this.$router.push('/')">
         <el-icon><Promotion /></el-icon>
         LOG OUT
       </el-menu-item>
-      <el-menu-item index="/UserDelete" style="color: #b21a20">
+      <el-menu-item index="3" @click="this.$router.push('/UserDelete')" style="color: #b21a20">
         <el-icon><DeleteFilled /></el-icon>
         Delete
       </el-menu-item>

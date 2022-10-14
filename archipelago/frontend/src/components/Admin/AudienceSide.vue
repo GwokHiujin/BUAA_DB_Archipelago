@@ -1,7 +1,7 @@
 <template>
   <el-affix>
     <el-menu
-        :default-active="this.$route.path" router
+        default-active="activeIndex"
         class="el-menu-vertical-demo"
     >
       <div style="display: flex">
@@ -9,14 +9,14 @@
           <img alt="Archipelago logo" src="src/assets/img/logo-long.png" width="220"/>
         </div>
       </div>
-      <el-menu-item index="/AudienceIndex">
+      <el-menu-item index="1" @click="this.$router.push('/AudienceIndex')">
         <template #title>
           <el-icon><HomeFilled /></el-icon>
           <span>Home</span>
         </template>
       </el-menu-item>
 
-      <el-menu-item index="/SettingPage">
+      <el-menu-item index="2" @click="this.$router.push('/SettingPage')">
         <template #title>
           <el-icon><Tools /></el-icon>
           <span>Settings</span>
