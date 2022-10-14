@@ -71,10 +71,10 @@ export default {
         email: document.getElementById('email2').value,
         password: document.getElementById('pw').value
       };
-      this.axios({
+      axios({
         method: 'post',
-        url: "login/login/", //暂定
-        data: qs.stringify(params)
+        url: "api/login/", //暂定
+        data: JSON.stringify(params)
       })
       .then(res => {
         console.log(res.data)
@@ -120,10 +120,10 @@ export default {
         usertype: this.utype
       };
       console.log(params);
-      this.axios({
+      axios({
         method: 'post',
-        url: "login/register/", //待定
-        data: qs.stringify(params)
+        url: "api/register/", //待定
+        data: JSON.stringify(params)
       })
       .then(res => {
         console.log(res.data)

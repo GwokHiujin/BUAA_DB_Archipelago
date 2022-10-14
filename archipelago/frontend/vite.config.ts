@@ -62,4 +62,13 @@ export default defineConfig({
       ]
     }),
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://43.143.200.141:8000',//代理的地址
+        changeOrigin: true,
+        // rewrite: path => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })
