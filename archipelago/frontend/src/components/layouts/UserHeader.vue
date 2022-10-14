@@ -16,20 +16,94 @@
         <el-icon><Promotion /></el-icon>
         LOG OUT
       </el-menu-item>
-      <el-menu-item index="3" @click="this.$router.push('/UserDelete')" style="color: #b21a20">
+      <el-menu-item index="3" @click="dialogVisible = true" style="color: #b21a20">
         <el-icon><DeleteFilled /></el-icon>
         Delete
       </el-menu-item>
+
+      <el-dialog
+          v-model="dialogVisible"
+          title="Delete this account"
+          width="30%"
+          align-center
+      >
+        <span>For security, please enter the password of your account</span>
+        <el-divider/>
+        <el-form-item label="Password" :label-width="formLabelWidth">
+          <el-input v-model.lazy="password0" autocomplete="off" placeholder="Enter Old Password" show-password="false"/>
+        </el-form-item>
+        <el-form-item label="Confirm" :label-width="formLabelWidth">
+          <el-input v-model.lazy="password1" autocomplete="off" placeholder="Enter Old Password" show-password="false"/>
+        </el-form-item>
+
+        <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">
+          Cancel
+        </el-button>
+        <el-button type="primary" @click="deleteAccount()">
+          Delete
+        </el-button>
+      </span>
+        </template>
+      </el-dialog>
+
     </el-menu>
   </el-affix>
 </template>
 
 <script>
 export default {
+  name: 'UserHeader',
+  data() {
+    return {
+      dialogVisible: false,
+      formLabelWidth: '100px',
+      password0: '',
+      password1: ''
+    }
+  },
   methods: {
     logOut: function () {
       this.$store.state.isLogin = false;
       this.$router.push('/');
+    },
+    deleteAccount: function () {
+      let that = this;
+      if (that.password0 !== this.$store.state.userInfo.password ||
+          that.password1 !== this.$store.state.userInfo.password) {
+        that.$message.error("Wrong password! Fail to delete this account");
+      } else {
+        this.axios.request({
+          method: 'post',
+          url: "", // TODO
+          data: qs.stringify({
+            userEmail: this.$store.state.userInfo.email
+          })
+        }).then(res => {
+          console.log(res.data)
+          if (res.data.errno === 0) {
+            this.$message({
+              message: "Successfully delete this account!",
+              type: 'success',
+              showClose: true
+            })
+            this.dialogVisible = false;
+            this.$store.state.userInfo.isLogin = false;
+            this.$router.push('/');
+          } else {
+            this.$message({
+              message: "Fail to delete this account",
+              type: 'error',
+              showClose: true
+            })
+            this.dialogVisible = false;
+            location.reload();
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      }
     }
   }
 }
