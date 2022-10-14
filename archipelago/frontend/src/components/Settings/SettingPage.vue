@@ -1,8 +1,11 @@
 <template>
   <el-config-provider namespace="ep">
     <el-container>
-      <el-aside width="250px">
+      <el-aside width="250px" v-if="type === 0">
         <AudienceSide/>
+      </el-aside>
+      <el-aside width="250px" v-if="type === 1">
+        <MusicianSide/>
       </el-aside>
       <el-container>
         <el-header height="70px">
@@ -16,10 +19,9 @@
   </el-config-provider>
 </template>
 
-<script>
-export default {
-  name: "SettingPage"
-}
+<script setup>
+import {ref} from 'vue'
+const type = ref(0)
 </script>
 
 <style>

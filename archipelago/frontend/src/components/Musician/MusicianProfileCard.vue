@@ -14,10 +14,10 @@
           Edit
         </el-button>
 
-        <el-dialog v-model="dialogFormVisible" title="Shipping address">
+        <el-dialog v-model.lazy="dialogFormVisible" title="Shipping address">
           <el-form>
             <el-form-item label="Musician name" :label-width="formLabelWidth">
-              <el-input v-model="musicianName" autocomplete="off" placeholder="Let us know your name!"/>
+              <el-input v-model.lazy="musicianName" autocomplete="off" placeholder="Let us know your name!"/>
             </el-form-item>
 
             <el-form-item label="Photo" :label-width="formLabelWidth">
@@ -25,7 +25,7 @@
             </el-form-item>
 
             <el-form-item label="Origin Country" :label-width="formLabelWidth">
-              <el-select  placeholder="Choose your origin country" style="width: 77.9%" v-model="originCountry">
+              <el-select  placeholder="Choose your origin country" style="width: 77.9%" v-model.lazy="originCountry">
                 <el-option v-for="item in country" :key="item.label" :label="item.value" :value="item.value">
                   <span style="float: left">{{ item.label }}</span>
                   <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
@@ -34,23 +34,23 @@
             </el-form-item>
 
             <el-form-item label="Location" :label-width="formLabelWidth">
-              <el-input v-model="location" autocomplete="off" placeholder="Enter your detailed location"/>
+              <el-input v-model.lazy="location" autocomplete="off" placeholder="Enter your detailed location"/>
             </el-form-item>
 
             <el-form-item label="Lyrical Themes" :label-width="formLabelWidth">
-              <el-input v-model="lyricalThemes" autocomplete="off" placeholder="Enter your lyrical themes"/>
+              <el-input v-model.lazy="lyricalThemes" autocomplete="off" placeholder="Enter your lyrical themes"/>
             </el-form-item>
 
             <el-form-item label="Formed Year" :label-width="formLabelWidth">
               <el-date-picker
-                  v-model="formedYear"
+                  v-model.lazy="formedYear"
                   type="year"
                   placeholder="Pick a year"
               />
             </el-form-item>
 
             <el-form-item label="Introduction" :label-width="formLabelWidth">
-              <el-input v-model="introduction" autocomplete="off" placeholder="Enter introduction"/>
+              <el-input v-model.lazy="introduction" autocomplete="off" placeholder="Enter introduction"/>
             </el-form-item>
           </el-form>
           <template #footer>
@@ -140,7 +140,7 @@
   </el-card>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { ref } from 'vue'
 
 const dialogFormVisible = ref(false)

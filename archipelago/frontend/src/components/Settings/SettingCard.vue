@@ -2,27 +2,34 @@
   <el-card class="box-card" >
     <template #header>
       <div class="card-header">
-        <img src="src/assets/img/avatar-default.jpg" class="avatar"/>
+        <img src="src/assets/img/avatar-default.jpg" class="avatar" v-if="useravatar === ''"/>
+        <img src={{useravatar}} class="avatar" v-else/>
         <span class="username">
-          MusicLover
+          {{nickname}}
           <el-space/>
-          <el-tag style="font-family: 'Candara Light'">
+          <el-tag style="font-family: 'Candara Light'" v-if="type === 0">
             Audience User
+          </el-tag>
+          <el-tag style="font-family: 'Candara Light'" v-if="type === 1">
+            Musician User
           </el-tag>
         </span>
         <el-button class="button" text @click="outerVisible = true">
           Edit
         </el-button>
         <el-dialog
-            v-model="outerVisible"
+            v-model.lazy="outerVisible"
             title="Edit Your Profile"
             style="border-radius: 5%"
             width="30%"
             align-center
         >
-          <el-form :model="form">
+          <el-form>
             <el-form-item label="Nickname" :label-width="formLabelWidth">
-              <el-input v-model="form.name" autocomplete="off" placeholder="Enter New Nickname"/>
+              <el-input v-model.lazy="nickname" autocomplete="off" placeholder="Enter New Nickname"/>
+            </el-form-item>
+            <el-form-item label="Bio" :label-width="formLabelWidth">
+              <el-input v-model.lazy="bio" autocomplete="off" placeholder="Enter your bio"/>
             </el-form-item>
             <el-form-item label="Password" :label-width="formLabelWidth">
               <el-button class="el-button--danger" @click="innerVisible = true">
@@ -31,7 +38,7 @@
             </el-form-item>
 
             <el-dialog
-              v-model="innerVisible"
+              v-model.lazy="innerVisible"
               title="Edit Password"
               style="border-radius: 5%"
               width="40%"
@@ -39,13 +46,13 @@
               align-center
             >
               <el-form-item label="Old Password" :label-width="formLabelWidth">
-                <el-input v-model="form.name" autocomplete="off" placeholder="Enter Old Password" show-password="false"/>
+                <el-input v-model.lazy="password0" autocomplete="off" placeholder="Enter Old Password" show-password="false"/>
               </el-form-item>
               <el-form-item label="New Password" :label-width="formLabelWidth">
-                <el-input v-model="form.name" autocomplete="off" placeholder="Enter New Password" show-password="false"/>
+                <el-input v-model.lazy="password1" autocomplete="off" placeholder="Enter New Password" show-password="false"/>
               </el-form-item>
               <el-form-item label="Confirm" :label-width="formLabelWidth">
-                <el-input v-model="form.name" autocomplete="off" placeholder="Enter New Password Again" show-password="false"/>
+                <el-input v-model.lazy="password2" autocomplete="off" placeholder="Enter New Password Again" show-password="false"/>
               </el-form-item>
               <template #footer>
                 <span class="dialog-footer">
@@ -85,7 +92,7 @@
             Nickname
           </div>
         </template>
-        kooriookami
+        {{nickname}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template #label>
@@ -94,7 +101,7 @@
             Register Email
           </div>
         </template>
-        test@example.com
+        {{email}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template #label>
@@ -103,52 +110,27 @@
             Bio
           </div>
         </template>
-        Hello world! Just love music...
+        {{bio}}
       </el-descriptions-item>
     </el-descriptions>
   </el-card>
 </template>
 
-<script lang="ts" setup>
-import { reactive, ref } from 'vue'
+<script setup>
+import { ref } from 'vue'
 
 const outerVisible = ref(false)
 const innerVisible = ref(false)
-const formLabelWidth = '140px'
+const formLabelWidth = '160px'
 
-const form = reactive({
-  name: '',
-  region: '',
-  date1: '',
-  date2: '',
-  delivery: false,
-  type: [],
-  resource: '',
-  desc: '',
-})
-
-const gridData = [
-  {
-    date: '2016-05-02',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
-  },
-  {
-    date: '2016-05-04',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
-  },
-  {
-    date: '2016-05-01',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
-  },
-  {
-    date: '2016-05-03',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
-  },
-]
+const email = ref('')
+const nickname = ref(email)
+const useravatar = ref('')
+const password0 = ref('')
+const password1 = ref('')
+const password2 = ref('')
+const type = ref(0)
+const bio = ref('')
 </script>
 
 <style>
