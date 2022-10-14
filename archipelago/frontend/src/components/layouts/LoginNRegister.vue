@@ -10,34 +10,34 @@
         <div className="form-box">
           <div className="register-box hidden">
             <h1>register</h1>
-            <input type="text" placeholder="Username" id="un1">
-            <input type="email" placeholder="Email" id="email">
-            <input type="password" placeholder="Password" id="pw1">
-            <input type="password" placeholder="Confirm password" id="pw2" @keyup.enter="toRegister">
+            <input type="text" placeholder="用户名" id="un1">
+            <input type="email" placeholder="邮箱" id="email1">
+            <input type="password" placeholder="密码" id="pw1">
+            <input type="password" placeholder="确认密码" id="pw2" @keyup.enter="toRegister">
             <el-radio-group v-model="utype" className="ml-4">
-              <el-radio label="0" size="large">I'm Audience</el-radio>
-              <el-radio label="1" size="large">I'm Musician</el-radio>
+              <el-radio label="0" size="large">我是听众</el-radio>
+              <el-radio label="1" size="large">我是音乐人</el-radio>
             </el-radio-group>
-            <button @click="toRegister()">SIGN UP</button>
+            <button @click="toRegister()">确认注册</button>
           </div>
           <div className="login-box">
             <h1>login</h1>
-            <input type="email" placeholder="Email" id="email">
-            <input type="password" placeholder="Password" id="pw" @keyup.enter="toLogin">
-            <button @click="toLogin()">LOG IN</button>
+            <input type="email" placeholder="邮箱" id="email2">
+            <input type="password" placeholder="密码" id="pw" @keyup.enter="toLogin">
+            <button @click="toLogin()">登录</button>
           </div>
         </div>
         <div className="con-box left">
-          <h2>Welcome <span>SIGN UP</span></h2>
+          <h2>欢迎您<span>注册</span></h2>
           <img src="../../assets/img/register.png" alt="加载失败">
-          <p>Have an account?</p>
-          <button id="login">LOG IN</button>
+          <p>已有账号</p>
+          <button id="login">去登录</button>
         </div>
         <div className="con-box right">
-          <h2>Welcome <span>LOG IN</span></h2>
+          <h2>欢迎您<span>登陆</span></h2>
           <img src="../../assets/img/login.png" alt="加载失败">
-          <p>Don't have an account?</p>
-          <button id="register">SIGN UP</button>
+          <p>没有账号？</p>
+          <button id="register">去注册</button>
         </div>
       </div>
     </div>
@@ -47,11 +47,12 @@
 
 <script>
 import axios from "axios";
-axios.defaults.withCredentials = true;
 import qs from "qs";
 
+axios.defaults.withCredentials = true;
+
 export default {
-  name: 'LoginNRegister',
+  name: 'LoginAndRegister',
   data() {
     return {
       utype: "0",
@@ -62,21 +63,23 @@ export default {
     this.initPage()
   },
   methods: {
+
     toLogin: function () {
       let params;
-      let that = this;
+      let tempthis = this;
       params = {
-        email: document.getElementById('email').value,
+        email: document.getElementById('email2').value,
         password: document.getElementById('pw').value
       };
-      this.axios({
+      axios({
         method: 'post',
-        url: "",    // TODO
-        data: qs.stringify(params)
+        url: "api/login/", //暂定
+        data: JSON.stringify(params)
       })
           .then(res => {
             console.log(res.data)
             if (res.data.errno === 0) {
+
               this.$store.state.userInfo.email = res.data.email; //邮箱
               this.$store.state.userInfo.username = res.data.username; //用户昵称
               this.$store.state.userInfo.avatar = res.data.avatar; //头像地址
@@ -84,17 +87,19 @@ export default {
               this.$store.state.userInfo.profile = res.data.profile //用户简介
               this.$store.state.userInfo.password = res.data.password //用户密码
               this.$store.state.isLogin = true;
+
               this.$message({
                 message: '登陆成功',
                 type: 'success',
                 showClose: true,
               })
-              that.isLogin = true;
-              if (this.$store.state.userInfo.usertype === 0) {
+              tempthis.isLogin = true;
+              if (this.$store.state.userInfo.type === 0) {
                 this.$router.push('/AudienceIndex');
               } else {
                 this.$router.push('/MusicianIndex');
               }
+
             } else {
               this.$message({
                 message: res.data.msg,
@@ -102,6 +107,7 @@ export default {
                 showClose: true,
               })
             }
+
           })
           .catch(err => {
             console.log(err)
@@ -111,20 +117,21 @@ export default {
       let params;
       params = {
         username: document.getElementById('un1').value,
-        email: document.getElementById('email').value,
+        email: document.getElementById('email1').value,
         password_1: document.getElementById('pw1').value,
         password_2: document.getElementById('pw2').value,
         usertype: this.utype
       };
       console.log(params);
-      this.axios({
+      axios({
         method: 'post',
-        url: "",    // TODO
-        data: qs.stringify(params)
+        url: "api/register/", //待定
+        data: JSON.stringify(params)
       })
           .then(res => {
             console.log(res.data)
             if (res.data.errno === 0) {
+
               //this.$store.state.uid = res.data.uid;
               //this.$store.state.userInfo.username = user.username;
               //this.$store.state.isLogin = true;
@@ -134,6 +141,7 @@ export default {
                 showClose: true,
               })
               location.reload();
+
             } else {
               if (res.data.msg === '密码格式错误') {
                 this.$message({
@@ -149,6 +157,7 @@ export default {
                 })
               }
             }
+
           })
           .catch(err => {
             console.log(err)
@@ -181,6 +190,7 @@ input[type="radio"] {
 }
 
 .radio-box {
+
 }
 
 /* 自定义单选框初始样式 */
@@ -265,6 +275,7 @@ input[type="radio"]:checked ~ .item {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
   /* 相对定位 */
   position: relative;
+
 }
 
 .form-box {
