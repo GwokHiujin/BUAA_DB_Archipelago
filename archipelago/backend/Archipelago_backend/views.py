@@ -23,13 +23,6 @@ def login(request):
         elif len(sql_result) == 0:
             return JsonResponse({"success": False, "message": "错误的用户名或密码", "userID": 0})
         return JsonResponse({"success": False, "message": "未知异常", "userID": 0})
-    #             return JsonResponse({"success": True, "message": "登录成功，已为您的密码加密", "userID": user[0].user_id})
-    #         elif check_password(password, (user[0]).user_password):
-    #             return JsonResponse({"success": True, "message": "登录成功", "userID": user[0].user_id})
-    #         else:
-    #             return JsonResponse({"success": False, "message": "密码错误", "userID": user[0].user_id})
-    # else:
-    #     JsonResponse({"success": False, "message": "请求异常"})
 
 
 # 10.12: 初步实验
