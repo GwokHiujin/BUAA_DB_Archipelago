@@ -71,15 +71,14 @@ export default {
         email: document.getElementById('email2').value,
         password: document.getElementById('pw').value
       };
-      axios({
+      this.axios({
         method: 'post',
-        url: "api/login/", //暂定
-        data: JSON.stringify(params)
+        url: "login/login/", //暂定
+        data: qs.stringify(params)
       })
       .then(res => {
         console.log(res.data)
         if(res.data.errno === 0) {
-
           this.$store.state.userInfo.email = res.data.email; //邮箱
           this.$store.state.userInfo.username = res.data.username; //用户昵称
           this.$store.state.userInfo.avatar = res.data.avatar; //头像地址
@@ -120,10 +119,10 @@ export default {
         usertype: this.utype
       };
       console.log(params);
-      axios({
+      this.axios({
         method: 'post',
-        url: "api/register/", //待定
-        data: JSON.stringify(params)
+        url: "login/register/", //待定
+        data: qs.stringify(params)
       })
       .then(res => {
         console.log(res.data)
