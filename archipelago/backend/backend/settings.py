@@ -29,12 +29,13 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
-    "django.contrib.contenttypes",
     "django.contrib.sessions",
+    "django.contrib.contenttypes",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'Archipelago_backend.apps.ArchipelagoBackendConfig',
