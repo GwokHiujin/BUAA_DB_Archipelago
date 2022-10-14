@@ -21,12 +21,6 @@ def login(request):
         if len(sql_result) == 1:
             ref_password = sql_result[0][0]
             if ref_password != password:
-                # this.$store.state.userInfo.email = res.data.email; // 邮箱
-                # this.$store.state.userInfo.username = res.data.username; // 用户昵称
-                # this.$store.state.userInfo.avatar = res.data.avatar; // 头像地址
-                # this.$store.state.userInfo.usertype = res.data.usertype // 用户类型
-                # this.$store.state.userInfo.profile = res.data.profile // 用户简介
-                # this.$store.state.userInfo.password = res.data.password // 用户密码
                 return JsonResponse({"errno": 2,
                                      "msg": "错误的用户名或密码"})  # why need this
             # 由于数据库要求不能使用ORM，使用session完成AUTH + User的功能，session存储在内存Cache中，规避ORM
@@ -61,7 +55,7 @@ def register(request):
         cur.execute("SELECT * FROM users WHERE UE=%s", (email,))
         sql_result = cur.fetchall()
         if len(sql_result) != 0:
-            return JsonResponse({"success": False, "message": "邮箱已注册"})
+            return JsonResponse({"errno": 2, "msg": "邮箱已注册"})
         cur.execute("INSERT INTO users (UE, UN, AVATAR, PW, UTP, UB) VALUES(%s,%s,%s,%s,%s,%s)",
                     (email, nickname, 'NULL', password, type_id, bio))
         return JsonResponse({"errno": 0, "msg": "注册成功"})
