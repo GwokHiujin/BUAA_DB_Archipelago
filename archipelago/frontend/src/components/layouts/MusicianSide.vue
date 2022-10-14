@@ -6,7 +6,7 @@
     >
       <div style="display: flex">
         <div>
-          <img alt="Archipelago logo" src="src/assets/img/logo-long.png" width="220"/>
+          <img alt="Archipelago logo" src="../../assets/img/logo-long.png" width="220"/>
         </div>
       </div>
       <el-menu-item index="1" @click="this.$router.push('/MusicianIndex')">

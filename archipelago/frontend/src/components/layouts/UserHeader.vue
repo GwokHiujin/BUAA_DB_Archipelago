@@ -8,11 +8,11 @@
     >
 
       <el-menu-item index="1" @click="this.$router.push('/SettingPage')">
-        <img src="src/assets/img/avatar-default.jpg" class="head-avatar" />
+        <img src="../../assets/img/avatar-default.jpg" class="head-avatar" />
       </el-menu-item>
 
       <div class="flex-grow" />
-      <el-menu-item index="2" @click="this.$router.push('/')">
+      <el-menu-item index="2" @click="logOut()">
         <el-icon><Promotion /></el-icon>
         LOG OUT
       </el-menu-item>
@@ -23,6 +23,17 @@
     </el-menu>
   </el-affix>
 </template>
+
+<script>
+export default {
+  methods: {
+    logOut: function () {
+      this.$store.state.isLogin = false;
+      this.$router.push('/');
+    }
+  }
+}
+</script>
 
 <style>
 .flex-grow {

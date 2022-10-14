@@ -8,11 +8,11 @@
     >
 
       <div class="flex-grow" />
-      <el-menu-item index="1" @click="this.$router.push('/')">
+      <el-menu-item index="1" @click="this.$router.push('/LoginNRegister')">
         <el-icon><Reading /></el-icon>
         LOG IN
       </el-menu-item>
-      <el-menu-item index="2" @click="this.$router.push('/')">
+      <el-menu-item index="2" @click="this.$router.push('/LoginNRegister')">
         <el-icon><UserFilled /></el-icon>
         SIGN UP
       </el-menu-item>

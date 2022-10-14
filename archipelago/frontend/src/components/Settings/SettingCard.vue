@@ -2,15 +2,15 @@
   <el-card class="box-card" >
     <template #header>
       <div class="card-header">
-        <img src="src/assets/img/avatar-default.jpg" class="avatar" v-if="useravatar === ''"/>
-        <img src={{useravatar}} class="avatar" v-else/>
+        <img src="src/assets/img/avatar-default.jpg" class="avatar" v-if="userInfo.useravatar === ''"/>
+        <img src={{userInfo.useravatar}} class="avatar" v-else/>
         <span class="username">
-          {{nickname}}
+          {{userInfo.nickname}}
           <el-space/>
-          <el-tag style="font-family: 'Candara Light'" v-if="type === 0">
+          <el-tag style="font-family: 'Candara Light'" v-if="userInfo.type === 0">
             Audience User
           </el-tag>
-          <el-tag style="font-family: 'Candara Light'" v-if="type === 1">
+          <el-tag style="font-family: 'Candara Light'" v-if="userInfo.type === 1">
             Musician User
           </el-tag>
         </span>
@@ -26,10 +26,10 @@
         >
           <el-form>
             <el-form-item label="Nickname" :label-width="formLabelWidth">
-              <el-input v-model.lazy="nickname" autocomplete="off" placeholder="Enter New Nickname"/>
+              <el-input id="nickname" autocomplete="off" placeholder="Enter New Nickname"/>
             </el-form-item>
             <el-form-item label="Bio" :label-width="formLabelWidth">
-              <el-input v-model.lazy="bio" autocomplete="off" placeholder="Enter your bio"/>
+              <el-input id="bio" autocomplete="off" placeholder="Enter your bio"/>
             </el-form-item>
             <el-form-item label="Password" :label-width="formLabelWidth">
               <el-button class="el-button--danger" @click="innerVisible = true">
@@ -72,7 +72,7 @@
               <el-button @click="outerVisible = false">
                 Cancel
               </el-button>
-              <el-button type="primary" @click="outerVisible = false">
+              <el-button type="primary" @click="confirmChanges()">
                 Confirm
               </el-button>
             </span>
@@ -92,7 +92,7 @@
             Nickname
           </div>
         </template>
-        {{nickname}}
+        {{userInfo.nickname}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template #label>
@@ -101,7 +101,7 @@
             Register Email
           </div>
         </template>
-        {{email}}
+        {{userInfo.email}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template #label>
@@ -110,27 +110,108 @@
             Bio
           </div>
         </template>
-        {{bio}}
+        {{userInfo.bio}}
       </el-descriptions-item>
     </el-descriptions>
   </el-card>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script>
+export default {
+  name: 'SettingCard',
+  data() {
+    return {
+      outerVisible: false,
+      innerVisible: false,
+      formLabelWidth: '160px',
+      userInfo: {
+        email: this.$store.state.userInfo.email,
+        nickname: this.$store.state.userInfo.username,
+        useravatar: this.$store.state.userInfo.avatar,
+        type: this.$store.state.userInfo.usertype,
+        bio: this.$store.state.userInfo.profile
+      },
+      showUserInfo: this.userInfo,
+      password0: '',
+      password1: '',
+      password2: '',
+      changePWD: false,
+      loading: true
+    }
+  },
+  mounted() {
+    this.getSettingInfo()
+  },
+  methods: {
+    getSettingInfo: function () {
+      let that = this
+      that.loading = true
+      this.axios.request({
+        url: "",     // TODO
+        method: 'get'
+      })
+          .then(function (response) {
+            console.log(response.data)
+            that.loading = false
+            that.userInfo = response.data,
+            that.showUserInfo = response.data
+            this.$store.state.userInfo.nickname = this.userInfo.nickname
+            this.$store.state.userInfo.password = this.userInfo.password
+          }).catch(function (error) {
+        console.log(error)
+        that.loading = false
+      })
+    },
+    confirmChanges: function () {
+      let newNickname;
+      let newPWD;
+      let that = this;
+      newNickname = document.getElementById('nickname').value;
+      newPWD = this.$store.state.userInfo.password;
+      if (that.changePWD === true) {
+        if (that.password0 === '' || that.password1 === '' || that.password2 === '') {
+          that.$message.error("Please refill all the blocks!");
+        } else {
+          if (that.password1 !== that.password2) {
+            that.$message.error("The new password are different!");
+          } else if (that.password0 !== this.$store.state.userInfo.password) {
+            that.$message.error("Wrong origin password!");
+          } else {
+            newPWD = that.password1;
+          }
+        }
+      }
+      this.axios.request({
+        method: 'post',
+        url: "",    // TODO
+        data: qs.stringify({
+          newNickname,
+          newPWD
+        })
+      }).then(res => {
+        console.log(res.data)
+        if (res.data.errno === 0) {
+          this.$message({
+            message: "Successfully edit your profile!",
+            type: 'success',
+            showClose: true
+          })
+        } else {
+          this.$message({
+            message: "Fail to edit your profile.",
+            type: 'error',
+            showClose: true
+          })
+        }
+        that.outerVisible = false;
+        location.reload();
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  }
+}
 
-const outerVisible = ref(false)
-const innerVisible = ref(false)
-const formLabelWidth = '160px'
-
-const email = ref('')
-const nickname = ref(email)
-const useravatar = ref('')
-const password0 = ref('')
-const password1 = ref('')
-const password2 = ref('')
-const type = ref(0)
-const bio = ref('')
 </script>
 
 <style>

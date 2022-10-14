@@ -11,9 +11,8 @@ import MusicianProfile from '../components/Musician/MusicianProfile.vue'
 // Setting page
 import SettingPage from '../components/Settings/SettingPage.vue'
 // Admin page
-import UserRegister from '../components/Admin/Register.vue'
-import UserLogin from '../components/Admin/Login.vue'
-import UserDelete from '../components/Admin/DeleteUser.vue'
+import UserDelete from '../components/layouts/DeleteUser.vue'
+import LoginNRegister from "~/components/layouts/LoginNRegister.vue";
 
 const routes = [
     {
@@ -42,14 +41,9 @@ const routes = [
         component: AlbumTable,
     },
     {
-        path: "/UserRegister",
-        name: "UserRegister",
-        component: UserRegister
-    },
-    {
-        path: "/UserLogin",
-        name: "UserLogin",
-        component: UserLogin
+        path: "/LoginNRegister",
+        name: "LoginNRegister",
+        component: LoginNRegister
     },
     {
         path: "/UserDelete",

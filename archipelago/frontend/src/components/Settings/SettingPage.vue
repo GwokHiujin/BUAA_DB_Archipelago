@@ -19,9 +19,17 @@
   </el-config-provider>
 </template>
 
-<script setup>
-import {ref} from 'vue'
-const type = ref(0)
+<script>
+export default {
+  data: function () {
+    return {
+      type: 0
+    }
+  },
+  mounted() {
+    this.type = this.$store.state.userInfo.usertype;
+  }
+}
 </script>
 
 <style>
