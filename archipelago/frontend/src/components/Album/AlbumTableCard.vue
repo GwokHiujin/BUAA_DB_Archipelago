@@ -6,19 +6,50 @@
           DiscoGraphy
         </span>
         <el-button class="button" text @click="dialogFormVisible = true">
-          Add Album
+          Add 1 Album
         </el-button>
-        <el-dialog v-model="dialogFormVisible" title="Shipping address">
-          <el-form :model="form">
-            <el-form-item label="Promotion name" :label-width="formLabelWidth">
-              <el-input v-model="form.name" autocomplete="off" />
+        <el-dialog v-model="dialogFormVisible" title="Add 1 Album">
+          <el-form>
+            <el-form-item label="Album Name" :label-width="formLabelWidth">
+              <el-input v-model.lazy="albumName" autocomplete="off" />
             </el-form-item>
-            <el-form-item label="Zones" :label-width="formLabelWidth">
-              <el-select v-model="form.region" placeholder="Please select a zone">
-                <el-option label="Zone No.1" value="shanghai" />
-                <el-option label="Zone No.2" value="beijing" />
+
+            <el-form-item label="Price" :label-width="formLabelWidth">
+              <el-input v-model.number.lazy="price" autocomplete="off" />
+            </el-form-item>
+
+            <el-form-item label="Author" :label-width="formLabelWidth">
+              <el-input v-model.lazy="author" autocomplete="off" />
+            </el-form-item>
+
+            <el-form-item label="Releaser" :label-width="formLabelWidth">
+              <el-input v-model.lazy="releaser" autocomplete="off" />
+            </el-form-item>
+
+            <el-form-item label="Release Year" :label-width="formLabelWidth">
+              <el-date-picker
+                  v-model.lazy="releaseYear"
+                  type="year"
+                  placeholder="Pick a year"
+              />
+            </el-form-item>
+
+            <el-form-item label="Album Cover" :label-width="formLabelWidth">
+              <el-input v-model.lazy="cover" autocomplete="off" />
+            </el-form-item>
+
+            <el-form-item label="Album Type" :label-width="formLabelWidth">
+              <el-select  placeholder="Choose 1 Type" style="width: 77.9%" v-model.lazy.number="type">
+                <el-option v-for="item in albumType" :key="item.label" :label="item.value" :value="item.label">
+                  <span>{{ item.value }}</span>
+                </el-option>
               </el-select>
             </el-form-item>
+
+            <el-form-item label="Resource Link" :label-width="formLabelWidth">
+              <el-input v-model.lazy="resource" autocomplete="off" />
+            </el-form-item>
+
           </el-form>
           <template #footer>
       <span class="dialog-footer">
@@ -33,13 +64,13 @@
     </template>
 
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="Name" width="150" />
-      <el-table-column prop="name" label="Price" width="150" />
-      <el-table-column prop="name" label="Author" width="150" />
-      <el-table-column prop="name" label="Releaser" width="150" />
-      <el-table-column prop="name" label="Release Year" width="150" />
-      <el-table-column prop="name" label="Type" width="150" />
-      <el-table-column prop="address" label="Resource" />
+      <el-table-column prop={{albumName}} label="Album Name" width="150" />
+      <el-table-column prop={{price}} label="Price" width="150" />
+      <el-table-column prop={{author}} label="Author" width="150" />
+      <el-table-column prop={{releaser}} label="Releaser" width="150" />
+      <el-table-column prop={{releaseYear}} label="Release Year" width="150" />
+      <el-table-column prop={{type}} label="Type" width="150" />
+      <el-table-column prop={{resource}} label="Resource" />
     </el-table>
   </el-card>
 </template>
@@ -51,38 +82,53 @@ const dialogTableVisible = ref(false)
 const dialogFormVisible = ref(false)
 const formLabelWidth = '140px'
 
-const form = reactive({
-  name: '',
-  region: '',
-  date1: '',
-  date2: '',
-  delivery: false,
-  type: [],
-  resource: '',
-  desc: '',
-})
+const albumid = ref('')
+const albumName = ref('')
+const price = ref('')
+const author = ref('')
+const releaser = ref('')
+const releaseYear = ref('')
+const cover = ref('')
+const type = ref(null)
+const resource = ref(null)
 
-const gridData = [
+const albumType = [
   {
-    date: '2016-05-02',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
+    label: '0',
+    value: 'EP'
   },
   {
-    date: '2016-05-04',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
+    label: '1',
+    value: 'Single'
   },
   {
-    date: '2016-05-01',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
+    label: '2',
+    value: 'Album'
   },
   {
-    date: '2016-05-03',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
+    label: '3',
+    value: 'Live'
   },
+  {
+    label: '4',
+    value: 'Demo'
+  },
+  {
+    label: '5',
+    value: 'Split'
+  },
+  {
+    label: '6',
+    value: 'Compilations'
+  },
+  {
+    label: '7',
+    value: 'Various Artists'
+  },
+  {
+    label: '8',
+    value: 'Original Soundtrack'
+  }
 ]
 
 const tableData = [
