@@ -2,7 +2,7 @@
   <el-config-provider namespace="ep">
     <el-container>
       <el-aside width="250px">
-        <MusicianSide/>
+        <AudienceSide/>
       </el-aside>
       <el-container>
         <el-header height="70px">

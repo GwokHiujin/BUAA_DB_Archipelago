@@ -4,16 +4,12 @@ import { createRouter,createWebHashHistory} from "vue-router";
 import Index from '../components/layouts/Index.vue'
 import AudienceIndex from '../components/layouts/AudienceIndex.vue'
 import MusicianIndex from '../components/layouts/MusicianIndex.vue'
-
 // Album page
 import AlbumTable from '../components/Album/AlbumTable.vue'
-
 // Musician page
 import MusicianProfile from '../components/Musician/MusicianProfile.vue'
-
 // Setting page
 import SettingPage from '../components/Settings/SettingPage.vue'
-
 // Admin page
 import UserRegister from '../components/Admin/Register.vue'
 import UserLogin from '../components/Admin/Login.vue'

@@ -10,28 +10,65 @@
             Audience User
           </el-tag>
         </span>
-        <el-button class="button" text @click="dialogFormVisible = true">
+        <el-button class="button" text @click="outerVisible = true">
           Edit
         </el-button>
-        <el-dialog v-model="dialogFormVisible" title="Shipping address">
+        <el-dialog
+            v-model="outerVisible"
+            title="Edit Your Profile"
+            style="border-radius: 5%"
+            width="30%"
+            align-center
+        >
           <el-form :model="form">
-            <el-form-item label="Promotion name" :label-width="formLabelWidth">
-              <el-input v-model="form.name" autocomplete="off" />
+            <el-form-item label="Nickname" :label-width="formLabelWidth">
+              <el-input v-model="form.name" autocomplete="off" placeholder="Enter New Nickname"/>
             </el-form-item>
-            <el-form-item label="Zones" :label-width="formLabelWidth">
-              <el-select v-model="form.region" placeholder="Please select a zone">
-                <el-option label="Zone No.1" value="shanghai" />
-                <el-option label="Zone No.2" value="beijing" />
-              </el-select>
+            <el-form-item label="Password" :label-width="formLabelWidth">
+              <el-button class="el-button--danger" @click="innerVisible = true">
+                Edit Password
+              </el-button>
             </el-form-item>
+
+            <el-dialog
+              v-model="innerVisible"
+              title="Edit Password"
+              style="border-radius: 5%"
+              width="40%"
+              append-to-body
+              align-center
+            >
+              <el-form-item label="Old Password" :label-width="formLabelWidth">
+                <el-input v-model="form.name" autocomplete="off" placeholder="Enter Old Password" show-password="false"/>
+              </el-form-item>
+              <el-form-item label="New Password" :label-width="formLabelWidth">
+                <el-input v-model="form.name" autocomplete="off" placeholder="Enter New Password" show-password="false"/>
+              </el-form-item>
+              <el-form-item label="Confirm" :label-width="formLabelWidth">
+                <el-input v-model="form.name" autocomplete="off" placeholder="Enter New Password Again" show-password="false"/>
+              </el-form-item>
+              <template #footer>
+                <span class="dialog-footer">
+                  <el-button @click="innerVisible = false">
+                    Cancel
+                  </el-button>
+                  <el-button type="primary" @click="innerVisible = false">
+                    Submit
+                  </el-button>
+                </span>
+              </template>
+            </el-dialog>
+
           </el-form>
           <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false"
-        >Confirm</el-button
-        >
-      </span>
+            <span class="dialog-footer">
+              <el-button @click="outerVisible = false">
+                Cancel
+              </el-button>
+              <el-button type="primary" @click="outerVisible = false">
+                Confirm
+              </el-button>
+            </span>
           </template>
         </el-dialog>
       </div>
@@ -75,8 +112,8 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 
-const dialogTableVisible = ref(false)
-const dialogFormVisible = ref(false)
+const outerVisible = ref(false)
+const innerVisible = ref(false)
 const formLabelWidth = '140px'
 
 const form = reactive({

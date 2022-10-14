@@ -7,7 +7,7 @@
         :ellipsis="false"
     >
 
-      <el-menu-item index="/">
+      <el-menu-item index="/SettingPage">
         <img src="src/assets/img/avatar-default.jpg" class="head-avatar" />
       </el-menu-item>
 
