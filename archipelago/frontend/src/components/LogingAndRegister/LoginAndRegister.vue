@@ -11,7 +11,7 @@
           <div class="register-box hidden">
             <h1>register</h1>
             <input type="text" placeholder="用户名" id="un1">
-            <input type="email" placeholder="邮箱" id="email">
+            <input type="email" placeholder="邮箱" id="email1">
             <input type="password" placeholder="密码" id="pw1">
             <input type="password" placeholder="确认密码" id="pw2" @keyup.enter="toRegister">
             <el-radio-group v-model="utype" class="ml-4">
@@ -22,7 +22,7 @@
           </div>
           <div class="login-box">
             <h1>login</h1>
-            <input type="email" placeholder="邮箱" id="email">
+            <input type="email" placeholder="邮箱" id="email2">
             <input type="password" placeholder="密码" id="pw" @keyup.enter="toLogin">
             <button @click="toLogin()">登录</button>
           </div>
@@ -68,7 +68,7 @@ export default {
       let params;
       let tempthis = this;
       params = {
-        email: document.getElementById('email').value,
+        email: document.getElementById('email2').value,
         password: document.getElementById('pw').value
       };
       this.axios({
@@ -114,7 +114,7 @@ export default {
       let params;
       params = {
         username: document.getElementById('un1').value,
-        email: document.getElementById('email').value,
+        email: document.getElementById('email1').value,
         password_1: document.getElementById('pw1').value,
         password_2: document.getElementById('pw2').value,
         usertype: this.utype
