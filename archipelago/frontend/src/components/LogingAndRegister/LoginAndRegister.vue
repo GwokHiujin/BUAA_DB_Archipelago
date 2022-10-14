@@ -79,7 +79,6 @@ export default {
       .then(res => {
         console.log(res.data)
         if(res.data.errno === 0) {
-
           this.$store.state.userInfo.email = res.data.email; //邮箱
           this.$store.state.userInfo.username = res.data.username; //用户昵称
           this.$store.state.userInfo.avatar = res.data.avatar; //头像地址
