@@ -1,44 +1,25 @@
-/*
-
-
-*/
-
 <template>
   <el-affix>
     <el-menu
-        :default-active="this.$route.path" router
+        default-active="activeIndex"
         class="el-menu-vertical-demo"
     >
       <div style="display: flex">
         <div>
-          <img alt="Archipelago logo" src="src/assets/img/logo-long.png" width="220"/>
+          <img alt="Archipelago logo" src="../../assets/img/logo-long.png" width="220"/>
         </div>
       </div>
-      <el-menu-item index="/">
+      <el-menu-item index="1" @click="this.$router.push('/AudienceIndex')">
         <template #title>
           <el-icon><HomeFilled /></el-icon>
           <span>Home</span>
         </template>
       </el-menu-item>
 
-      <el-menu-item index="/SettingPage">
+      <el-menu-item index="2" @click="this.$router.push('/SettingPage')">
         <template #title>
           <el-icon><Tools /></el-icon>
           <span>Settings</span>
-        </template>
-      </el-menu-item>
-
-      <el-menu-item index="/MusicianProfile">
-        <template #title>
-          <el-icon><BrushFilled /></el-icon>
-          <span>Musician Profile</span>
-        </template>
-      </el-menu-item>
-
-      <el-menu-item index="/AlbumTable">
-        <template #title>
-          <el-icon><Headset /></el-icon>
-          <span>Album</span>
         </template>
       </el-menu-item>
     </el-menu>
@@ -47,7 +28,7 @@
 
 <script>
 export default {
-  name: "MusicianSide"
+  name: "AudienceSide"
 }
 
 </script>

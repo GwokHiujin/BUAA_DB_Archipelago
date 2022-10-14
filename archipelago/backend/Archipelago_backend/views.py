@@ -28,6 +28,7 @@ def login(request):
             cur.execute("SELECT UE, UN, AVATAR, UTP, UB, PW FROM users WHERE UE=%s", (email,))
             sql_result = cur.fetchall()
             sql_result = sql_result[0]
+            print(sql_result)
             return JsonResponse({"errno": 0, "msg": "登录成功", "email": sql_result[0], "username": sql_result[1],
                                  "avatar": sql_result[2], "usertype": sql_result[3], "profile": sql_result[4],
                                  "password": sql_result[5]})
