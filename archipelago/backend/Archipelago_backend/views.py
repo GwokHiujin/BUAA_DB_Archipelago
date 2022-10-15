@@ -5,12 +5,14 @@ from django.db import connection
 from django.http import JsonResponse
 
 
-def get_data(sel,table_name,limit,arg):
+def get_data(sel, table_name, limit):
     cur = connection.cursor()
     cmd_str = "SELECT " + sel + " FROM " + table_name + " WHERE " + limit
-    cur.execute(cmd_str,arg)
+    print(cmd_str)
+    cur.execute(cmd_str)
     ret = cur.fetchall()
     return ret
+
 
 def get_user(email):
     cur = connection.cursor()
@@ -91,6 +93,9 @@ def register(request):
             return JsonResponse({"errno": 2, "msg": "邮箱已注册"})
         cur.execute("INSERT INTO users (UE, UN, AVATAR, PW, UTP, UB) VALUES(%s,%s,%s,%s,%s,%s)",
                     (email, nickname, 'NULL', password, type_id, bio))
+        if type_id == '1':
+            cur.execute("INSERT INTO musicians (UE, MN, OC) VALUES(%s,%s,%s)", (email, nickname,
+                                                                                'DEFAULT_OC'))  # TODO: ADD INTERFACE IN FRONTEND
         return JsonResponse({"errno": 0, "msg": "注册成功"})
 
 
@@ -146,21 +151,106 @@ def get_album(request):
     if request.method == "GET":
         email = request.session.get('email')
         if email is None:
-            return JsonResponse(list())
-        mid_list = get_data('MID','musicians','UE=%s',(email,))
+            return JsonResponse(list(), safe=False)
+        mid_list = get_data('MID,MN', 'musicians', f"UE='{email}'")
         if len(mid_list) == 0:
-            return JsonResponse(list())
-        mid = mid_list[0]
-        album_list = get_data('AN,AP,AU,RY,MID,TYP,SRC','albums','MID=%s',(mid,))
+            return JsonResponse(list(), safe=False)
+        mid = mid_list[0][0]
+        mn = mid_list[0][1]
+        album_list = get_data('AN,AP,AU,RY,MID,TYP,SRC', 'albums', f"MID={mid}")
+        print(album_list)
         var = [{
             'albumName': elem[0],
             'price': elem[1],
             'author': elem[2],
-            'releaser': elem[3],
-            'releaseYear': elem[4],
+            'releaseYear': elem[3],
+            'releaser': mn,
             'type': elem[5],
             'resource': elem[6]
         } for elem in album_list]
-        return JsonResponse(var)
+        return JsonResponse(var, safe=False)
+
 
 def set_album(request):
+    if request.method == "POST":
+        json_str = request.body.decode()
+        payload = json.loads(json_str)
+        email = request.session.get('email')
+        if email is None:
+            return JsonResponse({"errno": 1, "msg": "未登录"})
+        mid_list = get_data('MID', 'musicians', f"UE='{email}'")
+        if len(mid_list) == 0:
+            return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
+        mid = mid_list[0][0]
+        new_data = payload['newAlbumData']
+        tag = payload['Tag']
+        cur = connection.cursor()
+        if tag < 0:
+            cur.execute('INSERT INTO albums (AN, AP, AU, MID, RY, AC, TYP, SRC) values(%s,%s,%s,%s,%s,%s,%s,%s)',
+                        (new_data['albumName'], new_data['price'], new_data['author'], mid,
+                         new_data['releaseYear'], new_data['cover'], new_data['type'], new_data['resource']))
+            return JsonResponse({"errno": 0, "msg": "新建唱片成功！"})
+        cast_list = [
+            ('albumName', 'AN'),
+            ('price', 'AP'),
+            ('author', 'AU'),
+            # ('releaser', 'MID'), todo: config it's useless
+            ('releaseYear', 'RY'),
+            ('cover', 'AC'),
+            ('type', 'TYP'),
+            ('resource', 'SRC')
+        ]
+        old_album = get_data('MID', 'albums', f"AID={tag} AND MID={mid}")
+        if len(old_album) == 0:
+            return JsonResponse({"errno": 3, "msg": "无此唱片，或唱片不属于此用户"})
+        for elem in cast_list:
+            if new_data.get(elem[0]) is not None:
+                cur.execute('UPDATE albums SET %s=%s WHERE AID=%s', (elem[1], new_data.get(elem[0]), tag))
+        return JsonResponse({"errno": 0, "msg": "修改唱片成功！"})
+
+
+def get_musician(request):
+    if request.method == "GET":
+        email = request.session.get('email')
+        if email is None:
+            return JsonResponse({"errno": 1, "msg": "未登录"})
+        mid_list = get_data('MID, MN, PH, OC, LC, LT, FY, INFO', 'musicians', f"UE='{email}'")
+        if len(mid_list) == 0:
+            return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
+        mid_list = mid_list[0]
+        return JsonResponse({
+            'musicianName': mid_list[1],
+            'photo': mid_list[2],
+            'originCountry': mid_list[3],
+            'location': mid_list[4],
+            'lyricalThemes': mid_list[5],
+            'formedYear': mid_list[6],
+            'introduction': mid_list[7]
+        })
+
+
+def set_musician(request):
+    if request.method == "POST":
+        json_str = request.body.decode()
+        payload = json.loads(json_str)
+        email = request.session.get('email')
+        if email is None:
+            return JsonResponse({"errno": 1, "msg": "未登录"})
+        mid_list = get_data('MID', 'musicians', f"UE='{email}'")
+        if len(mid_list) == 0:
+            return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
+        mid = mid_list[0][0]
+        cast_list = [
+            ('musicianName', 'MN'),
+            ('photo', 'PH'),
+            ('originCountry', 'OC'),
+            ('location', 'LC'),
+            ('lyricalThemes', 'LT'),
+            ('formedYear', 'FY'),
+            ('introduction', 'INFO')
+        ]
+        cur = connection.cursor()
+        for elem in cast_list:
+            if payload.get(elem[0]) is not None:
+                cur.execute('UPDATE albums SET %s=%s WHERE MID=%s', (elem[1], payload.get(elem[0]), mid))
+        return JsonResponse({"errno": 0, "msg": "修改音乐人信息成功！"})
