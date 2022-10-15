@@ -11,35 +11,35 @@
         <el-dialog v-model="dialogFormVisible" title="Add New Album">
           <el-form>
             <el-form-item label="Album Name" :label-width="formLabelWidth">
-              <el-input id="albumName" autocomplete="off" />
+              <el-input v-model.lazy="curalbumName" autocomplete="off" />
             </el-form-item>
 
             <el-form-item label="Price" :label-width="formLabelWidth">
-              <el-input id="price" autocomplete="off" />
+              <el-input v-model.lazy="curprice" autocomplete="off" />
             </el-form-item>
 
             <el-form-item label="Author" :label-width="formLabelWidth">
-              <el-input id="author" autocomplete="off" />
+              <el-input v-model.lazy="curauthor" autocomplete="off" />
             </el-form-item>
 
             <el-form-item label="Releaser" :label-width="formLabelWidth">
-              <el-input id="releaser" autocomplete="off" />
+              <el-input v-model.lazy="curreleaser" autocomplete="off" />
             </el-form-item>
 
             <el-form-item label="Release Year" :label-width="formLabelWidth">
               <el-date-picker
-                  id="releaseYear"
-                  curType="year"
+                  v-model.lazy="curreleaseYear"
+                  type="year"
                   placeholder="Pick a year"
               />
             </el-form-item>
 
             <el-form-item label="Album Cover" :label-width="formLabelWidth">
-              <el-input id="cover" autocomplete="off" />
+              <el-input v-model.lazy="curcover" autocomplete="off" />
             </el-form-item>
 
             <el-form-item label="Album Type" :label-width="formLabelWidth">
-              <el-select  placeholder="Choose 1 Type" style="width: 77.9%" id="type">
+              <el-select  placeholder="Choose 1 Type" style="width: 77.9%" v-model.lazy="curtype">
                 <el-option v-for="item in albumType" :key="item.label" :label="item.value" :value="item.value">
                   <span>{{ item.value }}</span>
                 </el-option>
@@ -95,6 +95,14 @@ export default {
         type: '',
         resource: ''
       }],
+      curalbumName: '',
+      curprice: '',
+      curauthor: '',
+      curreleaser: '',
+      curreleaseYear: '',
+      curtype: '',
+      curcover: '',
+      curResource: '',
       showAlbumList: this.albumList,
       albumType: [
         {
@@ -136,7 +144,7 @@ export default {
       ]
     }
   },
-  mounted() {
+  activated() {
     this.getAlbumList()
   },
   methods: {
@@ -162,14 +170,14 @@ export default {
       let newAlbumData;
       let that = this;
       newAlbumData = {
-        albumName: document.getElementById('albumName').value,
-        price: document.getElementById('price').value,
-        author: document.getElementById('author').value,
-        releaser: document.getElementById('releaser').value,
-        releaseYear: document.getElementById('releaseYear').value,
-        cover: document.getElementById('cover').value,
-        type: document.getElementById('type').value,
-        resource: document.getElementById('resource').value
+        albumName: that.curalbumName,
+        price: that.curprice,
+        author: that.curauthor,
+        releaser: that.curreleaser,
+        releaseYear: that.curreleaseYear,
+        cover: that.curcover,
+        type: that.curtype,
+        resource: that.curResource
       };
       axios({
         method: 'post',
