@@ -57,7 +57,7 @@ def register(request):
         password = payload.get("password_1")
         if len(password) < 3:
             return JsonResponse({"errno": 5, "msg": "您输入的密码过短，至少为3位"})
-        password_c = [False,False]
+        password_c = [False, False]
         for c in password:
             if c.isupper():
                 password_c[0] = True
@@ -88,3 +88,11 @@ def logoff(request):
         print(email + ": logoff")
         del request.session['email']
         return JsonResponse({"errno": 0, "msg": "已注销"})
+
+
+def delete_account(request):
+    if request.method == "POST":
+        email = request.session.get('userEmail')
+        cur = connection.cursor()
+        cur.execute("DELETE FROM users WHERE UE=%S", (email,))
+        return JsonResponse({"errno": 0, "msg": "注销成功"})
