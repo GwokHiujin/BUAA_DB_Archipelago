@@ -103,7 +103,7 @@
         </template>
         {{userInfo.email}}
       </el-descriptions-item>
-      <el-descriptions-item>
+      <el-descriptions-item v-if="userInfo.bio !== ''">
         <template #label>
           <div class="cell-item">
             <el-icon><ChatDotRound /></el-icon>
@@ -111,6 +111,15 @@
           </div>
         </template>
         {{userInfo.bio}}
+      </el-descriptions-item>
+      <el-descriptions-item v-else>
+        <template #label>
+          <div class="cell-item">
+            <el-icon><ChatDotRound /></el-icon>
+            Bio
+          </div>
+        </template>
+        A music lover......
       </el-descriptions-item>
     </el-descriptions>
   </el-card>
