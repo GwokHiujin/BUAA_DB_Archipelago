@@ -19,8 +19,8 @@ def get_user(email):
 # 10.12: 初步实验，注册及登录的部分逻辑
 def login(request):
     if request.method == "POST":
-        if request.session.get('email') is not None:
-            return JsonResponse({"errno": 1, "msg": "请勿重复登录！"})
+        # if request.session.get('email') is not None:
+        #     return JsonResponse({"errno": 1, "msg": "请勿重复登录！"})
         print(request.body)
         json_str = request.body.decode()
         payload = json.loads(request.body)
