@@ -161,6 +161,7 @@ export default {
     confirmInfo: function () {
       let newAlbumData;
       let that = this;
+      let tag = -1;
       newAlbumData = {
         albumName: document.getElementById('albumName').value,
         price: document.getElementById('price').value,
@@ -171,10 +172,14 @@ export default {
         type: document.getElementById('type').value,
         resource: document.getElementById('resource').value
       };
+      let params = {
+        NewAlbumData: newAlbumData,
+        Tag: tag
+      }
       axios({
         method: 'post',
         url: "",     // TODO
-        data: JSON.stringify(newAlbumData)
+        data: JSON.stringify(params)
       })
           .then(res => {
             console.log(res.data)
