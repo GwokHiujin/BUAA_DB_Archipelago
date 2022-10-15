@@ -143,7 +143,7 @@ export default {
     getAlbumList: function () {
       let that = this
       that.loading = true
-      this.axios.request({
+      axios.request({
         url: "",     // TODO
         method: 'get'
       })
@@ -171,10 +171,10 @@ export default {
         type: document.getElementById('type').value,
         resource: document.getElementById('resource').value
       };
-      this.axios({
+      axios({
         method: 'post',
         url: "",     // TODO
-        data: qs.stringify(newAlbumData)
+        data: JSON.stringify(newAlbumData)
       })
           .then(res => {
             console.log(res.data)

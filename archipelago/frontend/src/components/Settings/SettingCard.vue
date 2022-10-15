@@ -166,8 +166,8 @@ export default {
             that.loading = false
             that.userInfo = response.data,
             that.showUserInfo = response.data
-            this.$store.state.userInfo.nickname = this.userInfo.nickname
-            this.$store.state.userInfo.password = this.userInfo.password
+            that.$store.state.userInfo.username = that.userInfo.nickname
+            that.$store.state.userInfo.password = that.userInfo.password
           }).catch(function (error) {
         console.log(error)
         that.loading = false
