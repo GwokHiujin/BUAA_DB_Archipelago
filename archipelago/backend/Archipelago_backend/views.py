@@ -15,6 +15,8 @@ def login(request):
         payload = json.loads(request.body)
         email = payload.get("email")
         password = payload.get("password")
+        if(email is None):
+            return JsonResponse({"errno": 2, "msg": "错误的用户名或密码"})
         cur = connection.cursor()
         cur.execute("SELECT PW FROM users WHERE UE=%s", (email,))
         sql_result = cur.fetchall()
