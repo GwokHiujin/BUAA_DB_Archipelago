@@ -3,4 +3,9 @@
 /archipelago/frontend/.idea
 /archipelago/backend/*.sqlite3
 /archipelago/backend/.idea
-__pycache__
+__pycache__/
+.idea/
+*.py[cod]
+*.so
+*.egg
+*.egg-info
