@@ -65,7 +65,8 @@ def register(request):
 def logoff(request):
     if request.method == "GET":
         email = request.session.get('email')
-        if email == None:
+        if email is None:
             return JsonResponse({"errno": 1, "msg": "未登录"})
         print(email + ": logoff")
+        request.session.delete('email')
         return JsonResponse({"errno": 0, "msg": "已注销"})
