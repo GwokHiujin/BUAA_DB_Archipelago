@@ -163,15 +163,11 @@ export default {
       })
           .then(function (response) {
             console.log(response.data)
-            console.log('imhere_1')
             that.loading = false
             that.userInfo = response.data,
             that.showUserInfo = response.data
-            console.log('imhere_2')
-            // this.$store.state.userInfo.username = this.userInfo.nickname
-            console.log('imhere_3')
-            // this.$store.state.userInfo.password = this.userInfo.password
-            console.log('imhere_4')
+            that.$store.state.userInfo.username = that.userInfo.nickname
+            that.$store.state.userInfo.password = that.userInfo.password
           }).catch(function (error) {
         console.log(error)
         that.loading = false
