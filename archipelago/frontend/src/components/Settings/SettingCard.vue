@@ -168,9 +168,9 @@ export default {
             that.userInfo = response.data,
             that.showUserInfo = response.data
             console.log('imhere_2')
-            this.$store.state.userInfo.nickname = this.userInfo.nickname
+            // this.$store.state.userInfo.username = this.userInfo.nickname
             console.log('imhere_3')
-            this.$store.state.userInfo.password = this.userInfo.password
+            // this.$store.state.userInfo.password = this.userInfo.password
             console.log('imhere_4')
           }).catch(function (error) {
         console.log(error)

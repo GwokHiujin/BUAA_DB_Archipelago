@@ -110,7 +110,13 @@ def get_user_info(request):
         email = request.session.get('email')
         if email is None:
             return JsonResponse({"errno": 1, "msg": "未登录"})
-        return JsonResponse(get_user(email))
+        ret = get_user(email)
+        return JsonResponse({
+            'email': ret['email'],
+            'nickname': ret['username'],
+            'useravatar': ret['avatar'],
+            'type': ret['usertype'],
+            'bio': ret['profile']})
 
 
 def set_user_info(request):
@@ -125,5 +131,5 @@ def set_user_info(request):
         cur = connection.cursor()
         for check_unit in check_list:
             if payload.get(check_unit[0]) is not None:
-                cur.execute('UPDATE users SET %s=%s WHERE UE=%s',check_unit[1],payload[check_unit[0]])
-        return JsonResponse(get_user(email))
+                cur.execute('UPDATE users SET %s=%s WHERE UE=%s', check_unit[1], payload[check_unit[0]])
+        return JsonResponse({"errno": 0, "msg": "修改成功"})
