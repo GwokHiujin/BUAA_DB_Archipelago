@@ -63,7 +63,6 @@ export default {
     this.initPage()
   },
   methods: {
-
     toLogin: function () {
       let params;
       let tempthis = this;

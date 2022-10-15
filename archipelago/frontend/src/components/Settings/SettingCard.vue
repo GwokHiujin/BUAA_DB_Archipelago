@@ -59,7 +59,7 @@
                   <el-button @click="innerVisible = false">
                     Cancel
                   </el-button>
-                  <el-button type="primary" @click="innerVisible = false">
+                  <el-button type="primary" @click="innerVisible = false; changePWD = true">
                     Submit
                   </el-button>
                 </span>
@@ -126,6 +126,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: 'SettingCard',
   data() {
@@ -155,7 +157,7 @@ export default {
     getSettingInfo: function () {
       let that = this
       that.loading = true
-      this.axios.request({
+      axios.request({
         url: "",     // TODO
         method: 'get'
       })
@@ -190,10 +192,10 @@ export default {
           }
         }
       }
-      this.axios.request({
+      axios.request({
         method: 'post',
         url: "",    // TODO
-        data: qs.stringify({
+        data: JSON.stringify({
           newNickname,
           newPWD
         })
@@ -212,6 +214,7 @@ export default {
             showClose: true
           })
         }
+        that.changePWD = false;
         that.outerVisible = false;
         location.reload();
       }).catch(err => {
