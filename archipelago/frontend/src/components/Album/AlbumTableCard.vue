@@ -144,7 +144,7 @@ export default {
       let that = this
       that.loading = true
       axios.request({
-        url: "",     // TODO
+        url: "/api/get_album/",     // TODO
         method: 'get'
       })
           .then(function (response) {
@@ -178,7 +178,7 @@ export default {
       }
       axios({
         method: 'post',
-        url: "",     // TODO
+        url: "/api/set_album/",     // TODO
         data: JSON.stringify(params)
       })
           .then(res => {

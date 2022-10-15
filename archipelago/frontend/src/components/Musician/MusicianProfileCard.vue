@@ -364,8 +364,8 @@ export default {
     getProfileData: function () {
       let that = this
       that.loading = true
-      this.axios.request({
-        url: "",    // TODO
+      axios.request({
+        url: "/api/get_musician/",    // TODO
         method: "get"
       }).then(function (response) {
         console.log(response.data)
@@ -390,10 +390,10 @@ export default {
         formedYear: document.getElementById('formedYear').value,
         introduction: document.getElementById('introduction').value
       };
-      this.axios({
+      axios({
         method: 'post',
-        url: "",  // TODO
-        data: qs.stringify(newProfileData)
+        url: "/api/set_musician/",  // TODO
+        data: JSON.stringify(newProfileData)
       }).then(res => {
         console.log(res.data)
         if (res.data.errno === 0) {
