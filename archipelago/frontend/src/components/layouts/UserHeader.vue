@@ -77,7 +77,7 @@ export default {
         this.axios.request({
           method: 'post',
           url: "", // TODO
-          data: qs.stringify({
+          data: JSON.stringify({
             userEmail: this.$store.state.userInfo.email
           })
         }).then(res => {
@@ -89,7 +89,7 @@ export default {
               showClose: true
             })
             this.dialogVisible = false;
-            this.$store.state.userInfo.isLogin = false;
+            this.$store.state.isLogin = false;
             this.$router.push('/');
           } else {
             this.$message({

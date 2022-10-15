@@ -93,7 +93,7 @@ export default {
                 type: 'success',
                 showClose: true,
               })
-              tempthis.isLogin = true;
+
               if (this.$store.state.userInfo.type === 0) {
                 this.$router.push('/AudienceIndex');
               } else {
