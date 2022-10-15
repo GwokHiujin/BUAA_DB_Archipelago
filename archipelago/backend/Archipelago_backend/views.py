@@ -1,4 +1,5 @@
 import json
+import re
 
 from django.db import connection
 from django.http import JsonResponse
@@ -46,9 +47,24 @@ def register(request):
         json_str = request.body.decode()
         payload = json.loads(json_str)
         email = payload.get("email")
+        email_re = r'^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+){0,4}@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+){0,4}$'
+        if not re.match(email_re, email):
+            return JsonResponse({"errno": 3, "msg": "错误的邮箱格式"})
         nickname = payload.get("username")
+        if nickname == '':
+            return JsonResponse({"errno": 4, "msg": "用户名不能为空"})
         # TODO useravatar = payload.get("useravatar")
         password = payload.get("password_1")
+        if len(password) < 3:
+            return JsonResponse({"errno": 5, "msg": "您输入的密码过短，至少为3位"})
+        password_c = [False,False]
+        for c in password:
+            if c.isupper():
+                password_c[0] = True
+            if c.islower():
+                password_c[1] = True
+        if not (password_c[0] and password_c[1]):
+            return JsonResponse({"errno": 6, "msg": "您输入的密码至少应包含大小写字母"})
         password_check = payload.get("password_2")
         if password_check != password:
             return JsonResponse({"errno": 1, "msg": "两次输入的密码不一致"})
