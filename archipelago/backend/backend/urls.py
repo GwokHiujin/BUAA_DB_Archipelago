@@ -22,4 +22,5 @@ urlpatterns = [
     # path("admin/", admin.site.urls),
     path("api/login/", views.login),
     path("api/register/", views.register),
+    path("api/logoff/",views.logoff),
 ]

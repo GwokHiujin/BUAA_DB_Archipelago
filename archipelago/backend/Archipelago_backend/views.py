@@ -60,3 +60,12 @@ def register(request):
         cur.execute("INSERT INTO users (UE, UN, AVATAR, PW, UTP, UB) VALUES(%s,%s,%s,%s,%s,%s)",
                     (email, nickname, 'NULL', password, type_id, bio))
         return JsonResponse({"errno": 0, "msg": "注册成功"})
+
+
+def logoff(request):
+    if request.method == "GET":
+        email = request.session.get('email')
+        if email == None:
+            return JsonResponse({"errno": 1, "msg": "未登录"})
+        print(email + ": logoff")
+        return JsonResponse({"errno": 0, "msg": "已注销"})
