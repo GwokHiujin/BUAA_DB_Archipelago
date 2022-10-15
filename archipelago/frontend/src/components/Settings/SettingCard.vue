@@ -158,16 +158,20 @@ export default {
       let that = this
       that.loading = true
       axios.request({
-        url: "",     // TODO
+        url: "/api/get_user_info/",     // TODO
         method: 'get'
       })
           .then(function (response) {
             console.log(response.data)
+            console.log('imhere_1')
             that.loading = false
             that.userInfo = response.data,
             that.showUserInfo = response.data
+            console.log('imhere_2')
             this.$store.state.userInfo.nickname = this.userInfo.nickname
+            console.log('imhere_3')
             this.$store.state.userInfo.password = this.userInfo.password
+            console.log('imhere_4')
           }).catch(function (error) {
         console.log(error)
         that.loading = false
@@ -194,10 +198,10 @@ export default {
       }
       axios.request({
         method: 'post',
-        url: "",    // TODO
+        url: "/api/set_user_info/",    // TODO
         data: JSON.stringify({
-          newNickname,
-          newPWD
+          nickname: newNickname,
+          password: newPWD
         })
       }).then(res => {
         console.log(res.data)

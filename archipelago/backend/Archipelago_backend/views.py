@@ -5,6 +5,16 @@ from django.db import connection
 from django.http import JsonResponse
 
 
+def get_user(email):
+    cur = connection.cursor()
+    cur.execute("SELECT UE, UN, AVATAR, UTP, UB, PW FROM users WHERE UE=%s", (email,))
+    sql_result = cur.fetchall()
+    sql_result = sql_result[0]
+    return {"email": sql_result[0], "username": sql_result[1],
+            "avatar": sql_result[2], "usertype": sql_result[3], "profile": sql_result[4],
+            "password": sql_result[5]}
+
+
 # Create your views here.
 # 10.12: 初步实验，注册及登录的部分逻辑
 def login(request):
@@ -28,13 +38,10 @@ def login(request):
                                      "msg": "错误的用户名或密码"})  # why need this
             # 由于数据库要求不能使用ORM，使用session完成AUTH + User的功能，session存储在内存Cache中，规避ORM
             request.session['email'] = email
-            cur.execute("SELECT UE, UN, AVATAR, UTP, UB, PW FROM users WHERE UE=%s", (email,))
-            sql_result = cur.fetchall()
-            sql_result = sql_result[0]
-            print(sql_result)
-            return JsonResponse({"errno": 0, "msg": "登录成功", "email": sql_result[0], "username": sql_result[1],
-                                 "avatar": sql_result[2], "usertype": sql_result[3], "profile": sql_result[4],
-                                 "password": sql_result[5]})
+            ret = get_user(email)
+            ret['errno'] = 0
+            ret['msg'] = "登录成功"
+            return JsonResponse(ret)
         elif len(sql_result) == 0:
             return JsonResponse({"errno": 2, "msg": "错误的用户名或密码"})
         return JsonResponse({"errno": 3, "msg": "未知异常"})
@@ -96,3 +103,27 @@ def delete_account(request):
         cur = connection.cursor()
         cur.execute("DELETE FROM users WHERE UE=%s", (email,))
         return JsonResponse({"errno": 0, "msg": "注销成功"})
+
+
+def get_user_info(request):
+    if request.method == "GET":
+        email = request.session.get('email')
+        if email is None:
+            return JsonResponse({"errno": 1, "msg": "未登录"})
+        return JsonResponse(get_user(email))
+
+
+def set_user_info(request):
+    if request.method == "POST":
+        email = request.session.get('email')
+        if email is None:
+            return JsonResponse({"errno": 1, "msg": "未登录"})
+        check_list = [('nickname', 'UN'), ('useravatar', 'AVATAR'), ('password', 'PW'),
+                      ('type', 'UTP'), ('bio', 'UB')]
+        json_str = request.body.decode()
+        payload = json.loads(json_str)
+        cur = connection.cursor()
+        for check_unit in check_list:
+            if payload.get(check_unit[0]) is not None:
+                cur.execute('UPDATE users SET %s=%s WHERE UE=%s',check_unit[1],payload[check_unit[0]])
+        return JsonResponse(get_user(email))

@@ -65,8 +65,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://43.143.200.141:8000',//代理的地址
-        // target: 'http://127.0.0.1:8000',//代理的地址
+        // target: 'http://43.143.200.141:8000',//代理的地址
+        target: 'http://127.0.0.1:8000',//代理的地址
         changeOrigin: true,
         // rewrite: path => path.replace(/^\/api/, '')
       }
