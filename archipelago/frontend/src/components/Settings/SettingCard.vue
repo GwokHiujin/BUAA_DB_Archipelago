@@ -179,9 +179,11 @@ export default {
     },
     confirmChanges: function () {
       let newNickname;
+      let newBio;
       let newPWD;
       let that = this;
       newNickname = document.getElementById('nickname').value;
+      newBio = document.getElementById("bio").value;
       newPWD = this.$store.state.userInfo.password;
       if (that.changePWD === true) {
         if (that.password0 === '' || that.password1 === '' || that.password2 === '') {
@@ -201,7 +203,8 @@ export default {
         url: "/api/set_user_info/",    // TODO
         data: JSON.stringify({
           nickname: newNickname,
-          password: newPWD
+          password: newPWD,
+          bio:newBio,
         })
       }).then(res => {
         console.log(res.data)
