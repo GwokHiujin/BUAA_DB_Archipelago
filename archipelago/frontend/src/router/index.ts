@@ -48,11 +48,11 @@ const routes = [
         name: "LoginNRegister",
         component: LoginNRegister
     },
-    {
-        path: "/UserDelete",
-        name: "UserDelete",
-        component: UserDelete
-    },
+    // {
+    //     path: "/UserDelete",
+    //     name: "UserDelete",
+    //     component: UserDelete
+    // },
     {
         path: "/Login&Register",
         name: "Login&Register",

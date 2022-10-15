@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'UserHeader',
   data() {
@@ -65,6 +66,10 @@ export default {
   },
   methods: {
     logOut: function () {
+      axios({
+        method: 'get',
+        url: "/api/logoff/" //暂定
+      })
       this.$store.state.isLogin = false;
       this.$router.push('/');
     },

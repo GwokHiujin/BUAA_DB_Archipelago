@@ -11,7 +11,6 @@ declare module '@vue/runtime-core' {
     AudienceSide: typeof import('./components/layouts/AudienceSide.vue')['default']
     BaseHeader: typeof import('./components/layouts/BaseHeader.vue')['default']
     BaseSide: typeof import('./components/layouts/BaseSide.vue')['default']
-    DeleteUser: typeof import('./components/layouts/DeleteUser.vue')['default']
     ElAffix: typeof import('element-plus/es')['ElAffix']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
