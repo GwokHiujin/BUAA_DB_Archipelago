@@ -11,7 +11,8 @@ create table if not exists users(
 );
 
 create table if not exists musicians(
-    MID VARCHAR(255) NOT NULL,
+    MID INT UNSIGNED AUTO_INCREMENT,
+    UE  VARCHAR(255) NOT NULL,
     MN  VARCHAR(255) NOT NULL,
     PH  VARCHAR(255),
     OC  TEXT NOT NULL,
@@ -19,15 +20,20 @@ create table if not exists musicians(
     LT  TEXT,
     FY  DATETIME,
     INFO TEXT,
-    PRIMARY KEY(MID)
+    PRIMARY KEY(MID),
+    FOREIGN KEY(UE) REFERENCES users(UE)
 );
 
 create table if not exists albums(
     AID INT UNSIGNED AUTO_INCREMENT,
     AN  VARCHAR(255) NOT NULL,
-    AP  INT     NOT NULL,
+    AP  INT          NOT NULL,
     AU  VARCHAR(255) NOT NULL,
-    MN  VARCHAR(255) NOT NULL,
+    MID VARCHAR(255) NOT NULL,
+    RY  DATETIME,
+    AC  VARCHAR(255),
+    TYP INT NOT NULL,
+    SRC VARCHAR(255),
     PRIMARY KEY(AID),
-    FOREIGN KEY(MN) REFERENCES musicians(MID)
+    FOREIGN KEY(MID) REFERENCES musicians(MID)
 );

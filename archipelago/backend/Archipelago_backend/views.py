@@ -5,6 +5,13 @@ from django.db import connection
 from django.http import JsonResponse
 
 
+def get_data(sel,table_name,limit,arg):
+    cur = connection.cursor()
+    cmd_str = "SELECT " + sel + " FROM " + table_name + " WHERE " + limit
+    cur.execute(cmd_str,arg)
+    ret = cur.fetchall()
+    return ret
+
 def get_user(email):
     cur = connection.cursor()
     cur.execute("SELECT UE, UN, AVATAR, UTP, UB, PW FROM users WHERE UE=%s", (email,))
@@ -133,3 +140,27 @@ def set_user_info(request):
             if payload.get(check_unit[0]) is not None:
                 cur.execute('UPDATE users SET %s=%s WHERE UE=%s', check_unit[1], payload[check_unit[0]])
         return JsonResponse({"errno": 0, "msg": "修改成功"})
+
+
+def get_album(request):
+    if request.method == "GET":
+        email = request.session.get('email')
+        if email is None:
+            return JsonResponse(list())
+        mid_list = get_data('MID','musicians','UE=%s',(email,))
+        if len(mid_list) == 0:
+            return JsonResponse(list())
+        mid = mid_list[0]
+        album_list = get_data('AN,AP,AU,RY,MID,TYP,SRC','albums','MID=%s',(mid,))
+        var = [{
+            'albumName': elem[0],
+            'price': elem[1],
+            'author': elem[2],
+            'releaser': elem[3],
+            'releaseYear': elem[4],
+            'type': elem[5],
+            'resource': elem[6]
+        } for elem in album_list]
+        return JsonResponse(var)
+
+def set_album(request):
