@@ -79,9 +79,9 @@ export default {
           that.password1 !== this.$store.state.userInfo.password) {
         that.$message.error("Wrong password! Fail to delete this account");
       } else {
-        this.axios.request({
+        axios.request({
           method: 'post',
-          url: "", // TODO
+          url: "/api/delete_account/", // TODO
           data: JSON.stringify({
             userEmail: this.$store.state.userInfo.email
           })
