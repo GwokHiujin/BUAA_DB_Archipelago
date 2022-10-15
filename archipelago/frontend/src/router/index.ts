@@ -56,7 +56,7 @@ const routes = [
     {
         path: "/Login&Register",
         name: "Login&Register",
-        component: LoginAndRegister
+        component: LoginNRegister
     },
     {
         path: "/SettingPage",

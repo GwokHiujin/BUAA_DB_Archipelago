@@ -3,3 +3,4 @@
 /archipelago/frontend/.idea
 /archipelago/backend/*.sqlite3
 /archipelago/backend/.idea
+__pycache__
