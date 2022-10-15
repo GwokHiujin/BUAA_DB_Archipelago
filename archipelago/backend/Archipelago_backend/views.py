@@ -70,5 +70,5 @@ def logoff(request):
         if email is None:
             return JsonResponse({"errno": 1, "msg": "未登录"})
         print(email + ": logoff")
-        request.session.delete('email')
+        del request.session['email']
         return JsonResponse({"errno": 0, "msg": "已注销"})
