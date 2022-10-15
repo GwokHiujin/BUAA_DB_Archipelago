@@ -66,10 +66,10 @@ export default {
   },
   methods: {
     logOut: function () {
-      axios({
-        method: 'get',
-        url: "/api/logoff/" //暂定
-      })
+      // axios({
+      //   method: 'get',
+      //   url: "/api/logoff/" //暂定
+      // })
       this.$store.state.isLogin = false;
       this.$router.push('/');
     },
