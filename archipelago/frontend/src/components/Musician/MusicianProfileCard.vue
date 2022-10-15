@@ -364,7 +364,7 @@ export default {
       ]
     }
   },
-  activated() {
+  mounted() {
     this.getProfileData()
   },
   methods: {

@@ -140,10 +140,13 @@ def set_user_info(request):
                       ('type', 'UTP'), ('bio', 'UB')]
         json_str = request.body.decode()
         payload = json.loads(json_str)
+        print(payload)
         cur = connection.cursor()
         for check_unit in check_list:
             if payload.get(check_unit[0]) is not None:
-                cur.execute('UPDATE users SET %s=%s WHERE UE=%s', check_unit[1], payload[check_unit[0]])
+                ctrl_str = 'UPDATE users SET ' + check_unit[1] + '=' + f"'{payload[check_unit[0]]}' " \
+                           + f" WHERE UE='{email}' "
+                cur.execute(ctrl_str)
         return JsonResponse({"errno": 0, "msg": "修改成功"})
 
 
@@ -182,7 +185,7 @@ def set_album(request):
         if len(mid_list) == 0:
             return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
         mid = mid_list[0][0]
-        new_data = payload['newAlbumData']
+        new_data = payload['NewAlbumData']
         tag = payload['Tag']
         cur = connection.cursor()
         if tag < 0:
@@ -205,7 +208,9 @@ def set_album(request):
             return JsonResponse({"errno": 3, "msg": "无此唱片，或唱片不属于此用户"})
         for elem in cast_list:
             if new_data.get(elem[0]) is not None:
-                cur.execute('UPDATE albums SET %s=%s WHERE AID=%s', (elem[1], new_data.get(elem[0]), tag))
+                ctrl_str = 'UPDATE albums SET ' + elem[1] + '=' + f"'{new_data[elem[0]]}' " \
+                           + f" WHERE AID='{tag}' "
+                cur.execute(ctrl_str)
         return JsonResponse({"errno": 0, "msg": "修改唱片成功！"})
 
 
@@ -252,5 +257,7 @@ def set_musician(request):
         cur = connection.cursor()
         for elem in cast_list:
             if payload.get(elem[0]) is not None:
-                cur.execute('UPDATE albums SET %s=%s WHERE MID=%s', (elem[1], payload.get(elem[0]), mid))
+                ctrl_str = 'UPDATE musicians SET ' + elem[1] + '=' + f"'{payload[elem[0]]}' " \
+                           + f" WHERE MID='{mid}' "
+                cur.execute(ctrl_str)
         return JsonResponse({"errno": 0, "msg": "修改音乐人信息成功！"})

@@ -152,11 +152,12 @@ export default {
       loading: true
     }
   },
-  activated() {
+  mounted() {
     this.getSettingInfo()
   },
   methods: {
     getSettingInfo: function () {
+      console.log('getting')
       let that = this
       that.loading = true
       axios.request({

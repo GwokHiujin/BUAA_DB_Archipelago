@@ -144,7 +144,7 @@ export default {
       ]
     }
   },
-  activated() {
+  mounted() {
     this.getAlbumList()
   },
   methods: {
