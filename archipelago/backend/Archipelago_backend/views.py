@@ -71,16 +71,16 @@ def register(request):
             return JsonResponse({"errno": 4, "msg": "用户名不能为空"})
         # TODO useravatar = payload.get("useravatar")
         password = payload.get("password_1")
-        if len(password) < 3:
-            return JsonResponse({"errno": 5, "msg": "您输入的密码过短，至少为3位"})
-        password_c = [False, False]
-        for c in password:
-            if c.isupper():
-                password_c[0] = True
-            if c.islower():
-                password_c[1] = True
-        if not (password_c[0] and password_c[1]):
-            return JsonResponse({"errno": 6, "msg": "您输入的密码至少应包含大小写字母"})
+        # if len(password) < 3:
+        #     return JsonResponse({"errno": 5, "msg": "您输入的密码过短，至少为3位"})
+        # password_c = [False, False]
+        # for c in password:
+        #     if c.isupper():
+        #         password_c[0] = True
+        #     if c.islower():
+        #         password_c[1] = True
+        # if not (password_c[0] and password_c[1]):
+        #     return JsonResponse({"errno": 6, "msg": "您输入的密码至少应包含大小写字母"})
         password_check = payload.get("password_2")
         if password_check != password:
             return JsonResponse({"errno": 1, "msg": "两次输入的密码不一致"})
@@ -143,8 +143,8 @@ def set_user_info(request):
         print(payload)
         cur = connection.cursor()
         if payload.get('password') is not None:
-            old_password = get_data('PW', 'users', f'UE={email}')
-            if payload['oldPassword'] != old_password:
+            old_password = get_data('PW', 'users', f"UE='{email}'")
+            if payload['oldPassword'] != old_password[0][0]:
                 return JsonResponse({"errno": 2, "msg": "旧密码输入错误"})
         for check_unit in check_list:
             if payload.get(check_unit[0]) is not None:
