@@ -11,6 +11,7 @@ export default createStore({
       usertype: 0, //用户类型
     },
     isLogin: false,
+    aseKey: "20373543"
   },
   getters: {
   },

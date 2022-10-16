@@ -47,7 +47,7 @@
 
 <script>
 import axios from "axios";
-import qs from "qs";
+import CryptoJS from 'crypto-js'
 
 axios.defaults.withCredentials = true;
 
@@ -66,9 +66,13 @@ export default {
     toLogin: function () {
       let params;
       let tempthis = this;
+      let PWD = document.getElementById('pw').value;
       params = {
         email: document.getElementById('email2').value,
-        password: document.getElementById('pw').value
+        password: CryptoJS.AES.encrypt(PWD, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+          mode: CryptoJS.mode.ECB,
+          padding: CryptoJS.pad.Pkcs7
+        }).toString()
       };
       axios({
         method: 'post',
@@ -113,11 +117,19 @@ export default {
     },
     toRegister: function () {
       let params;
+      let PWD1 = document.getElementById('pw1').value;
+      let PWD2 = document.getElementById('pw2').value;
       params = {
         username: document.getElementById('un1').value,
         email: document.getElementById('email1').value,
-        password_1: document.getElementById('pw1').value,
-        password_2: document.getElementById('pw2').value,
+        password_1: CryptoJS.AES.encrypt(PWD1, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+          mode: CryptoJS.mode.ECB,
+          padding: CryptoJS.pad.Pkcs7
+        }).toString(),
+        password_2: CryptoJS.AES.encrypt(PWD2, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+          mode: CryptoJS.mode.ECB,
+          padding: CryptoJS.pad.Pkcs7
+        }).toString(),
         usertype: this.utype
       };
       console.log(params);

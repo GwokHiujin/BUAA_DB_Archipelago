@@ -127,6 +127,7 @@
 
 <script>
 import axios from "axios";
+import CryptoJS from 'crypto-js'
 
 export default {
   name: 'SettingCard',
@@ -180,20 +181,28 @@ export default {
       let newNickname;
       let newBio;
       let newPWD;
+      let encryptPWD0;
       let that = this;
       newNickname = that.curnickname;
       newBio = that.curbio;
       newPWD = this.$store.state.userInfo.password;
+      encryptPWD0 = CryptoJS.AES.encrypt(that.password0, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+      }).toString();
       if (that.changePWD === true) {
         if (that.password0 === '' || that.password1 === '' || that.password2 === '') {
           that.$message.error("Please refill all the blocks!");
         } else {
           if (that.password1 !== that.password2) {
             that.$message.error("The new password are different!");
-          } else if (that.password0 !== this.$store.state.userInfo.password) {
+          } else if (encryptPWD0 !== this.$store.state.userInfo.password) {
             that.$message.error("Wrong origin password!");
           } else {
-            newPWD = that.password1;
+            newPWD = CryptoJS.AES.encrypt(that.password1, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+              mode: CryptoJS.mode.ECB,
+              padding: CryptoJS.pad.Pkcs7
+            }).toString();
           }
         }
       }

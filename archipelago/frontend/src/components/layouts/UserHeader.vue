@@ -54,6 +54,7 @@
 
 <script>
 import axios from 'axios';
+import CryptoJS from 'crypto-js'
 export default {
   name: 'UserHeader',
   data() {
@@ -75,8 +76,16 @@ export default {
     },
     deleteAccount: function () {
       let that = this;
-      if (that.password0 !== this.$store.state.userInfo.password ||
-          that.password1 !== this.$store.state.userInfo.password) {
+      let encryptPWD0 = CryptoJS.AES.encrypt(that.password0, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+      }).toString();
+      let encryptPWD1 = CryptoJS.AES.encrypt(that.password1, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+      }).toString();
+      if (encryptPWD0 !== this.$store.state.userInfo.password ||
+          encryptPWD1 !== this.$store.state.userInfo.password) {
         that.$message.error("Wrong password! Fail to delete this account");
       } else {
         axios.request({
