@@ -84,15 +84,15 @@ export default {
         mode: CryptoJS.mode.ECB,
         padding: CryptoJS.pad.Pkcs7
       }).toString();
-      if (encryptPWD0 !== this.$store.state.userInfo.password ||
-          encryptPWD1 !== this.$store.state.userInfo.password) {
+      if (encryptPWD0 !== encryptPWD1) {
         that.$message.error("Wrong password! Fail to delete this account");
       } else {
         axios.request({
           method: 'post',
           url: "/api/delete_account/", // TODO
           data: JSON.stringify({
-            userEmail: this.$store.state.userInfo.email
+            userEmail: this.$store.state.userInfo.email,
+            password: encryptPWD0
           })
         }).then(res => {
           console.log(res.data)

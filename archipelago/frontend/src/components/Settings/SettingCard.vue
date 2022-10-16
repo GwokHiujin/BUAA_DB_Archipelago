@@ -2,8 +2,7 @@
   <el-card class="box-card" >
     <template #header>
       <div class="card-header">
-        <img src="src/assets/img/avatar-default.jpg" class="avatar" v-if="userInfo.useravatar === ''"/>
-        <img src={{userInfo.useravatar}} class="avatar" v-else/>
+        <img src="src/assets/img/avatar-default.jpg" class="avatar"/>
         <span class="username">
           {{userInfo.nickname}}
           <el-space/>
