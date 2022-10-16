@@ -85,7 +85,7 @@ export default {
 
               this.$store.state.userInfo.email = res.data.email; //邮箱
               this.$store.state.userInfo.username = res.data.username; //用户昵称
-              this.$store.state.userInfo.avatar = res.data.avatar; //头像地址
+              this.$store.state.userInfo.avatar = res.data.avatar !== '' ? res.data.avatar : "src/assets/img/avatar-default.jpg"; //头像地址
               this.$store.state.userInfo.usertype = res.data.usertype //用户类型
               this.$store.state.userInfo.profile = res.data.profile //用户简介
               this.$store.state.userInfo.password = res.data.password //用户密码
