@@ -197,6 +197,7 @@ export default {
           }
         }
       }
+      console.log(newNickname,newPWD,newBio)
       axios.request({
         method: 'post',
         url: "/api/set_user_info/",    // TODO
@@ -208,7 +209,7 @@ export default {
       }).then(res => {
         console.log(res.data)
         if (res.data.errno === 0) {
-          this.$message({
+          this.$message({ 
             message: "Successfully edit your profile!",
             type: 'success',
             showClose: true

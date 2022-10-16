@@ -8,7 +8,7 @@ export default createStore({
       avatar: "src/assets/img/login", //用户头像
       email: '', //邮箱
       profile: '', //签名
-      usertype: "0", //用户类型
+      usertype: 0, //用户类型
     },
     isLogin: false,
   },
