@@ -59,7 +59,7 @@
                   <el-button @click="innerVisible = false">
                     Cancel
                   </el-button>
-                  <el-button type="primary" @click="innerVisible = false; changePWD = true">
+                  <el-button type="primary" @click="submitPWDs()">
                     Submit
                   </el-button>
                 </span>
@@ -127,6 +127,7 @@
 
 <script>
 import axios from "axios";
+import CryptoJS from 'crypto-js'
 
 export default {
   name: 'SettingCard',
@@ -176,24 +177,35 @@ export default {
         that.loading = false
       })
     },
+    submitPWDs: function () {
+      let that = this;
+      that.innerVisible = false;
+      this.changePWD = true;
+    },
     confirmChanges: function () {
       let newNickname;
       let newBio;
       let newPWD;
+      let encryptPWD0;
       let that = this;
-      newNickname = that.curnickname;
-      newBio = that.curbio;
+      newNickname = that.curnickname === '' ? this.$store.state.userInfo.nickname : that.curnickname;
+      newBio = that.curbio === '' ? this.$store.state.userInfo.bio : that.curbio;
       newPWD = this.$store.state.userInfo.password;
-      if (that.changePWD === true) {
+      encryptPWD0 = CryptoJS.AES.encrypt(that.password0, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+      }).toString();
+      if (this.changePWD === true) {
         if (that.password0 === '' || that.password1 === '' || that.password2 === '') {
           that.$message.error("Please refill all the blocks!");
         } else {
           if (that.password1 !== that.password2) {
             that.$message.error("The new password are different!");
-          } else if (that.password0 !== this.$store.state.userInfo.password) {
-            that.$message.error("Wrong origin password!");
           } else {
-            newPWD = that.password1;
+            newPWD = CryptoJS.AES.encrypt(that.password1, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+              mode: CryptoJS.mode.ECB,
+              padding: CryptoJS.pad.Pkcs7
+            }).toString();
           }
         }
       }
@@ -205,6 +217,7 @@ export default {
           nickname: newNickname,
           password: newPWD,
           bio:newBio,
+          oldPassword: encryptPWD0
         })
       }).then(res => {
         console.log(res.data)
@@ -221,9 +234,9 @@ export default {
             showClose: true
           })
         }
-        that.changePWD = false;
+        this.changePWD = false;
         that.outerVisible = false;
-        location.reload();
+        // location.reload();
       }).catch(err => {
         console.log(err)
       })

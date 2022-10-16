@@ -47,7 +47,7 @@
 
 <script>
 import axios from "axios";
-import qs from "qs";
+import CryptoJS from 'crypto-js'
 
 axios.defaults.withCredentials = true;
 
@@ -66,9 +66,13 @@ export default {
     toLogin: function () {
       let params;
       let tempthis = this;
+      let PWD = document.getElementById('pw').value;
       params = {
         email: document.getElementById('email2').value,
-        password: document.getElementById('pw').value
+        password: CryptoJS.AES.encrypt(PWD, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+          mode: CryptoJS.mode.ECB,
+          padding: CryptoJS.pad.Pkcs7
+        }).toString()
       };
       axios({
         method: 'post',
@@ -81,7 +85,7 @@ export default {
 
               this.$store.state.userInfo.email = res.data.email; //邮箱
               this.$store.state.userInfo.username = res.data.username; //用户昵称
-              this.$store.state.userInfo.avatar = res.data.avatar; //头像地址
+              this.$store.state.userInfo.avatar = res.data.avatar !== '' ? res.data.avatar : "src/assets/img/avatar-default.jpg"; //头像地址
               this.$store.state.userInfo.usertype = res.data.usertype //用户类型
               this.$store.state.userInfo.profile = res.data.profile //用户简介
               this.$store.state.userInfo.password = res.data.password //用户密码
@@ -113,11 +117,19 @@ export default {
     },
     toRegister: function () {
       let params;
+      let PWD1 = document.getElementById('pw1').value;
+      let PWD2 = document.getElementById('pw2').value;
       params = {
         username: document.getElementById('un1').value,
         email: document.getElementById('email1').value,
-        password_1: document.getElementById('pw1').value,
-        password_2: document.getElementById('pw2').value,
+        password_1: CryptoJS.AES.encrypt(PWD1, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+          mode: CryptoJS.mode.ECB,
+          padding: CryptoJS.pad.Pkcs7
+        }).toString(),
+        password_2: CryptoJS.AES.encrypt(PWD2, CryptoJS.enc.Utf8.parse(this.$store.state.aseKey), {
+          mode: CryptoJS.mode.ECB,
+          padding: CryptoJS.pad.Pkcs7
+        }).toString(),
         usertype: this.utype
       };
       console.log(params);
