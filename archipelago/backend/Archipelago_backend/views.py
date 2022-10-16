@@ -112,6 +112,13 @@ def logoff(request):
 def delete_account(request):
     if request.method == "POST":
         email = request.session.get('email')
+        json_str = request.body.decode()
+        payload = json.loads(json_str)
+        passwd = payload.get('password')
+        old_password = get_data('PW', 'users', f"UE='{email}'")
+        old_password = old_password[0][0]
+        if passwd != old_password:
+            return JsonResponse({"errno": 1, "msg": "注销失败！密码不匹配"})
         cur = connection.cursor()
         cur.execute("DELETE FROM users WHERE UE=%s", (email,))
         return JsonResponse({"errno": 0, "msg": "注销成功"})
