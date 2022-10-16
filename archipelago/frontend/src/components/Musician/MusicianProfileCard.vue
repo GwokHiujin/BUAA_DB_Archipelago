@@ -370,7 +370,6 @@ export default {
   methods: {
     getProfileData: function () {
       let that = this
-      that.loading = true
       axios.request({
         url: "/api/get_musician/",    // TODO
         method: "get"
@@ -381,7 +380,6 @@ export default {
         that.showMusicianProfile = response.data
       }).catch(function (error) {
         console.log(error)
-        that.loading = false
       })
     },
 

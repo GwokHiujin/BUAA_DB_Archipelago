@@ -26,7 +26,7 @@ export default {
       type: 0
     }
   },
-  activated() {
+  mounted() {
     this.type = this.$store.state.userInfo.usertype;
   }
 }
