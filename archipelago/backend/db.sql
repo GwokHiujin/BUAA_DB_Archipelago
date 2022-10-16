@@ -21,7 +21,7 @@ create table if not exists musicians(
     LT  TEXT,
     FY  DATETIME,
     INFO TEXT,
-    FOREIGN KEY(UE) REFERENCES users(UE)
+    FOREIGN KEY(UE) REFERENCES users(UE) ON DELETE CASCADE
 );
 
 create table if not exists albums(
@@ -34,5 +34,5 @@ create table if not exists albums(
     AC  VARCHAR(255),
     TYP INT NOT NULL,
     SRC VARCHAR(255),
-    FOREIGN KEY(MID) REFERENCES musicians(MID)
+    FOREIGN KEY(MID) REFERENCES musicians(MID) ON DELETE CASCADE
 );

@@ -111,7 +111,7 @@ def logoff(request):
 
 def delete_account(request):
     if request.method == "POST":
-        email = request.session.get('userEmail')
+        email = request.session.get('email')
         cur = connection.cursor()
         cur.execute("DELETE FROM users WHERE UE=%s", (email,))
         return JsonResponse({"errno": 0, "msg": "注销成功"})
