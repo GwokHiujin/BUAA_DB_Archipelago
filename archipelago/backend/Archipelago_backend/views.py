@@ -142,6 +142,10 @@ def set_user_info(request):
         payload = json.loads(json_str)
         print(payload)
         cur = connection.cursor()
+        if payload.get('password') is not None:
+            old_password = get_data('PW', 'users', f'UE={email}')
+            if payload['oldPassword'] != old_password:
+                return JsonResponse({"errno": 2, "msg": "旧密码输入错误"})
         for check_unit in check_list:
             if payload.get(check_unit[0]) is not None:
                 ctrl_str = 'UPDATE users SET ' + check_unit[1] + '=' + f"'{payload[check_unit[0]]}' " \
