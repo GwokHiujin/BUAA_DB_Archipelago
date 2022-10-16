@@ -2,8 +2,7 @@
   <el-card class="box-card" >
     <template #header>
       <div class="card-header">
-        <img src="src/assets/img/photo-default.jpg" class="show_avatar" v-if="profileList.photo === ''"/>
-        <img src={{profileList.photo}} class="show_avatar" v-else/>
+        <img src="src/assets/img/photo-default.jpg" class="show_avatar"/>
         <span class="username" v-if="profileList.musicianName !== ''">
           {{profileList.musicianName}}
         </span>
