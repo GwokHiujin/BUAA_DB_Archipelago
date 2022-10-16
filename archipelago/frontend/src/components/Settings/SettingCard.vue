@@ -26,10 +26,10 @@
         >
           <el-form>
             <el-form-item label="Nickname" :label-width="formLabelWidth">
-              <el-input id="nickname" autocomplete="off" placeholder="Enter New Nickname"/>
+              <el-input v-model="curnickname" autocomplete="off" placeholder="Enter New Nickname"/>
             </el-form-item>
             <el-form-item label="Bio" :label-width="formLabelWidth">
-              <el-input id="bio" autocomplete="off" placeholder="Enter your bio"/>
+              <el-input v-model="curbio" autocomplete="off" placeholder="Enter your bio"/>
             </el-form-item>
             <el-form-item label="Password" :label-width="formLabelWidth">
               <el-button class="el-button--danger" @click="innerVisible = true">
@@ -143,6 +143,8 @@ export default {
         bio: this.$store.state.userInfo.profile
       },
       showUserInfo: this.userInfo,
+      curnickname: '',
+      curbio: '',
       password0: '',
       password1: '',
       password2: '',
@@ -155,6 +157,7 @@ export default {
   },
   methods: {
     getSettingInfo: function () {
+      console.log('getting')
       let that = this
       that.loading = true
       axios.request({
@@ -178,8 +181,8 @@ export default {
       let newBio;
       let newPWD;
       let that = this;
-      newNickname = document.getElementById('nickname').value;
-      newBio = document.getElementById("bio").value;
+      newNickname = that.curnickname;
+      newBio = that.curbio;
       newPWD = this.$store.state.userInfo.password;
       if (that.changePWD === true) {
         if (that.password0 === '' || that.password1 === '' || that.password2 === '') {

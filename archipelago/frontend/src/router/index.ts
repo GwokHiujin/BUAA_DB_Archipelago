@@ -14,9 +14,6 @@ import SettingPage from '../components/Settings/SettingPage.vue'
 import UserDelete from '../components/layouts/DeleteUser.vue'
 import LoginNRegister from "~/components/layouts/LoginNRegister.vue";
 
-//LoginAndRegister page
-import LoginAndRegister from '../components/LogingAndRegister/LoginAndRegister.vue'
-
 const routes = [
     {
         path: "/",
@@ -48,11 +45,6 @@ const routes = [
         name: "LoginNRegister",
         component: LoginNRegister
     },
-    // {
-    //     path: "/UserDelete",
-    //     name: "UserDelete",
-    //     component: UserDelete
-    // },
     {
         path: "/Login&Register",
         name: "Login&Register",
