@@ -77,7 +77,7 @@ export default {
       })
           .then(res => {
             console.log(res.data)
-            if (res.data.errno === 0) {
+            if (res.data.errno == 0) {
 
               this.$store.state.userInfo.email = res.data.email; //邮箱
               this.$store.state.userInfo.username = res.data.username; //用户昵称
@@ -92,8 +92,7 @@ export default {
                 type: 'success',
                 showClose: true,
               })
-
-              if (this.$store.state.userInfo.type === 0) {
+              if (this.$store.state.userInfo.usertype === 0) {
                 this.$router.push('/AudienceIndex');
               } else {
                 this.$router.push('/MusicianIndex');
