@@ -235,7 +235,7 @@ export default {
         }
         this.changePWD = false;
         that.outerVisible = false;
-        // location.reload();
+        location.reload();
       }).catch(err => {
         console.log(err)
       })
