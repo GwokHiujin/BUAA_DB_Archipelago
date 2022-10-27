@@ -1,42 +1,63 @@
 {
-  "name": "element-plus-vite-starter",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vue-notus",
+  "homepage": "https://demos.creative-tim.com/vue-notus/",
+  "version": "1.1.0",
+  "description": "Vue Notus - A free Tailwind CSS and VueJS UI Kit and Admin by Creative Tim.",
+  "repository": "https://github.com/creativetimofficial/vue-notus",
+  "license": "MIT",
   "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "generate": "vite-ssg build",
-    "preview": "vite preview",
-    "typecheck": "vue-tsc --noEmit"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build && gulp licenses",
+    "lint": "vue-cli-service lint",
+    "build:tailwind": "tailwind build src/assets/styles/index.css -o src/assets/styles/tailwind.css",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run build:tailwind && npm run serve"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.0.10",
-    "@types/store": "^2.0.2",
-    "axios": "^1.1.2",
-    "cookie": "^0.5.0",
-    "crypto-js": "^4.1.1",
-    "element-plus": "^2.2.13",
-    "qs": "^6.11.0",
-    "vue": "^3.2.36",
-    "vue-axios": "^3.5.0",
-    "vue-router": "^4.1.5",
-    "vuex": "^4.0.2"
+    "@fortawesome/fontawesome-free": "5.15.3",
+    "@popperjs/core": "2.9.1",
+    "@tailwindcss/forms": "0.2.1",
+    "@vue/compiler-sfc": "3.0.7",
+    "chart.js": "2.9.4",
+    "core-js": "3.9.1",
+    "gulp": "4.0.2",
+    "gulp-append-prepend": "1.0.8",
+    "tailwindcss": "2.0.4",
+    "vue": "3.0.7",
+    "vue-router": "4.0.5"
   },
   "devDependencies": {
-    "@iconify-json/ep": "^1.1.4",
-    "@types/node": "^17.0.35",
-    "@types/qs": "^6.9.7",
-    "@vitejs/plugin-vue": "^2.3.3",
-    "@vue/cli-plugin-vuex": "~5.0.0",
-    "node-sass": "^7.0.3",
-    "sass": "^1.52.1",
-    "sass-loader": "^13.1.0",
-    "typescript": "^4.7.2",
-    "unocss": "^0.34.1",
-    "unplugin-vue-components": "^0.19.5",
-    "vite": "^2.9.9",
-    "vite-ssg": "^0.20.0",
-    "vue-tsc": "^0.34.16"
+    "@babel/core": "7.13.10",
+    "@babel/eslint-parser": "7.13.10",
+    "@vue/cli-plugin-babel": "5.0.0-alpha.7",
+    "@vue/cli-plugin-eslint": "5.0.0-alpha.7",
+    "@vue/cli-service": "5.0.0-alpha.7",
+    "autoprefixer": "10.2.5",
+    "eslint": "7.22.0",
+    "eslint-plugin-vue": "7.7.0",
+    "postcss": "8.2.8",
+    "vue-template-compiler": "2.6.12"
   },
-  "license": "MIT"
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }
