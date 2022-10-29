@@ -7,36 +7,25 @@
       <div class="container mx-auto items-center flex flex-wrap">
         <div class="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
           <div class="pt-32 sm:pt-0">
-            <h2 class="font-semibold text-4xl text-blueGray-600">
-              Vue Notus - A beautiful extension for Tailwind CSS.
-            </h2>
+            <img
+              :src="logoLong"
+              alt="..."
+            />
             <p class="mt-4 text-lg leading-relaxed text-blueGray-500">
-              Vue Notus is Free and Open Source. It does not change any of the
-              CSS from
               <a
-                href="https://tailwindcss.com/?ref=creativetim"
+                href="/"
                 class="text-blueGray-600"
-                target="_blank"
               >
-                Tailwind CSS.
+                群岛 Archipelago
               </a>
-              It features multiple HTML elements and it comes with dynamic
-              components for ReactJS, Vue and Angular.
+              是一款专注于独立音乐人的数字唱片销售平台，也是音乐发烧友们发掘优秀作品、联系并直接支持小众艺术家们的音乐交流社区。<br>欢迎加入我们，邂逅属于你的音乐岛屿！
             </p>
             <div class="mt-12">
               <a
-                href="https://www.creative-tim.com/learning-lab/tailwind/vue/overview/notus?ref=vn-index"
-                target="_blank"
+                href="/auth"
                 class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-emerald-500 active:bg-emerald-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
               >
                 Get started
-              </a>
-              <a
-                href="https://github.com/creativetimofficial/vue-notus?ref=vn-index"
-                class="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-                target="_blank"
-              >
-                Github Star
               </a>
             </div>
           </div>
@@ -45,7 +34,7 @@
 
       <img
         class="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860-px"
-        :src="patternVue"
+        :src="landingPage_pattern"
         alt="..."
       />
     </section>
@@ -96,12 +85,13 @@
                   ></polygon>
                 </svg>
                 <h4 class="text-xl font-bold text-white">
-                  Great for your awesome project
+                  邂逅独立音乐的群岛
                 </h4>
-                <p class="text-md font-light mt-2 text-white">
-                  Putting together a page has never been easier than matching
-                  together pre-made components. From landing pages presentation
-                  to login areas, you can easily customise and built your pages.
+                <p class="text-md font-light mt-4 text-white">
+                  在音乐市场几乎被唱片资本公司与大型厂牌垄断的当下,
+                  未经签约的独立音乐一直小众而式微, 我们衷心希望能提供这样一片纯净的群岛,
+                  供独立音乐人与音乐爱好者们共同发现、共同探索,
+                  传递音乐的美好与创作的自由。
                 </p>
               </blockquote>
             </div>
@@ -115,14 +105,14 @@
                     <div
                       class="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white"
                     >
-                      <i class="fas fa-sitemap"></i>
+                      <i class="fas fa-id-card"></i>
                     </div>
                     <h6 class="text-xl mb-1 font-semibold">
-                      CSS Components
+                      专业的音乐人档案
                     </h6>
-                    <p class="mb-4 text-blueGray-500">
-                      Vue Notus comes with a huge number of Fully Coded CSS
-                      components.
+                    <p class="mt-4 mb-4 text-blueGray-500">
+                      群岛提供专业的音乐人档案表,
+                      让你在乐曲之外更好地认识艺术家。
                     </p>
                   </div>
                 </div>
@@ -131,14 +121,14 @@
                     <div
                       class="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white"
                     >
-                      <i class="fas fa-drafting-compass"></i>
+                      <i class="fas fa-dollar-sign"></i>
                     </div>
                     <h6 class="text-xl mb-1 font-semibold">
-                      JavaScript Components
+                      快捷的交易渠道
                     </h6>
-                    <p class="mb-4 text-blueGray-500">
-                      We also feature many dynamic components for React, NextJS,
-                      Vue and Angular.
+                    <p class="mt-4 mb-4 text-blueGray-500">
+                      群岛为数字唱片交易提供方便快捷的平台,
+                      快来支持喜爱的音乐！
                     </p>
                   </div>
                 </div>
@@ -149,28 +139,30 @@
                     <div
                       class="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white"
                     >
-                      <i class="fas fa-newspaper"></i>
+                      <i class="fas fa-table"></i>
                     </div>
-                    <h6 class="text-xl mb-1 font-semibold">Pages</h6>
-                    <p class="mb-4 text-blueGray-500">
-                      This extension also comes with 3 sample pages. They are
-                      fully coded so you can start working instantly.
+                    <h6 class="text-xl mb-1 font-semibold">
+                      丰富的音乐标签
+                    </h6>
+                    <p class="mt-4 mb-4 text-blueGray-500">
+                      群岛具有丰富专业的音乐标签系统,
+                      帮助你精准邂逅心爱的音乐。
                     </p>
                   </div>
                 </div>
                 <div class="relative flex flex-col min-w-0">
                   <div class="px-4 py-5 flex-auto">
                     <div
-                      class="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white"
+                        class="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white"
                     >
-                      <i class="fas fa-file-alt"></i>
+                      <i class="fas fa-guitar"></i>
                     </div>
                     <h6 class="text-xl mb-1 font-semibold">
-                      Documentation
+                      自由的创作氛围
                     </h6>
-                    <p class="mb-4 text-blueGray-500">
-                      Built by developers for developers. You will love how easy
-                      is to to work with Vue Notus.
+                    <p class="mt-4 mb-4 text-blueGray-500">
+                      群岛管理员保证以最小程度干涉音乐人作品的分享,
+                      助力优秀的独立音乐创作。
                     </p>
                   </div>
                 </div>
@@ -186,66 +178,62 @@
             <div
               class="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white"
             >
-              <i class="fas fa-sitemap text-xl"></i>
+              <i class="fas fa-id-card text-xl"></i>
             </div>
             <h3 class="text-3xl mb-2 font-semibold leading-normal">
-              CSS Components
+              专业的音乐人档案
             </h3>
             <p
-              class="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600"
+              class="text-lg font-light leading-relaxed mt-5 mb-4 text-blueGray-600"
             >
-              Every element that you need in a product comes built in as a
-              component. All components fit perfectly with each other and can
-              have different colours.
+              群岛平台提供维基式的音乐人档案填写方式。
+              听众用户可以查看到乐队历届成员的活动年份,
+              艺术家也能够在此详细叙述自己的创作主题,
+              专业的档案信息使你能够在音乐情绪以外更好地了解独立音乐人的点滴。
             </p>
             <div class="block pb-6">
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Buttons
+                活动年份
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Inputs
+                国籍
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Labels
+                活动地点
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Menus
+                成员信息
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Navbars
+                创作主题
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Pagination
+                音乐标签
               </span>
               <span
-                class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
+                  class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Progressbars
-              </span>
-              <span
-                class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
-              >
-                Typography
+                ……
               </span>
             </div>
             <a
-              href="https://www.creative-tim.com/learning-lab/tailwind/vue/alerts/notus?ref=vn-index"
+              href="/auth"
               target="_blank"
               class="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
             >
-              View All
+              加入我们
               <i class="fa fa-angle-double-right ml-1 leading-relaxed"></i>
             </a>
           </div>
@@ -751,7 +739,7 @@
 import IndexNavbar from "@/components/Navbars/IndexNavbar.vue";
 import FooterComponent from "@/components/Footers/Footer.vue";
 
-import patternVue from "@/assets/img/pattern_vue.png";
+import landingPage_pattern from "@/assets/img/landingPage_pattern.png";
 import componentBtn from "@/assets/img/component-btn.png";
 import componentProfileCard from "@/assets/img/component-profile-card.png";
 import componentInfoCard from "@/assets/img/component-info-card.png";
@@ -762,11 +750,12 @@ import documentation from "@/assets/img/documentation.png";
 import login from "@/assets/img/login.jpg";
 import profile from "@/assets/img/profile.jpg";
 import landing from "@/assets/img/landing.jpg";
+import logoLong from "@/assets/img/logo-long.png";
 
 export default {
   data() {
     return {
-      patternVue,
+      landingPage_pattern,
       componentBtn,
       componentProfileCard,
       componentInfoCard,
@@ -777,6 +766,7 @@ export default {
       login,
       profile,
       landing,
+      logoLong,
     };
   },
   components: {
