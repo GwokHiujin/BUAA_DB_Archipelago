@@ -69,7 +69,7 @@
             >
               <img
                 alt="..."
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
+                src="https://images.unsplash.com/photo-1489641493513-ba4ee84ccea9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                 class="w-full align-middle rounded-t-lg"
               />
               <blockquote class="relative p-8 mb-4">
@@ -146,7 +146,7 @@
                     </h6>
                     <p class="mt-4 mb-4 text-blueGray-500">
                       群岛具有丰富专业的音乐标签系统,
-                      帮助你精准邂逅心爱的音乐。
+                      帮助你精准邂逅心仪的音乐。
                     </p>
                   </div>
                 </div>
@@ -184,7 +184,7 @@
               专业的音乐人档案
             </h3>
             <p
-              class="text-lg font-light leading-relaxed mt-5 mb-4 text-blueGray-600"
+              class="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600"
             >
               群岛平台提供维基式的音乐人档案填写方式。
               听众用户可以查看到乐队历届成员的活动年份,
@@ -230,10 +230,9 @@
             </div>
             <a
               href="/auth"
-              target="_blank"
               class="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
             >
-              加入我们
+              加入群岛
               <i class="fa fa-angle-double-right ml-1 leading-relaxed"></i>
             </a>
           </div>
@@ -280,108 +279,69 @@
           <div class="w-full md:w-6/12 px-4 mr-auto ml-auto mt-32">
             <div class="justify-center flex flex-wrap relative">
               <div class="my-4 w-full lg:w-6/12 px-4">
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/svelte/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div class="bg-red-600 shadow-lg rounded-lg text-center p-8">
-                    <img
+                <div class="shadow-lg rounded-lg text-center p-8" style="background-image: url(https://images.unsplash.com/photo-1477233534935-f5e6fe7c1159?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)">
+                  <img
+                      src="https://images.unsplash.com/photo-1477233534935-f5e6fe7c1159?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                       alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/svelte.jpg"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      Svelte
-                    </p>
-                  </div>
-                </a>
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/react/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div
-                    class="bg-lightBlue-500 shadow-lg rounded-lg text-center p-8 mt-8"
-                  >
-                    <img
+                      class="shadow-md rounded-full"
+                  />
+                  <p class="text-lg text-white mt-4 font-semibold">
+                    Hip-Hop
+                  </p>
+                </div>
+                <div class="shadow-lg rounded-lg text-center p-8 mt-8" style="background-image: url(https://images.unsplash.com/photo-1633311332161-b98e8387760f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1437&q=80)">
+                  <img
+                      src="https://images.unsplash.com/photo-1633311332161-b98e8387760f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1437&q=80"
                       alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/react.jpg"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      ReactJS
-                    </p>
-                  </div>
-                </a>
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div
-                    class="bg-blueGray-700 shadow-lg rounded-lg text-center p-8 mt-8"
-                  >
-                    <img
+                      class="shadow-md rounded-full"
+                  />
+                  <p class="text-lg text-white mt-4 font-semibold">
+                    Acid Jazz
+                  </p>
+                </div>
+                <div class="shadow-lg rounded-lg text-center p-8 mt-8" style="background-image: url(https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)">
+                  <img
+                      src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                       alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/nextjs.jpg"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      NextJS
-                    </p>
-                  </div>
-                </a>
+                      class="shadow-md rounded-full"
+                  />
+                  <p class="text-lg text-white mt-4 font-semibold">
+                    Urban Folk
+                  </p>
+                </div>
               </div>
+
               <div class="my-4 w-full lg:w-6/12 px-4 lg:mt-16">
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/js/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div
-                    class="bg-yellow-500 shadow-lg rounded-lg text-center p-8"
-                  >
-                    <img
+                <div class="shadow-lg rounded-lg text-center p-8" style="background-image: url(https://images.unsplash.com/photo-1651336451597-4d74863a3a50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)">
+                  <img
+                      src="https://images.unsplash.com/photo-1651336451597-4d74863a3a50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                       alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/js.png"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      JavaScript
-                    </p>
-                  </div>
-                </a>
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/angular/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div
-                    class="bg-red-700 shadow-lg rounded-lg text-center p-8 mt-8"
-                  >
-                    <img
+                      class="shadow-md rounded-full"
+                  />
+                  <p class="text-lg text-white mt-4 font-semibold">
+                    Thrash Metal
+                  </p>
+                </div>
+                <div class="shadow-lg rounded-lg text-center p-8 mt-8" style="background-image: url(https://images.unsplash.com/photo-1504904126298-3fde501c9b31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)">
+                  <img
+                      src="https://images.unsplash.com/photo-1504904126298-3fde501c9b31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                       alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/angular.jpg"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      Angular
-                    </p>
-                  </div>
-                </a>
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/vue/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div
-                    class="bg-emerald-500 shadow-lg rounded-lg text-center p-8 mt-8"
-                  >
-                    <img
+                      class="shadow-md rounded-full"
+                  />
+                  <p class="text-lg text-white mt-4 font-semibold">
+                    EDM Trap
+                  </p>
+                </div>
+                <div class="shadow-lg rounded-lg text-center p-8 mt-8" style="background-image: url(https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)">
+                  <img
+                      src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                       alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/vue.jpg"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      Vue.js
-                    </p>
-                  </div>
-                </a>
+                      class="shadow-md rounded-full"
+                  />
+                  <p class="text-lg text-white mt-4 font-semibold">
+                    Piano Music
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -390,232 +350,100 @@
             <div
               class="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white"
             >
-              <i class="fas fa-drafting-compass text-xl"></i>
+              <i class="fas fa-table text-xl"></i>
             </div>
             <h3 class="text-3xl mb-2 font-semibold leading-normal">
-              Javascript Components
+              丰富的音乐标签
             </h3>
             <p
               class="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600"
             >
-              In order to create a great User Experience some components require
-              JavaScript. In this way you can manipulate the elements on the
-              page and give more options to your users.
+              群岛具有丰富专业的音乐标签系统,
+              从风格流派、音乐情绪、器乐元素三个分类帮助音乐人描述自己的作品,
+              助力听众精准邂逅心仪的音乐。
             </p>
             <p
               class="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600"
             >
-              We created a set of Components that are dynamic and come to help
-              you.
+              当然,
+              你也可以通过国籍、成立年份等更细粒度的信息,
+              在群岛的搜索系统中检索属于自己的那篇音乐岛屿。
             </p>
             <div class="block pb-6">
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Alerts
+                前卫金属
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Dropdowns
+                Drill Music
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Menus
+                数学摇滚
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Modals
+                校园民谣
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Navbars
+                Jazz Hip-Hop
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Popovers
+                BoomBap
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Tabs
+                欢快
               </span>
               <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
               >
-                Tooltips
+                悲怆
+              </span>
+              <span
+                  class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
+              >
+                ……
               </span>
             </div>
             <a
-              href="https://www.creative-tim.com/learning-lab/tailwind/vue/alerts/notus?ref=vn-index"
-              target="_blank"
-              class="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                href="/auth"
+                class="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
             >
-              View all
+              加入群岛
               <i class="fa fa-angle-double-right ml-1 leading-relaxed"></i>
             </a>
           </div>
         </div>
       </div>
 
-      <div class="container mx-auto px-4 pb-32 pt-48">
-        <div class="items-center flex flex-wrap">
-          <div class="w-full md:w-5/12 ml-auto px-12 md:px-4">
-            <div class="md:pr-12">
-              <div
-                class="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white"
-              >
-                <i class="fas fa-file-alt text-xl"></i>
-              </div>
-              <h3 class="text-3xl font-semibold">
-                Complex Documentation
-              </h3>
-              <p class="mt-4 text-lg leading-relaxed text-blueGray-500">
-                This extension comes a lot of fully coded examples that help you
-                get started faster. You can adjust the colors and also the
-                programming language. You can change the text and images and
-                you're good to go.
-              </p>
-              <ul class="list-none mt-6">
-                <li class="py-2">
-                  <div class="flex items-center">
-                    <div>
-                      <span
-                        class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-50 mr-3"
-                      >
-                        <i class="fas fa-fingerprint"></i>
-                      </span>
-                    </div>
-                    <div>
-                      <h4 class="text-blueGray-500">
-                        Built by Developers for Developers
-                      </h4>
-                    </div>
-                  </div>
-                </li>
-                <li class="py-2">
-                  <div class="flex items-center">
-                    <div>
-                      <span
-                        class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-50 mr-3"
-                      >
-                        <i class="fab fa-html5"></i>
-                      </span>
-                    </div>
-                    <div>
-                      <h4 class="text-blueGray-500">
-                        Carefully crafted code for Components
-                      </h4>
-                    </div>
-                  </div>
-                </li>
-                <li class="py-2">
-                  <div class="flex items-center">
-                    <div>
-                      <span
-                        class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-50 mr-3"
-                      >
-                        <i class="far fa-paper-plane"></i>
-                      </span>
-                    </div>
-                    <div>
-                      <h4 class="text-blueGray-500">
-                        Dynamic Javascript Components
-                      </h4>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0">
-            <img
-              alt="..."
-              class="max-w-full rounded-lg shadow-xl"
-              style="
-                transform: scale(1) perspective(1040px) rotateY(-11deg)
-                  rotateX(2deg) rotate(2deg);
-              "
-              :src="documentation"
-            />
-          </div>
-        </div>
-      </div>
-
       <div class="justify-center text-center flex flex-wrap mt-24">
         <div class="w-full md:w-6/12 px-12 md:px-4">
-          <h2 class="font-semibold text-4xl">Beautiful Example Pages</h2>
-          <p class="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
-            Vue Notus is a completly new product built using our past experience
-            in web templates. Take the examples we made for you and start
-            playing with them.
+          <h2 class="font-semibold text-4xl">
+            ✨ 自由便捷的作品交易机制 ✨
+          </h2>
+          <p class="text-lg leading-relaxed mt-8 mb-4 text-blueGray-500">
+            群岛管理员保证以最小程度干涉音乐人作品的发布,
+            助力优秀的独立音乐创作。用户可以方便快捷地购买数字唱片,
+            支持自己喜爱的艺术家。
           </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="block relative z-1 bg-blueGray-600">
-      <div class="container mx-auto">
-        <div class="justify-center flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4 -mt-24">
-            <div class="flex flex-wrap">
-              <div class="w-full lg:w-4/12 px-4">
-                <h5 class="text-xl font-semibold pb-4 text-center">
-                  Login Page
-                </h5>
-                <router-link to="/auth/login">
-                  <div
-                    class="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150"
-                  >
-                    <img
-                      alt="..."
-                      class="align-middle border-none max-w-full h-auto rounded-lg"
-                      :src="login"
-                    />
-                  </div>
-                </router-link>
-              </div>
-
-              <div class="w-full lg:w-4/12 px-4">
-                <h5 class="text-xl font-semibold pb-4 text-center">
-                  Profile Page
-                </h5>
-                <router-link to="/profile">
-                  <div
-                    class="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150"
-                  >
-                    <img
-                      alt="..."
-                      class="align-middle border-none max-w-full h-auto rounded-lg"
-                      :src="profile"
-                    />
-                  </div>
-                </router-link>
-              </div>
-
-              <div class="w-full lg:w-4/12 px-4">
-                <h5 class="text-xl font-semibold pb-4 text-center">
-                  Landing Page
-                </h5>
-                <router-link to="/landing">
-                  <div
-                    class="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150"
-                  >
-                    <img
-                      alt="..."
-                      class="align-middle border-none max-w-full h-auto rounded-lg"
-                      :src="landing"
-                    />
-                  </div>
-                </router-link>
-              </div>
-            </div>
-          </div>
+          <a
+              href="/auth"
+              class="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+          >
+            加入群岛
+            <i class="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+          </a>
         </div>
       </div>
     </section>
@@ -630,31 +458,23 @@
               <i class="fas fa-code-branch text-xl"></i>
             </div>
             <h3 class="text-3xl mb-2 font-semibold leading-normal text-white">
-              Open Source
+              开发者介绍
             </h3>
             <p
               class="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-400"
             >
-              Since
-              <a
-                href="https://tailwindcss.com/?ref=creativetim"
-                class="text-blueGray-300"
-                target="_blank"
-              >
-                Tailwind CSS
-              </a>
-              is an open source project we wanted to continue this movement too.
-              You can give this version a try to feel the design and also test
-              the quality of the code!
+              本平台作为北京航空航天大学计算机学院
+              2020 级数据库系统概论课程大作业,
+              由学生王哲、蔡赋忞、郭晓燕合作开发。
+
             </p>
             <p
               class="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-400"
             >
-              Get it free on Github and please help us spread the news with a
-              Star!
+              Get it free on Github and give us a Star if you like this project!
             </p>
             <a
-              href="https://github.com/creativetimofficial/vue-notus?ref=vn-index"
+              href="/"
               target="_blank"
               class="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
             >
@@ -702,24 +522,23 @@
                 😍
               </span>
             </p>
-            <h3 class="font-semibold text-3xl">
-              Do you love this Starter Kit?
+            <h3 class="font-semibold text-3xl mt-8">
+              Do you love ARCHIPELAGO?
             </h3>
             <p class="text-blueGray-500 text-lg leading-relaxed mt-4 mb-4">
-              Cause if you do, it can be yours now. Hit the buttons below to
-              navigate to get the Free version for your next project. Build a
-              new web app or give an old project a new look!
+              如果你是希望自己作品被看见的独立音乐创作者,
+              或者是正在寻求专业的音乐交易与分类平台的独立音乐爱好者,
+              欢迎注册成为群岛的一员！开发者衷心希望你能够在此邂逅自己的音乐岛屿。
             </p>
             <div class="sm:block flex flex-col mt-10">
               <a
-                href="https://www.creative-tim.com/learning-lab/tailwind/vue/overview/notus?ref=vn-index"
-                target="_blank"
+                href="/auth"
                 class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-emerald-500 active:bg-emerald-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
               >
                 Get started
               </a>
               <a
-                href="https://github.com/creativetimofficial/vue-notus?ref=vn-index"
+                href="/"
                 target="_blank"
                 class="github-star sm:ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
               >
