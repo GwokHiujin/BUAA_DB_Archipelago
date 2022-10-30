@@ -9,13 +9,13 @@
       <!-- Brand -->
       <a
         class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-        href="javascript:void(0)"
+        href="/admin/dashboard"
       >
-        Dashboard
+        群岛 Archipelago
       </a>
       <!-- Form -->
       <form
-        class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3"
+        class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-4"
       >
         <div class="relative flex w-full flex-wrap items-stretch">
           <span
@@ -25,14 +25,24 @@
           </span>
           <input
             type="text"
-            placeholder="Search here..."
+            placeholder="发现你的音乐岛屿……"
             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"
           />
         </div>
       </form>
       <!-- User -->
       <ul class="flex-col md:flex-row list-none items-center hidden md:flex">
-        <user-dropdown />
+        <div class="items-center flex">
+        <span
+            class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"
+        >
+          <img
+              alt="..."
+              class="w-full rounded-full align-middle border-none shadow-lg"
+              src="@/assets/img/team-1-800x800.jpg"
+          />
+        </span>
+        </div>
       </ul>
     </div>
   </nav>
@@ -40,11 +50,5 @@
 </template>
 
 <script>
-import UserDropdown from "@/components/Dropdowns/UserDropdown.vue";
 
-export default {
-  components: {
-    UserDropdown,
-  },
-};
 </script>

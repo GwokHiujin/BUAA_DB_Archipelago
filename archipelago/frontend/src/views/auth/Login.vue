@@ -8,7 +8,7 @@
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
               <h6 class="text-blueGray-500 text-lg font-bold">
-                Sign in with Credentials
+                登录
               </h6>
             </div>
             <hr class="mt-6 border-b-1 border-blueGray-300" />
@@ -44,12 +44,14 @@
               </div>
 
               <div class="text-center mt-8">
-                <button
-                  class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                  type="button"
-                >
-                  Sign In
-                </button>
+                <router-link to="/admin/dashboard">
+                  <button
+                    class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                    type="button"
+                  >
+                    登录
+                  </button>
+                </router-link>
               </div>
             </form>
           </div>
@@ -60,7 +62,7 @@
           </div>
           <div class="w-1/2 text-right">
             <router-link to="/auth/register" class="text-blueGray-200">
-              <small>Create new account</small>
+              <small>新用户注册 >></small>
             </router-link>
           </div>
         </div>

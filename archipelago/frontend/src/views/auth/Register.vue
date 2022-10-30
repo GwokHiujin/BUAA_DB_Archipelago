@@ -8,7 +8,7 @@
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
               <h6 class="text-blueGray-500 text-lg font-bold">
-                Sign up with Credentials
+                新用户注册
               </h6>
             </div>
             <hr class="mt-6 border-b-1 border-blueGray-300" />
@@ -71,13 +71,31 @@
                 />
               </div>
 
+              <div class="relative w-full mt-8">
+                <div class="text-center">
+                  <button
+                      class="mx-8 bg-emerald-500 text-white focus:bg-blueGray-800 active:bg-emerald-600 font-bold uppercase text-sm px-4 py-4 rounded-full shadow hover:shadow-lg outline-none mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                  >
+                    <i class="fas fa-guitar mr-2"></i> 我是音乐人
+                  </button>
+
+                  <button
+                      class="mx-8 bg-emerald-500 text-white focus:bg-blueGray-800 active:bg-emerald-600 font-bold uppercase text-sm px-4 py-4 rounded-full shadow hover:shadow-lg outline-none mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                  >
+                    <i class="fas fa-headphones mr-2"></i> 我是听众
+                  </button>
+                </div>
+              </div>
+
               <div class="text-center mt-8">
                 <router-link to="/auth/login">
                   <button
                     class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="button"
                   >
-                    Create Account
+                    注册
                   </button>
                 </router-link>
               </div>
@@ -88,16 +106,7 @@
     </div>
   </div>
 </template>
-<script>
-import github from "@/assets/img/github.svg";
-import google from "@/assets/img/google.svg";
 
-export default {
-  data() {
-    return {
-      github,
-      google,
-    };
-  },
-};
+<script>
+
 </script>
