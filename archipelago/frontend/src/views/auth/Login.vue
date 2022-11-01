@@ -96,7 +96,6 @@ export default {
   methods: {
     login: function () {
       let params;
-      let that = this;
       let password = document.getElementById("password").value;
       params = {
         email: document.getElementById("emailAddress").value,
