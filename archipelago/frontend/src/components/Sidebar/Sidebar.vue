@@ -71,8 +71,8 @@
 
         <!-- Divider -->
         <hr class="my-4 md:min-w-full" />
-        <!-- Navigation -->
 
+        <!-- Navigation -->
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <li class="items-center">
             <router-link
@@ -98,7 +98,10 @@
             </router-link>
           </li>
 
-          <li class="items-center">
+          <li
+              class="items-center"
+              v-if="$cookies.get('userInfo_usertype') === '1'"
+          >
             <router-link
                 class="text-blueGray-600 hover:text-blueGray-400 text-base uppercase py-4 font-bold block"
                 to="/profile"
@@ -108,7 +111,10 @@
             </router-link>
           </li>
 
-          <li class="items-center">
+          <li
+              class="items-center"
+              v-if="$cookies.get('userInfo_usertype') === '1'"
+          >
             <router-link
               to="/admin/tables"
               v-slot="{ href, navigate, isActive }"
@@ -132,7 +138,10 @@
             </router-link>
           </li>
 
-          <li class="items-center">
+          <li
+              class="items-center"
+              v-if="$cookies.get('userInfo_usertype') === '0'"
+          >
             <router-link
                 to="/admin/tables"
                 v-slot="{ href, navigate, isActive }"
@@ -179,6 +188,39 @@
               </a>
             </router-link>
           </li>
+
+          <!-- Divider -->
+          <hr class="my-4 md:min-w-full" />
+
+          <li class="items-center">
+            <button
+                class="lg:bg-opacity-0 font-bold uppercase text-sm py-3 pr-12 hover:text-pink-500 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                @click="logout()"
+            >
+              <i
+                  class="fas fa-forward mr-2 text-base"
+                  :class="[isActive ? 'opacity-75' : 'text-pink-500']"
+              ></i>
+              退出登录
+            </button>
+          </li>
+
+          <li class="items-center">
+            <div>
+              <button
+                  class="lg:bg-opacity-0 font-bold uppercase text-sm py-3 pr-12 hover:text-pink-500 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                  v-on:click="toggleModal()"
+              >
+                <i
+                    class="fas fa-lock mr-2 text-base"
+                    :class="[isActive ? 'opacity-75' : 'text-pink-500']"
+                ></i>
+                注销账号
+              </button>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -194,16 +236,32 @@ export default {
   data() {
     return {
       collapseShow: "hidden",
+      showModal: false,
     };
   },
-  methods: {
-    toggleCollapseShow: function (classes) {
-      this.collapseShow = classes;
-    },
+  mounted() {
+    console.log("userType is " + this.$cookies.get("userInfo_usertype"));
   },
   components: {
     NotificationDropdown,
     UserDropdown,
   },
+  methods: {
+    toggleCollapseShow: function (classes) {
+      this.collapseShow = classes;
+    },
+    toggleModal: function () {
+      let that = this;
+      that.showModal = !that.showModal;
+      this.$cookies.set("flag_logOut_showModal", that.showModal.toString());
+      console.log("showModal is " + this.$cookies.get('flag_logOut_showModal'));
+      location.reload();
+    },
+    logout: function () {
+      this.$cookies.set("flag_isLogin", "false");
+      this.router.push("/");
+      location.reload();
+    }
+  }
 };
 </script>

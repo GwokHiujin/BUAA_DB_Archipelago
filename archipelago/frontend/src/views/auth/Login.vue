@@ -46,7 +46,6 @@
               </div>
 
               <div class="text-center mt-8">
-                <router-link to="/admin/dashboard">
                   <button
                     class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="button"
@@ -54,7 +53,6 @@
                   >
                     登录
                   </button>
-                </router-link>
               </div>
             </form>
           </div>
@@ -96,10 +94,11 @@ export default {
   methods: {
     login: function () {
       let params;
+      let that = this;
       let password = document.getElementById("password").value;
       params = {
         email: document.getElementById("emailAddress").value,
-        password: CryptoJS.AES.encrypt(password, CryptoJS.enc.Utf8.parse(this.$cookies.get("aseKey")), {
+        password: CryptoJS.AES.encrypt(password, CryptoJS.enc.Utf8.parse(that.$cookies.get("aseKey")), {
           mode: CryptoJS.mode.ECB,
           padding: CryptoJS.pad.Pkcs7
         }).toString()
@@ -112,13 +111,13 @@ export default {
           res => {
             console.log(res.data)
             if (res.data.errno === 0) {
-              this.$cookies.set("userInfo_email", res.data.email)
-              this.$cookies.set("userInfo_username", res.data.username)
-              this.$cookies.set("userInfo_avatar", res.data.avatar !== '' ? res.data.avatar : "@/assets/img/avatar-default.jpg")
-              this.$cookies.set("userInfo_usertype", res.data.usertype)
-              this.$cookies.set("userInfo_bio", res.data.profile !== '' ? res.data.profile : "江空岛石出，霜落天宇净 :)")
-              this.$cookies.set("userInfo_password", res.data.password)
-              this.$cookies.set("flag_isLogin", true)
+              that.$cookies.set("userInfo_email", res.data.email)
+              that.$cookies.set("userInfo_username", res.data.username)
+              that.$cookies.set("userInfo_avatar", res.data.avatar !== '' ? res.data.avatar : "@/assets/img/avatar-default.jpg")
+              that.$cookies.set("userInfo_usertype", res.data.usertype)
+              that.$cookies.set("userInfo_bio", res.data.profile !== '' ? res.data.profile : "江空岛石出，霜落天宇净 :)")
+              that.$cookies.set("userInfo_password", res.data.password)
+              that.$cookies.set("flag_isLogin", true)
 
               this.$message({
                 message: "登录成功",
@@ -126,8 +125,8 @@ export default {
                 showClose: true,
               })
 
-              if (this.$cookies.get("userInfo_usertype") === 0 ||
-                  this.$cookies.get("userInfo_usertype") === 1) {
+              if (that.$cookies.get("userInfo_usertype") === 0 ||
+                  that.$cookies.get("userInfo_usertype") === 1) {
                 this.$router.push("/admin/dashboard");
               }
             } else {

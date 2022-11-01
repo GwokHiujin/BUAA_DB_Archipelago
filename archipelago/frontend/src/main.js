@@ -1,8 +1,7 @@
 import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
 import axios from "axios";
-import VueAxios from "vue-axios";
-import VueCookies from "vue-cookies";
+import VueCookies from "vue3-cookies";
 
 // styles
 
@@ -98,8 +97,12 @@ const router = createRouter({
 });
 
 const Vue = createApp(App);
-Vue.use(router).mount("#app");
-Vue.use(VueAxios, axios);
-Vue.config.globalProperties.$cookies = VueCookies;    // cookie 使用默认全局配置，即过期时间为 1，path = '/'
+Vue.config.globalProperties.$axios = axios
 
-this.$cookies.set("aseKey", 20373543);
+Vue.use(VueCookies, {
+  expireTimes: "1d",
+  path: "/",
+  domain: "",
+  secure: true,
+  sameSite: "None",
+}).use(router).mount("#app");

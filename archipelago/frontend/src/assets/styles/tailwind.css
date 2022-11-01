@@ -1438,6 +1438,11 @@ select {
   background-color: rgba(71, 85, 105, var(--tw-bg-opacity));
 }
 
+.active\:bg-red-500:active {
+  --tw-bg-opacity: 1;
+  background-color: rgba(239, 68, 68, var(--tw-bg-opacity));
+}
+
 .visited\:bg-emerald-600:visited {
   --tw-bg-opacity: 1;
   background-color: rgba(5, 150, 105, var(--tw-bg-opacity));
@@ -2325,6 +2330,11 @@ select {
 .mx-8 {
   margin-left: 2rem;
   margin-right: 2rem;
+}
+
+.mx-64 {
+  margin-left: 25rem;
+  margin-right: 25rem;
 }
 
 .mx-auto {
@@ -3262,6 +3272,11 @@ select {
   color: rgba(20, 184, 166, var(--tw-text-opacity));
 }
 
+.text-pink-500 {
+  --tw-text-opacity: 1;
+  color: rgba(236, 72, 153, var(--tw-text-opacity));
+}
+
 .text-emerald-300 {
   --tw-text-opacity: 1;
   color: rgba(110, 231, 183, var(--tw-text-opacity));
@@ -3357,6 +3372,11 @@ select {
   color: rgba(203, 213, 225, var(--tw-text-opacity));
 }
 
+.hover\:text-pink-500:hover {
+  --tw-text-opacity: 1;
+  color: rgba(236, 72, 153, var(--tw-text-opacity));
+}
+
 .hover\:text-blueGray-400:hover {
   --tw-text-opacity: 1;
   color: rgba(148, 163, 184, var(--tw-text-opacity));
@@ -3375,6 +3395,14 @@ select {
 .hover\:text-blueGray-800:hover {
   --tw-text-opacity: 1;
   color: rgba(30, 41, 59, var(--tw-text-opacity));
+}
+
+.hover\:bg-red-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(239, 68, 68, var(--tw-bg-opacity));
+  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .truncate {
@@ -3596,6 +3624,10 @@ select {
 
 .w-16 {
   width: 4rem;
+}
+
+.w-card {
+  width: 30rem;
 }
 
 .w-auto {

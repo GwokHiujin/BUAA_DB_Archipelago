@@ -592,5 +592,14 @@ export default {
     IndexNavbar,
     FooterComponent,
   },
+  mounted() {
+    this.setCookies()
+  },
+  methods: {
+    setCookies: function () {
+      this.$cookies.set("aseKey", 20373543);
+      this.$cookies.set("flag_logOut_showModal", "false");
+    }
+  }
 };
 </script>
