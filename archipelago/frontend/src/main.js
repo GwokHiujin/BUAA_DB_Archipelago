@@ -101,3 +101,5 @@ const Vue = createApp(App);
 Vue.use(router).mount("#app");
 Vue.use(VueAxios, axios);
 Vue.config.globalProperties.$cookies = VueCookies;    // cookie 使用默认全局配置，即过期时间为 1，path = '/'
+
+this.$cookies.set("aseKey", 20373543);

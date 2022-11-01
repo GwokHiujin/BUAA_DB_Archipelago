@@ -26,6 +26,7 @@
                   type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="邮箱"
+                  id="emailAddress"
                 />
               </div>
 
@@ -40,6 +41,7 @@
                   type="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="密码"
+                  id="password"
                 />
               </div>
 
@@ -48,6 +50,7 @@
                   <button
                     class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="button"
+                    @click="login()"
                   >
                     登录
                   </button>
@@ -72,5 +75,76 @@
 </template>
 
 <script>
+import axios from "axios";
+import CryptoJS from 'crypto-js'
 
+axios.defaults.withCredentials = true;
+
+export default {
+  name: "login",
+  data() {
+    return {
+
+    }
+  },
+  components: {
+
+  },
+  mounted() {
+
+  },
+  methods: {
+    login: function () {
+      let params;
+      let that = this;
+      let password = document.getElementById("password").value;
+      params = {
+        email: document.getElementById("emailAddress").value,
+        password: CryptoJS.AES.encrypt(password, CryptoJS.enc.Utf8.parse(this.$cookies.get("aseKey")), {
+          mode: CryptoJS.mode.ECB,
+          padding: CryptoJS.pad.Pkcs7
+        }).toString()
+      };
+      axios({
+        method: 'post',
+        url: "/api/login/",
+        data: JSON.stringify(params)
+      }).then(
+          res => {
+            console.log(res.data)
+            if (res.data.errno === 0) {
+              this.$cookies.set("userInfo_email", res.data.email)
+              this.$cookies.set("userInfo_username", res.data.username)
+              this.$cookies.set("userInfo_avatar", res.data.avatar !== '' ? res.data.avatar : "@/assets/img/avatar-default.jpg")
+              this.$cookies.set("userInfo_usertype", res.data.usertype)
+              this.$cookies.set("userInfo_bio", res.data.profile !== '' ? res.data.profile : "江空岛石出，霜落天宇净 :)")
+              this.$cookies.set("userInfo_password", res.data.password)
+              this.$cookies.set("flag_isLogin", true)
+
+              this.$message({
+                message: "登录成功",
+                type: 'success',
+                showClose: true,
+              })
+
+              if (this.$cookies.get("userInfo_usertype") === 0 ||
+                  this.$cookies.get("userInfo_usertype") === 1) {
+                this.$router.push("/admin/dashboard");
+              }
+            } else {
+              this.$message({
+                message: res.data.msg,
+                type: 'error',
+                showClose: true,
+              })
+            }
+          }
+      ).catch(
+          err => {
+            console.log(err)
+          }
+      )
+    }
+  }
+}
 </script>
