@@ -1,5 +1,8 @@
 import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
+import axios from "axios";
+import VueAxios from "vue-axios";
+import VueCookies from "vue-cookies";
 
 // styles
 
@@ -94,4 +97,7 @@ const router = createRouter({
   routes,
 });
 
-createApp(App).use(router).mount("#app");
+const Vue = createApp(App);
+Vue.use(router).mount("#app");
+Vue.use(VueAxios, axios);
+Vue.config.globalProperties.$cookies = VueCookies;

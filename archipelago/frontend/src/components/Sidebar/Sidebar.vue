@@ -90,10 +90,10 @@
                 ]"
               >
                 <i
-                  class="fas fa-home mr-2 text-base"
+                  class="fas fa-paper-plane mr-2 text-base"
                   :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
-                首页
+                发现音乐
               </a>
             </router-link>
           </li>
