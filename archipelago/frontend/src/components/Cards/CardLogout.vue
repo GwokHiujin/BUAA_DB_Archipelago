@@ -79,29 +79,19 @@ import CryptoJS from 'crypto-js'
 
 export default {
   name: "CardLogout",
-  data() {
-    return {
-      showModal: false
-    }
-  },
   mounted() {
     /*
     if (this.$cookies.getCookie("flag_isLogin") !== true) {
       this.$router.push("/");
     }
      */
-    this.showModal = this.$cookies.get("flag_logOut_showModal") === "true";
-    console.log("showModal is " + this.showModal);
   },
   methods: {
     toggleModal: function () {
-      let that = this;
-      that.showModal = !that.showModal;
-      this.$cookies.set("flag_logOut_showModal", that.showModal.toString());
+      this.$cookies.set("flag_logOut_showModal", "false");
       location.reload();
     },
     deleteAccount: function () {
-      let that = this;
       let originPassword = document.getElementById("password").value;
       let confirmPassword = document.getElementById("confirmPassword").value;
 
@@ -131,7 +121,6 @@ export default {
                 type: 'success',
                 showClose: true
               })
-              that.showModal = !that.showModal;
               this.$cookies.remove("flag_logOut_showModal");
               this.$router.push("/");
             } else {
@@ -140,8 +129,7 @@ export default {
                 type: 'error',
                 showClose: true
               })
-              that.showModal = !that.showModal;
-              this.$cookies.set("flag_logOut_showModal", that.showModal.toString());
+              this.$cookies.set("flag_logOut_showModal", "false");
               location.reload();
             }
           }

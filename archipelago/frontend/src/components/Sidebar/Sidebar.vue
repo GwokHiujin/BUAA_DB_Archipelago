@@ -253,14 +253,13 @@ export default {
     toggleModal: function () {
       let that = this;
       that.showModal = !that.showModal;
-      this.$cookies.set("flag_logOut_showModal", that.showModal.toString());
-      console.log("showModal is " + this.$cookies.get('flag_logOut_showModal'));
+      this.$cookies.set("flag_logOut_showModal", "true");
+      // console.log("showModal is " + this.$cookies.get('flag_logOut_showModal'));
       location.reload();
     },
     logout: function () {
       this.$cookies.set("flag_isLogin", "false");
-      this.router.push("/");
-      location.reload();
+      this.$router.push("/");
     }
   }
 };

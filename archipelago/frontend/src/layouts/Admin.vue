@@ -43,15 +43,6 @@ export default {
      */
     this.showModal = this.$cookies.get("flag_logOut_showModal") === "true";
     console.log("showModal is " + this.showModal);
-  },
-  methods: {
-    toggleModal: function () {
-      let that = this;
-      that.showModal = !that.showModal;
-      this.$cookies.set("flag_logOut_showModal", that.showModal.toString());
-      console.log("showModal is " + this.$cookies.get('flag_logOut_showModal'));
-      location.reload();
-    }
   }
 };
 </script>
