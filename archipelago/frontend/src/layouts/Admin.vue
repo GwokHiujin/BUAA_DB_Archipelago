@@ -2,7 +2,7 @@
   <div>
     <!-- Basic layouts -->
     <sidebar />
-    <Logout v-if="this.$cookies.get('flag_logOut_showModal') === 'true'"/>
+    <Logout v-if="this.$cookies.get('flag_logOut_showModal') === 'true'" class="transition-all duration-150"/>
     <div class="relative md:ml-64 bg-blueGray-100">
       <admin-navbar />
       <header-stats />
@@ -41,8 +41,7 @@ export default {
       this.$router.push("/");
     }
      */
-    this.showModal = this.$cookies.get("flag_logOut_showModal") === "true";
-    console.log("showModal is " + this.showModal);
+    console.log("Logout Card's showModal is " + this.$cookies.get("flag_logOut_showModal"));
   }
 };
 </script>

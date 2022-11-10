@@ -236,7 +236,6 @@ export default {
   data() {
     return {
       collapseShow: "hidden",
-      showModal: false,
     };
   },
   mounted() {
@@ -251,8 +250,6 @@ export default {
       this.collapseShow = classes;
     },
     toggleModal: function () {
-      let that = this;
-      that.showModal = !that.showModal;
       this.$cookies.set("flag_logOut_showModal", "true");
       // console.log("showModal is " + this.$cookies.get('flag_logOut_showModal'));
       location.reload();

@@ -18,7 +18,7 @@
           <!--body-->
           <div class="relative px-6 flex-auto py-6">
             <p class="text-blueGray-500 text-sm leading-relaxed w-card text-center mb-4">
-              请注意，您即将注销此账号！此操作不可撤回。
+              确定要注销当前群岛账号吗？此操作不可撤回。
             </p>
             <div class="relative w-full mb-3">
               <label
@@ -79,13 +79,6 @@ import CryptoJS from 'crypto-js'
 
 export default {
   name: "CardLogout",
-  mounted() {
-    /*
-    if (this.$cookies.getCookie("flag_isLogin") !== true) {
-      this.$router.push("/");
-    }
-     */
-  },
   methods: {
     toggleModal: function () {
       this.$cookies.set("flag_logOut_showModal", "false");
