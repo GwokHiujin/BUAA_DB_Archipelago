@@ -1258,6 +1258,10 @@ select {
   background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
 }
 
+.bg-white-linear {
+  background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.6));
+}
+
 .bg-pink-500 {
   --tw-bg-opacity: 1;
   background-color: rgba(236, 72, 153, var(--tw-bg-opacity));
@@ -1650,6 +1654,10 @@ select {
 
 .border-2 {
   border-width: 2px;
+}
+
+.border-4 {
+  border-width: 4px;
 }
 
 .border {
@@ -2124,6 +2132,12 @@ select {
 
 .font-bold {
   font-weight: 700;
+}
+
+.title-font {
+  font-family: "Helvetica Neue";
+  font-weight: 600;
+
 }
 
 .h-0 {
@@ -2624,6 +2638,18 @@ select {
   opacity: .8;
 }
 
+.opacity-90 {
+  opacity: .9;
+}
+
+.opacity-0 {
+  opacity: .0;
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -2741,6 +2767,10 @@ select {
   padding: 1.25rem;
 }
 
+.p-6 {
+  padding: 1.5rem;
+}
+
 .p-8 {
   padding: 2rem;
 }
@@ -2806,6 +2836,11 @@ select {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .py-8 {
@@ -3154,6 +3189,10 @@ select {
   --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
           box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.hover\:opacity-100:hover {
+  opacity: 1;
 }
 
 * {

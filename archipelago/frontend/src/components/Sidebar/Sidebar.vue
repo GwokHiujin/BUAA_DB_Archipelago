@@ -16,7 +16,7 @@
       <!-- Brand -->
       <router-link
         class="md:block md:pb-2 mr-0 inline-block uppercase p-4 px-0"
-        to="/admin/dashboard"
+        to="/admin/index"
       >
         <img src="@/assets/img/logo-long.png">
       </router-link>
@@ -42,7 +42,7 @@
             <div class="w-6/12">
               <router-link
                 class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                to="/auth/dashboard"
+                to="/auth/index"
               >
                 群岛 Archipelago
               </router-link>
@@ -76,7 +76,7 @@
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <li class="items-center">
             <router-link
-              to="/admin/dashboard"
+              to="/admin/index"
               v-slot="{ href, navigate, isActive }"
             >
               <a

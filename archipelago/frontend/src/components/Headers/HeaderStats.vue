@@ -1,15 +1,18 @@
 <template>
   <!-- Header -->
-  <div class="relative bg-emerald-600 md:pt-32 pb-0 pt-12">
+  <div class="relative bg-emerald-600 md:pt-32 pb-0 pt-12"
+       :style="`background-image: url('${headerBgd}'); background-repeat: repeat;`">
   </div>
 </template>
 
 <script>
-import CardStats from "@/components/Cards/CardStats.vue";
+import headerBgd from "@/assets/img/header-background.png"
 
 export default {
-  components: {
-    CardStats,
-  },
+  data() {
+    return {
+      headerBgd,
+    }
+  }
 };
 </script>
