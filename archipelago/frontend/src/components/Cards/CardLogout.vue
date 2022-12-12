@@ -1,7 +1,18 @@
 <template>
   <div>
-    <div class="py-40 px-12 mx-64 overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
-      <div class="relative w-auto my-6 max-w-4xl shadow-2xl">
+    <button
+        class="lg:bg-opacity-0 font-bold uppercase text-sm py-3 pr-12 hover:text-pink-500 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        type="button"
+        v-on:click="toggleModal()"
+    >
+      <i
+          class="fas fa-lock mr-2 text-base text-pink-500"
+      ></i>
+      注销账号
+    </button>
+    <div v-if="showModal"
+         class="top-95-px px-12 mx-64 overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex" >
+      <div class="relative w-auto my-6 mx-auto max-w-4xl shadow-2xl">
         <!--content-->
         <div class="border-0 rounded-lg shadow-2xl px-3 py-3 relative flex flex-col w-full bg-white outline-none focus:outline-none">
           <!--header-->
@@ -10,7 +21,7 @@
               注销账号
             </h3>
             <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" v-on:click="toggleModal()">
-              <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+              <span class="bg-transparent text-black hover:text-red-500 opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
                 ×
               </span>
             </button>
@@ -52,7 +63,7 @@
           <!--footer-->
           <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
             <button
-                class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 mt-4 ease-linear transition-all duration-150"
+                class="bg-white text-red-500 font-bold uppercase px-6 py-3 text-sm rounded hover:bg-gray-100 outline-none focus:outline-none mr-1 mb-1 mt-4 ease-linear transition-all duration-150"
                 type="button"
                 v-on:click="toggleModal()"
             >
@@ -69,7 +80,7 @@
         </div>
       </div>
     </div>
-    <div class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+    <div v-if="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
   </div>
 </template>
 
@@ -79,10 +90,15 @@ import CryptoJS from 'crypto-js'
 
 export default {
   name: "CardLogout",
+  data() {
+    return {
+      showModal: false
+    }
+  },
   methods: {
     toggleModal: function () {
-      this.$cookies.set("flag_logOut_showModal", "false");
-      location.reload();
+      console.log("showModal is ", this.showModal)
+      this.showModal = !this.showModal;
     },
     deleteAccount: function () {
       let originPassword = document.getElementById("password").value;
@@ -114,7 +130,6 @@ export default {
                 type: 'success',
                 showClose: true
               })
-              this.$cookies.remove("flag_logOut_showModal");
               this.$router.push("/");
             } else {
               this.$message({
@@ -122,7 +137,7 @@ export default {
                 type: 'error',
                 showClose: true
               })
-              this.$cookies.set("flag_logOut_showModal", "false");
+              this.showModal = false;
               location.reload();
             }
           }

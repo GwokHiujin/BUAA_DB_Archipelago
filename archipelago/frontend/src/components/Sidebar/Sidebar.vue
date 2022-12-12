@@ -208,17 +208,7 @@
 
           <li class="items-center">
             <div>
-              <button
-                  class="lg:bg-opacity-0 font-bold uppercase text-sm py-3 pr-12 hover:text-pink-500 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  type="button"
-                  v-on:click="toggleModal()"
-              >
-                <i
-                    class="fas fa-lock mr-2 text-base"
-                    :class="[isActive ? 'opacity-75' : 'text-pink-500']"
-                ></i>
-                注销账号
-              </button>
+              <CardLogout/>
             </div>
           </li>
         </ul>
@@ -231,6 +221,7 @@
 <script>
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.vue";
 import UserDropdown from "@/components/Dropdowns/UserDropdown.vue";
+import CardLogout from "../Cards/CardLogout";
 
 export default {
   data() {
@@ -239,20 +230,16 @@ export default {
     };
   },
   mounted() {
-    console.log("userType is " + this.$cookies.get("userInfo_usertype"));
+    this.$cookies.set("userInfo_usertype", 1)
   },
   components: {
+    CardLogout,
     NotificationDropdown,
     UserDropdown,
   },
   methods: {
     toggleCollapseShow: function (classes) {
       this.collapseShow = classes;
-    },
-    toggleModal: function () {
-      this.$cookies.set("flag_logOut_showModal", "true");
-      // console.log("showModal is " + this.$cookies.get('flag_logOut_showModal'));
-      location.reload();
     },
     logout: function () {
       this.$cookies.set("flag_isLogin", "false");
