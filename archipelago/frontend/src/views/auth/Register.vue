@@ -145,8 +145,8 @@ export default {
       let originPassword = document.getElementById("originPassword").value;
       let confirmPassword = document.getElementById("confirmPassword").value;
       params = {
-        username: document.getElementById("username").value,
         email: document.getElementById("emailAddress").value,
+        name: document.getElementById("username").value,
         password_1: CryptoJS.AES.encrypt(originPassword, CryptoJS.enc.Utf8.parse(this.$cookies.get("aseKey")), {
           mode: CryptoJS.mode.ECB,
           padding: CryptoJS.pad.Pkcs7
@@ -155,7 +155,7 @@ export default {
           mode: CryptoJS.mode.ECB,
           padding: CryptoJS.pad.Pkcs7
         }).toString(),
-        usertype: this.userType
+        type: this.userType
       };
       console.log(params);
       axios({

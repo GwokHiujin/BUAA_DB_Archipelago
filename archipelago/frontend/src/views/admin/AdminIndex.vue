@@ -240,9 +240,20 @@
         </div>
       </div>
 
-      <h1 class="text-3xl font-semibold leading-normal mb-12 text-blueGray-700">
-        ......
+      <h1 class="text-2xl font-semibold leading-normal mb-12 text-blueGray-700 pt-12">
+        🧐 没有喜欢的？试试标签检索功能!
       </h1>
+      <div class="relative flex w-full flex-wrap items-stretch mb-3 mx-32">
+        <span class="z-10 h-full leading-normal font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-4">
+          <i class="fas fa-search"></i>
+        </span>
+        <input type="text"
+               placeholder="搜索标签"
+               class="px-3 py-4 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-10/12 pl-10"/>
+        <button class="bg-emerald-500 text-white ml-3 active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+          搜索
+        </button>
+      </div>
     </section>
 
     <span class="inline-block h-1 w-full rounded bg-gray-100 mt-4 mb-4"></span>
@@ -256,7 +267,7 @@
             <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
           </svg>
           <p class="leading-relaxed text-lg">
-            音乐不仅是最原始最普遍的艺术, 而且是最完美的艺术, 可以普及深入一般民众，
+            音乐不仅是最原始、最普遍的艺术, 而且是最完美的艺术, <br>可以普及深入一般民众,
             从根本上陶冶人的性格。
           </p>
           <p class="mt-4 leading-relaxed text-lg">
@@ -267,7 +278,7 @@
             所以音乐达到了艺术的最高理想。
           </p>
           <span class="inline-block h-1 w-10 rounded bg-emerald-500 mt-4 mb-4"></span>
-          <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm"> 朱光潜 </h2>
+          <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm pt-16"> 朱光潜 </h2>
           <p class="text-gray-500 mt-2"> 《音乐与教育》 </p>
         </div>
       </div>

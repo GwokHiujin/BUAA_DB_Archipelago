@@ -29,9 +29,6 @@
         id="example-navbar-warning"
       >
         <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
-          <li class="flex items-center">
-            <index-dropdown />
-          </li>
 
           <li class="flex items-center">
             <router-link to="/auth">

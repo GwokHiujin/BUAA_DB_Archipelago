@@ -96,12 +96,13 @@ export default {
       let params;
       let that = this;
       let password = document.getElementById("password").value;
+      let password_key = CryptoJS.AES.encrypt(password, CryptoJS.enc.Utf8.parse(that.$cookies.get("aseKey")), {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+      }).toString();
       params = {
         email: document.getElementById("emailAddress").value,
-        password: CryptoJS.AES.encrypt(password, CryptoJS.enc.Utf8.parse(that.$cookies.get("aseKey")), {
-          mode: CryptoJS.mode.ECB,
-          padding: CryptoJS.pad.Pkcs7
-        }).toString()
+        password: password_key,
       };
       axios({
         method: 'post',
@@ -112,11 +113,16 @@ export default {
             console.log(res.data)
             if (res.data.errno === 0) {
               that.$cookies.set("userInfo_email", res.data.email)
-              that.$cookies.set("userInfo_username", res.data.username)
-              that.$cookies.set("userInfo_avatar", res.data.avatar !== '' ? res.data.avatar : "@/assets/img/avatar-default.jpg")
-              that.$cookies.set("userInfo_usertype", res.data.usertype)
-              that.$cookies.set("userInfo_bio", res.data.profile !== '' ? res.data.profile : "江空岛石出，霜落天宇净 :)")
-              that.$cookies.set("userInfo_password", res.data.password)
+              that.$cookies.set("userInfo_username", res.data.name)
+              if (res.data.abort !== '') {
+                const myBlob = new window.Blob(res.data.avatar, {type: 'image/jpeg'})
+                that.$cookies.set("userInfo_avatar", window.URL.createObjectURL(myBlob))
+              } else {
+                that.$cookies.set("userInfo_avatar", "@/assets/img/avatar-default.jpg")
+              }
+              that.$cookies.set("userInfo_usertype", res.data.type)
+              that.$cookies.set("userInfo_bio", res.data.bio !== '' ? res.data.bio : "江空岛石出，霜落天宇净 :)")
+              that.$cookies.set("userInfo_password", password_key)
               that.$cookies.set("flag_isLogin", true)
 
               this.$message({

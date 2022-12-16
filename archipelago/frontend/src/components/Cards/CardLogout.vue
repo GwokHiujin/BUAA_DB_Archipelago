@@ -10,6 +10,21 @@
       ></i>
       注销账号
     </button>
+
+    <div v-if="alertOpen"
+         class="top-95-px px-12 mx-64 md:w-6/12 overflow-x-hidden overflow-y-auto rounded fixed inset-0 z-50 outline-none text-white py-4 border-0 fixed bg-pink-500 justify-center items-center flex">
+    <span class="text-xl inline-block mr-5 align-middle">
+      <i class="fas fa-bell"></i>
+    </span>
+      <span class="inline-block align-middle mr-8 px-2">
+      <b class="capitalize">注销失败！</b> 注销操作失败 ☹ 请检查您是否输入了正确的信息！
+    </span>
+      <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
+              v-on:click="closeAlert()">
+        <span>×</span>
+      </button>
+    </div>
+
     <div v-if="showModal"
          class="top-95-px px-12 mx-64 overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex" >
       <div class="relative w-auto my-6 mx-auto max-w-4xl shadow-2xl">
@@ -92,13 +107,17 @@ export default {
   name: "CardLogout",
   data() {
     return {
-      showModal: false
+      showModal: false,
+      alertOpen: false
     }
   },
   methods: {
     toggleModal: function () {
       console.log("showModal is ", this.showModal)
       this.showModal = !this.showModal;
+    },
+    closeAlert: function(){
+      this.alertOpen = false;
     },
     deleteAccount: function () {
       let originPassword = document.getElementById("password").value;
@@ -113,39 +132,44 @@ export default {
         padding: CryptoJS.pad.Pkcs7
       }).toString();
 
-      axios.request({
-        method: 'post',
-        url: "/api/delete_account",
-        data: JSON.stringify({
-          userEmail: this.$cookies.get("userInfo_email"),
-          password0: password0,
-          password1: password1
-        })
-      }).then(
-          res => {
-            console.log(res.data)
-            if (res.data.errno === 0) {
-              this.$message({
-                message: "成功注销账户",
-                type: 'success',
-                showClose: true
-              })
-              this.$router.push("/");
-            } else {
-              this.$message({
-                message: "注销账户失败！",
-                type: 'error',
-                showClose: true
-              })
-              this.showModal = false;
-              location.reload();
+      if (password0 !== password1 || password0 !== this.$cookies.get("userInfo_password")) {
+        this.showModal = false;
+        this.alertOpen = true;
+      } else {
+        axios.request({
+          method: 'post',
+          url: "/api/delete_account",
+          data: JSON.stringify({
+            userEmail: this.$cookies.get("userInfo_email"),
+            password0: password0,
+            password1: password1
+          })
+        }).then(
+            res => {
+              console.log(res.data)
+              if (res.data.errno === 0) {
+                this.$message({
+                  message: "成功注销账户",
+                  type: 'success',
+                  showClose: true
+                })
+                this.$router.push("/");
+              } else {
+                this.$message({
+                  message: "注销账户失败！",
+                  type: 'error',
+                  showClose: true
+                })
+                this.showModal = false;
+                location.reload();
+              }
             }
-          }
-      ).catch(
-          err => {
-            console.log(err)
-          }
-      )
+        ).catch(
+            err => {
+              console.log(err)
+            }
+        )
+      }
     }
   }
 }

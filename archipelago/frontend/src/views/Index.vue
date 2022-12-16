@@ -560,7 +560,7 @@ import FooterComponent from "@/components/Footers/Footer.vue";
 
 import landingPage_pattern from "@/assets/img/landingPage_pattern.png";
 import componentBtn from "@/assets/img/component-btn.png";
-import componentProfileCard from "@/assets/img/component-profile-card.png";
+import componentProfileCard from "@/assets/img/component-profile-card.jpg";
 import componentInfoCard from "@/assets/img/component-info-card.png";
 import componentInfo2 from "@/assets/img/component-info-2.png";
 import componentMenu from "@/assets/img/component-menu.png";

@@ -2429,6 +2429,10 @@ select {
   margin-right: 1rem;
 }
 
+.mr-6 {
+  margin-right: 2rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
