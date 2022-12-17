@@ -155,7 +155,7 @@
                 </div>
               </div>
 
-              <CardTable/>
+              <CardMusicianMems/>
 
               <div class="relative w-full mt-8 pt-8 pb-16">
                 <div class="text-center">
@@ -183,6 +183,7 @@ import FooterComponent from "@/components/Footers/Footer.vue";
 import CardTable from "@/components/Cards/CardTable";
 
 import team2 from "@/assets/img/team-2-800x800.jpg";
+import CardMusicianMems from "../components/Cards/CardMusicianMems";
 
 export default {
   data() {
@@ -205,6 +206,7 @@ export default {
     };
   },
   components: {
+    CardMusicianMems,
     Navbar,
     FooterComponent,
     CardTable,

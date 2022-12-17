@@ -114,9 +114,10 @@ export default {
             if (res.data.errno === 0) {
               that.$cookies.set("userInfo_email", res.data.email)
               that.$cookies.set("userInfo_username", res.data.name)
-              if (res.data.abort !== '') {
-                const myBlob = new window.Blob(res.data.avatar, {type: 'image/jpeg'})
-                that.$cookies.set("userInfo_avatar", window.URL.createObjectURL(myBlob))
+              if (res.data.avatar !== '') {
+                // const myBlob = new window.Blob(res.data.avatar, {type: 'image/jpeg'})
+                // that.$cookies.set("userInfo_avatar", window.URL.createObjectURL(myBlob))
+                that.$cookies.set("userInfo_avatar", res.data.avatar)
               } else {
                 that.$cookies.set("userInfo_avatar", "@/assets/img/avatar-default.jpg")
               }
