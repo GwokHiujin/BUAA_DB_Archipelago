@@ -27,6 +27,7 @@ urlpatterns = [
     path("api/get_user_info/", views.get_user_info),
     path("api/set_user_info/", views.set_user_info),
     path("api/get_album/", views.get_album),
+    path("api/get_album_info/", views.get_album_info),
     path("api/set_album/", views.set_album),
     path("api/get_musician/", views.get_musician),
     path("api/set_musician/", views.set_musician),

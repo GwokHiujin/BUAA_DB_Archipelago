@@ -155,6 +155,25 @@ def set_user_info(request):
         return JsonResponse({"errno": 0, "msg": "修改成功"})
 
 
+def get_album_info(request):
+    if request.method == "POST":
+        payload = get_payload(request)
+        album = Album.objects.filter(id=payload.get('albumID'))
+        if len(album) == 0:
+            return JsonResponse({"errno": 1, "msg": "成功"})
+        album = album[0]
+        song_list = Song.objects.filter(album=album)
+        return JsonResponse({
+            "errno": 0, "msg": "成功",
+            "generalInfo": {"albumID": album.id, "albumName": album.album_name, "price": album.album_price,
+                            "author": album.album_producer, "releaseYear": album.release_year,
+                            "releaser": album.musician.musician_name, "cover": album.cover, "type": album.type,
+                            "resource": album.source, "salesVolume": album.sales_volume},
+            "songList": [{"name": s.song_name, "songLast": s.song_last, "ADT": s.resource, "albumID": album.id} for s in
+                         song_list]
+        })
+
+
 def get_album(request):
     if request.method == "GET":
         email = request.session.get('email')
@@ -175,7 +194,29 @@ def get_album(request):
             'releaseYear': elem.release_year,
             'releaser': mn,
             'type': elem.type,
-            'resource': elem.source
+            'resource': elem.source,
+            'salesVolume': elem.sales_volume
+        } for elem in album_list]
+        return JsonResponse(var, safe=False)
+    if request.method == "POST":
+        payload = get_payload(request)
+        musician_id = payload.get('musicianID')
+        mid_list = Musician.objects.filter(id=musician_id)
+        if len(mid_list) == 0:
+            return JsonResponse(list(), safe=False)
+        mn = mid_list[0].musician_name
+        album_list = Album.objects.filter(musician=mid_list[0])
+        print(album_list)
+        var = [{
+            'albumID': elem.id,
+            'albumName': elem.album_name,
+            'price': elem.album_price,
+            'author': elem.album_producer,
+            'releaseYear': elem.release_year,
+            'releaser': mn,
+            'type': elem.type,
+            'resource': elem.source,
+            'salesVolume': elem.sales_volume
         } for elem in album_list]
         return JsonResponse(var, safe=False)
 
