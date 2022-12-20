@@ -40,4 +40,10 @@ urlpatterns = [
     path("api/del_song/", views.del_song),
     path("api/get_album_tag/", views.get_album_tag),
     path("api/add_del_album_tag/", views.add_del_album_tag),
+
+    path("api/get_homepage_info/", views.get_homepage_info),
+    path("api/search_musician_album/", views.search_musician_album),
+    path("api/search_tag/", views.search_tag),
+    path("api/get_order/", views.get_order),
+    path("api/gen_order/", views.gen_order),
 ]

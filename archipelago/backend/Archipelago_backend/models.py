@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 
 class User(models.Model):
@@ -34,7 +33,7 @@ class Album(models.Model):
     cover = models.CharField(max_length=255, null=True)
     type = models.IntegerField()
     source = models.CharField(max_length=255, null=True)
-
+    sales_volume = models.IntegerField()
 
 class MusicianMember(models.Model):
     musician = models.ForeignKey('Musician', on_delete=models.CASCADE)
