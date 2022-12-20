@@ -30,12 +30,26 @@
       </button>
     </div>
 
+    <div v-if="alertOpen2"
+         class="top-95-px px-12 mx-32 md:w-6/12 overflow-x-hidden overflow-y-auto rounded fixed inset-0 z-50 outline-none text-white py-4 border-0 fixed bg-pink-500 justify-center items-center flex">
+    <span class="text-xl inline-block mr-5 align-middle">
+      <i class="fas fa-bell"></i>
+    </span>
+      <span class="inline-block align-middle mr-8 px-2">
+      <b class="capitalize">修改失败！</b> 修改音乐人成员失败 ☹ 请检查您是否输入了正确的信息！
+    </span>
+      <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
+              v-on:click="closeAlert2()">
+        <span>×</span>
+      </button>
+    </div>
+
     <div class="rounded-t bg-white mb-0 px-6 py-6">
       <div class="text-center flex justify-between">
         <h6 class="text-blueGray-700 text-xl font-bold">欢迎您，{{this.$cookies.get("userInfo_username")}}！</h6>
         <span
             class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-200 uppercase last:mr-0 mr-2 mt-2"
-            v-if="userInfo.type === 1"
+            v-if="this.$cookies.get(`userInfo_usertype`) === `1`"
         >
           音乐人用户
         </span>
@@ -417,11 +431,16 @@ export default {
       new_password1: '',
       new_password2: '',
       alertOpen: false,
-      alertOpen1: false
+      alertOpen1: false,
+      alertOpen2: false,
     }
   },
   mounted() {
     this.getUserInfo();
+    if (this.$cookies.get("userInfo_usertype") === '1') {
+      this.getMusicianInfo();
+      this.getMemberInfo();
+    }
   },
   methods: {
     closeAlert: function() {
@@ -429,6 +448,9 @@ export default {
     },
     closeAlert1: function () {
       this.alertOpen1 = false;
+    },
+    closeAlert2: function () {
+      this.alertOpen2 = false;
     },
     getUserInfo: function () {
       let that = this;
@@ -439,6 +461,33 @@ export default {
           .then(function (response) {
             console.log(response.data)
             that.userInfo = response.data
+          }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    getMusicianInfo: function () {
+      let that = this;
+      axios.request({
+        url: "api/get_musician/",
+        method: 'get',
+        data: JSON.stringify(that.$cookies.get("userInfo_email"))
+      })
+          .then(function (response) {
+            console.log(response.data)
+            that.musicianInfo = response.data
+          }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    getMemberInfo: function () {
+      let that = this;
+      axios.request({
+        url: "",  // TODO
+        method: 'get'
+      })
+          .then(function (response) {
+            console.log(response.data)
+            that.musicianMember = response.data
           }).catch(function (error) {
         console.log(error)
       })
@@ -495,7 +544,30 @@ export default {
       // TODO
     },
     setMusicianMember: function () {
-      // TODO
+      let newMemberInfo;
+      let that = this;
+
+      newMemberInfo = {
+        name: '', // TODO
+        birthday: '',
+        role: '',
+        activeYear: '',
+      };
+      axios({
+        method: 'post',
+        url: "api/set_musician_member/",
+        data: JSON.stringify(newMemberInfo)
+      }).then(res => {
+        console.log(res.data)
+        if (res.data.errno === 0) {
+          location.reload();
+        } else {
+          that.alertOpen2 = true;
+        }
+        location.reload();
+      }).catch(err => {
+        console.log(err)
+      })
     },
     deleteMusicianMember: function () {
       // TODO

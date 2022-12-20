@@ -140,10 +140,9 @@
 
           <li
               class="items-center"
-              v-if="$cookies.get('userInfo_usertype') === '0'"
           >
             <router-link
-                to="/admin/tables"
+                to="/admin/orders"
                 v-slot="{ href, navigate, isActive }"
             >
               <a

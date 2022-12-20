@@ -30,7 +30,7 @@
           {{userInfo.name}}
         </h3>
         <div class="mb-2 text-blueGray-600 mt-10"
-             v-if="userInfo.type === 1">
+             v-if="userInfo.type === `1`">
           <i class="fas fa-microphone mr-2 text-lg text-blueGray-400"></i>
           音乐人用户
         </div>

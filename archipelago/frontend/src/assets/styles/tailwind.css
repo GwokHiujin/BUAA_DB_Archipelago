@@ -1307,6 +1307,10 @@ select {
   background-color: rgba(153, 246, 228, var(--tw-bg-opacity));
 }
 
+.background-transparent {
+  --tw-bg-opacity: 0;
+}
+
 .bg-teal-500 {
   --tw-bg-opacity: 1;
   background-color: rgba(20, 184, 166, var(--tw-bg-opacity));
@@ -1674,6 +1678,10 @@ select {
 
 .border-l-0 {
   border-left-width: 0px;
+}
+
+.border-l-2 {
+  border-left-width: 2px;
 }
 
 .border-b-2 {
@@ -4291,6 +4299,10 @@ select {
 
   .lg\:w-9\/12 {
     width: 75%;
+  }
+
+  .lg\:w-4\/5 {
+    width: 80%;
   }
 }
 
