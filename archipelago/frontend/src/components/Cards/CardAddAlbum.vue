@@ -462,37 +462,22 @@ export default {
     },
     addNewAlbum: function () {
       let that = this;
-      let aid = -1;
-      console.log(that.discInfo)
-      axios({
-        method: 'post',
-        url: "/set_album/",
-        baseURL: '/api',
-        data: JSON.stringify(that.discInfo)
-      }).then(res => {
-        console.log(res.data)
-        aid = res.data.albumID;
-      }).catch(err => {
-        console.log(err)
-      })
 
       that.tagList.at(0).tag = that.tag0;
       that.tagList.at(1).tag = that.tag1;
       that.tagList.at(2).tag = that.tag2;
 
-      let tagInfo;
-      tagInfo = {
-        ID: aid,
-        tagList: that.tagList,
+      let data = {
+        generalInfo: that.discInfo,
+        tagList: that.tagList
       };
       axios({
         method: 'post',
-        url: "/add_del_album_tag/",
+        url: "/set_album/",
         baseURL: '/api',
-        data: JSON.stringify(tagInfo)
+        data: JSON.stringify(data)
       }).then(res => {
         console.log(res.data)
-        that.$router.push('/admin/tables')
       }).catch(err => {
         console.log(err)
       })
