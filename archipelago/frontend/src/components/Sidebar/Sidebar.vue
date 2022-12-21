@@ -233,7 +233,7 @@ export default {
     };
   },
   mounted() {
-    this.$cookies.set("userInfo_usertype", 1)
+    //
   },
   components: {
     CardLogout,
@@ -243,21 +243,22 @@ export default {
       this.collapseShow = classes;
     },
     logout: function () {
+      let that = this;
+      this.$cookies.remove("mid", '/')
+      this.$cookies.remove("userInfo_email", '/')
+      this.$cookies.remove("userInfo_avatar", '/')
+      this.$cookies.remove("userInfo_usertype", '/')
+      this.$cookies.remove("userInfo_bio", '/')
+      this.$cookies.remove("userInfo_password", '/')
+      this.$cookies.remove("flag_isLogin", '/')
+
       axios.request({
         url: "/logoff/",
         baseURL: '/api',
         method: 'get',
       })
           .then(function () {
-            this.$cookies.remove("mid", '/')
-            this.$cookies.remove("userInfo_email", '/')
-            this.$cookies.remove("userInfo_avatar", '/')
-            this.$cookies.remove("userInfo_usertype", '/')
-            this.$cookies.remove("userInfo_bio", '/')
-            this.$cookies.remove("userInfo_password", '/')
-            this.$cookies.remove("flag_isLogin", '/')
-
-            this.$router.push("/");
+            that.$router.push("/");
           }).catch(function (error) {
         console.log(error)
       })
