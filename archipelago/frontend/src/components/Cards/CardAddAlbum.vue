@@ -13,7 +13,7 @@
             <h3 class="text-3xl font-semibold place-content-center ml-auto">
               添加新歌曲
             </h3>
-            <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" v-on:click="toggleModal()">
+            <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" @click.native="toggleModal()">
               <span class="bg-transparent text-black hover:text-red-500 opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
                 ×
               </span>
@@ -80,14 +80,14 @@
             <button
                 class="bg-white text-red-500 font-bold uppercase px-6 py-3 text-sm rounded hover:bg-gray-100 outline-none focus:outline-none mr-1 mb-1 mt-4 ease-linear transition-all duration-150"
                 type="button"
-                v-on:click="toggleModal()"
+                @click.native="toggleModal()"
             >
               关闭
             </button>
             <button
                 class="bg-blueGray-600 text-white active:bg-red-500 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:bg-red-500 outline-none focus:outline-none mr-1 mb-1 mt-4 ease-linear transition-all duration-150"
                 type="button"
-                v-on:click="addNewSong()"
+                @click.native="addNewSong()"
             >
               添加
             </button>
@@ -106,7 +106,7 @@
       <b class="capitalize">发布失败！</b> 发布新唱片失败 ☹ 请检查您是否输入了正确的信息！
     </span>
       <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
-              v-on:click="closeAlert()">
+              @click.native="closeAlert()">
         <span>×</span>
       </button>
     </div>
@@ -221,47 +221,47 @@
 
               <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
                 <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" v-on:click="toggleTabs(0)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 0, 'text-white bg-emerald-600': openTab === 0}">
+                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" @click.native="toggleTabs(0)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 0, 'text-white bg-emerald-600': openTab === 0}">
                     EP
                   </a>
                 </li>
                 <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" v-on:click="toggleTabs(1)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 1, 'text-white bg-emerald-600': openTab === 1}">
+                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" @click.native="toggleTabs(1)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 1, 'text-white bg-emerald-600': openTab === 1}">
                     Single
                   </a>
                 </li>
                 <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" v-on:click="toggleTabs(2)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 2, 'text-white bg-emerald-600': openTab === 2}">
+                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" @click.native="toggleTabs(2)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 2, 'text-white bg-emerald-600': openTab === 2}">
                     Album
                   </a>
                 </li>
                 <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" v-on:click="toggleTabs(3)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 3, 'text-white bg-emerald-600': openTab === 3}">
+                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" @click.native="toggleTabs(3)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 3, 'text-white bg-emerald-600': openTab === 3}">
                     Live
                   </a>
                 </li>
                 <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" v-on:click="toggleTabs(4)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 4, 'text-white bg-emerald-600': openTab === 4}">
+                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" @click.native="toggleTabs(4)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 4, 'text-white bg-emerald-600': openTab === 4}">
                     Demo
                   </a>
                 </li>
                 <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" v-on:click="toggleTabs(5)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 5, 'text-white bg-emerald-600': openTab === 5}">
+                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" @click.native="toggleTabs(5)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 5, 'text-white bg-emerald-600': openTab === 5}">
                     Split
                   </a>
                 </li>
                 <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" v-on:click="toggleTabs(6)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 6, 'text-white bg-emerald-600': openTab === 6}">
+                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" @click.native="toggleTabs(6)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 6, 'text-white bg-emerald-600': openTab === 6}">
                     Compilations
                   </a>
                 </li>
                 <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" v-on:click="toggleTabs(7)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 7, 'text-white bg-emerald-600': openTab === 7}">
+                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" @click.native="toggleTabs(7)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 7, 'text-white bg-emerald-600': openTab === 7}">
                     Various Artists
                   </a>
                 </li>
                 <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" v-on:click="toggleTabs(8)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 8, 'text-white bg-emerald-600': openTab === 8}">
+                  <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" @click.native="toggleTabs(8)" v-bind:class="{'text-emerald-600 bg-white': openTab !== 8, 'text-white bg-emerald-600': openTab === 8}">
                     Original Soundtrack
                   </a>
                 </li>
@@ -453,6 +453,7 @@ export default {
       tag0: '',
       tag1: '',
       tag2: '',
+      openTab: 0,
     }
   },
   methods: {
@@ -460,13 +461,17 @@ export default {
       this.alertOpen = false;
     },
     toggleTabs: function (tabNum) {
-      this.discInfo.type = tabNum;
+      console.log(this.openTab)
+      let that = this;
+      that.discInfo.type = tabNum;
+      this.openTab = tabNum;
     },
     toggleModal: function () {
       this.showModal = !this.showModal;
     },
     addNewAlbum: function () {
       let that = this;
+      console.log(that.discInfo)
       axios({
         method: 'post',
         url: "/set_album/",
