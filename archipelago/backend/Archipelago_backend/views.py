@@ -272,10 +272,8 @@ def set_album(request):
                     tag_sel.save()
                 else:
                     tag_sel = tag_sel[0]
-                new_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=new_album)
                 tag_sel.popularity += 1
                 tag_sel.save()
-                new_album_tag.save()
 
             return JsonResponse({"errno": 0, "msg": "新建唱片并添加歌曲成功！", "albumID": new_album.id})
 
