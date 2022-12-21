@@ -160,7 +160,7 @@ export default {
       console.log(params);
       axios({
         method: 'post',
-        url: "/api/register",
+        url: "/api/register/",
         data: JSON.stringify(params)
       }).then(
           res => {
@@ -172,6 +172,7 @@ export default {
                 showClose: true,
               })
               this.$router.push('/auth/login')
+              location.reload()
             } else {
               if (res.data.msg === "密码格式错误") {
                 this.$message({
