@@ -249,7 +249,6 @@ export default {
         method: 'get',
       })
           .then(function () {
-            this.$cookies.set("flag_isLogin", "false");
             this.$router.push("/");
           }).catch(function (error) {
         console.log(error)

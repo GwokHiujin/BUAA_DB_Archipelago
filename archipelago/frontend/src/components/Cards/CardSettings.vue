@@ -356,7 +356,6 @@
                   placeholder="请上传头像图片"
                   id="new_userInfo_avatar"
                   accept=".jpg,.gif,.png,.bmp"
-                  ref="getFile"
               />
             </div>
           </div>
@@ -644,8 +643,6 @@ import CardMusicianMems from "@/components/Cards/CardMusicianMems.vue";
 
 axios.defaults.withCredentials = true;
 
-const getFile = ref(null)
-
 export default {
   name: "settings",
   components: {
@@ -798,13 +795,13 @@ export default {
           } else {
             that.alertOpen = true;
           }
-          location.reload();
         }).catch(err => {
           console.log(err)
         })
       }
     },
     setMusicianInfo: function () {
+
       let that = this;
       axios({
         method: 'post',
@@ -818,7 +815,6 @@ export default {
         } else {
           that.alertOpen1 = true;
         }
-        location.reload();
       }).catch(err => {
         console.log(err)
       })
@@ -833,7 +829,7 @@ export default {
       }).then(res => {
         console.log(res.data)
         if (res.data.errno === 0) {
-          location.reload();
+          that.showModal = false;
         } else {
           that.alertOpen2 = true;
         }
@@ -851,7 +847,7 @@ export default {
         data: JSON.stringify(that.toBeDelete)
       }).then(res => {
         console.log(res.data)
-        location.reload();
+        that.showModal1 = false;
       }).catch(err => {
         console.log(err)
       })
