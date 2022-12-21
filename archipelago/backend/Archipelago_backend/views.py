@@ -226,7 +226,7 @@ def get_album(request):
             'resource': elem.source,
             'salesVolume': elem.sales_volume
         } for elem in album_list]
-        return JsonResponse({'errno': 0, 'msg': '成功', 'albumList': var}, safe=False)
+        return JsonResponse(var, safe=False)
 
 
 def set_album(request):
