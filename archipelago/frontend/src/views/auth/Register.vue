@@ -172,6 +172,7 @@ export default {
                 showClose: true,
               })
               this.$router.push('/auth/login')
+              location.reload()
             } else {
               if (res.data.msg === "密码格式错误") {
                 this.$message({
