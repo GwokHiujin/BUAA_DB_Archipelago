@@ -60,10 +60,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr >
+        <tr v-for="disc in discInfo">
           <td
               class="border-t-0 px-6 align-middle hover:text-emerald-600 border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
               @click="gotoAlbum(disc.albumID)"
           >
             {{disc.albumName}}
@@ -71,42 +70,36 @@
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{disc.price}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{disc.author}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{disc.releaseYear}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{disc.releaser}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{map.albumType[disc.type]}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{disc.salesVolume}}
           </td>
