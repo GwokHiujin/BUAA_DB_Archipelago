@@ -419,7 +419,6 @@
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   v-model.lazy="musicianInfo.musicianName"
-                  :placeholder="musicianInfo.musicianName"
               />
             </div>
           </div>
@@ -436,7 +435,6 @@
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   v-model.lazy="musicianInfo.originCountry"
-                  :placeholder="musicianInfo.originCountry"
               />
             </div>
           </div>
@@ -453,7 +451,6 @@
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   v-model.lazy="musicianInfo.location"
-                  :placeholder="musicianInfo.location"
               />
             </div>
           </div>
@@ -470,7 +467,6 @@
                   type="date"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   v-model.lazy="musicianInfo.formedYear"
-                  :placeholder="musicianInfo.formedYear"
               />
             </div>
           </div>
@@ -507,7 +503,6 @@
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   rows="4"
                   :placeholder="musicianInfo.lyricalThemes"
-                  v-model.lazy="musicianInfo.lyricalThemes"
               >
                   </textarea
                   >
@@ -527,7 +522,6 @@
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   rows="4"
-                  :placeholder="musicianInfo.introduction"
                   v-model.lazy="musicianInfo.introduction"
               >
                   </textarea
@@ -756,8 +750,8 @@ export default {
         method: 'get'
       })
           .then(function (response) {
-            console.log(response.data.data)
             that.userInfo = response.data.data
+            console.log(that.userInfo)
             that.$cookies.set("userInfo_bio", response.data.data.bio)
             that.$cookies.set("userInfo_avatar", response.data.data.avatar)
             that.$cookies.set("userInfo_username", response.data.data.name)

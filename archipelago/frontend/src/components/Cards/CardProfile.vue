@@ -82,16 +82,16 @@ export default {
           .then(function (response) {
             console.log(response.data)
             that.userInfo = response.data
-            that.$cookies.set("userInfo_bio", response.data.bio)
-            that.$cookies.set("userInfo_avatar", response.data.avatar)
-            that.$cookies.set("userInfo_username", response.data.name)
+            that.$cookies.set("userInfo_bio", response.data.data.bio)
+            that.$cookies.set("userInfo_avatar", response.data.data.avatar)
+            that.$cookies.set("userInfo_username", response.data.data.name)
+            that.userInfo.name = response.data.data.name
+            that.userInfo.avatar = response.data.avatar
+            that.userInfo.type = response.data.data.type
+            that.userInfo.bio = response.data.data.bio
           }).catch(function (error) {
         console.log(error)
       })
-      that.userInfo.name = that.$cookies.get("userInfo_username")
-      that.userInfo.avatar = that.$cookies.get("userInfo_avatar")
-      that.userInfo.type = that.$cookies.get("userInfo_usertype")
-      that.userInfo.bio = that.$cookies.get("userInfo_bio")
     }
   }
 };
