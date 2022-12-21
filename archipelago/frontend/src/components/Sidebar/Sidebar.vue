@@ -243,22 +243,24 @@ export default {
       this.collapseShow = classes;
     },
     logout: function () {
+      let that = this;
       axios.request({
         url: "/logoff/",
         baseURL: '/api',
         method: 'get',
       })
           .then(function () {
-            this.$router.push("/");
+            that.$router.push("/");
           }).catch(function (error) {
         console.log(error)
       })
     },
     gotoMusician: function () {
+      let that = this;
       this.$router.push({
         path: '/profile',
         query: {
-          mid: this.$cookies.get("mid")
+          mid: that.$cookies.get("mid")
         }
       })
     }

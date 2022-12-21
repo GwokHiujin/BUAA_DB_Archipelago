@@ -490,7 +490,7 @@ export default {
 
       let tagInfo;
       tagInfo = {
-        ID: this.$cookies.get("mid"),
+        ID: that.$cookies.get("mid"),
         tagList: that.tagList,
       };
       axios({
@@ -500,7 +500,7 @@ export default {
         data: JSON.stringify(tagInfo)
       }).then(res => {
         console.log(res.data)
-        this.$router.push('/admin/tables')
+        that.$router.push('/admin/tables')
       }).catch(err => {
         console.log(err)
       })

@@ -87,6 +87,7 @@ export default {
   },
   methods: {
     getOrder: function () {
+      let that = this;
       axios.request({
         url: "/get_order/",
         baseURL: '/api',
@@ -94,7 +95,7 @@ export default {
       })
           .then(function (response) {
             console.log(response.orderList)
-            this.orderList = response.orderList
+            that.orderList = response.orderList
           }).catch(function (error) {
         console.log(error)
       })

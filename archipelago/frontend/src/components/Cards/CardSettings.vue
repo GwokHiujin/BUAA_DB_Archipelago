@@ -736,6 +736,7 @@ export default {
             that.$cookies.set("userInfo_bio", response.data.bio)
             that.$cookies.set("userInfo_avatar", response.data.avatar)
             that.$cookies.set("userInfo_username", response.data.name)
+            location.reload()
           }).catch(function (error) {
         console.log(error)
       })

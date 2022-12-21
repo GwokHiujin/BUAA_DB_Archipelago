@@ -242,8 +242,9 @@ export default {
       this.alertOpen = false;
     },
     deleteAlbum: function () {
+      let that = this;
       let data = {
-        Tag: this.toDelete
+        Tag: that.toDelete
       }
       axios({
         method: 'post',

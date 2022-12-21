@@ -54,6 +54,7 @@
 </template>
 <script>
 import team2 from "@/assets/img/team-2-800x800.jpg";
+import axios from "axios";
 
 export default {
   data() {
@@ -73,6 +74,20 @@ export default {
   methods: {
     getUserInfo: function () {
       let that = this;
+      axios.request({
+        url: "/get_user_info/",
+        baseURL: '/api',
+        method: 'get'
+      })
+          .then(function (response) {
+            console.log(response.data)
+            that.userInfo = response.data
+            that.$cookies.set("userInfo_bio", response.data.bio)
+            that.$cookies.set("userInfo_avatar", response.data.avatar)
+            that.$cookies.set("userInfo_username", response.data.name)
+          }).catch(function (error) {
+        console.log(error)
+      })
       that.userInfo.name = that.$cookies.get("userInfo_username")
       that.userInfo.avatar = that.$cookies.get("userInfo_avatar")
       that.userInfo.type = that.$cookies.get("userInfo_usertype")
