@@ -96,24 +96,21 @@
           </tr>
           </thead>
           <tbody>
-          <tr >
+          <tr v-for="song in songList">
             <td
                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                v-for="song in songList"
             >
               {{song.name}}
             </td>
 
             <td
                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                v-for="song in songList"
             >
-              {{song.songLast / 60}} : {{song.songLast % 60}}
+              {{(song.songLast / 60).toString().split('.').at(0)}} : {{(song.songLast % 60).toString().substring(0, 2)}}
             </td>
 
             <td
                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                v-for="song in songList"
             >
               {{song.ADT}}
             </td>
@@ -194,7 +191,7 @@ export default {
       axios.request({
         url: "/get_album_info/",
         baseURL: '/api',
-        method: 'get',
+        method: 'post',
         data: JSON.stringify(data)
       })
           .then(function (response) {
@@ -214,7 +211,7 @@ export default {
       axios.request({
         url: "/get_album_tag/",
         baseURL: '/api',
-        method: 'get',
+        method: 'post',
         data: JSON.stringify(data)
       })
           .then(function (response) {

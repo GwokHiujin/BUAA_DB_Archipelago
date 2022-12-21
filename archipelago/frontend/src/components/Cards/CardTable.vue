@@ -160,7 +160,7 @@ export default {
       axios.request({
         url: "/get_album/",
         baseURL: '/api',
-        method: 'get',
+        method: 'post',
         data: JSON.stringify(data)
       })
           .then(function (response) {

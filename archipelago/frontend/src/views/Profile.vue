@@ -116,7 +116,7 @@
               <div class="relative w-full mt-8 pt-8 pb-16">
                 <div class="flex flex-wrap mt-4">
                   <div class="w-full mb-12 px-4">
-                    <card-table :mid="this.$route.query.mid"/>
+                    <CardTable :mid="this.$route.query.mid"/>
                   </div>
                 </div>
               </div>
@@ -133,7 +133,8 @@ import Navbar from "@/components/Navbars/AdminNavbar.vue";
 import FooterComponent from "@/components/Footers/Footer.vue";
 
 import team2 from "@/assets/img/team-2-800x800.jpg";
-import CardMusicianMems from "../components/Cards/CardMusicianMems";
+import CardMusicianMems from "@/components/Cards/CardMusicianMems";
+import CardTable from "@/components/Cards/CardTable.vue";
 import axios from "axios";
 
 export default {
@@ -160,6 +161,7 @@ export default {
     CardMusicianMems,
     Navbar,
     FooterComponent,
+    CardTable,
   },
   mounted() {
     this.getMusicianInfo();
