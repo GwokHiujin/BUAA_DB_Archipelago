@@ -477,8 +477,10 @@ export default {
         baseURL: '/api',
         data: JSON.stringify(data)
       }).then(res => {
+        that.$router.push("/admin/tables")
         console.log(res.data)
       }).catch(err => {
+        this.alertOpen = true;
         console.log(err)
       })
     },
