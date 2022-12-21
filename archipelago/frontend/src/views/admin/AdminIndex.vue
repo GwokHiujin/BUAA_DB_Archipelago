@@ -227,9 +227,9 @@ export default {
         method: 'get',
       })
           .then(function (response) {
-            this.musicianList = response.musicianList
-            this.albumList = response.albumList
-            this.tagList = response.tagList
+            this.musicianList = response.data.musicianList
+            this.albumList = response.data.albumList
+            this.tagList = response.data.tagList
           }).catch(function (error) {
         console.log(error)
       })
