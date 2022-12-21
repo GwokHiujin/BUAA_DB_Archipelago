@@ -94,8 +94,8 @@ export default {
         method: 'get',
       })
           .then(function (response) {
-            console.log(response.orderList)
-            that.orderList = response.orderList
+            console.log(response.data.orderList)
+            that.orderList = response.data.orderList
           }).catch(function (error) {
         console.log(error)
       })

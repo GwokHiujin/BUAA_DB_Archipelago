@@ -117,10 +117,10 @@ export default {
       let question;
       let that = this;
       question = {
-        keyWord: this.$route.query.target,
+        keyWord: that.$route.query.target,
       };
       let url;
-      if (this.$route.query.type === 'tag') {
+      if (that.$route.query.type === 'tag') {
         url = "/search_tag/";
       } else {
         url = "/search_musician_album/";
@@ -132,8 +132,8 @@ export default {
         data: JSON.stringify(question)
       })
           .then(function (response) {
-            that.musicianList = response.musicianList;
-            that.albumList = response.albumList;
+            that.musicianList = response.data.musicianList;
+            that.albumList = response.data.albumList;
           }).catch(function (error) {
         console.log(error)
       })

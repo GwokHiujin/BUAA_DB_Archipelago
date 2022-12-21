@@ -186,7 +186,8 @@ export default {
       this.alertOpen = false;
     },
     getAlbumInfo: function () {
-      let aid = this.$route.query.aid;
+      let that = this;
+      let aid = that.$route.query.aid;
       let data = {
         albumID: aid,
       }
@@ -205,7 +206,8 @@ export default {
       })
     },
     getTags: function () {
-      let aid = this.$route.query.aid;
+      let that = this;
+      let aid = that.$route.query.aid;
       let data = {
         albumID: aid,
       }
@@ -216,15 +218,15 @@ export default {
         data: JSON.stringify(data)
       })
           .then(function (response) {
-            console.log(response.data)
-            this.albumTags = response.data
+            console.log(response.data.data)
+            this.albumTags = response.data.data
           }).catch(function (error) {
         console.log(error)
       })
     },
     buy: function () {
       let that = this;
-      let aid = this.$route.query.aid;
+      let aid = that.$route.query.aid;
       let data = {
         albumID: aid,
       }
