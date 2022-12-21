@@ -130,7 +130,6 @@ export default {
               if (that.$cookies.get("userInfo_usertype") === 0 ||
                   that.$cookies.get("userInfo_usertype") === 1) {
                 this.$router.push("/admin/index");
-                location.reload();
               }
             } else {
               // TODO: Alert

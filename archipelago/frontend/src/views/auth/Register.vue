@@ -167,7 +167,6 @@ export default {
             console.log(res.data)
             if (res.data.errno === 0) {
               this.$router.push('/auth/login')
-              location.reload()
             } else {
               // TODO: Alert
             }
