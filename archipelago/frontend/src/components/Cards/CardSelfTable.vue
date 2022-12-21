@@ -223,6 +223,9 @@ export default {
       toDelete: '',
     };
   },
+  mounted() {
+    this.getAlbumInfo();
+  },
   methods: {
     toggleModal: function (id) {
       let that = this;
@@ -249,7 +252,25 @@ export default {
       }).catch(err => {
         console.log(err)
       })
-    }
+    },
+    getAlbumInfo: function () {
+      let that = this;
+      let data = {
+        musicianID: that.curID
+      }
+      axios.request({
+        url: "/get_album/",
+        baseURL: '/api',
+        method: 'get',
+        data: JSON.stringify(data)
+      })
+          .then(function (response) {
+            console.log(response.data)
+            that.discInfo = response.data
+          }).catch(function (error) {
+        console.log(error)
+      })
+    },
   }
 };
 </script>
