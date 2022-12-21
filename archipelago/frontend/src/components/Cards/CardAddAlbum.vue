@@ -462,6 +462,7 @@ export default {
     },
     addNewAlbum: function () {
       let that = this;
+      let aid = -1;
       console.log(that.discInfo)
       axios({
         method: 'post',
@@ -470,6 +471,7 @@ export default {
         data: JSON.stringify(that.discInfo)
       }).then(res => {
         console.log(res.data)
+        aid = res.data.albumID;
       }).catch(err => {
         console.log(err)
       })
@@ -480,7 +482,7 @@ export default {
 
       let tagInfo;
       tagInfo = {
-        ID: that.$cookies.get("mid"),
+        ID: aid,
         tagList: that.tagList,
       };
       axios({
