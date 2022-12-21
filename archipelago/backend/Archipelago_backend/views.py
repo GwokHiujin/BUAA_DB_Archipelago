@@ -13,7 +13,7 @@ from Archipelago_backend.models import *
 def get_payload(request):
     json_str = request.body.decode()
     payload = json.loads(json_str)
-    payload = payload.get("data")
+    # payload = payload.get("data")
     return payload
 
 
@@ -80,15 +80,15 @@ def register(request):
         password_check = payload.get("password_2")
         if password_check != password:
             return JsonResponse({"errno": 1, "msg": "两次输入的密码不一致"})
-        type_id = payload.get("usertype")
-        bio = None
+        type_id = payload.get("type")
+        bio = " "
         user = User.objects.filter(user_id=email)
         if len(user) != 0:
             return JsonResponse({"errno": 2, "msg": "邮箱已注册"})
         new_user = User(user_id=email, user_name=nickname, user_type=type_id, password=password, bio=bio)
         new_user.save()
         if type_id == '1':
-            new_musician = Musician(user=new_user, musician_name=nickname, nationality='Default_OC')
+            new_musician = Musician(user=new_user, musician_name=nickname, user_type=type_id, nationality='Default_OC')
             new_musician.save()
         return JsonResponse({"errno": 0, "msg": "注册成功"})
 

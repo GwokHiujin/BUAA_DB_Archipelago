@@ -160,7 +160,7 @@ export default {
       console.log(params);
       axios({
         method: 'post',
-        url: "/api/register",
+        url: "/api/register/",
         data: JSON.stringify(params)
       }).then(
           res => {
