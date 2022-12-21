@@ -166,27 +166,10 @@ export default {
           res => {
             console.log(res.data)
             if (res.data.errno === 0) {
-              this.$message({
-                message: '注册成功',
-                type: 'success',
-                showClose: true,
-              })
               this.$router.push('/auth/login')
               location.reload()
             } else {
-              if (res.data.msg === "密码格式错误") {
-                this.$message({
-                  message: res.data.msg + ":必须包含字母和数字，且长度在8和18之间",
-                  type: 'error',
-                  showClose: true,
-                })
-              } else {
-                this.$message({
-                  message: res.data.msg,
-                  type: 'error',
-                  showClose: true,
-                })
-              }
+              // TODO: Alert
             }
           }
       ).catch(
