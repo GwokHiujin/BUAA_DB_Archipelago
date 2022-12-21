@@ -365,7 +365,7 @@
                   <input
                       type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      v-model.lazy="tagList.at(0).tag"
+                      v-model.lazy="tag0"
                   />
                 </div>
               </div>
@@ -381,7 +381,7 @@
                   <input
                       type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      v-model.lazy="tagList.at(1).tag"
+                      v-model.lazy="tag1"
                   />
                 </div>
               </div>
@@ -397,7 +397,7 @@
                   <input
                       type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      v-model.lazy="tagList.at(2).tag"
+                      v-model.lazy="tag2"
                   />
                 </div>
               </div>
@@ -449,7 +449,10 @@ export default {
             ADT: '',
           }
         ],
-      }
+      },
+      tag0: '',
+      tag1: '',
+      tag2: '',
     }
   },
   methods: {
@@ -479,6 +482,10 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+
+      that.tagList.at(0).tag = that.tag0;
+      that.tagList.at(1).tag = that.tag1;
+      that.tagList.at(2).tag = that.tag2;
 
       let tagInfo;
       tagInfo = {
