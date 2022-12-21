@@ -127,23 +127,12 @@ export default {
               that.$cookies.set("userInfo_password", password_key)
               that.$cookies.set("flag_isLogin", true)
 
-              this.$message({
-                message: "登录成功",
-                type: 'success',
-                showClose: true,
-              })
-
               if (that.$cookies.get("userInfo_usertype") === 0 ||
                   that.$cookies.get("userInfo_usertype") === 1) {
                 this.$router.push("/admin/index");
-                location.reload();
               }
             } else {
-              this.$message({
-                message: res.data.msg,
-                type: 'error',
-                showClose: true,
-              })
+              // TODO: Alert
             }
           }
       ).catch(
