@@ -166,18 +166,19 @@ export default {
   },
   methods: {
     getMusicianInfo: function () {
+      let that = this;
       let musician_id = this.$route.query.mid;
       let data = {
         musicianID: musician_id,
       }
       axios.request({
         url: "api/get_musician/",
-        method: 'get',
+        method: 'post',
         data: JSON.stringify(data)
       })
           .then(function (response) {
             console.log(response.data)
-            this.musicianInfo = response.data.data
+            that.musicianInfo = response.data
           }).catch(function (error) {
         console.log(error)
       })
@@ -186,13 +187,13 @@ export default {
         musicianId: musician_id,
       }
       axios.request({
-        url: "/api/get_musician_tag/",
+        url: "api/get_musician_tag/",
         method: 'post',
         data: JSON.stringify(data)
       })
           .then(function (response) {
             console.log(response.data)
-            this.musicianTags = response.data
+            that.musicianTags = response.data
           }).catch(function (error) {
         console.log(error)
       })
