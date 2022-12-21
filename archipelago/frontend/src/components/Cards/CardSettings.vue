@@ -733,27 +733,23 @@ export default {
           .then(function (response) {
             console.log(response.data)
             that.userInfo = response.data
+            that.$cookies.set("userInfo_bio", response.data.bio)
+            that.$cookies.set("userInfo_avatar", response.data.avatar)
+            that.$cookies.set("userInfo_username", response.data.name)
           }).catch(function (error) {
         console.log(error)
       })
     },
     getMusicianInfo: function () {
       let that = this;
-      let data = {
-        musicianID: this.$cookies.get("mid"),
-      }
       axios.request({
         url: "/get_musician/",
         baseURL: '/api',
         method: 'get',
-        data: JSON.stringify(data)
       })
           .then(function (response) {
             console.log(response.data)
             that.musicianInfo = response.data
-            that.$cookies.set("userInfo_bio", response.data.bio)
-            that.$cookies.set("userInfo_avatar", response.data.avatar)
-            that.$cookies.set("userInfo_username", response.data.name)
           }).catch(function (error) {
         console.log(error)
       })

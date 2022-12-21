@@ -102,14 +102,14 @@ export default {
         musicianID: that.curID
       }
       axios.request({
-        url: "/get_musician_member/",
+        url: "get_musician_member/",
         baseURL: '/api',
-        method: 'get',
+        method: 'post',
         data: JSON.stringify(data)
       })
           .then(function (response) {
             console.log(response.data)
-            that.member_info = response.data
+            that.member_info = response.data == null ? [] : response.data
           }).catch(function (error) {
         console.log(error)
       })
