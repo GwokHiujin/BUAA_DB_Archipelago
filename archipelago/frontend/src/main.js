@@ -25,7 +25,8 @@ import Maps from "@/views/admin/Maps.vue";
 import AdminIndex from "@/views/admin/AdminIndex.vue";
 import Album from "@/views/admin/Album.vue";
 import Orders from "@/views/admin/OrderList.vue";
-import AddAlbum from "@/views/admin/AddAlbum.vue"
+import AddAlbum from "@/views/admin/AddAlbum.vue";
+import SearchPage from "@/views/admin/SearchPage.vue";
 
 // views for Auth layout
 
@@ -37,7 +38,6 @@ import Register from "@/views/auth/Register.vue";
 import Landing from "@/views/Landing.vue";
 import Profile from "@/views/Profile.vue";
 import Index from "@/views/Index.vue";
-import CardAddAlbum from "./components/Cards/CardAddAlbum";
 
 // routes
 
@@ -74,6 +74,10 @@ const routes = [
       {
         path: "/admin/addalbum",
         component: AddAlbum,
+      },
+      {
+        path: "/admin/search",
+        component: SearchPage,
       }
     ],
   },
