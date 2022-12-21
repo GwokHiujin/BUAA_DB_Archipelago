@@ -744,11 +744,13 @@ def search_musician_album(request):
 
 def get_homepage_info(request):
     if request.method == "GET":
+        print(Musician.objects.count(), Tag.objects.count(), Album.objects.count())
         select_musicians = [Musician.objects.all()[i] for i in
-                            random.Random().sample(range(0, Musician.objects.count() - 1), 6)]
+                            random.Random().sample(range(0, Musician.objects.count()),
+                                                   min(6, Musician.objects.count()))]
         select_tags = [Tag.objects.all()[i] for i in
-                       random.Random().sample(range(0, Tag.objects.count() - 1), 6)]
-        select_albums = Album.objects.filter().order_by('-sales_volume')[:4]
+                       random.Random().sample(range(0, Tag.objects.count()), min(6, Tag.objects.count()))]
+        select_albums = Album.objects.filter().order_by('-sales_volume')[:min(4, Album.objects.count())]
         musician_list = [
             {"musicianID": m.id, "musicianName": m.musician_name, "photo": m.photo} for m in select_musicians]
         album_list = [{"albumID": a.id, "albumName": a.album_name, "author": a.album_producer, "cover": a.cover,
