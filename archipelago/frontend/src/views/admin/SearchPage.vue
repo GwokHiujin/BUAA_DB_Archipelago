@@ -27,7 +27,7 @@
                 <div class="container px-5 py-24 mx-auto items-center">
                   <div class="w-full -m-4 justify-center flex flex-wrap relative">
                     <div class="lg:w-3/12 md:w-6/12 p-4 w-full"
-                         v-for="musician in this.musicianList">
+                         v-for="musician in musicianList">
                       <a class="block relative h-48 rounded overflow-hidden">
                         <img alt="ecommerce"
                              class="object-cover object-center w-full h-full block"
@@ -119,6 +119,7 @@ export default {
       question = {
         keyWord: that.$route.query.target,
       };
+      console.log(question)
       let url1;
       if (that.$route.query.type === 'tag') {
         url1 = "/search_tag/";
