@@ -88,7 +88,9 @@ def register(request):
         new_user = User(user_id=email, user_name=nickname, user_type=type_id, password=password, bio=bio)
         new_user.save()
         if type_id == 1:
-            new_musician = Musician(user=new_user, musician_name=nickname, nationality='Default_OC')
+            print('user is musician')
+            new_musician = Musician(user=new_user, musician_name=nickname, nationality='Default_OC', photo='',
+                                    location='China', theme=' ', found_year=' ', info=' ')
             new_musician.save()
         return JsonResponse({"errno": 0, "msg": "注册成功"})
 
@@ -490,7 +492,8 @@ def del_musician_member(request):
 def get_musician_tag(request):
     if request.method == "POST":
         payload = get_payload(request)
-        mid = payload.get('MID')
+        print(payload)
+        mid = payload.get('musicianId')
         if mid == None:
             return JsonResponse({"errno": 1, "msg": "该音乐人不存在"})
         musician = Musician.objects.filter(id=mid)
