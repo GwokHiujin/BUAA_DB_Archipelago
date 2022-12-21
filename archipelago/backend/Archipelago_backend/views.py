@@ -88,7 +88,7 @@ def register(request):
         new_user = User(user_id=email, user_name=nickname, user_type=type_id, password=password, bio=bio)
         new_user.save()
         if type_id == 1:
-            new_musician = Musician(user=new_user, musician_name=nickname, user_type=type_id, nationality='Default_OC')
+            new_musician = Musician(user=new_user, musician_name=nickname, nationality='Default_OC')
             new_musician.save()
         return JsonResponse({"errno": 0, "msg": "注册成功"})
 
