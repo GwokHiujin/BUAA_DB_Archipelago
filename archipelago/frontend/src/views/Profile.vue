@@ -63,26 +63,6 @@
                 </div>
                 <div class="w-full lg:w-4/12 px-4 lg:order-1">
                   <div class="flex justify-center py-4 lg:pt-4 pt-8">
-                    <div class="mr-4 p-3 text-center">
-                      <span
-                        class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
-                      >
-                        10
-                      </span>
-                      <span class="text-sm text-blueGray-400">
-                        唱片数
-                      </span>
-                    </div>
-                    <div class="lg:mr-4 p-3 text-center">
-                      <span
-                        class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
-                      >
-                        89
-                      </span>
-                      <span class="text-sm text-blueGray-400">
-                        被购买数
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -130,13 +110,13 @@
               </div>
 
               <div class="relative w-full mt-8 pt-8 pb-6">
-                <CardMusicianMems/>
+                <CardMusicianMems :mid="this.$route.query.mid"/>
               </div>
 
               <div class="relative w-full mt-8 pt-8 pb-16">
                 <div class="flex flex-wrap mt-4">
                   <div class="w-full mb-12 px-4">
-                    <card-table/>
+                    <card-table :mid="this.$route.query.mid"/>
                   </div>
                 </div>
               </div>
@@ -162,16 +142,7 @@ export default {
       team2,
       musicianTags: [
         {
-          value: "校园民谣"
-        },
-        {
-          value: "欢快清新"
-        },
-        {
-          value: "怀旧"
-        },
-        {
-          value: "木吉他"
+          tag: '',
         }
       ],
       musicianInfo: {
@@ -195,16 +166,33 @@ export default {
   },
   methods: {
     getMusicianInfo: function () {
-      let that = this;
-      let musician_id = that.$route.params.id;
+      let musician_id = this.$route.query.mid;
+      let data = {
+        musicianID: musician_id,
+      }
       axios.request({
         url: "api/get_musician/",
         method: 'get',
-        data: JSON.stringify(musician_id)
+        data: JSON.stringify(data)
       })
           .then(function (response) {
             console.log(response.data)
-            that.musicianInfo = response.data
+            this.musicianInfo = response.data
+          }).catch(function (error) {
+        console.log(error)
+      })
+
+      data = {
+        musicianId: musician_id,
+      }
+      axios.request({
+        url: "api/get_musician_tag/",
+        method: 'get',
+        data: JSON.stringify(data)
+      })
+          .then(function (response) {
+            console.log(response.data)
+            this.musicianTags = response.data
           }).catch(function (error) {
         console.log(error)
       })

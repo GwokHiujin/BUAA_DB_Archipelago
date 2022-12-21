@@ -62,8 +62,9 @@
         <tbody>
         <tr >
           <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+              class="border-t-0 px-6 align-middle hover:text-emerald-600 border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
               v-for="disc in discInfo"
+              @click="gotoAlbum(disc.albumID)"
           >
             {{disc.albumName}}
           </td>
@@ -116,16 +117,7 @@
   </div>
 </template>
 <script>
-import bootstrap from "@/assets/img/bootstrap.jpg";
-import angular from "@/assets/img/angular.jpg";
-import sketch from "@/assets/img/sketch.jpg";
-import react from "@/assets/img/react.jpg";
-import vue from "@/assets/img/react.jpg";
-
-import team1 from "@/assets/img/team-1-800x800.jpg";
-import team2 from "@/assets/img/team-2-800x800.jpg";
-import team3 from "@/assets/img/team-3-800x800.jpg";
-import team4 from "@/assets/img/team-4-470x470.png";
+import axios from "axios";
 
 const map = {
   albumType: {
@@ -142,6 +134,7 @@ const map = {
 }
 
 export default {
+  props:['mid'],
   data() {
     return {
       discInfo: [
@@ -159,16 +152,38 @@ export default {
         }
       ],
       map,
-      bootstrap,
-      angular,
-      sketch,
-      react,
-      vue,
-      team1,
-      team2,
-      team3,
-      team4,
+      curID: this.mid,
     };
   },
+  mounted() {
+    this.getAlbumInfo();
+  },
+  methods: {
+    getAlbumInfo: function () {
+      let that = this;
+      let data = {
+        musicianID: that.curID
+      }
+      axios.request({
+        url: "api/get_album/",
+        method: 'get',
+        data: JSON.stringify(data)
+      })
+          .then(function (response) {
+            console.log(response.data)
+            that.discInfo = response.data
+          }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    gotoAlbum: function (aid) {
+      this.$router.push({
+        path: '/admin/album',
+        query: {
+          aid: aid
+        }
+      })
+    }
+  }
 };
 </script>

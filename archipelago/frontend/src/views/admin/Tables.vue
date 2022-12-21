@@ -10,7 +10,7 @@
     </div>
 
     <div class="w-full mb-12 px-4">
-      <CardSelfTable />
+      <CardSelfTable :mid="this.$cookies.get('mid')"/>
     </div>
   </div>
 </template>

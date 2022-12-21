@@ -148,18 +148,8 @@ export default {
             res => {
               console.log(res.data)
               if (res.data.errno === 0) {
-                this.$message({
-                  message: "成功注销账户",
-                  type: 'success',
-                  showClose: true
-                })
                 this.$router.push("/");
               } else {
-                this.$message({
-                  message: "注销账户失败！",
-                  type: 'error',
-                  showClose: true
-                })
                 this.showModal = false;
                 location.reload();
               }

@@ -47,8 +47,6 @@
 </template>
 
 <script>
-import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
-
 export default {
   data() {
     return {
@@ -59,9 +57,6 @@ export default {
     setNavbarOpen: function () {
       this.navbarOpen = !this.navbarOpen;
     },
-  },
-  components: {
-    IndexDropdown,
   },
 };
 </script>

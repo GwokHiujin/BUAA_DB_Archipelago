@@ -121,6 +121,7 @@ export default {
               } else {
                 that.$cookies.set("userInfo_avatar", "@/assets/img/avatar-default.jpg")
               }
+              that.$cookies.set("mid", res.data.musicianID)
               that.$cookies.set("userInfo_usertype", res.data.type)
               that.$cookies.set("userInfo_bio", res.data.bio !== '' ? res.data.bio : "江空岛石出，霜落天宇净 :)")
               that.$cookies.set("userInfo_password", password_key)

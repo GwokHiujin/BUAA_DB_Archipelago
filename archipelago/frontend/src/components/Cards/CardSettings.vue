@@ -36,6 +36,7 @@
                   <input
                       type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      v-model.lazy="musicianMember.name"
                   />
                 </div>
               </div>
@@ -51,6 +52,7 @@
                   <input
                       type="date"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      v-model.lazy="musicianMember.birthday"
                   />
                 </div>
               </div>
@@ -66,6 +68,7 @@
                   <input
                       type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      v-model.lazy="musicianMember.role"
                   />
                 </div>
               </div>
@@ -81,6 +84,7 @@
                   <input
                       type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      v-model.lazy="musicianMember.activeYear"
                   />
                 </div>
               </div>
@@ -143,6 +147,7 @@
                       type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="请输入需要删除的成员的名称"
+                      v-model.lazy="toBeDelete"
                   />
                 </div>
               </div>
@@ -557,7 +562,7 @@
         </div>
 
         <div class="rounded-t mb-0 py-3 border-0 flex-wrap flex">
-          <CardMusicianMems />
+          <CardMusicianMems :mid="this.$cookies.get('mid')"/>
         </div>
       </form>
     </div>
@@ -589,6 +594,7 @@
               <input
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  v-model.lazy="tagList.at(0).tag"
               />
             </div>
           </div>
@@ -604,6 +610,7 @@
               <input
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  v-model.lazy="tagList.at(1).tag"
               />
             </div>
           </div>
@@ -619,6 +626,7 @@
               <input
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  v-model.lazy="tagList.at(2).tag"
               />
             </div>
           </div>
@@ -673,6 +681,21 @@ export default {
       alertOpen2: false,
       showModal: false,
       showModal1: false,
+      toBeDelete: '',
+      tagList: [
+        {
+          tag: '',
+          tagType: 0,
+        },
+        {
+          tag: '',
+          tagType: 1,
+        },
+        {
+          tag: '',
+          tagType: 2,
+        }
+      ]
     }
   },
   mounted() {
@@ -698,28 +721,29 @@ export default {
       this.showModal1 = !this.showModal1;
     },
     getUserInfo: function () {
-      let that = this;
       axios.request({
         url: "api/get_user_info/",
         method: 'get'
       })
           .then(function (response) {
             console.log(response.data)
-            that.userInfo = response.data
+            this.userInfo = response.data
           }).catch(function (error) {
         console.log(error)
       })
     },
     getMusicianInfo: function () {
-      let that = this;
+      let data = {
+        musicianID: this.$cookies.get("mid"),
+      }
       axios.request({
         url: "api/get_musician/",
         method: 'get',
-        data: JSON.stringify(that.$cookies.get("userInfo_email"))
+        data: JSON.stringify(data)
       })
           .then(function (response) {
             console.log(response.data)
-            that.musicianInfo = response.data
+            this.musicianInfo = response.data
           }).catch(function (error) {
         console.log(error)
       })
@@ -770,19 +794,77 @@ export default {
       }
     },
     setMusicianInfo: function () {
-      // TODO
-    },
-    addMusicianMember: function () {
-      // TODO
+      let that = this;
+      let formdata = new FormData()
+      Array.from(that.files).map(item => {
+        console.log(item)
+        formdata.append("file", item)
+      })
+      that.musicianInfo.photo = formdata;
+      axios({
+        method: 'post',
+        url: "api/set_musician/",
+        data: JSON.stringify(that.musicianInfo)
+      }).then(res => {
+        console.log(res.data)
+        if (res.data.errno === 0) {
+          location.reload();
+        } else {
+          that.alertOpen1 = true;
+        }
+        location.reload();
+      }).catch(err => {
+        console.log(err)
+      })
     },
     setMusicianMember: function () {
-
+      let that = this;
+      axios({
+        method: 'post',
+        url: "api/add_musician_member/",
+        data: JSON.stringify(that.musicianMember)
+      }).then(res => {
+        console.log(res.data)
+        if (res.data.errno === 0) {
+          location.reload();
+        } else {
+          that.alertOpen2 = true;
+        }
+        location.reload();
+      }).catch(err => {
+        console.log(err)
+      })
     },
     deleteMusicianMember: function () {
-      // TODO
+      let that = this;
+      axios({
+        method: 'post',
+        url: "api/del_musician_member/",
+        data: JSON.stringify(that.toBeDelete)
+      }).then(res => {
+        console.log(res.data)
+        location.reload();
+      }).catch(err => {
+        console.log(err)
+      })
     },
     addMusicianTags: function () {
-
+      let that = this;
+      let tagInfo;
+      tagInfo = {
+        ID: this.$cookies.get("userInfo_email"),
+        tagList: that.tagList,
+      };
+      axios({
+        method: 'post',
+        url: "api/set_musician_tag/",
+        data: JSON.stringify(tagInfo)
+      }).then(res => {
+        console.log(res.data)
+        location.reload();
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }

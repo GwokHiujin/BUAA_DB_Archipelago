@@ -67,17 +67,36 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "OrderList",
   data() {
     return {
       orderList: [
         {
-          orderNum: '',
-          albumID: '',
+          orderNum: -1,
+          albumID: -1,
           setTime: '',
         }
       ]
+    }
+  },
+  mounted() {
+    this.getOrder();
+  },
+  methods: {
+    getOrder: function () {
+      axios.request({
+        url: "api/get_order/",
+        method: 'get',
+      })
+          .then(function (response) {
+            console.log(response.orderList)
+            this.orderList = response.orderList
+          }).catch(function (error) {
+        console.log(error)
+      })
     }
   }
 }

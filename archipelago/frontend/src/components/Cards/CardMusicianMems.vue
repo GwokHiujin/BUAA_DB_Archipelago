@@ -74,8 +74,11 @@
 </template>
 <script>
 
+import axios from "axios";
+
 export default {
   name: 'CardMusicianMems',
+  props:['mid'],
   data() {
     return {
       member_info: [
@@ -86,7 +89,30 @@ export default {
           activeYear: '',
         }
       ],
+      curID: this.mid
     };
   },
+  mounted() {
+    this.getMemInfo();
+  },
+  methods: {
+    getMemInfo: function () {
+      let that = this;
+      let data = {
+        musicianID: that.curID
+      }
+      axios.request({
+        url: "api/get_musician_member/",
+        method: 'get',
+        data: JSON.stringify(data)
+      })
+          .then(function (response) {
+            console.log(response.data)
+            that.member_info = response.data
+          }).catch(function (error) {
+        console.log(error)
+      })
+    }
+  }
 };
 </script>

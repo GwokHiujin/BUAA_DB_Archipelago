@@ -100,20 +100,16 @@
 
           <li
               class="items-center"
-              v-if="$cookies.get('userInfo_usertype') === '1'"
+              v-if="this.$cookies.get('userInfo_usertype') === '1'"
+              @click="gotoMusician()"
           >
-            <router-link
-                class="text-blueGray-600 hover:text-blueGray-400 text-base uppercase py-4 font-bold block"
-                to="/profile"
-            >
               <i class="fas fa-user-circle text-blueGray-300 mr-2 text-base"></i>
               我的音乐人主页
-            </router-link>
           </li>
 
           <li
               class="items-center"
-              v-if="$cookies.get('userInfo_usertype') === '1'"
+              v-if="this.$cookies.get('userInfo_usertype') === '1'"
           >
             <router-link
               to="/admin/tables"
@@ -221,6 +217,7 @@
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.vue";
 import UserDropdown from "@/components/Dropdowns/UserDropdown.vue";
 import CardLogout from "../Cards/CardLogout";
+import axios from "axios";
 
 export default {
   data() {
@@ -241,8 +238,24 @@ export default {
       this.collapseShow = classes;
     },
     logout: function () {
-      this.$cookies.set("flag_isLogin", "false");
-      this.$router.push("/");
+      axios.request({
+        url: "api/logoff/",
+        method: 'get',
+      })
+          .then(function () {
+            this.$cookies.set("flag_isLogin", "false");
+            this.$router.push("/");
+          }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    gotoMusician: function () {
+      this.$router.push({
+        path: '/profile',
+        query: {
+          mid: this.$cookies.get("mid")
+        }
+      })
     }
   }
 };

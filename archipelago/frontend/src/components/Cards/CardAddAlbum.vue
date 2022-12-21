@@ -37,6 +37,7 @@
                   <input
                       type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      id="newSongName"
                   />
                 </div>
               </div>
@@ -52,6 +53,7 @@
                   <input
                       type="number"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      id="newSongTime"
                   />
                 </div>
               </div>
@@ -67,6 +69,7 @@
                   <input
                       type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      id="newSongADT"
                   />
                 </div>
               </div>
@@ -141,6 +144,7 @@
               <input
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  v-model.lazy="discInfo.albumName"
               />
             </div>
           </div>
@@ -155,6 +159,7 @@
               <input
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  v-model.lazy="discInfo.price"
               />
             </div>
           </div>
@@ -169,6 +174,7 @@
               <input
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  v-model.lazy="discInfo.author"
               />
             </div>
           </div>
@@ -183,6 +189,7 @@
               <input
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  v-model.lazy="discInfo.releaseYear"
               />
             </div>
           </div>
@@ -259,7 +266,6 @@
                   </a>
                 </li>
               </ul>
-
             </div>
           </div>
         </div>
@@ -267,7 +273,7 @@
         <hr class="mt-6 border-b-1 border-blueGray-300" />
 
         <h6 class="text-blueGray-400 text-sm mt-6 mb-6 font-bold uppercase lg:w-3/12">
-          添加唱片中的歌曲 |
+          为唱片添加歌曲 |
         </h6>
 
         <div class="rounded-t mb-0 py-3 border-0">
@@ -314,20 +320,23 @@
             <tr >
               <td
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  v-for="song in songs"
               >
-                test
+                {{song.name}}
               </td>
 
               <td
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  v-for="song in songs"
               >
-                test
+                {{song.songLast}} s
               </td>
 
               <td
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  v-for="song in songs"
               >
-                test
+                试听链接: {{song.ADT}}
               </td>
             </tr>
             </tbody>
@@ -336,55 +345,64 @@
 
         <hr class="mt-6 border-b-1 border-blueGray-300" />
 
-        <h6 class="text-blueGray-400 text-sm mt-6 mb-6 font-bold uppercase">
-          添加标签 | (请以 tag1;tag2;tag3;... 的格式填写，用半角分号区分标签！)
-        </h6>
-
-        <div class="flex flex-wrap">
-          <div class="w-full px-4">
-            <div class="relative w-full mb-3">
-              <label
-                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                  htmlFor="grid-password"
-              >
-                风格流派标签
-              </label>
-              <input
-                  type="text"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              />
+        <div class="flex-auto px-4 lg:px-10 py-10 pt-8 bg-white">
+          <form>
+            <div class="text-center flex justify-between pb-16">
+              <h6 class="text-blueGray-400 text-sm mt-6 mb-6 font-bold uppercase">
+                添加标签 | (请以 tag1;tag2;tag3;... 的格式填写，用半角分号区分标签！)
+              </h6>
             </div>
-          </div>
 
-          <div class="w-full px-4">
-            <div class="relative w-full mb-3">
-              <label
-                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                  htmlFor="grid-password"
-              >
-                音乐情绪标签
-              </label>
-              <input
-                  type="text"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              />
-            </div>
-          </div>
+            <div class="flex flex-wrap">
+              <div class="w-full px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                  >
+                    风格流派标签
+                  </label>
+                  <input
+                      type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      v-model.lazy="tagList.at(0).tag"
+                  />
+                </div>
+              </div>
 
-          <div class="w-full px-4">
-            <div class="relative w-full mb-3">
-              <label
-                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                  htmlFor="grid-password"
-              >
-                器乐元素标签
-              </label>
-              <input
-                  type="text"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              />
+              <div class="w-full px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                  >
+                    音乐情绪标签
+                  </label>
+                  <input
+                      type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      v-model.lazy="tagList.at(1).tag"
+                  />
+                </div>
+              </div>
+
+              <div class="w-full px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                  >
+                    器乐元素标签
+                  </label>
+                  <input
+                      type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      v-model.lazy="tagList.at(2).tag"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </form>
     </div>
@@ -393,20 +411,45 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "CardAddAlbum",
   data() {
     return {
       alertOpen: false,
-      openTab: 0,
       showModal: false,
-      songs: [
+      tagList: [
         {
-          name: '',
-          songLast: '',
-          ADT: '',
+          tag: '',
+          tagType: 0,
+        },
+        {
+          tag: '',
+          tagType: 1,
+        },
+        {
+          tag: '',
+          tagType: 2,
         }
-      ]
+      ],
+      discInfo: {
+        Tag: -1,
+        albumName: '',
+        price: '',
+        author: '',
+        releaseYear: '',
+        cover: '',
+        type: 0,
+        resource: '',
+        songs: [
+          {
+            name: '',
+            songLast: '',
+            ADT: '',
+          }
+        ],
+      }
     }
   },
   methods: {
@@ -414,17 +457,56 @@ export default {
       this.alertOpen = false;
     },
     toggleTabs: function (tabNum) {
-      this.openTab = tabNum;
+      this.discInfo.type = tabNum;
     },
     toggleModal: function () {
       this.showModal = !this.showModal;
     },
     addNewAlbum: function () {
+      let that = this;
+      let formdata = new FormData()
+      Array.from(that.files).map(item => {
+        console.log(item)
+        formdata.append("file", item)
+      })
+      that.discInfo.cover = formdata;
+      axios({
+        method: 'post',
+        url: "api/set_album/",
+        data: JSON.stringify(that.discInfo)
+      }).then(res => {
+        console.log(res.data)
+      }).catch(err => {
+        console.log(err)
+      })
 
+      let tagInfo;
+      tagInfo = {
+        ID: this.$cookies.get("mid"),
+        tagList: that.tagList,
+      };
+      axios({
+        method: 'post',
+        url: "api/add_del_album_tag/",
+        data: JSON.stringify(tagInfo)
+      }).then(res => {
+        console.log(res.data)
+        this.$router.push('/admin/tables')
+      }).catch(err => {
+        console.log(err)
+      })
     },
     addNewSong: function () {
-
-    }
+      let name = document.getElementById("newSongName").value;
+      let time = document.getElementById("newSongTime").value;
+      let ADT = document.getElementById("newSongADT").value;
+      let newData = {
+        name: name,
+        songLast: time,
+        ADT: ADT
+      };
+      this.discInfo.songs.push(newData);
+    },
   }
 }
 </script>

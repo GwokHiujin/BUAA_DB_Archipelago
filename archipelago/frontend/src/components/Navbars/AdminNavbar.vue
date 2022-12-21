@@ -40,10 +40,15 @@
             class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"
         >
           <img
-              alt="..."
               class="w-full rounded-full align-middle border-none shadow-lg"
-              src="@/assets/img/team-1-800x800.jpg"
+              src={{avatar}}
+              v-if="this.$cookies.get('userInfo_avatar') !== ''"
           />
+           <img
+               class="w-full rounded-full align-middle border-none shadow-lg"
+               src="./assets/img/team-4-470x470.png"
+               v-else
+           />
         </span>
         </div>
       </ul>
@@ -54,9 +59,21 @@
 
 <script>
 export default {
+  data() {
+    return {
+      avatar: this.$cookies.get('userInfo_avatar')
+    }
+  },
   methods: {
     search: function () {
-      this.$router.push("/admin/search")
+      let toSearch = document.getElementById("string").value;
+      this.$router.push({
+        path: '/admin/search',
+        query: {
+          target: toSearch,
+          type: 'normal'
+        }
+      })
     }
   }
 }

@@ -19,46 +19,26 @@
           </div>
         </div>
 
-
         <div class="flex flex-wrap -m-4 justify-center flex flex-wrap relative mt-12">
-          <div class="xl:w-3/12 md:w-6/12 p-4">
+          <div class="xl:w-3/12 md:w-6/12 p-4" v-for="album in albumList">
             <div class="bg-gray-100 p-6 rounded-lg h-500-px">
-              <img class="h-40 rounded w-auto object-cover object-center mb-6" src="https://dummyimage.com/720x720" alt="content">
-              <h3 class="tracking-wide text-emerald-500 text-xs font-medium title-font">
-                SUBTITLE
+              <img class="h-40 rounded w-auto object-cover object-center mb-6"
+                   src={{album.cover}}>
+              <h3 class="tracking-wide text-emerald-500 text-xs font-medium title-font hover:text-emerald-600"
+                  @click="toAlbum(album.albumID)">
+                {{ album.albumName }}
               </h3>
               <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-                Chichen Itza
+                {{album.author}}
               </h2>
-              <p class="leading-relaxed text-base">
-                Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.
-              </p>
-            </div>
-          </div>
-          <div class="xl:w-3/12 md:w-6/12 p-4">
-            <div class="bg-gray-100 p-6 rounded-lg h-500-px">
-              <img class="h-40 rounded w-auto object-cover object-center mb-6" src="https://dummyimage.com/721x721" alt="content">
-              <h3 class="tracking-wide text-emerald-500 text-xs font-medium title-font">SUBTITLE</h3>
-              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Colosseum Roma</h2>
-              <p class="leading-relaxed text-base">
-                Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.
-              </p>
-            </div>
-          </div>
-          <div class="xl:w-3/12 md:w-6/12 p-4">
-            <div class="bg-gray-100 p-6 rounded-lg h-500-px">
-              <img class="h-40 rounded w-auto object-cover object-center mb-6" src="https://dummyimage.com/722x722" alt="content">
-              <h3 class="tracking-wide text-emerald-500 text-xs font-medium title-font">SUBTITLE</h3>
-              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Great Pyramid of Giza</h2>
-              <p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
-            </div>
-          </div>
-          <div class="xl:w-3/12 md:w-6/12 p-4">
-            <div class="bg-gray-100 p-6 rounded-lg h-500-px">
-              <img class="h-40 rounded w-auto object-cover object-center mb-6" src="https://dummyimage.com/723x723" alt="content">
-              <h3 class="tracking-wide text-emerald-500 text-xs font-medium title-font">SUBTITLE</h3>
-              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">San Francisco</h2>
-              <p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
+              <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5 pb-6">
+                <span
+                    class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-100 uppercase last:mr-0 mr-2 mt-2"
+                    v-for="tag in album.tagList"
+                >
+                  {{tag.tag}}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -77,63 +57,19 @@
         </div>
 
         <div class="flex flex-wrap -m-4 justify-center flex flex-wrap relative">
-          <div class="lg:w-4/12 sm:w-6/12 p-4">
+          <div class="lg:w-4/12 sm:w-6/12 p-4"
+               v-for="musician in musicianList">
             <div class="flex relative">
-              <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/600x360">
+              <img class="absolute inset-0 w-full h-full object-cover object-center"
+                   src={{musician.photo}}>
               <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                <h2 class="tracking-wide text-sm title-font font-medium text-emerald-500 mb-1">THE SUBTITLE</h2>
-                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
-                <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-              </div>
-            </div>
-          </div>
-          <div class="lg:w-4/12 sm:w-6/12 p-4">
-            <div class="flex relative">
-              <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/601x361">
-              <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                <h2 class="tracking-wide text-sm title-font font-medium text-emerald-500 mb-1">THE SUBTITLE</h2>
-                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">The Catalyzer</h1>
-                <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-              </div>
-            </div>
-          </div>
-          <div class="lg:w-4/12 sm:w-6/12 p-4">
-            <div class="flex relative">
-              <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/603x363">
-              <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                <h2 class="tracking-wide text-sm title-font font-medium text-emerald-500 mb-1">THE SUBTITLE</h2>
-                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">The 400 Blows</h1>
-                <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-              </div>
-            </div>
-          </div>
-          <div class="lg:w-4/12 sm:w-6/12 p-4">
-            <div class="flex relative">
-              <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/602x362">
-              <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                <h2 class="tracking-wide text-sm title-font font-medium text-emerald-500 mb-1">THE SUBTITLE</h2>
-                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Neptune</h1>
-                <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-              </div>
-            </div>
-          </div>
-          <div class="lg:w-4/12 sm:w-6/12 p-4">
-            <div class="flex relative">
-              <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/605x365">
-              <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                <h2 class="tracking-wide text-sm title-font font-medium text-emerald-500 mb-1">THE SUBTITLE</h2>
-                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Holden Caulfield</h1>
-                <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-              </div>
-            </div>
-          </div>
-          <div class="lg:w-4/12 sm:w-6/12 p-4">
-            <div class="flex relative">
-              <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/606x366">
-              <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                <h2 class="tracking-wide text-sm title-font font-medium text-emerald-500 mb-1">THE SUBTITLE</h2>
-                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Alper Kamu</h1>
-                <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                <h2 class="tracking-wide text-sm title-font font-medium text-emerald-500 mb-1 hover:text-emerald-600"
+                    @click="toMusician(musician.musicianID)">
+                  {{musician.musicianName}}
+                </h2>
+                <p class="leading-relaxed">
+                  {{musician.introduction}}
+                </p>
               </div>
             </div>
           </div>
@@ -156,84 +92,22 @@
         </div>
         
         <div class="flex flex-wrap justify-center flex flex-wrap relative">
-          <div class="p-2 lg:w-4/12 md:w-6/12 w-full">
+          <div class="p-2 lg:w-4/12 md:w-6/12 w-full" v-for="tag in tagList">
             <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/80x80">
               <div class="flex-grow">
-                <h2 class="text-gray-900 title-font font-medium">Holden Caulfield</h2>
-                <p class="text-gray-500">UI Designer</p>
-              </div>
-            </div>
-          </div>
-          <div class="p-2 lg:w-4/12 md:w-6/12 w-full">
-            <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/84x84">
-              <div class="flex-grow">
-                <h2 class="text-gray-900 title-font font-medium">Henry Letham</h2>
-                <p class="text-gray-500">CTO</p>
-              </div>
-            </div>
-          </div>
-          <div class="p-2 lg:w-4/12 md:w-6/12 w-full">
-            <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/88x88">
-              <div class="flex-grow">
-                <h2 class="text-gray-900 title-font font-medium">Oskar Blinde</h2>
-                <p class="text-gray-500">Founder</p>
-              </div>
-            </div>
-          </div>
-          <div class="p-2 lg:w-4/12 md:w-6/12 w-full">
-            <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/90x90">
-              <div class="flex-grow">
-                <h2 class="text-gray-900 title-font font-medium">John Doe</h2>
-                <p class="text-gray-500">DevOps</p>
-              </div>
-            </div>
-          </div>
-          <div class="p-2 lg:w-4/12 md:w-6/12 w-full">
-            <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/94x94">
-              <div class="flex-grow">
-                <h2 class="text-gray-900 title-font font-medium">Martin Eden</h2>
-                <p class="text-gray-500">Software Engineer</p>
-              </div>
-            </div>
-          </div>
-          <div class="p-2 lg:w-4/12 md:w-6/12 w-full">
-            <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/98x98">
-              <div class="flex-grow">
-                <h2 class="text-gray-900 title-font font-medium">Boris Kitua</h2>
-                <p class="text-gray-500">UX Researcher</p>
-              </div>
-            </div>
-          </div>
-          <div class="p-2 lg:w-4/12 md:w-6/12 w-full">
-            <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/100x90">
-              <div class="flex-grow">
-                <h2 class="text-gray-900 title-font font-medium">Atticus Finch</h2>
-                <p class="text-gray-500">QA Engineer</p>
-              </div>
-            </div>
-          </div>
-          <div class="p-2 lg:w-4/12 md:w-6/12 w-full">
-            <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/104x94">
-              <div class="flex-grow">
-                <h2 class="text-gray-900 title-font font-medium">Alper Kamu</h2>
-                <p class="text-gray-500">System</p>
-              </div>
-            </div>
-          </div>
-          <div class="p-2 lg:w-4/12 md:w-6/12 w-full">
-            <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/108x98">
-              <div class="flex-grow">
-                <h2 class="text-gray-900 title-font font-medium">Rodrigo Monchi</h2>
-                <p class="text-gray-500">Product Manager</p>
+                <h2 class="text-gray-900 title-font font-medium"
+                    @click="searchTag(tag.tag)">
+                  {{tag.tag}}
+                </h2>
+                <p class="text-gray-500" v-if="tag.tagType === 0">
+                  风格流派标签
+                </p>
+                <p class="text-gray-500" v-if="tag.tagType === 1">
+                  音乐情绪标签
+                </p>
+                <p class="text-gray-500" v-if="tag.tagType === 2">
+                  器乐元素标签
+                </p>
               </div>
             </div>
           </div>
@@ -249,8 +123,13 @@
         </span>
         <input type="text"
                placeholder="搜索标签"
-               class="px-3 py-4 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-10/12 pl-10"/>
-        <button class="bg-emerald-500 text-white ml-3 active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+               class="px-3 py-4 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-10/12 pl-10"
+               v-model.lazy="searchTag"
+               @keyup.enter="search()"/>
+        <Input v-show="false"></Input>
+        <button class="bg-emerald-500 text-white ml-3 active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                @click="search()">
           搜索
         </button>
       </div>
@@ -289,12 +168,86 @@
 
 <script>
 import indexFooter from "@/assets/img/index-footer.jpg";
+import axios from "axios";
 
 export default {
   name: "AdminIndex",
   data() {
     return {
       indexFooter,
+      searchTag: '',
+      musicianList: [
+        {
+          musicianID: -1,
+          musicianName: '',
+          photo: '',
+          introduction: '',
+        }
+      ],
+      albumList: [
+        {
+          albumID: -1,
+          albumName: '',
+          author: '',
+          cover: '',
+          tagList: [
+            {
+              tag: ''
+            }
+          ]
+        }
+      ],
+      tagList: [
+        {
+          tag: '',
+          tagType: -1,
+        }
+      ]
+    }
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    search: function (tag) {
+      let that = this;
+      let toSearch = tag === '' ? that.searchTag : tag;
+      this.$router.push({
+        path: '/admin/search',
+        query: {
+          target: toSearch,
+          type: 'tag'
+        }
+      })
+    },
+    getData: function () {
+      axios.request({
+        url: "api/get_homepage_info/",
+        method: 'get',
+      })
+          .then(function (response) {
+            this.musicianList = response.musicianList
+            this.albumList = response.albumList
+            this.tagList = response.tagList
+          }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    toAlbum: function (aid) {
+      this.$router.push({
+        path: '/admin/album',
+        query: {
+          aid: aid
+        }
+      })
+    },
+    toMusician: function (mid) {
+      this.$router.push({
+        path: '/profile',
+        query: {
+          mid: mid
+        }
+      })
     }
   }
 }

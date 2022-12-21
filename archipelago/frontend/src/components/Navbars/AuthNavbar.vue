@@ -28,9 +28,6 @@
         id="example-navbar-warning"
       >
         <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
-          <li class="flex items-center">
-            <PagesDropdown />
-          </li>
         </ul>
       </div>
     </div>
@@ -38,7 +35,6 @@
 </template>
 
 <script>
-import PagesDropdown from "@/components/Dropdowns/PagesDropdown.vue";
 export default {
   data() {
     return {
@@ -49,9 +45,6 @@ export default {
     setNavbarOpen: function () {
       this.navbarOpen = !this.navbarOpen;
     },
-  },
-  components: {
-    PagesDropdown,
   },
 };
 </script>

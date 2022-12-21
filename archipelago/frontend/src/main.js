@@ -21,7 +21,6 @@ import Auth from "@/layouts/Auth.vue";
 
 import Settings from "@/views/admin/Settings.vue";
 import Tables from "@/views/admin/Tables.vue";
-import Maps from "@/views/admin/Maps.vue";
 import AdminIndex from "@/views/admin/AdminIndex.vue";
 import Album from "@/views/admin/Album.vue";
 import Orders from "@/views/admin/OrderList.vue";
@@ -34,8 +33,6 @@ import Login from "@/views/auth/Login.vue";
 import Register from "@/views/auth/Register.vue";
 
 // views without layouts
-
-import Landing from "@/views/Landing.vue";
 import Profile from "@/views/Profile.vue";
 import Index from "@/views/Index.vue";
 
@@ -44,7 +41,7 @@ import Index from "@/views/Index.vue";
 const routes = [
   {
     path: "/admin",
-    redirect: "/admin/dashboard",
+    redirect: "/admin/index",
     component: Admin,
     children: [
       {
@@ -54,10 +51,6 @@ const routes = [
       {
         path: "/admin/tables",
         component: Tables,
-      },
-      {
-        path: "/admin/maps",
-        component: Maps,
       },
       {
         path: "/admin/index",
@@ -95,10 +88,6 @@ const routes = [
         component: Register,
       },
     ],
-  },
-  {
-    path: "/landing",
-    component: Landing,
   },
   {
     path: '/profile',
