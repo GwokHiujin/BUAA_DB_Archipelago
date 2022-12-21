@@ -119,23 +119,23 @@ export default {
       question = {
         keyWord: that.$route.query.target,
       };
-      let url;
+      let url1;
       if (that.$route.query.type === 'tag') {
-        url = "/search_tag/";
+        url1 = "/search_tag/";
       } else {
-        url = "/search_musician_album/";
+        url1 = "/search_musician_album/";
       }
       axios.request({
-        url: url,
+        url: url1,
         baseURL: '/api',
-        method: 'get',
+        method: 'post',
         data: JSON.stringify(question)
       })
-          .then(function (response) {
+          .then((response) => {
             that.musicianList = response.data.musicianList;
             that.albumList = response.data.albumList;
-          }).catch(function (error) {
-        console.log(error)
+          }).catch((e) => {
+        console.log(e)
       })
     },
     gotoMusician: function (mid) {
