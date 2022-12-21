@@ -47,7 +47,7 @@ def login(request):
         ret.update(get_user(email))
         musician = Musician.objects.filter(user=user)
         if len(musician) != 0:
-            ret['musicianID'] = musician[0].id
+            ret['musicianID'] = str(musician[0].id)
         ret['errno'] = 0
         ret['msg'] = "登录成功"
         return JsonResponse(ret)
