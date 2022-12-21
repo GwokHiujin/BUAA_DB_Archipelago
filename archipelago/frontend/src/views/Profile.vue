@@ -177,7 +177,7 @@ export default {
       })
           .then(function (response) {
             console.log(response.data)
-            this.musicianInfo = response.data
+            this.musicianInfo = response.data.data
           }).catch(function (error) {
         console.log(error)
       })
@@ -186,8 +186,8 @@ export default {
         musicianId: musician_id,
       }
       axios.request({
-        url: "api/get_musician_tag/",
-        method: 'get',
+        url: "/api/get_musician_tag/",
+        method: 'post',
         data: JSON.stringify(data)
       })
           .then(function (response) {
