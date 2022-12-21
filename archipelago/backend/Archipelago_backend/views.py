@@ -395,6 +395,7 @@ def set_musician(request):
 def add_musician_member(request):
     if request.method == "POST":
         payload = get_payload(request)
+        print(payload)
         email = request.session.get('email')
         if email is None:
             return JsonResponse({"errno": 1, "msg": "未登录"})
