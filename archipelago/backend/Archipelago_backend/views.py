@@ -232,6 +232,7 @@ def get_album(request):
 def set_album(request):
     if request.method == "POST":
         payload = get_payload(request)
+        print(payload)
         email = request.session.get('email')
         if email is None:
             return JsonResponse({"errno": 1, "msg": "未登录"})
@@ -240,7 +241,7 @@ def set_album(request):
         if len(musician_list) == 0:
             return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
         musician = musician_list[0]
-        new_data = payload['NewAlbumData']
+        new_data = payload
         tag = payload['Tag']
         if tag < 0:
             new_album = Album(album_name=new_data['albumName'],
@@ -249,12 +250,16 @@ def set_album(request):
                               release_year=new_data['releaseYear'],
                               cover=new_data['cover'],
                               type=new_data['type'],
-                              source=new_data['resource'])
+                              source=new_data['resource'],
+                              sales_volume=0,
+                              musician=musician)
             new_album.save()
             if payload.get('songs') is None:
                 return JsonResponse({"errno": 0, "msg": "新建唱片成功！"})
             for new_song_json in payload['songs']:
-                new_song = Song(song_name=new_song_json.get('name'), song_last=new_song_json.get('songLength'),
+                if new_song_json.get('name') is None or new_song_json['name'] == '':
+                    continue
+                new_song = Song(song_name=new_song_json.get('name'), song_last=new_song_json.get('songLast'),
                                 resource=new_song_json.get('ADT'),
                                 album=new_album)
                 new_song.save()
