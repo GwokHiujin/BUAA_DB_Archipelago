@@ -243,24 +243,30 @@ export default {
       this.collapseShow = classes;
     },
     logout: function () {
-      let that = this;
       axios.request({
         url: "/logoff/",
         baseURL: '/api',
         method: 'get',
       })
           .then(function () {
-            that.$router.push("/");
+            this.$cookies.remove("mid", '/')
+            this.$cookies.remove("userInfo_email", '/')
+            this.$cookies.remove("userInfo_avatar", '/')
+            this.$cookies.remove("userInfo_usertype", '/')
+            this.$cookies.remove("userInfo_bio", '/')
+            this.$cookies.remove("userInfo_password", '/')
+            this.$cookies.remove("flag_isLogin", '/')
+
+            this.$router.push("/");
           }).catch(function (error) {
         console.log(error)
       })
     },
     gotoMusician: function () {
-      let that = this;
       this.$router.push({
         path: '/profile',
         query: {
-          mid: that.$cookies.get("mid")
+          mid: this.$cookies.get("mid")
         }
       })
     }

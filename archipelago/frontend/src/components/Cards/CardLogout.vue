@@ -149,6 +149,14 @@ export default {
             res => {
               console.log(res.data)
               if (res.data.errno === 0) {
+                this.$cookies.remove("mid", '/')
+                this.$cookies.remove("userInfo_email", '/')
+                this.$cookies.remove("userInfo_avatar", '/')
+                this.$cookies.remove("userInfo_usertype", '/')
+                this.$cookies.remove("userInfo_bio", '/')
+                this.$cookies.remove("userInfo_password", '/')
+                this.$cookies.remove("flag_isLogin", '/')
+
                 this.$router.push("/");
               } else {
                 this.showModal = false;

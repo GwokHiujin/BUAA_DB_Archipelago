@@ -112,29 +112,28 @@ export default {
           res => {
             console.log(res.data)
             if (res.data.errno === 0) {
-              this.$cookies.remove("mid")
-              this.$cookies.remove("userInfo_email")
-              this.$cookies.remove("userInfo_avatar")
-              this.$cookies.remove("userInfo_usertype")
-              this.$cookies.remove("userInfo_bio")
-              this.$cookies.remove("userInfo_password")
-              this.$cookies.remove("flag_isLogin")
+              this.$cookies.remove("mid", '/')
+              this.$cookies.remove("userInfo_email", '/')
+              this.$cookies.remove("userInfo_avatar", '/')
+              this.$cookies.remove("userInfo_usertype", '/')
+              this.$cookies.remove("userInfo_bio", '/')
+              this.$cookies.remove("userInfo_password", '/')
+              this.$cookies.remove("flag_isLogin", '/')
 
-
-              this.$cookies.set("userInfo_email", res.data.email)
-              this.$cookies.set("userInfo_username", res.data.name)
+              this.$cookies.set("userInfo_email", res.data.email, '', '/')
+              this.$cookies.set("userInfo_username", res.data.name, '', '/')
               if (res.data.avatar !== '') {
                 // const myBlob = new window.Blob(res.data.avatar, {type: 'image/jpeg'})
                 // this.$cookies.set("userInfo_avatar", window.URL.createObjectURL(myBlob))
-                this.$cookies.set("userInfo_avatar", res.data.avatar)
+                this.$cookies.set("userInfo_avatar", res.data.avatar, '', '/')
               } else {
-                this.$cookies.set("userInfo_avatar", "@/assets/img/avatar-default.jpg")
+                this.$cookies.set("userInfo_avatar", "@/assets/img/avatar-default.jpg", '', '/')
               }
-              this.$cookies.set("mid", res.data.musicianID)
-              this.$cookies.set("userInfo_usertype", res.data.type)
-              this.$cookies.set("userInfo_bio", res.data.bio !== '' ? res.data.bio : "江空岛石出，霜落天宇净 :)")
-              this.$cookies.set("userInfo_password", password_key)
-              this.$cookies.set("flag_isLogin", true)
+              this.$cookies.set("mid", res.data.musicianID, '', '/')
+              this.$cookies.set("userInfo_usertype", res.data.type, '', '/')
+              this.$cookies.set("userInfo_bio", res.data.bio !== '' ? res.data.bio : "江空岛石出，霜落天宇净 :)", '', '/')
+              this.$cookies.set("userInfo_password", password_key, '', '/')
+              this.$cookies.set("flag_isLogin", true, '', '/')
 
               console.log('im here')
               console.log(res.data.type)
