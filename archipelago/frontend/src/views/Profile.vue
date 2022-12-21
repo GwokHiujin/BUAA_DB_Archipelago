@@ -178,7 +178,7 @@ export default {
       })
           .then(function (response) {
             console.log(response.data)
-            that.musicianInfo = response.data
+            that.musicianInfo = response.data.data
           }).catch(function (error) {
         console.log(error)
       })
@@ -193,7 +193,7 @@ export default {
       })
           .then(function (response) {
             console.log(response.data)
-            that.musicianTags = response.data
+            that.musicianTags = response.data.data
           }).catch(function (error) {
         console.log(error)
       })

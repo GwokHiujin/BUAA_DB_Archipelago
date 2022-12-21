@@ -356,6 +356,7 @@
                   placeholder="请上传头像图片"
                   id="new_userInfo_avatar"
                   accept=".jpg,.gif,.png,.bmp"
+                  ref="getFile"
               />
             </div>
           </div>
@@ -643,6 +644,8 @@ import CardMusicianMems from "@/components/Cards/CardMusicianMems.vue";
 
 axios.defaults.withCredentials = true;
 
+const getFile = ref(null)
+
 export default {
   name: "settings",
   components: {
@@ -769,20 +772,20 @@ export default {
           padding: CryptoJS.pad.Pkcs7
         }).toString();
 
-        let formdata = new FormData()
-        Array.from(that.files).map(item => {
-          console.log(item)
-          formdata.append("file", item)
-        })
+        //let forms = new FormData()
+        //let file = getFile.value.files[0]
+        //forms.append('file', file)
+        //forms.append('filePath', `pc/client-${moment().format('YYYY-MM-DD')}/`)
+        //getFile.value.value = '' // 清空内容
 
         newUserInfo = {
           name: that.userInfo.name,
-          avatar: formdata,
+          avatar: '',
           oldPassword: old_pwd_key,
           password: new_pwd_key,
           bio: that.userInfo.bio
         };
-        console.log(newUserInfo)
+
         axios({
           method: 'post',
           url: "/set_user_info/",
@@ -803,12 +806,6 @@ export default {
     },
     setMusicianInfo: function () {
       let that = this;
-      let formdata = new FormData()
-      Array.from(that.files).map(item => {
-        console.log(item)
-        formdata.append("file", item)
-      })
-      that.musicianInfo.photo = formdata;
       axios({
         method: 'post',
         url: "/set_musician/",

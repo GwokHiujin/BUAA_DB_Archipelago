@@ -101,8 +101,19 @@
               v-if="this.$cookies.get('userInfo_usertype') === '1'"
               @click="gotoMusician()"
           >
+            <a
+                :href="href"
+                @click="navigate"
+                class="text-base uppercase py-4 font-bold block"
+                :class="[
+                  isActive
+                    ? 'text-emerald-500 hover:text-emerald-600'
+                    : 'text-blueGray-600 hover:text-blueGray-400',
+                ]"
+            >
               <i class="fas fa-user-circle text-blueGray-300 mr-2 text-base"></i>
               我的音乐人主页
+            </a>
           </li>
 
           <li
