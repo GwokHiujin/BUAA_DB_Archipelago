@@ -52,7 +52,7 @@ class Tag(models.Model):
         unique_together = ("tag_name", "tag_type")
 
 
-class MusicionTag(models.Model):
+class MusicianTag(models.Model):
     tag = models.ForeignKey('Tag', on_delete=models.CASCADE)
     musician = models.ForeignKey('Musician', on_delete=models.CASCADE)
 

@@ -3,7 +3,7 @@ import json
 import random
 import re
 
-from django.db import connection
+from django.db import connection, transaction
 from django.db.models import Q
 from django.db.models import F
 from django.http import JsonResponse
@@ -35,20 +35,22 @@ def login(request):
         if email == "" or email is None:
             return JsonResponse({"errno": 2, "msg": "错误的用户名或密码"})
         user = User.objects.filter(user_id=email)
-        if len(user) == 1:
-            user = user[0]
-            ref_password = user.password
-            if ref_password != password:
-                return JsonResponse({"errno": 2,
-                                     "msg": "错误的用户名或密码"})
-            request.session['email'] = email
-            ret = dict()
-            ret['data'] = get_user(email)
-            ret['errno'] = 0
-            ret['msg'] = "登录成功"
-            return JsonResponse(ret)
-        else:
+        if len(user) != 1:
             return JsonResponse({"errno": 3, "msg": "未知异常"})
+        user = user[0]
+        ref_password = user.password
+        if ref_password != password:
+            return JsonResponse({"errno": 2,
+                                 "msg": "错误的用户名或密码"})
+        request.session['email'] = email
+        ret = dict()
+        ret['data'] = get_user(email)
+        musician = Musician.objects.filter(user=user)
+        if len(musician) != 0:
+            ret['data']['musicianID'] = musician[0].id
+        ret['errno'] = 0
+        ret['msg'] = "登录成功"
+        return JsonResponse(ret)
 
 
 # 10.12: 初步实验
@@ -218,7 +220,7 @@ def get_album(request):
             'resource': elem.source,
             'salesVolume': elem.sales_volume
         } for elem in album_list]
-        return JsonResponse(var, safe=False)
+        return JsonResponse({'errno': 0, 'msg': '成功', 'albumList': var}, safe=False)
 
 
 def set_album(request):
@@ -243,7 +245,15 @@ def set_album(request):
                               type=new_data['type'],
                               source=new_data['resource'])
             new_album.save()
-            return JsonResponse({"errno": 0, "msg": "新建唱片成功！"})
+            if payload.get('songs') is None:
+                return JsonResponse({"errno": 0, "msg": "新建唱片成功！"})
+            for new_song_json in payload['songs']:
+                new_song = Song(song_name=new_song_json.get('name'), song_last=new_song_json.get('songLength'),
+                                resource=new_song_json.get('ADT'),
+                                album=new_album)
+                new_song.save()
+            return JsonResponse({"errno": 0, "msg": "新建唱片并添加歌曲成功！"})
+
         old_album = Album.objects.select_for_update().filter(Q(musician=musician) and Q(id=tag))
         if len(old_album) == 0:
             return JsonResponse({"errno": 3, "msg": "无此唱片，或唱片不属于此用户"})
@@ -265,6 +275,24 @@ def set_album(request):
         return JsonResponse({"errno": 0, "msg": "修改唱片成功！"})
 
 
+def del_album(request):
+    if request.method == "POST":
+        payload = get_payload(request)
+        sel_album = Album.objects.filter(id=payload['Tag'])
+        if len(sel_album) == 0:
+            return JsonResponse({"errno": 1, "msg": "唱片不存在"})
+        sel_album = sel_album[0]
+        user = User.objects.get(user_id=email)
+        musician_list = Musician.objects.filter(user=user)
+        if len(musician_list) == 0:
+            return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
+        musician = musician_list[0]
+        if sel_album.musician != musician:
+            return JsonResponse({"errno": 3, "msg": "当前唱片不属于此用户"})
+        sel_album.delete()
+        return JsonResponse({"errno": 0, "msg": "成功"})
+
+
 def get_musician(request):
     if request.method == "GET":
         email = request.session.get('email')
@@ -276,13 +304,50 @@ def get_musician(request):
             return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
         musician = musician_list[0]
         return JsonResponse({
+            'errno': 0,
+            'msg': '成功',
+            'data': {
+                'musicianName': musician.musician_name,
+                'photo': musician.photo,
+                'originCountry': musician.nationality,
+                'location': musician.location,
+                'lyricalThemes': musician.theme,
+                'formedYear': musician.found_year,
+                'introduction': musician.info
+            }
+        })
+    if request.method == "POST":
+        payload = get_payload(request)
+        musician_list = Musician.objects.filter(id=payload.get('musicianID'))
+        if len(musician_list) == 0:
+            return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
+        musician = musician_list[0]
+        return JsonResponse({
+            'errno': 0,
+            'msg': '成功',
+            'data': {
+                'musicianName': musician.musician_name,
+                'photo': musician.photo,
+                'originCountry': musician.nationality,
+                'location': musician.location,
+                'lyricalThemes': musician.theme,
+                'formedYear': musician.found_year,
+                'introduction': musician.info
+            }
+        })
+
+
+def get_all_musician(request):
+    if request.method == "GET":
+        musician_list = Musician.objects.all
+        return JsonResponse({'data': [{
             'musicianName': musician.musician_name,
             'photo': musician.photo,
             'originCountry': musician.nationality,
             'location': musician.location,
             'lyricalThemes': musician.theme,
             'formedYear': musician.found_year,
-            'introduction': musician.info
+            'introduction': musician.info} for musician in musician_list]
         })
 
 
@@ -381,6 +446,21 @@ def set_musician_member(request):
         return JsonResponse({"errno": 0, "msg": "成功", "data": all_member})
 
 
+def get_musician_member(request):
+    if request.method == "POST":
+        payload = get_payload(request)
+        musician_list = Musician.objects.filter(id=payload.get('musicianID'))
+        if len(musician_list) == 0:
+            return JsonResponse({"errno": 1, "msg": "音乐人不存在"})
+        musician = musician_list[0]
+        all_member = MusicianMember.objects.filter(musician=musician)
+        all_member = [{"name": member.member_name,
+                       "birthday": member.birthday,
+                       "role": member.role,
+                       "activeYear": member.active_year} for member in all_member]
+        return JsonResponse({"errno": 0, "msg": "成功", "data": all_member})
+
+
 def del_musician_member(request):
     if request.method == "POST":
         payload = get_payload(request)
@@ -417,11 +497,12 @@ def get_musician_tag(request):
         if len(musician) == 0:
             return JsonResponse({"errno": 1, "msg": "该音乐人不存在"})
         musician = musician[0]
-        all_tag = MusicionTag.objects.filter(musician=musician)
+        all_tag = MusicianTag.objects.filter(musician=musician)
         all_tag = [{"tag": tag.tag.tag_name} for tag in all_tag]
         return JsonResponse({"errno": 0, "msg": "成功", "data": all_tag})
 
 
+@transaction.atomic
 def add_del_musician_tag(request):
     if request.method == "POST":
         payload = get_payload(request)
@@ -432,24 +513,21 @@ def add_del_musician_tag(request):
         if len(musician) == 0:
             return JsonResponse({"errno": 1, "msg": "该音乐人不存在"})
         musician = musician[0]
-        old_tag = Tag.objects.select_for_update().filter(tag_name=payload.get('tag'), tag_type=payload.get('tagType'))
-        if len(old_tag) == 0:
-            old_tag = Tag(tag_name=payload.get('tag'), tag_type=payload.get('tagType'), popularity=0)
-        else:
-            old_tag = old_tag[0]
-        musician_tag = MusicionTag.objects.filter(musician=musician, tag=old_tag)
-        if len(musician_tag) != 0:
-            musician_tag = musician_tag[0]
-            musician_tag.delete()
-            old_tag.popularity = old_tag.popularity - 1
-            old_tag.save()
-            return JsonResponse({"errno": 0, "msg": "删除成功"})
-        else:
-            musician_tag = MusicionTag(tag=old_tag, musician=musician)
-            musician_tag.save()
-            old_tag.popularity = old_tag.popularity + 1
-            old_tag.save()
-            return JsonResponse({"errno": 0, "msg": "添加成功"})
+        for tag_json in payload['tagList']:
+            tag_sel = Tag.objects.filter(tag_name=tag_json['tag'], tag_type=tag_json['tagType'])
+            if len(tag_sel) == 0:
+                tag_sel = Tag(tag_name=tag_json['tag'], tag_type=tag_json['tagType'], popularity=0)
+                tag_sel.save()
+            else:
+                tag_sel = tag_sel[0]
+            old_musician_tag = MusicianTag.objects.filter(tag=tag_sel, musician=musician)
+            if len(old_musician_tag) == 0:
+                continue
+            new_musician_tag = MusicianTag(tag=tag_sel, musician=musician)
+            tag_sel.popularity += 1
+            tag_sel.save()
+            new_musician_tag.save()
+        return JsonResponse({"errno": 0, "msg": "成功"})
 
 
 def add_song(request):
@@ -571,24 +649,21 @@ def add_del_album_tag(request):
         if len(album) == 0:
             return JsonResponse({"errno": 1, "msg": "该唱片不存在"})
         album = album[0]
-        old_tag = Tag.objects.select_for_update().filter(tag_name=payload.get('SN'), tag_type=payload.get('ST'))
-        if len(old_tag) == 0:
-            old_tag = Tag(tag_name=payload.get('SN'), tag_type=payload.get('ST'), popularity=0)
-        else:
-            old_tag = old_tag[0]
-        album_tag = AlbumTag.objects.filter(album=album, tag=old_tag)
-        if len(album_tag) != 0:
-            album_tag = album_tag[0]
-            album_tag.delete()
-            old_tag.popularity = old_tag.popularity - 1
-            old_tag.save()
-            return JsonResponse({"errno": 0, "msg": "删除成功"})
-        else:
-            album_tag = AlbumTag(tag=old_tag, album=album)
-            album_tag.save()
-            old_tag.popularity = old_tag.popularity + 1
-            old_tag.save()
-            return JsonResponse({"errno": 0, "msg": "添加成功"})
+        for tag_json in payload['tagList']:
+            tag_sel = Tag.objects.filter(tag_name=tag_json['tag'], tag_type=tag_json['tagType'])
+            if len(tag_sel) == 0:
+                tag_sel = Tag(tag_name=tag_json['tag'], tag_type=tag_json['tagType'], popularity=0)
+                tag_sel.save()
+            else:
+                tag_sel = tag_sel[0]
+            old_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=album)
+            if len(old_album_tag) == 0:
+                continue
+            new_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=album)
+            tag_sel.popularity += 1
+            tag_sel.save()
+            new_album_tag.save()
+        return JsonResponse({"errno": 0, "msg": "成功"})
 
 
 def gen_order(request):
@@ -614,7 +689,8 @@ def get_order(request):
             return JsonResponse({"errno": 1, "msg": "未登录"})
         user = User.objects.get(user_id=email)
         order_list = Order.objects.filter(consumer=user)
-        order_list = [{"orderNum": order.id, "albumID": order.album.id, "setTime": order.time} for order in order_list]
+        order_list = [{"orderNum": order.id, "albumID": order.album.id, "setTime": order.time} for order in
+                      order_list]
         return JsonResponse({"errno": 0, "msg": "成功", "orderList": order_list})
 
 
@@ -622,7 +698,7 @@ def search_tag(request):
     if request.method == "POST":
         payload = get_payload(request)
         select_tag = Tag.objects.filter(tag_name__icontains=payload.get("keyWord"))
-        select_musicians = MusicionTag.objects.filter(tag__in=select_tag)
+        select_musicians = MusicianTag.objects.filter(tag__in=select_tag)
         select_albums = AlbumTag.objects.filter(tag__in=select_tag)
         return_dict = {"errno": 0, "msg": "成功"}
         musician_list = [
