@@ -88,7 +88,8 @@ export default {
   methods: {
     getOrder: function () {
       axios.request({
-        url: "api/get_order/",
+        url: "/get_order/",
+        baseURL: '/api',
         method: 'get',
       })
           .then(function (response) {

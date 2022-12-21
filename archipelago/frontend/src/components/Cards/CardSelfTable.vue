@@ -50,7 +50,7 @@
             <button
                 class="bg-blueGray-600 text-white active:bg-red-500 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:bg-red-500 outline-none focus:outline-none mr-1 mb-1 mt-4 ease-linear transition-all duration-150"
                 type="button"
-                v-on:click="deleteAccount()"
+                v-on:click="deleteAlbum()"
             >
               删除
             </button>
@@ -192,6 +192,8 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+
 const map = {
   albumType: {
     0: 'EP',
@@ -239,6 +241,22 @@ export default {
     closeAlert: function(){
       this.alertOpen = false;
     },
+    deleteAlbum: function () {
+      let data = {
+        Tag: this.toDelete
+      }
+      axios({
+        method: 'post',
+        url: "/del_album/",
+        baseURL: '/api',
+        data: JSON.stringify(data)
+      }).then(res => {
+        console.log(res.data)
+        location.reload()
+      }).catch(err => {
+        console.log(err)
+      })
+    }
   }
 };
 </script>

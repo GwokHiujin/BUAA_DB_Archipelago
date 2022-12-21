@@ -233,7 +233,8 @@ export default {
     },
     logout: function () {
       axios.request({
-        url: "api/logoff/",
+        url: "/logoff/",
+        baseURL: '/api',
         method: 'get',
       })
           .then(function () {

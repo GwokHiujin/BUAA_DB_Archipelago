@@ -475,7 +475,8 @@ export default {
       that.discInfo.cover = formdata;
       axios({
         method: 'post',
-        url: "api/set_album/",
+        url: "/set_album/",
+        baseURL: '/api',
         data: JSON.stringify(that.discInfo)
       }).then(res => {
         console.log(res.data)
@@ -494,7 +495,8 @@ export default {
       };
       axios({
         method: 'post',
-        url: "api/add_del_album_tag/",
+        url: "/add_del_album_tag/",
+        baseURL: '/api',
         data: JSON.stringify(tagInfo)
       }).then(res => {
         console.log(res.data)

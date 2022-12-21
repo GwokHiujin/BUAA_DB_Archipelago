@@ -132,13 +132,14 @@ export default {
         padding: CryptoJS.pad.Pkcs7
       }).toString();
 
-      if (password0 !== password1 || password0 !== this.$cookies.get("userInfo_password")) {
+      if (password0 !== password1) {
         this.showModal = false;
         this.alertOpen = true;
       } else {
         axios.request({
           method: 'post',
-          url: "/api/delete_account",
+          url: "/delete_account",
+          baseURL: '/api',
           data: JSON.stringify({
             userEmail: this.$cookies.get("userInfo_email"),
             password0: password0,
@@ -151,7 +152,7 @@ export default {
                 this.$router.push("/");
               } else {
                 this.showModal = false;
-                location.reload();
+                this.alertOpen = true;
               }
             }
         ).catch(
