@@ -94,6 +94,7 @@ export default {
   methods: {
     login: function () {
       let params;
+      let that = this;
       let password = document.getElementById("password").value;
       let password_key = CryptoJS.AES.encrypt(password, CryptoJS.enc.Utf8.parse(this.$cookies.get("aseKey")), {
         mode: CryptoJS.mode.ECB,
@@ -118,32 +119,22 @@ export default {
                 // this.$cookies.set("userInfo_avatar", window.URL.createObjectURL(myBlob))
                 this.$cookies.set("userInfo_avatar", res.data.avatar)
               } else {
-<<<<<<< HEAD
-                that.$cookies.set("userInfo_avatar", "@/assets/img/avatar-default.jpg")
-              }
-              that.$cookies.set("mid", res.data.musicianID)
-              that.$cookies.set("userInfo_usertype", res.data.type)
-              that.$cookies.set("userInfo_bio", res.data.bio !== '' ? res.data.bio : "江空岛石出，霜落天宇净 :)")
-              that.$cookies.set("userInfo_password", password_key)
-              that.$cookies.set("flag_isLogin", true)
-
-              console.log('im here')
-              console.log(res.data.type)
-              console.log(that.$cookies.get("userInfo_usertype"))
-              if (that.$cookies.get("userInfo_usertype") === '0' ||
-                  that.$cookies.get("userInfo_usertype") === '1') {
-                this.$router.push("/admin/index");
-=======
                 this.$cookies.set("userInfo_avatar", "@/assets/img/avatar-default.jpg")
->>>>>>> origin/gxy_check_interface
               }
               this.$cookies.set("mid", res.data.musicianID)
               this.$cookies.set("userInfo_usertype", res.data.type)
               this.$cookies.set("userInfo_bio", res.data.bio !== '' ? res.data.bio : "江空岛石出，霜落天宇净 :)")
               this.$cookies.set("userInfo_password", password_key)
               this.$cookies.set("flag_isLogin", true)
-              
-              this.$router.push("/admin/index");
+
+              console.log('im here')
+              console.log(res.data.type)
+              console.log(this.$cookies.get("userInfo_usertype"))
+
+              if (this.$cookies.get("userInfo_usertype") === '0' ||
+                  this.$cookies.get("userInfo_usertype") === '1') {
+                this.$router.push("/admin/index");
+              }
             } else {
               // TODO: Alert
             }
