@@ -688,11 +688,13 @@ def gen_order(request):
         if email is None:
             return JsonResponse({"errno": 1, "msg": "未登录"})
         user = User.objects.get(user_id=email)
-        album = Album.objects.filter(id=payload.get('albumID'))
+        album = Album.objects.select_for_update().filter(id=payload.get('albumID'))
         if len(album) == 0:
             return JsonResponse({"errno": 2, "msg": "不存在此专辑"})
         album = album[0]
-        new_order = Order(consumer=user, album=album, time=datetime.date.today())
+        album.sales_volume += 1
+        album.save()
+        new_order = Order(consumer=user, album=album, time=datetime.datetime.now())
         new_order.save()
         return JsonResponse({"errno": 0, "msg": "成功"})
 
