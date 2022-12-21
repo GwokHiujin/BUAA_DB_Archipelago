@@ -752,9 +752,9 @@ export default {
           .then(function (response) {
             that.userInfo = response.data.data
             console.log(that.userInfo)
-            that.$cookies.set("userInfo_bio", response.data.data.bio)
-            that.$cookies.set("userInfo_avatar", response.data.data.avatar)
-            that.$cookies.set("userInfo_username", response.data.data.name)
+            that.$cookies.set("userInfo_bio", response.data.data.bio, '', '/')
+            that.$cookies.set("userInfo_avatar", response.data.data.avatar, '', '/')
+            that.$cookies.set("userInfo_username", response.data.data.name, '', '/')
             console.log(response.data.data.name)
           }).catch(function (error) {
         console.log(error)
