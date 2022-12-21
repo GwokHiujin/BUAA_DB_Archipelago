@@ -196,8 +196,8 @@ export default {
       })
           .then(function (response) {
             console.log(response.data)
-            this.generalInfo = response.generalInfo
-            this.songList = response.songList
+            that.generalInfo = response.data.generalInfo
+            that.songList = response.data.songList
           }).catch(function (error) {
         console.log(error)
       })
@@ -216,7 +216,7 @@ export default {
       })
           .then(function (response) {
             console.log(response.data.data)
-            this.albumTags = response.data.data
+            that.albumTags = response.data.data
           }).catch(function (error) {
         console.log(error)
       })
