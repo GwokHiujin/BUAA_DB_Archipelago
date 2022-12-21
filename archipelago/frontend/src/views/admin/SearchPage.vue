@@ -130,9 +130,8 @@ export default {
         data: JSON.stringify(question)
       })
           .then(function (response) {
-            console.log(response.data)
-            this.musicianList = response.data.musicianList;
-            this.albumList = response.data.albumList;
+            this.musicianList = response.musicianList;
+            this.albumList = response.albumList;
           }).catch(function (error) {
         console.log(error)
       })
