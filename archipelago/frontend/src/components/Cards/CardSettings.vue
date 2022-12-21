@@ -356,7 +356,6 @@
                   placeholder="请上传头像图片"
                   id="new_userInfo_avatar"
                   accept=".jpg,.gif,.png,.bmp"
-                  ref="getFile"
               />
             </div>
           </div>
@@ -644,7 +643,7 @@ import CardMusicianMems from "@/components/Cards/CardMusicianMems.vue";
 
 axios.defaults.withCredentials = true;
 
-const getFile = ref(null)
+// const getFile = ref(null)
 
 export default {
   name: "settings",

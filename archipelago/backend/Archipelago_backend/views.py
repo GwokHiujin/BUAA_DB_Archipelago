@@ -139,7 +139,7 @@ def set_user_info(request):
         email = request.session.get('email')
         if email is None:
             return JsonResponse({"errno": 1, "msg": "未登录"})
-        user = User.select_for_update().objects.get(user_id=email)
+        user = User.objects.select_for_update().filter(user_id=email)
         check_list = [('name', 'user_name'), ('avatar', 'avatar'), ('password', 'password'),
                       ('bio', 'bio')
                       # ,('type', 'user_type')
@@ -147,14 +147,15 @@ def set_user_info(request):
         print(payload)
         cur = connection.cursor()
         if payload.get('password') is not None:
-            old_password = user.password
+            old_password = user[0].password
             if payload['oldPassword'] != old_password:
                 return JsonResponse({"errno": 2, "msg": "旧密码输入错误"})
         for check_unit in check_list:
             if payload.get(check_unit[0]) is not None:
                 update_data = {check_unit[1]: payload.get(check_unit[0])}
+                print(update_data)
                 user.update(**update_data)
-                user.save()
+                # user.save()
 
         return JsonResponse({"errno": 0, "msg": "修改成功"})
 
