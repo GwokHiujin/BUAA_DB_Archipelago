@@ -104,6 +104,13 @@ export default {
         email: document.getElementById("emailAddress").value,
         password: password_key,
       };
+      this.$cookies.remove("mid", '/')
+      this.$cookies.remove("userInfo_email", '/')
+      this.$cookies.remove("userInfo_avatar", '/')
+      this.$cookies.remove("userInfo_usertype", '/')
+      this.$cookies.remove("userInfo_bio", '/')
+      this.$cookies.remove("userInfo_password", '/')
+      this.$cookies.remove("flag_isLogin", '/')
       axios({
         method: 'post',
         url: "/api/login/",
@@ -112,14 +119,6 @@ export default {
           res => {
             console.log(res.data)
             if (res.data.errno === 0) {
-              this.$cookies.remove("mid", '/')
-              this.$cookies.remove("userInfo_email", '/')
-              this.$cookies.remove("userInfo_avatar", '/')
-              this.$cookies.remove("userInfo_usertype", '/')
-              this.$cookies.remove("userInfo_bio", '/')
-              this.$cookies.remove("userInfo_password", '/')
-              this.$cookies.remove("flag_isLogin", '/')
-
               this.$cookies.set("userInfo_email", res.data.email, '', '/')
               this.$cookies.set("userInfo_username", res.data.name, '', '/')
               if (res.data.avatar !== '') {
