@@ -127,6 +127,9 @@ export default {
               that.$cookies.set("userInfo_password", password_key)
               that.$cookies.set("flag_isLogin", true)
 
+              console.log('im here')
+              console.log(res.data.type)
+              console.log(that.$cookies.get("userInfo_usertype"))
               if (that.$cookies.get("userInfo_usertype") === '0' ||
                   that.$cookies.get("userInfo_usertype") === '1') {
                 this.$router.push("/admin/index");

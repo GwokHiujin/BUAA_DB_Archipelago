@@ -21,7 +21,7 @@ def get_user(email):
     user = User.objects.filter(user_id=email)
     user = user[0]
     return {"email": user.user_id, "name": user.user_name,
-            "avatar": user.avatar, "type": user.user_type, "bio": user.bio}
+            "avatar": user.avatar, "type": str(user.user_type), "bio": user.bio}
 
 
 # Create your views here.
@@ -44,10 +44,10 @@ def login(request):
                                  "msg": "错误的用户名或密码"})
         request.session['email'] = email
         ret = dict()
-        ret['data'] = get_user(email)
+        ret.update(get_user(email))
         musician = Musician.objects.filter(user=user)
         if len(musician) != 0:
-            ret['data']['musicianID'] = musician[0].id
+            ret['musicianID'] = musician[0].id
         ret['errno'] = 0
         ret['msg'] = "登录成功"
         return JsonResponse(ret)
@@ -81,13 +81,13 @@ def register(request):
         if password_check != password:
             return JsonResponse({"errno": 1, "msg": "两次输入的密码不一致"})
         type_id = payload.get("type")
-        bio = " "
+        bio = "江空岛石出，霜落天宇净 :)"
         user = User.objects.filter(user_id=email)
         if len(user) != 0:
             return JsonResponse({"errno": 2, "msg": "邮箱已注册"})
         new_user = User(user_id=email, user_name=nickname, user_type=type_id, password=password, bio=bio)
         new_user.save()
-        if type_id == '1':
+        if type_id == 1:
             new_musician = Musician(user=new_user, musician_name=nickname, user_type=type_id, nationality='Default_OC')
             new_musician.save()
         return JsonResponse({"errno": 0, "msg": "注册成功"})
