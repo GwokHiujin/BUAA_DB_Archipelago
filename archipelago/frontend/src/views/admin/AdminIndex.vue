@@ -221,15 +221,16 @@ export default {
       })
     },
     getData: function () {
+      let that = this;
       axios.request({
         url: "/get_homepage_info/",
         baseURL: '/api',
         method: 'get',
       })
           .then(function (response) {
-            this.musicianList = response.data.musicianList
-            this.albumList = response.data.albumList
-            this.tagList = response.data.tagList
+            that.musicianList = response.data.musicianList
+            that.albumList = response.data.albumList
+            that.tagList = response.data.tagList
           }).catch(function (error) {
         console.log(error)
       })

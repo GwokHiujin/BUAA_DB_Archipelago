@@ -317,26 +317,23 @@
             </tr>
             </thead>
             <tbody>
-            <tr >
+            <tr v-for="song in discInfo.songs">
               <td
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                  v-for="song in songs"
               >
                 {{song.name}}
               </td>
 
               <td
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                  v-for="song in songs"
               >
-                {{song.songLast}} s
+                {{(song.songLast / 60).toString().split('.').at(0)}} : {{(song.songLast % 60).toString().substring(0, 2)}}
               </td>
 
               <td
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                  v-for="song in songs"
               >
-                试听链接: {{song.ADT}}
+                {{song.ADT}}
               </td>
             </tr>
             </tbody>
@@ -442,13 +439,7 @@ export default {
         cover: '',
         type: 0,
         resource: '',
-        songs: [
-          {
-            name: '',
-            songLast: '',
-            ADT: '',
-          }
-        ],
+        songs: [],
       },
       tag0: '',
       tag1: '',
@@ -505,16 +496,20 @@ export default {
       })
     },
     addNewSong: function () {
+      let that = this;
       let name = document.getElementById("newSongName").value;
       let time = document.getElementById("newSongTime").value;
       let ADT = document.getElementById("newSongADT").value;
-      let newData = {
-        name: name,
-        songLast: time,
-        ADT: ADT
-      };
-      this.discInfo.songs.push(newData);
+      if (name !== '' && time !== '' && ADT !== '') {
+        let newData = {
+          name: name,
+          songLast: time,
+          ADT: ADT
+        };
+        that.discInfo.songs.push(newData);
+      }
       this.showModal = false;
+      console.log(that.discInfo.songs)
     },
   }
 }
