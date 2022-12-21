@@ -280,6 +280,7 @@ def set_album(request):
 def del_album(request):
     if request.method == "POST":
         payload = get_payload(request)
+        email = request.session.get('email')
         sel_album = Album.objects.filter(id=payload['Tag'])
         if len(sel_album) == 0:
             return JsonResponse({"errno": 1, "msg": "唱片不存在"})
@@ -363,7 +364,7 @@ def set_musician(request):
         musician_list = Musician.objects.select_for_update().filter(user=user)
         if len(musician_list) == 0:
             return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
-        musician = musician_list[0]
+        musician = musician_list
         cast_list = [
             ('musicianName', 'musician_name'),
             ('photo', 'photo'),
@@ -376,8 +377,9 @@ def set_musician(request):
         for elem in cast_list:
             if payload.get(elem[0]) is not None:
                 update_data = {elem[1]: payload.get(elem[0])}
+                print(update_data)
                 musician.update(**update_data)
-                musician.save()
+                # musician.save()
         return JsonResponse({"errno": 0, "msg": "修改音乐人信息成功！"})
 
 
