@@ -222,7 +222,8 @@ export default {
     },
     getData: function () {
       axios.request({
-        url: "api/get_homepage_info/",
+        url: "/get_homepage_info/",
+        baseURL: '/api',
         method: 'get',
       })
           .then(function (response) {

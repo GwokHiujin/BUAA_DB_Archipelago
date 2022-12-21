@@ -191,7 +191,8 @@ export default {
         albumID: aid,
       }
       axios.request({
-        url: "api/get_album_info/",
+        url: "/get_album_info/",
+        baseURL: '/api',
         method: 'get',
         data: JSON.stringify(data)
       })
@@ -209,7 +210,8 @@ export default {
         albumID: aid,
       }
       axios.request({
-        url: "api/get_album_tag/",
+        url: "/get_album_tag/",
+        baseURL: '/api',
         method: 'get',
         data: JSON.stringify(data)
       })
@@ -228,7 +230,8 @@ export default {
       }
       axios({
         method: 'post',
-        url: "api/gen_order/",
+        url: "/gen_order/",
+        baseURL: '/api',
         data: JSON.stringify(data)
       }).then(res => {
         console.log(res.data)

@@ -102,7 +102,8 @@ export default {
         musicianID: that.curID
       }
       axios.request({
-        url: "api/get_musician_member/",
+        url: "/get_musician_member/",
+        baseURL: '/api',
         method: 'get',
         data: JSON.stringify(data)
       })

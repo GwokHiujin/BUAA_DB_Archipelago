@@ -120,12 +120,13 @@ export default {
       };
       let url;
       if (this.$route.query.type === 'tag') {
-        url = "api/search_tag/";
+        url = "/search_tag/";
       } else {
-        url = "api/search_musician_album/";
+        url = "/search_musician_album/";
       }
       axios.request({
         url: url,
+        baseURL: '/api',
         method: 'get',
         data: JSON.stringify(question)
       })

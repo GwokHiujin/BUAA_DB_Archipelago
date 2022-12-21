@@ -219,7 +219,7 @@
 
     <div class="rounded-t bg-white mb-0 px-6 py-6">
       <div class="text-center flex justify-between">
-        <h6 class="text-blueGray-700 text-xl font-bold">欢迎您，{{this.$cookies.get("userInfo_username")}}！</h6>
+        <h6 class="text-blueGray-700 text-xl font-bold">欢迎您，{{this.userInfo.name}}！</h6>
         <span
             class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-200 uppercase last:mr-0 mr-2 mt-2"
             v-if="this.$cookies.get(`userInfo_usertype`) === `1`"
@@ -724,29 +724,36 @@ export default {
       this.showModal1 = !this.showModal1;
     },
     getUserInfo: function () {
+      let that = this;
       axios.request({
-        url: "api/get_user_info/",
+        url: "/get_user_info/",
+        baseURL: '/api',
         method: 'get'
       })
           .then(function (response) {
             console.log(response.data)
-            this.userInfo = response.data
+            that.userInfo = response.data
           }).catch(function (error) {
         console.log(error)
       })
     },
     getMusicianInfo: function () {
+      let that = this;
       let data = {
         musicianID: this.$cookies.get("mid"),
       }
       axios.request({
-        url: "api/get_musician/",
+        url: "/get_musician/",
+        baseURL: '/api',
         method: 'get',
         data: JSON.stringify(data)
       })
           .then(function (response) {
             console.log(response.data)
-            this.musicianInfo = response.data
+            that.musicianInfo = response.data
+            that.$cookies.set("userInfo_bio", response.data.bio)
+            that.$cookies.set("userInfo_avatar", response.data.avatar)
+            that.$cookies.set("userInfo_username", response.data.name)
           }).catch(function (error) {
         console.log(error)
       })
@@ -781,7 +788,8 @@ export default {
         };
         axios({
           method: 'post',
-          url: "api/set_user_info/",
+          url: "/set_user_info/",
+          baseURL: '/api',
           data: JSON.stringify(newUserInfo)
         }).then(res => {
           console.log(res.data)
@@ -806,7 +814,8 @@ export default {
       that.musicianInfo.photo = formdata;
       axios({
         method: 'post',
-        url: "api/set_musician/",
+        url: "/set_musician/",
+        baseURL: '/api',
         data: JSON.stringify(that.musicianInfo)
       }).then(res => {
         console.log(res.data)
@@ -824,7 +833,8 @@ export default {
       let that = this;
       axios({
         method: 'post',
-        url: "api/add_musician_member/",
+        url: "/add_musician_member/",
+        baseURL: '/api',
         data: JSON.stringify(that.musicianMember)
       }).then(res => {
         console.log(res.data)
@@ -842,7 +852,8 @@ export default {
       let that = this;
       axios({
         method: 'post',
-        url: "api/del_musician_member/",
+        url: "/del_musician_member/",
+        baseURL: '/api',
         data: JSON.stringify(that.toBeDelete)
       }).then(res => {
         console.log(res.data)
@@ -865,7 +876,8 @@ export default {
       };
       axios({
         method: 'post',
-        url: "api/set_musician_tag/",
+        url: "/set_musician_tag/",
+        baseURL: '/api',
         data: JSON.stringify(tagInfo)
       }).then(res => {
         console.log(res.data)
