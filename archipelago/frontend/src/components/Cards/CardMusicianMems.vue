@@ -38,31 +38,27 @@
         </tr>
         </thead>
         <tbody>
-        <tr >
+        <tr v-for="mem in member_info">
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="mem in member_info"
           >
             {{mem.name}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="mem in member_info"
           >
             {{mem.birthday}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="mem in member_info"
           >
             {{mem.role}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="mem in member_info"
           >
             {{mem.activeYear}}
           </td>

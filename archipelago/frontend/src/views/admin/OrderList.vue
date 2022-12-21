@@ -36,10 +36,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr >
+        <tr v-for="order in orderList">
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="order in orderList"
           >
             {{order.orderNum}}
           </td>
@@ -47,7 +46,6 @@
           <router-link to="/admin/album">
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 hover:text-emerald-600"
-              v-for="order in orderList"
           >
             {{order.albumID}}
           </td>
@@ -55,7 +53,6 @@
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="order in orderList"
           >
             {{order.setTime}}
           </td>

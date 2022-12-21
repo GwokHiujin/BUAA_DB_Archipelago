@@ -124,59 +124,51 @@
         </tr>
         </thead>
         <tbody>
-        <tr >
+        <tr v-for="disc in discInfo">
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{disc.albumName}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{disc.price}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{disc.author}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{disc.releaseYear}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{disc.releaser}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{map.albumType[disc.type]}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             {{disc.salesVolume}}
           </td>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-              v-for="disc in discInfo"
           >
             <button class="background-transparent text-gray-500 font-bold uppercase text-xs px-4 py-2 rounded hover:text-pink-500 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
