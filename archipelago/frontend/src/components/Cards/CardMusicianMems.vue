@@ -109,7 +109,7 @@ export default {
       })
           .then(function (response) {
             console.log(response.data)
-            that.member_info = response.data == null ? [] : response.data
+            that.member_info = response.data.data == null ? [] : response.data.data
           }).catch(function (error) {
         console.log(error)
       })

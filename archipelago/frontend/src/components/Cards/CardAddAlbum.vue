@@ -467,12 +467,6 @@ export default {
     },
     addNewAlbum: function () {
       let that = this;
-      let formdata = new FormData()
-      Array.from(that.files).map(item => {
-        console.log(item)
-        formdata.append("file", item)
-      })
-      that.discInfo.cover = formdata;
       axios({
         method: 'post',
         url: "/set_album/",

@@ -219,7 +219,7 @@
 
     <div class="rounded-t bg-white mb-0 px-6 py-6">
       <div class="text-center flex justify-between">
-        <h6 class="text-blueGray-700 text-xl font-bold">欢迎您，{{this.$cookies.get("userInfo_username")}}！</h6>
+        <h6 class="text-blueGray-700 text-xl font-bold">欢迎您，{{userInfo.name}}！</h6>
         <span
             class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-200 uppercase last:mr-0 mr-2 mt-2"
             v-if="this.$cookies.get(`userInfo_usertype`) === `1`"
@@ -352,10 +352,11 @@
               </label>
               <input
                   type="file"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  class="upload"
+                  @change="addImg"
+                  ref="inputer"
+                  accept="image/png,image/jpeg,image/gif,image/jpg"
                   placeholder="请上传头像图片"
-                  id="new_userInfo_avatar"
-                  accept=".jpg,.gif,.png,.bmp"
               />
             </div>
           </div>
@@ -373,7 +374,7 @@
                 type="text"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 rows="4"
-                :placeholder="this.$cookies.get(`userInfo_bio`)"
+                :placeholder="userInfo.bio"
                 v-model.lazy="userInfo.bio"
               >
                   </textarea
@@ -418,7 +419,6 @@
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   v-model.lazy="musicianInfo.musicianName"
-                  :placeholder="musicianInfo.musicianName"
               />
             </div>
           </div>
@@ -435,7 +435,6 @@
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   v-model.lazy="musicianInfo.originCountry"
-                  :placeholder="musicianInfo.originCountry"
               />
             </div>
           </div>
@@ -452,7 +451,6 @@
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   v-model.lazy="musicianInfo.location"
-                  :placeholder="musicianInfo.location"
               />
             </div>
           </div>
@@ -469,7 +467,6 @@
                   type="date"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   v-model.lazy="musicianInfo.formedYear"
-                  :placeholder="musicianInfo.formedYear"
               />
             </div>
           </div>
@@ -506,7 +503,6 @@
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   rows="4"
                   :placeholder="musicianInfo.lyricalThemes"
-                  v-model.lazy="musicianInfo.lyricalThemes"
               >
                   </textarea
                   >
@@ -526,7 +522,6 @@
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   rows="4"
-                  :placeholder="musicianInfo.introduction"
                   v-model.lazy="musicianInfo.introduction"
               >
                   </textarea
@@ -648,6 +643,30 @@ export default {
   components: {
     CardMusicianMems,
   },
+  setup() {
+    function addImg(e) {
+      const file = e.target.files[0]; //获得input上传的文件
+      uploadImg(file); //将文件上传到后端的方法
+    }
+    function uploadImg(img) {
+      const formData = new FormData(); //使用formData上传文件
+      formData.append("file", img);
+      axios({
+        method: "POST",
+        url: "/user/info",  // TODO
+        baseURL: 'api',     // TODO
+        headers: { "Content-Type": "multipart/form-data" },
+        data: formData,
+      }).then((res) => {
+        console.log(res.data.md5);
+        location.reload()
+      });
+    }
+    return {
+      addImg,
+      uploadImg,
+    };
+  },
   data() {
     return {
       userInfo: {
@@ -698,7 +717,7 @@ export default {
       ],
       tag0: '',
       tag1: '',
-      tag2: ''
+      tag2: '',
     }
   },
   mounted() {
@@ -731,12 +750,12 @@ export default {
         method: 'get'
       })
           .then(function (response) {
-            console.log(response.data)
-            that.userInfo = response.data
-            that.$cookies.set("userInfo_bio", response.data.bio)
-            that.$cookies.set("userInfo_avatar", response.data.avatar)
-            that.$cookies.set("userInfo_username", response.data.name)
-            location.reload()
+            that.userInfo = response.data.data
+            console.log(that.userInfo)
+            that.$cookies.set("userInfo_bio", response.data.data.bio)
+            that.$cookies.set("userInfo_avatar", response.data.data.avatar)
+            that.$cookies.set("userInfo_username", response.data.data.name)
+            console.log(response.data.data.name)
           }).catch(function (error) {
         console.log(error)
       })
@@ -750,7 +769,7 @@ export default {
       })
           .then(function (response) {
             console.log(response.data)
-            that.musicianInfo = response.data
+            that.musicianInfo = response.data.data
           }).catch(function (error) {
         console.log(error)
       })
@@ -785,10 +804,10 @@ export default {
         };
 
         axios({
-          method: 'post',
           url: "/set_user_info/",
           baseURL: '/api',
-          data: JSON.stringify(newUserInfo)
+          method: 'post',
+          data: JSON.stringify({newUserInfo})
         }).then(res => {
           console.log(res.data)
           if (res.data.errno === 0) {
@@ -802,7 +821,6 @@ export default {
       }
     },
     setMusicianInfo: function () {
-
       let that = this;
       axios({
         method: 'post',
@@ -876,7 +894,8 @@ export default {
       }).catch(err => {
         console.log(err)
       })
-    }
+    },
+
   }
 }
 </script>
