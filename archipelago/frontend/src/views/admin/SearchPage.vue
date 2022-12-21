@@ -115,6 +115,7 @@ export default {
     },
     searchString: function () {
       let question;
+      let that = this;
       question = {
         keyWord: this.$route.query.target,
       };
@@ -131,14 +132,15 @@ export default {
         data: JSON.stringify(question)
       })
           .then(function (response) {
-            this.musicianList = response.musicianList;
-            this.albumList = response.albumList;
+            that.musicianList = response.musicianList;
+            that.albumList = response.albumList;
           }).catch(function (error) {
         console.log(error)
       })
     },
     gotoMusician: function (mid) {
-      this.$router.push({
+      let that = this;
+      that.$router.push({
         path: '/profile',
         query: {
           mid: mid
@@ -146,7 +148,8 @@ export default {
       })
     },
     gotoAlbum: function (aid) {
-      this.$router.push({
+      let that = this;
+      that.$router.push({
         path: '/admin/album',
         query: {
           aid: aid
