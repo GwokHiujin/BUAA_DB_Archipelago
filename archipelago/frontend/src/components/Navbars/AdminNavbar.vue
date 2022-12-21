@@ -25,9 +25,12 @@
           </span>
           <input
             type="text"
-            placeholder="发现你的音乐岛屿……"
+            placeholder="搜索音乐人/唱片名"
             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"
+            id="string"
+            @keyup.enter="search()"
           />
+          <Input v-show="false"></Input>
         </div>
       </form>
       <!-- User -->
@@ -50,5 +53,11 @@
 </template>
 
 <script>
-
+export default {
+  methods: {
+    search: function () {
+      this.$router.push("/admin/search")
+    }
+  }
+}
 </script>
