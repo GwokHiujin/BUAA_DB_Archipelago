@@ -255,7 +255,7 @@ def set_album(request):
                               musician=musician)
             new_album.save()
             if payload.get('songs') is None:
-                return JsonResponse({"errno": 0, "msg": "新建唱片成功！"})
+                return JsonResponse({"errno": 0, "msg": "新建唱片成功！", "albumID": new_album.id})
             for new_song_json in payload['songs']:
                 if new_song_json.get('name') is None or new_song_json['name'] == '':
                     continue
@@ -263,7 +263,7 @@ def set_album(request):
                                 resource=new_song_json.get('ADT'),
                                 album=new_album)
                 new_song.save()
-            return JsonResponse({"errno": 0, "msg": "新建唱片并添加歌曲成功！"})
+            return JsonResponse({"errno": 0, "msg": "新建唱片并添加歌曲成功！", "albumID": new_album.id})
 
         old_album = Album.objects.select_for_update().filter(Q(musician=musician) and Q(id=tag))
         if len(old_album) == 0:
@@ -282,8 +282,8 @@ def set_album(request):
             if new_data.get(elem[0]) is not None:
                 update_data = {elem[1]: payload.get(elem[0])}
                 old_album.update(**update_data)
-                old_album.save()
-        return JsonResponse({"errno": 0, "msg": "修改唱片成功！"})
+                # old_album.save()
+        return JsonResponse({"errno": 0, "msg": "修改唱片成功！", "albumID": old_album.id})
 
 
 def del_album(request):
