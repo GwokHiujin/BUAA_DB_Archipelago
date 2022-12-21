@@ -514,6 +514,7 @@ export default {
         ADT: ADT
       };
       this.discInfo.songs.push(newData);
+      this.showModal = false;
     },
   }
 }
