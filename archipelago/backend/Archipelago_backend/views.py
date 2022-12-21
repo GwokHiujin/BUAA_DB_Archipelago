@@ -144,12 +144,15 @@ def set_user_info(request):
                       ('bio', 'bio')
                       # ,('type', 'user_type')
                       ]
-        print(payload)
-        cur = connection.cursor()
+        payload = payload['newUserInfo']
         if payload.get('password') is not None:
-            old_password = user[0].password
-            if payload['oldPassword'] != old_password:
-                return JsonResponse({"errno": 2, "msg": "旧密码输入错误"})
+            if payload.get('password') == 'rBID9l7f56W7tMVYXVk3Jw==':
+                del payload['password']
+            else:
+                old_password = user[0].password
+                if payload['oldPassword'] != old_password:
+                    return JsonResponse({"errno": 2, "msg": "旧密码输入错误"})
+        print(payload)
         for check_unit in check_list:
             if payload.get(check_unit[0]) is not None:
                 update_data = {check_unit[1]: payload.get(check_unit[0])}
