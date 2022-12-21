@@ -94,9 +94,8 @@ export default {
   methods: {
     login: function () {
       let params;
-      let that = this;
       let password = document.getElementById("password").value;
-      let password_key = CryptoJS.AES.encrypt(password, CryptoJS.enc.Utf8.parse(that.$cookies.get("aseKey")), {
+      let password_key = CryptoJS.AES.encrypt(password, CryptoJS.enc.Utf8.parse(this.$cookies.get("aseKey")), {
         mode: CryptoJS.mode.ECB,
         padding: CryptoJS.pad.Pkcs7
       }).toString();
@@ -112,26 +111,27 @@ export default {
           res => {
             console.log(res.data)
             if (res.data.errno === 0) {
-              that.$cookies.set("userInfo_email", res.data.email)
-              that.$cookies.set("userInfo_username", res.data.name)
+              this.$cookies.set("userInfo_email", res.data.email)
+              this.$cookies.set("userInfo_username", res.data.name)
               if (res.data.avatar !== '') {
                 // const myBlob = new window.Blob(res.data.avatar, {type: 'image/jpeg'})
-                // that.$cookies.set("userInfo_avatar", window.URL.createObjectURL(myBlob))
-                that.$cookies.set("userInfo_avatar", res.data.avatar)
+                // this.$cookies.set("userInfo_avatar", window.URL.createObjectURL(myBlob))
+                this.$cookies.set("userInfo_avatar", res.data.avatar)
               } else {
-                that.$cookies.set("userInfo_avatar", "@/assets/img/avatar-default.jpg")
+                this.$cookies.set("userInfo_avatar", "@/assets/img/avatar-default.jpg")
               }
-              that.$cookies.set("mid", res.data.musicianID)
-              that.$cookies.set("userInfo_usertype", res.data.type)
-              that.$cookies.set("userInfo_bio", res.data.bio !== '' ? res.data.bio : "江空岛石出，霜落天宇净 :)")
-              that.$cookies.set("userInfo_password", password_key)
-              that.$cookies.set("flag_isLogin", true)
+              this.$cookies.set("mid", res.data.musicianID)
+              this.$cookies.set("userInfo_usertype", res.data.type)
+              this.$cookies.set("userInfo_bio", res.data.bio !== '' ? res.data.bio : "江空岛石出，霜落天宇净 :)")
+              this.$cookies.set("userInfo_password", password_key)
+              this.$cookies.set("flag_isLogin", true)
 
               console.log('im here')
               console.log(res.data.type)
-              console.log(that.$cookies.get("userInfo_usertype"))
-              if (that.$cookies.get("userInfo_usertype") === '0' ||
-                  that.$cookies.get("userInfo_usertype") === '1') {
+              console.log(this.$cookies.get("userInfo_usertype"))
+
+              if (this.$cookies.get("userInfo_usertype") === '0' ||
+                  this.$cookies.get("userInfo_usertype") === '1') {
                 this.$router.push("/admin/index");
               }
             } else {

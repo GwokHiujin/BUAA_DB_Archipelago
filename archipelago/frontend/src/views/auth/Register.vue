@@ -162,20 +162,12 @@ export default {
         method: 'post',
         url: "/api/register/",
         data: JSON.stringify(params)
-      }).then(
-          res => {
-            console.log(res.data)
-            if (res.data.errno === 0) {
-              this.$router.push('/auth/login')
-            } else {
-              // TODO: Alert
-            }
-          }
-      ).catch(
-          err => {
-            console.log(err)
-          }
-      )
+      }).then(res => {
+        console.log(res.data);
+        this.$router.push("/auth/login");
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }
