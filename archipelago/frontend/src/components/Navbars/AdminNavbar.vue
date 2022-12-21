@@ -41,12 +41,12 @@
         >
           <img
               class="w-full rounded-full align-middle border-none shadow-lg"
-              src={{avatar}}
+              :src=avatar
               v-if="this.$cookies.get('userInfo_avatar') !== ''"
           />
            <img
                class="w-full rounded-full align-middle border-none shadow-lg"
-               src="./assets/img/team-4-470x470.png"
+               :src=team2
                v-else
            />
         </span>
@@ -58,10 +58,12 @@
 </template>
 
 <script>
+import team2 from "@/assets/img/team-2-800x800.jpg";
 export default {
   data() {
     return {
-      avatar: this.$cookies.get('userInfo_avatar')
+      avatar: this.$cookies.get('userInfo_avatar'),
+      team2
     }
   },
   methods: {
