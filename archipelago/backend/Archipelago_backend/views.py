@@ -804,7 +804,9 @@ def get_homepage_info(request):
         musician_list = [
             {"musicianID": m.id, "musicianName": m.musician_name, "photo": m.photo} for m in select_musicians]
         album_list = [{"albumID": a.id, "albumName": a.album_name, "author": a.album_producer, "cover": a.cover,
-                       "salesVolume": a.sales_volume} for a in select_albums]
+                       "salesVolume": a.sales_volume,
+                       "tagList": [{"tag": t.tag.tag_name} for t in AlbumTag.objects.filter(album=a)]}
+                      for a in select_albums]
         tag_list = [
             {"tag": t.tag_name, "tagType": t.tag_type} for t in select_tags
         ]
