@@ -686,7 +686,7 @@ export default {
         introduction: '',
       },
       musicianMember: {
-        musicianID: this.$cookies.get("userInfo_email"),
+        musicianID: '',
         name: '',
         birthday: '',
         role: '',
@@ -811,7 +811,7 @@ export default {
         }).then(res => {
           console.log(res.data)
           if (res.data.errno === 0) {
-            location.reload();
+            that.$router.push("/admin/settings")
           } else {
             that.alertOpen = true;
           }
@@ -830,7 +830,7 @@ export default {
       }).then(res => {
         console.log(res.data)
         if (res.data.errno === 0) {
-          location.reload();
+          that.$router.push("/admin/settings")
         } else {
           that.alertOpen1 = true;
         }
@@ -840,6 +840,8 @@ export default {
     },
     setMusicianMember: function () {
       let that = this;
+      that.musicianMember.musicianID = that.$cookies.get("mid")
+      console.log(that.musicianMember.musicianID)
       axios({
         method: 'post',
         url: "/add_musician_member/",
@@ -851,8 +853,9 @@ export default {
           that.showModal = false;
         } else {
           that.alertOpen2 = true;
+          console.log(res.data.msg)
         }
-        location.reload();
+        that.$router.push("/admin/settings")
       }).catch(err => {
         console.log(err)
       })
@@ -880,7 +883,7 @@ export default {
       that.tagList.at(2).tag = that.tag2;
 
       tagInfo = {
-        ID: this.$cookies.get("userInfo_email"),
+        ID: that.$cookies.get("mid"),
         tagList: that.tagList,
       };
       axios({
@@ -890,7 +893,7 @@ export default {
         data: JSON.stringify(tagInfo)
       }).then(res => {
         console.log(res.data)
-        location.reload();
+        that.$router.push("/admin/settings")
       }).catch(err => {
         console.log(err)
       })
