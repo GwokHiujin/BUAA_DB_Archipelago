@@ -208,13 +208,16 @@ export default {
     search: function (tag) {
       let that = this;
       let toSearch = tag === '' ? that.searchTag : tag;
-      this.$router.push({
-        path: '/admin/search',
-        query: {
-          target: toSearch,
-          type: 'tag'
-        }
-      })
+      console.log(toSearch)
+      if (toSearch !== undefined) {
+        this.$router.push({
+          path: '/admin/search',
+          query: {
+            target: toSearch,
+            type: 'tag'
+          }
+        })
+      }
     },
     getData: function () {
       let that = this;

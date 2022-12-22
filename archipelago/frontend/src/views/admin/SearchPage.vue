@@ -50,7 +50,7 @@
                              src={{musician.photo}}>
                       </a>
                       <div class="mt-4">
-                        <h2 class="text-gray-900 title-font text-lg font-medium"
+                        <h2 class="text-gray-900 title-font text-lg font-medium hover:text-emerald-600"
                             @click="gotoMusician(musician.musicianID)">
                           {{musician.musicianName}}
                         </h2>
@@ -91,7 +91,7 @@
                         <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
                           {{album.author}}
                         </h3>
-                        <h2 class="text-gray-900 title-font text-lg font-medium"
+                        <h2 class="text-gray-900 title-font text-lg font-medium hover:text-emerald-600"
                             @click="gotoAlbum(album.albumID)">
                           {{album.albumName}}
                         </h2>

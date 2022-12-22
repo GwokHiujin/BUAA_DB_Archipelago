@@ -71,13 +71,15 @@ export default {
     search: function () {
       let that = this;
       let toSearch = document.getElementById("string").value;
-      that.$router.push({
-        path: '/admin/search',
-        query: {
-          target: toSearch,
-          type: 'normal',
-        }
-      })
+      if (toSearch !== '') {
+        that.$router.push({
+          path: '/admin/search',
+          query: {
+            target: toSearch,
+            type: 'normal',
+          }
+        })
+      }
     }
   }
 }
