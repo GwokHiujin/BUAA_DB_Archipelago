@@ -812,9 +812,9 @@ def get_homepage_info(request):
 
 def upload_img(request):
     if request.method == 'POST':
-        img = request.FILES.get('img')
+        img = request.FILES.get('file')
         print(request.FILES)
-        print(get_payload(request))
+        # print(get_payload(request))
         saved_img = Image(img=img)
         saved_img.save()
-        return JsonResponse({'img_url': saved_img.img.url})
+        return JsonResponse({'img_url': 'http://127.0.0.1:8000' + saved_img.img.url})
