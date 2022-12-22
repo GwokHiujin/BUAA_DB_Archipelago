@@ -38,7 +38,7 @@ urlpatterns = [
     path("api/get_musician_member/", views.get_musician_member),
     path("api/del_musician_member/", views.del_musician_member),
     path("api/get_musician_tag/", views.get_musician_tag),
-    path("api/add_del_musician_tag/", views.add_del_musician_tag),
+    path("api/set_musician_tag/", views.add_del_musician_tag),
     path("api/add_song/", views.add_song),
     path("api/set_song/", views.set_song),
     path("api/del_song/", views.del_song),

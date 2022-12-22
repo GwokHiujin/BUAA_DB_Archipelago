@@ -228,6 +228,7 @@ def get_album(request):
         } for elem in album_list]
         return JsonResponse(var, safe=False)
 
+
 @transaction.atomic
 def set_album(request):
     if request.method == "POST":
@@ -265,15 +266,25 @@ def set_album(request):
                 new_song.save()
             if payload.get('tagList') is None:
                 return JsonResponse({"errno": 0, "msg": "新建唱片并添加歌曲成功！", "albumID": new_album.id})
-            for tag_json in payload['tagList']:
-                tag_sel = Tag.objects.filter(tag_name=tag_json['tag'], tag_type=tag_json['tagType'])
-                if len(tag_sel) == 0:
-                    tag_sel = Tag(tag_name=tag_json['tag'], tag_type=tag_json['tagType'], popularity=0)
+            for tag_group_json in payload['tagList']:
+                tag_list = [{'tag': elem, 'tagType': tag_group_json['tagType']} for elem in
+                            tag_group_json['tag'].split(';')]
+                for tag_json in tag_list:
+                    if tag_json['tag'] == '':
+                        continue
+                    tag_sel = Tag.objects.filter(tag_name=tag_json['tag'], tag_type=tag_json['tagType'])
+                    if len(tag_sel) == 0:
+                        tag_sel = Tag(tag_name=tag_json['tag'], tag_type=tag_json['tagType'], popularity=0)
+                        tag_sel.save()
+                    else:
+                        tag_sel = tag_sel[0]
+                    old_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=new_album)
+                    if len(old_album_tag) == 0:
+                        continue
+                    new_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=new_album)
+                    tag_sel.popularity += 1
                     tag_sel.save()
-                else:
-                    tag_sel = tag_sel[0]
-                tag_sel.popularity += 1
-                tag_sel.save()
+                    new_album_tag.save()
 
             return JsonResponse({"errno": 0, "msg": "新建唱片并添加歌曲成功！", "albumID": new_album.id})
 
@@ -416,8 +427,8 @@ def add_musician_member(request):
         if len(musician_list) == 0:
             return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
         musician = musician_list[0]
-        if musician.id != payload.get('musicianID'):
-            return JsonResponse({"errno": 3, "msg": "错误绑定音乐人信息"})
+        if musician.id != int(payload.get('musicianID')):
+            return JsonResponse({"errno": 3, "msg": "错误绑定音乐人信息", "correct_musicianID": musician.id})
         old_member = MusicianMember.objects.filter(musician=musician, member_name=payload.get('N'))
         if len(old_member) != 0:
             return JsonResponse({"errno": 4, "msg": "该成员已存在"})
@@ -533,27 +544,32 @@ def get_musician_tag(request):
 def add_del_musician_tag(request):
     if request.method == "POST":
         payload = get_payload(request)
-        mid = payload.get('musicianID')
+        mid = payload.get('ID')
         if mid == None:
             return JsonResponse({"errno": 1, "msg": "该音乐人不存在"})
         musician = Musician.objects.filter(id=mid)
         if len(musician) == 0:
             return JsonResponse({"errno": 1, "msg": "该音乐人不存在"})
         musician = musician[0]
-        for tag_json in payload['tagList']:
-            tag_sel = Tag.objects.filter(tag_name=tag_json['tag'], tag_type=tag_json['tagType'])
-            if len(tag_sel) == 0:
-                tag_sel = Tag(tag_name=tag_json['tag'], tag_type=tag_json['tagType'], popularity=0)
+        for tag_group_json in payload['tagList']:
+            tag_list = [{'tag': elem, 'tagType': tag_group_json['tagType']} for elem in
+                        tag_group_json['tag'].split(';')]
+            for tag_json in tag_list:
+                if tag_json['tag'] == '':
+                    continue
+                tag_sel = Tag.objects.filter(tag_name=tag_json['tag'], tag_type=tag_json['tagType'])
+                if len(tag_sel) == 0:
+                    tag_sel = Tag(tag_name=tag_json['tag'], tag_type=tag_json['tagType'], popularity=0)
+                    tag_sel.save()
+                else:
+                    tag_sel = tag_sel[0]
+                old_musician_tag = MusicianTag.objects.filter(tag=tag_sel, musician=musician)
+                if len(old_musician_tag) == 0:
+                    continue
+                new_musician_tag = MusicianTag(tag=tag_sel, musician=musician)
+                tag_sel.popularity += 1
                 tag_sel.save()
-            else:
-                tag_sel = tag_sel[0]
-            old_musician_tag = MusicianTag.objects.filter(tag=tag_sel, musician=musician)
-            if len(old_musician_tag) == 0:
-                continue
-            new_musician_tag = MusicianTag(tag=tag_sel, musician=musician)
-            tag_sel.popularity += 1
-            tag_sel.save()
-            new_musician_tag.save()
+                new_musician_tag.save()
         return JsonResponse({"errno": 0, "msg": "成功"})
 
 
@@ -677,20 +693,25 @@ def add_del_album_tag(request):
         if len(album) == 0:
             return JsonResponse({"errno": 1, "msg": "该唱片不存在"})
         album = album[0]
-        for tag_json in payload['tagList']:
-            tag_sel = Tag.objects.filter(tag_name=tag_json['tag'], tag_type=tag_json['tagType'])
-            if len(tag_sel) == 0:
-                tag_sel = Tag(tag_name=tag_json['tag'], tag_type=tag_json['tagType'], popularity=0)
+        for tag_group_json in payload['tagList']:
+            tag_list = [{'tag': elem, 'tagType': tag_group_json['tagType']} for elem in
+                        tag_group_json['tag'].split(';')]
+            for tag_json in tag_list:
+                if tag_json['tag'] == '':
+                    continue
+                tag_sel = Tag.objects.filter(tag_name=tag_json['tag'], tag_type=tag_json['tagType'])
+                if len(tag_sel) == 0:
+                    tag_sel = Tag(tag_name=tag_json['tag'], tag_type=tag_json['tagType'], popularity=0)
+                    tag_sel.save()
+                else:
+                    tag_sel = tag_sel[0]
+                old_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=album)
+                if len(old_album_tag) == 0:
+                    continue
+                new_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=album)
+                tag_sel.popularity += 1
                 tag_sel.save()
-            else:
-                tag_sel = tag_sel[0]
-            old_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=album)
-            if len(old_album_tag) == 0:
-                continue
-            new_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=album)
-            tag_sel.popularity += 1
-            tag_sel.save()
-            new_album_tag.save()
+                new_album_tag.save()
         return JsonResponse({"errno": 0, "msg": "成功"})
 
 
