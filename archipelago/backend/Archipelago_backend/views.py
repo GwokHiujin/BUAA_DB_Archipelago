@@ -536,13 +536,14 @@ def get_musician_tag(request):
             return JsonResponse({"errno": 1, "msg": "该音乐人不存在"})
         musician = musician[0]
         all_tag = MusicianTag.objects.filter(musician=musician)
-        type_2_tag_str = dict()
-        type_2_tag_str['0'] = set()
-        type_2_tag_str['1'] = set()
-        type_2_tag_str['2'] = set()
-        for tag in all_tag:
-            type_2_tag_str[tag.tag.tag_type].add(tag.tag.tag_name)
-        all_tag = [{"tag": ';'.join(type_2_tag_str[tag_set])} for tag_set in type_2_tag_str]
+        # type_2_tag_str = dict()
+        # type_2_tag_str['0'] = set()
+        # type_2_tag_str['1'] = set()
+        # type_2_tag_str['2'] = set()
+        # for tag in all_tag:
+        #     type_2_tag_str[tag.tag.tag_type].add(tag.tag.tag_name)
+        # all_tag = [{"tag": ';'.join(type_2_tag_str[tag_set])} for tag_set in type_2_tag_str]
+        all_tag = [{"tag": t.tag.tag_name} for t in all_tag]
         return JsonResponse({"errno": 0, "msg": "成功", "data": all_tag})
 
 
@@ -684,13 +685,14 @@ def get_album_tag(request):
             return JsonResponse({"errno": 1, "msg": "该唱片不存在"})
         album = album[0]
         all_tag = AlbumTag.objects.filter(album=album)
-        type_2_tag_str = dict()
-        type_2_tag_str['0'] = set()
-        type_2_tag_str['1'] = set()
-        type_2_tag_str['2'] = set()
-        for tag in all_tag:
-            type_2_tag_str[tag.tag.tag_type].add(tag.tag.tag_name)
-        all_tag = [{"tag": ';'.join(type_2_tag_str[tag_set])} for tag_set in type_2_tag_str]
+        # type_2_tag_str = dict()
+        # type_2_tag_str['0'] = set()
+        # type_2_tag_str['1'] = set()
+        # type_2_tag_str['2'] = set()
+        # for tag in all_tag:
+        #     type_2_tag_str[tag.tag.tag_type].add(tag.tag.tag_name)
+        # all_tag = [{"tag": ';'.join(type_2_tag_str[tag_set])} for tag_set in type_2_tag_str]
+        all_tag = [{"tag": t.tag.tag_name} for t in all_tag]
         return JsonResponse({"errno": 0, "msg": "成功", "data": all_tag})
 
 
