@@ -139,7 +139,7 @@ export default {
       keyWord: '',
     }
   },
-  mounted() {
+  created() {
     let that = this;
     that.keyWord = that.$route.query.target;
     console.log(that.keyWord)

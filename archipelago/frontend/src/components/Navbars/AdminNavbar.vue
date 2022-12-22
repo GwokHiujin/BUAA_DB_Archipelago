@@ -7,12 +7,13 @@
       class="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4"
     >
       <!-- Brand -->
-      <a
+      <router-link to="/admin/index">
+      <p
         class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-        href="/admin/index"
       >
         群岛 Archipelago
-      </a>
+      </p>
+      </router-link>
       <!-- Form -->
       <form
         class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-4"
@@ -68,8 +69,9 @@ export default {
   },
   methods: {
     search: function () {
+      let that = this;
       let toSearch = document.getElementById("string").value;
-      this.$router.push({
+      that.$router.push({
         path: '/admin/search',
         query: {
           target: toSearch,

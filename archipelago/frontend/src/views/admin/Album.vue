@@ -56,7 +56,7 @@
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-100 uppercase last:mr-0 mr-2 mt-2"
                 v-for="tag in albumTags"
             >
-              {{tag.value}}
+              {{tag.tag}}
             </span>
           </div>
           <div class="flex">

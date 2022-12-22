@@ -68,7 +68,7 @@
               </div>
               <div class="text-center mt-12">
                 <h3
-                  class="text-5xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2"
+                  class="text-5xl font-semibold leading-normal mb-2 text-blueGray-700 pt-12"
                 >
                   {{musicianInfo.musicianName}}
                 </h3>
@@ -103,14 +103,18 @@
                         class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-100 uppercase last:mr-0 mr-2 mt-2"
                         v-for="tag in musicianTags"
                     >
-                      {{tag.value}}
+                      {{tag.tag}}
                     </span>
                   </div>
                 </div>
               </div>
 
               <div class="relative w-full mt-8 pt-8 pb-6">
-                <CardMusicianMems :mid="this.$route.query.mid"/>
+                <div class="flex flex-wrap mt-4">
+                  <div class="w-full px-4">
+                    <CardMusicianMems :mid="this.$route.query.mid"/>
+                  </div>
+                </div>
               </div>
 
               <div class="relative w-full mt-8 pt-8 pb-16">

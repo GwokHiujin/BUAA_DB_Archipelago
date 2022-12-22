@@ -852,7 +852,7 @@ export default {
         console.log(res.data)
         if (res.data.errno === 0) {
           that.showModal = false;
-          location.reload()
+          that.CardMusicianMems.getMemInfo()
         } else {
           that.alertOpen2 = true;
           console.log(res.data.msg)
@@ -864,15 +864,18 @@ export default {
     },
     deleteMusicianMember: function () {
       let that = this;
+      let data = {
+        name: that.toBeDelete
+      };
       axios({
         method: 'post',
         url: "/del_musician_member/",
         baseURL: '/api',
-        data: JSON.stringify(that.toBeDelete)
+        data: JSON.stringify(data)
       }).then(res => {
         console.log(res.data)
         that.showModal1 = false;
-        location.reload()
+        that.CardMusicianMems.getMemInfo()
       }).catch(err => {
         console.log(err)
       })
@@ -896,6 +899,7 @@ export default {
         data: JSON.stringify(tagInfo)
       }).then(res => {
         console.log(res.data)
+        that.tagList = []
         that.$router.push("/admin/settings")
       }).catch(err => {
         console.log(err)
