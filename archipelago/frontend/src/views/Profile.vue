@@ -5,10 +5,8 @@
       <section class="relative block h-500-px">
         <div
           class="absolute top-0 w-full h-full bg-center bg-cover"
-          style="
-            background-image: url({{musicianInfo.photo}});
-          "
         >
+          <img :src="musicianInfo.photo" class="w-full bg-cover bg-center"/>
           <span
             id="blackOverlay"
             class="w-full h-full absolute opacity-50 bg-black"

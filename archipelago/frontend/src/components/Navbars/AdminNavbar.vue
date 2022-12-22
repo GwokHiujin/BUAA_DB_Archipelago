@@ -16,7 +16,7 @@
       </router-link>
       <!-- Form -->
       <form
-        class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-4"
+        class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-4 w-card"
       >
         <div class="relative flex w-full flex-wrap items-stretch">
           <span
@@ -26,7 +26,7 @@
           </span>
           <input
             type="text"
-            placeholder="搜索音乐人/唱片名"
+            placeholder="搜索音乐人/唱片名/以'#'开头的标签，如 #tag "
             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"
             id="string"
             @keyup.enter="search()"
@@ -77,11 +77,16 @@ export default {
       let that = this;
       let toSearch = document.getElementById("string").value;
       if (toSearch !== '') {
+        let type = 'normal';
+        if (toSearch.toString().at(0) === '#') {
+          type = 'tag';
+          toSearch = toSearch.toString().substring(1)
+        }
         that.$router.push({
           path: '/admin/search',
           query: {
             target: toSearch,
-            type: 'normal',
+            type: type,
           }
         })
       }

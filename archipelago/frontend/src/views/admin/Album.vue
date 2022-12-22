@@ -85,7 +85,7 @@
 
   <section class="text-gray-600 body-font w-full px-12">
     <div class="container px-5 mx-auto">
-    <div class="flex flex-wrap mt-6 flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
+    <div class="flex flex-wrap flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
       <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="flex flex-wrap items-center">
           <div class="relative w-full px-4 max-w-full flex-grow flex-1">
