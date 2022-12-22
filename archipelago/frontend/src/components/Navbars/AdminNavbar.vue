@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       avatar: this.$cookies.get('userInfo_avatar'),
-      team2
+      team2,
     }
   },
   methods: {
@@ -75,7 +75,7 @@ export default {
         path: '/admin/search',
         query: {
           target: toSearch,
-          type: 'normal'
+          type: 'normal',
         }
       })
     }

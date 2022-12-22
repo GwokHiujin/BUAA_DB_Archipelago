@@ -139,11 +139,22 @@ export default {
       keyWord: '',
     }
   },
-  created() {
+  mounted() {
     let that = this;
     that.keyWord = that.$route.query.target;
     console.log(that.keyWord)
     this.searchString();
+  },
+  watch: {
+    // 利用watch方法检测路由变化：
+    $route: function(to, from) {
+      if (to.fullPath !== from.fullPath) {
+        let that = this;
+        that.keyWord = that.$route.query.target;
+        console.log(that.keyWord)
+        this.searchString();
+      }
+    }
   },
   methods: {
     toggleTabs: function (tabNum) {
