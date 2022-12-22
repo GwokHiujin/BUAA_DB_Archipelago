@@ -279,7 +279,7 @@ def set_album(request):
                     else:
                         tag_sel = tag_sel[0]
                     old_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=new_album)
-                    if len(old_album_tag) == 0:
+                    if len(old_album_tag) != 0:
                         continue
                     new_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=new_album)
                     tag_sel.popularity += 1
@@ -564,7 +564,7 @@ def add_del_musician_tag(request):
                 else:
                     tag_sel = tag_sel[0]
                 old_musician_tag = MusicianTag.objects.filter(tag=tag_sel, musician=musician)
-                if len(old_musician_tag) == 0:
+                if len(old_musician_tag) != 0:
                     continue
                 new_musician_tag = MusicianTag(tag=tag_sel, musician=musician)
                 tag_sel.popularity += 1
@@ -706,7 +706,7 @@ def add_del_album_tag(request):
                 else:
                     tag_sel = tag_sel[0]
                 old_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=album)
-                if len(old_album_tag) == 0:
+                if len(old_album_tag) != 0:
                     continue
                 new_album_tag = AlbumTag.objects.filter(tag=tag_sel, album=album)
                 tag_sel.popularity += 1
