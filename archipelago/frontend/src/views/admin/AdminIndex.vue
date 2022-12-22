@@ -13,7 +13,7 @@
 
           <div class="lg:w-6/12 mb-6 lg:mb-0">
             <p class="leading-relaxed text-gray-500 mt-2 text-sm">
-              🏞  群岛为您精选了上周销售量最高和点赞数最高的一批唱片，点击下方的唱片链接看看大家都在关注什么！<br>
+              🏞  群岛为您精选了上周销售量最高的一批唱片——点击下方的唱片链接，看看大家都在关注什么！<br>
               ✨  当然，欢迎您使用搜索功能，探索自己喜爱的音乐岛屿！
             </p>
           </div>
@@ -21,22 +21,35 @@
 
         <div class="flex flex-wrap -m-4 justify-center flex flex-wrap relative mt-12">
           <div class="xl:w-3/12 md:w-6/12 p-4" v-for="album in albumList">
-            <div class="bg-gray-100 p-6 rounded-lg h-500-px">
+            <div class="bg-gray-100 p-6 rounded-lg h-500-px"
+                 style="background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/papyrus.png')">
               <img class="h-40 rounded w-auto object-cover object-center mb-6"
                    src={{album.cover}}>
-              <h3 class="tracking-wide text-emerald-500 text-xs font-medium title-font hover:text-emerald-600"
+              <h3 class="tracking-wide text-emerald-500 text-xs font-medium title-font">
+                {{album.author}}
+              </h3>
+              <h2 class="text-lg text-gray-900 font-medium title-font mb-4 hover:text-emerald-600"
                   @click="toAlbum(album.albumID)">
                 {{ album.albumName }}
-              </h3>
-              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-                {{album.author}}
               </h2>
               <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5 pb-6">
                 <span
-                    class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-100 uppercase last:mr-0 mr-2 mt-2"
-                    v-for="tag in album.tagList"
+                    class="text-xs font-semibold inline-block py-1 px-0.5 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
+                    v-for="tag in album.tagList.slice(0, 3)"
                 >
                   {{tag.tag}}
+                </span>
+                <span
+                    class="text-xs font-semibold inline-block py-1 px-0.5 rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
+                    v-if="album.tagList.length > 3"
+                >
+                  ...
+                </span>
+                <span
+                    class="text-xs font-semibold inline-block py-1 px-0.5 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
+                    v-if="album.tagList.length === 0"
+                >
+                  该唱片未填写标签
                 </span>
               </div>
             </div>
@@ -192,7 +205,9 @@ export default {
           albumName: '',
           author: '',
           cover: '',
-          tagList: []
+          tagList: [{
+            tag: ''
+          }]
         }
       ],
       tagList: [
@@ -208,9 +223,8 @@ export default {
   },
   methods: {
     search: function (tag) {
-      let that = this;
-      let toSearch = tag === '' ? that.searchTag : tag;
-      console.log(toSearch)
+      let toSearch = tag === undefined ? this.searchTag : tag;
+      console.log(this.searchTag)
       if (toSearch !== undefined) {
         this.$router.push({
           path: '/admin/search',
@@ -232,6 +246,7 @@ export default {
             that.musicianList = response.data.musicianList
             that.albumList = response.data.albumList
             that.tagList = response.data.tagList
+            console.log(response.data.albumList.tagList)
           }).catch(function (error) {
         console.log(error)
       })

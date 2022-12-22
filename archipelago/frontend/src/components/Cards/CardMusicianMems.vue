@@ -94,6 +94,7 @@ export default {
   methods: {
     getMemInfo: function () {
       let that = this;
+      that.member_info = [];
       let data = {
         musicianID: that.curID
       }
