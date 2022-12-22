@@ -765,6 +765,7 @@ def search_tag(request):
                        "cover": a.album.cover, "salesVolume": a.album.sales_volume} for a in select_albums]
         return_dict['musicianList'] = musician_list
         return_dict['albumList'] = album_list
+        return_dict['popularity'] = sum([t.popularity for t in select_tag])
         return JsonResponse(return_dict)
 
 
