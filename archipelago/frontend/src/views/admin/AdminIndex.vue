@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="flex flex-wrap">
-    <section class="text-gray-600 body-font mx-8 mt-24">
+    <section class="text-gray-600 body-font mx-8 mt-24  w-full items-center">
       <div class="container px-5 py-24 mx-auto items-center">
         <div class="w-full mb-20 justify-center flex flex-wrap relative">
           <div class="lg:w-6/12 mb-6 lg:mb-0">
@@ -45,9 +45,9 @@
       </div>
     </section>
 
-    <section class="text-gray-600 body-font justify-center flex flex-wrap relative">
+    <section class="text-gray-600 body-font justify-center flex flex-wrap relative w-full items-center">
       <div class="container px-5 py-4 mx-auto">
-        <div class="flex flex-col text-center w-full mb-12">
+        <div class="flex flex-col text-center w-full mb-12 items-center">
           <h1 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
             👨‍🎤 最受欢迎音乐人 👩‍🎤
           </h1>
@@ -95,18 +95,18 @@
           <div class="p-2 lg:w-4/12 md:w-6/12 w-full" v-for="tag in tagList">
             <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
               <div class="flex-grow">
-                <h2 class="text-gray-900 title-font font-medium"
-                    @click="searchTag(tag.tag)">
+                <h2 class="text-gray-900 title-font font-medium hover:text-emerald-600"
+                    @click="search(tag.tag)">
                   {{tag.tag}}
                 </h2>
-                <p class="text-gray-500" v-if="tag.tagType === 0">
-                  风格流派标签
+                <p class="text-gray-500" v-if="tag.tagType === `0`">
+                  风格流派
                 </p>
-                <p class="text-gray-500" v-if="tag.tagType === 1">
-                  音乐情绪标签
+                <p class="text-gray-500" v-if="tag.tagType === `1`">
+                  音乐情绪
                 </p>
-                <p class="text-gray-500" v-if="tag.tagType === 2">
-                  器乐元素标签
+                <p class="text-gray-500" v-if="tag.tagType === `2`">
+                  器乐元素
                 </p>
               </div>
             </div>
@@ -190,11 +190,7 @@ export default {
           albumName: '',
           author: '',
           cover: '',
-          tagList: [
-            {
-              tag: ''
-            }
-          ]
+          tagList: []
         }
       ],
       tagList: [

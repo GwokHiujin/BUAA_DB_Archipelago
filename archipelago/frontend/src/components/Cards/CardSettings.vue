@@ -852,6 +852,7 @@ export default {
         console.log(res.data)
         if (res.data.errno === 0) {
           that.showModal = false;
+          location.reload()
         } else {
           that.alertOpen2 = true;
           console.log(res.data.msg)
@@ -871,6 +872,7 @@ export default {
       }).then(res => {
         console.log(res.data)
         that.showModal1 = false;
+        location.reload()
       }).catch(err => {
         console.log(err)
       })
