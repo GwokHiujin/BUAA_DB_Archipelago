@@ -49,7 +49,10 @@
           </span>
           </div>
           <p class="leading-relaxed">
-            由 {{generalInfo.author}} 制作，{{generalInfo.releaser}} 发布
+            由 {{generalInfo.author}} 制作，
+            <t class="hover:text-emerald-600" @click="gotoMusician()">
+              {{generalInfo.releaser}}
+            </t> 发布
           </p>
           <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5 pb-6">
             <span
@@ -57,6 +60,12 @@
                 v-for="tag in albumTags"
             >
               {{tag.tag}}
+            </span>
+            <span
+                class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-100 uppercase last:mr-0 mr-2 mt-2"
+                v-if="albumTags.length === 0"
+            >
+              该唱片未填写标签
             </span>
           </div>
           <div class="flex">

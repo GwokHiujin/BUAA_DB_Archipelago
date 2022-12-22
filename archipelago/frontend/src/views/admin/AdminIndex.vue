@@ -223,9 +223,8 @@ export default {
   },
   methods: {
     search: function (tag) {
-      let that = this;
-      let toSearch = tag === '' ? that.searchTag : tag;
-      console.log(toSearch)
+      let toSearch = tag === undefined ? this.searchTag : tag;
+      console.log(this.searchTag)
       if (toSearch !== undefined) {
         this.$router.push({
           path: '/admin/search',

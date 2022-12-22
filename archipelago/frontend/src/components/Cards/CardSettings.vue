@@ -217,6 +217,20 @@
       </button>
     </div>
 
+    <div v-if="alertOpen3"
+         class="top-95-px px-12 mx-32 md:w-6/12 overflow-x-hidden overflow-y-auto rounded fixed inset-0 z-50 outline-none text-white py-4 border-0 fixed bg-emerald-500 justify-center items-center flex">
+    <span class="text-xl inline-block mr-5 align-middle">
+      <i class="fas fa-bell"></i>
+    </span>
+      <span class="inline-block align-middle mr-8 px-2">
+      <b class="capitalize">修改成功！</b> 修改信息成功 👓
+    </span>
+      <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
+              v-on:click="closeAlert3()">
+        <span>×</span>
+      </button>
+    </div>
+
     <div class="rounded-t bg-white mb-0 px-6 py-6">
       <div class="text-center flex justify-between">
         <h6 class="text-blueGray-700 text-xl font-bold">欢迎您，{{userInfo.name}}！</h6>
@@ -558,7 +572,7 @@
         </div>
 
         <div class="rounded-t mb-0 py-3 border-0 flex-wrap flex">
-          <CardMusicianMems :mid="this.$cookies.get('mid')"/>
+          <CardMusicianMems :mid="this.$cookies.get('mid')" :key="componentKey"/>
         </div>
       </form>
     </div>
@@ -644,30 +658,6 @@ export default {
   components: {
     CardMusicianMems,
   },
-  setup() {
-    function addImg(e) {
-      const file = e.target.files[0]; //获得input上传的文件
-      uploadImg(file); //将文件上传到后端的方法
-    }
-    function uploadImg(img) {
-      const formData = new FormData(); //使用formData上传文件
-      formData.append("file", img);
-      axios({
-        method: "POST",
-        url: "/user/info",  // TODO
-        baseURL: 'api',     // TODO
-        headers: { "Content-Type": "multipart/form-data" },
-        data: formData,
-      }).then((res) => {
-        console.log(res.data.md5);
-        location.reload()
-      });
-    }
-    return {
-      addImg,
-      uploadImg,
-    };
-  },
   data() {
     return {
       userInfo: {
@@ -699,6 +689,7 @@ export default {
       alertOpen: false,
       alertOpen1: false,
       alertOpen2: false,
+      alertOpen3: false,
       showModal: false,
       showModal1: false,
       toBeDelete: '',
@@ -719,6 +710,7 @@ export default {
       tag0: '',
       tag1: '',
       tag2: '',
+      componentKey: 0,
     }
   },
   mounted() {
@@ -736,6 +728,9 @@ export default {
     },
     closeAlert2: function () {
       this.alertOpen2 = false;
+    },
+    closeAlert3: function () {
+      this.alertOpen3 = false;
     },
     toggleModal: function () {
       this.showModal = !this.showModal;
@@ -812,7 +807,8 @@ export default {
         }).then(res => {
           console.log(res.data)
           if (res.data.errno === 0) {
-            that.$router.push("/admin/settings")
+            this.alertOpen3 = true;
+            this.getUserInfo();
           } else {
             that.alertOpen = true;
           }
@@ -831,7 +827,8 @@ export default {
       }).then(res => {
         console.log(res.data)
         if (res.data.errno === 0) {
-          that.$router.push("/admin/settings")
+          this.alertOpen3 = true;
+          that.getMusicianInfo();
         } else {
           that.alertOpen1 = true;
         }
@@ -851,7 +848,9 @@ export default {
       }).then(res => {
         console.log(res.data)
         if (res.data.errno === 0) {
+          this.alertOpen3 = true;
           that.showModal = false;
+          this.componentKey += 1;
         } else {
           that.alertOpen2 = true;
           console.log(res.data.msg)
@@ -872,9 +871,14 @@ export default {
         baseURL: '/api',
         data: JSON.stringify(data)
       }).then(res => {
-        console.log(res.data)
-        that.showModal1 = false;
-        that.CardMusicianMems.getMemInfo()
+        if (res.data.errno === 0) {
+          console.log(res.data)
+          that.showModal1 = false;
+          this.alertOpen3 = true;
+          this.componentKey += 1;
+        } else {
+          this.alertOpen2 = true;
+        }
       }).catch(err => {
         console.log(err)
       })
@@ -897,9 +901,12 @@ export default {
         baseURL: '/api',
         data: JSON.stringify(tagInfo)
       }).then(res => {
-        console.log(res.data)
-        that.tagList = []
-        that.$router.push("/admin/settings")
+        if (res.data.errno === 0) {
+          console.log(res.data)
+          that.tagList = []
+          this.alertOpen3 = true;
+          that.$router.push("/admin/settings")
+        }
       }).catch(err => {
         console.log(err)
       })

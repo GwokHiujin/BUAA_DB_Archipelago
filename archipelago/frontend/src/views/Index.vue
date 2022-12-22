@@ -263,11 +263,6 @@
               />
               <img
                 alt="..."
-                :src="componentMenu"
-                class="w-full align-middle rounded absolute shadow-lg max-w-580-px -left-20-px top-210-px"
-              />
-              <img
-                alt="..."
                 :src="componentBtnPink"
                 class="w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px"
               />

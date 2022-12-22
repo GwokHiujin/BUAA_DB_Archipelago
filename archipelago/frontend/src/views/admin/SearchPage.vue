@@ -1,7 +1,12 @@
 <template>
   <div class="flex flex-wrap pt-32">
     <div class="flex flex-col text-center w-full mb-12 mt-4">
-      <h1 class="text-2xl font-semibold leading-normal mb-2 text-blueGray-700">
+      <h1 class="text-2xl font-semibold leading-normal mb-2 text-blueGray-700"
+          v-if="$route.query.type === 'tag'">
+        🗺 #{{keyWord}} 的搜索结果
+      </h1>
+      <h1 class="text-2xl font-semibold leading-normal mb-2 text-blueGray-700"
+          v-else>
         🔎 {{keyWord}} 的搜索结果
       </h1>
     </div>
