@@ -136,15 +136,15 @@ export default {
         this.showModal = false;
         this.alertOpen = true;
       } else {
+        let data = {
+          userEmail: this.$cookies.get("userInfo_email"),
+          password: password0,
+        };
         axios.request({
           method: 'post',
           url: "/delete_account",
           baseURL: '/api',
-          data: JSON.stringify({
-            userEmail: this.$cookies.get("userInfo_email"),
-            password0: password0,
-            password1: password1
-          })
+          data: JSON.stringify(data)
         }).then(
             res => {
               console.log(res.data)

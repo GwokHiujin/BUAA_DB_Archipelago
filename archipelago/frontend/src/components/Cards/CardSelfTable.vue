@@ -126,7 +126,8 @@
         <tbody>
         <tr v-for="disc in discInfo">
           <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 hover:text-emerald-600"
+              @click="gotoAlbum(disc.albumID)"
           >
             {{disc.albumName}}
           </td>
@@ -271,6 +272,14 @@ export default {
         console.log(error)
       })
     },
+    gotoAlbum: function (aid) {
+      this.$router.push({
+        path: '/admin/album',
+        query: {
+          aid: aid
+        }
+      })
+    }
   }
 };
 </script>

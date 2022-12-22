@@ -14,7 +14,21 @@
     </button>
   </div>
 
-  <section class="text-gray-600 body-font">
+  <div v-if="alertOpen1"
+       class="top-95-px px-12 mx-32 md:w-6/12 overflow-x-hidden overflow-y-auto rounded fixed inset-0 z-50 outline-none text-white py-4 border-0 fixed bg-emerald-500 justify-center items-center flex">
+    <span class="text-xl inline-block mr-5 align-middle">
+      <i class="fas fa-bell"></i>
+    </span>
+    <span class="inline-block align-middle mr-8 px-2">
+      <b class="capitalize">购买成功！</b> 成功收下此唱片 👓
+    </span>
+    <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
+            v-on:click="closeAlert1()">
+      <span>×</span>
+    </button>
+  </div>
+
+  <section class="text-gray-600 body-font w-full items-center">
     <div class="container px-5 py-24 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
         <img alt="ecommerce" class="lg:w-6/12 w-full lg:h-auto h-64 object-cover object-center rounded"
@@ -171,6 +185,7 @@ export default {
         }
       ],
       alertOpen: false,
+      alertOpen1: false,
       map,
     }
   },
@@ -181,6 +196,9 @@ export default {
   methods: {
     closeAlert: function () {
       this.alertOpen = false;
+    },
+    closeAlert1: function () {
+      this.alertOpen1 = false;
     },
     getAlbumInfo: function () {
       let that = this;
@@ -235,11 +253,11 @@ export default {
       }).then(res => {
         console.log(res.data)
         if (res.data.errno === 0) {
-          location.reload();
+          that.alertOpen1 = true;
         } else {
           that.alertOpen = true;
         }
-        location.reload();
+        this.getAlbumInfo()
       }).catch(err => {
         console.log(err)
       })
