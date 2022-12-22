@@ -65,7 +65,7 @@ def register(request):
         nickname = payload.get("name")
         if nickname == '':
             return JsonResponse({"errno": 4, "msg": "用户名不能为空"})
-        avatar = payload.get("avatar")
+        avatar = "http://127.0.0.1:8000/media/imgs/DefaultAvatar.jpg"
         password = payload.get("password_1")
         password_check = payload.get("password_2")
         if password_check != password:
@@ -80,7 +80,8 @@ def register(request):
         new_user.save()
         if type_id == 1:
             print('user is musician')
-            new_musician = Musician(user=new_user, musician_name=nickname, nationality='Default_OC', photo=avatar,
+            new_musician = Musician(user=new_user, musician_name=nickname, nationality='Default_OC',
+                                    photo="http://127.0.0.1:8000/media/imgs/DefaultMusicianPhoto.jpg",
                                     location='China', theme=' ', found_year=' ', info=' ')
             new_musician.save()
         return JsonResponse({"errno": 0, "msg": "注册成功"})
@@ -167,7 +168,8 @@ def get_album_info(request):
             "generalInfo": {"albumID": album.id, "albumName": album.album_name, "price": album.album_price,
                             "author": album.album_producer, "releaseYear": album.release_year,
                             "releaser": album.musician.musician_name, "cover": album.cover, "type": album.type,
-                            "resource": album.source, "salesVolume": album.sales_volume},
+                            "resource": album.source, "salesVolume": album.sales_volume,
+                            "musicianID": album.musician.id},
             "songList": [{"name": s.song_name, "songLast": s.song_last, "ADT": s.resource, "albumID": album.id} for s in
                          song_list]
         })
@@ -240,7 +242,7 @@ def set_album(request):
                               album_price=new_data['price'],
                               album_producer=new_data['author'],
                               release_year=new_data['releaseYear'],
-                              cover=new_data['cover'],
+                              cover="http://127.0.0.1:8000/media/imgs/albumCover.jpg",
                               type=new_data['type'],
                               source=new_data['resource'],
                               sales_volume=0,
@@ -339,7 +341,8 @@ def get_musician(request):
                 'location': musician.location,
                 'lyricalThemes': musician.theme,
                 'formedYear': musician.found_year,
-                'introduction': musician.info
+                'introduction': musician.info,
+                'avatar': musician.user.avatar
             }
         })
     if request.method == "POST":
@@ -358,7 +361,8 @@ def get_musician(request):
                 'location': musician.location,
                 'lyricalThemes': musician.theme,
                 'formedYear': musician.found_year,
-                'introduction': musician.info
+                'introduction': musician.info,
+                'avatar': musician.user.avatar
             }
         })
 
@@ -373,7 +377,8 @@ def get_all_musician(request):
             'location': musician.location,
             'lyricalThemes': musician.theme,
             'formedYear': musician.found_year,
-            'introduction': musician.info} for musician in musician_list]
+            'introduction': musician.info,
+            'avatar': musician.user.avatar} for musician in musician_list]
         })
 
 
