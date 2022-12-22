@@ -799,3 +799,11 @@ def get_homepage_info(request):
         return_dict['albumList'] = album_list
         return_dict['tagList'] = tag_list
         return JsonResponse(return_dict)
+
+
+def upload_img(request):
+    if request.method == 'POST':
+        img = request.FILES.get('img')
+        saved_img = Image(img=img)
+        saved_img.save()
+        return JsonResponse({'img_url': saved_img.id})

@@ -50,4 +50,5 @@ urlpatterns = [
     path("api/search_tag/", views.search_tag),
     path("api/get_order/", views.get_order),
     path("api/gen_order/", views.gen_order),
+    path("api/upload_img/", views.upload_img)
 ]

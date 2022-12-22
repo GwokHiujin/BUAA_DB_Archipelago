@@ -1,7 +1,9 @@
 from django.db import models
 
-# Create your models here.
 
+# Create your models here.
+class Image(models.Model):
+    img = models.FileField(upload_to='imgs')
 class User(models.Model):
     user_id = models.CharField(max_length=255, primary_key=True)
     user_name = models.CharField(max_length=255)
@@ -34,6 +36,7 @@ class Album(models.Model):
     type = models.IntegerField()
     source = models.CharField(max_length=255, null=True)
     sales_volume = models.IntegerField()
+
 
 class MusicianMember(models.Model):
     musician = models.ForeignKey('Musician', on_delete=models.CASCADE)
