@@ -534,7 +534,7 @@ def get_musician_tag(request):
         # for tag in all_tag:
         #     type_2_tag_str[tag.tag.tag_type].add(tag.tag.tag_name)
         # all_tag = [{"tag": ';'.join(type_2_tag_str[tag_set])} for tag_set in type_2_tag_str]
-        all_tag = [{"tag": t.tag.tag_name} for t in all_tag]
+        all_tag = [{"tag": t.tag.tag_name, "popularity": t.tag.popularity} for t in all_tag]
         return JsonResponse({"errno": 0, "msg": "成功", "data": all_tag})
 
 
@@ -683,7 +683,7 @@ def get_album_tag(request):
         # for tag in all_tag:
         #     type_2_tag_str[tag.tag.tag_type].add(tag.tag.tag_name)
         # all_tag = [{"tag": ';'.join(type_2_tag_str[tag_set])} for tag_set in type_2_tag_str]
-        all_tag = [{"tag": t.tag.tag_name} for t in all_tag]
+        all_tag = [{"tag": t.tag.tag_name, "popularity": t.tag.popularity} for t in all_tag]
         return JsonResponse({"errno": 0, "msg": "成功", "data": all_tag})
 
 
@@ -796,10 +796,11 @@ def get_homepage_info(request):
             {"musicianID": m.id, "musicianName": m.musician_name, "photo": m.photo} for m in select_musicians]
         album_list = [{"albumID": a.id, "albumName": a.album_name, "author": a.album_producer, "cover": a.cover,
                        "salesVolume": a.sales_volume,
-                       "tagList": [{"tag": t.tag.tag_name} for t in AlbumTag.objects.filter(album=a)]}
+                       "tagList": [{"tag": t.tag.tag_name, "popularity": t.tag.popularity} for t in
+                                   AlbumTag.objects.filter(album=a)]}
                       for a in select_albums]
         tag_list = [
-            {"tag": t.tag_name, "tagType": t.tag_type} for t in select_tags
+            {"tag": t.tag_name, "tagType": t.tag_type, "popularity": t.popularity} for t in select_tags
         ]
         return_dict = {"errno": 0, "msg": "成功"}
         return_dict['musicianList'] = musician_list
