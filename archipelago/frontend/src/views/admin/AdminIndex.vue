@@ -24,7 +24,7 @@
             <div class="bg-gray-100 p-6 rounded-lg h-500-px"
                  style="background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/papyrus.png')">
               <img class="h-40 rounded w-auto object-cover object-center mb-6"
-                   src={{album.cover}}>
+                   :src=album.cover>
               <h3 class="tracking-wide text-emerald-500 text-xs font-medium title-font">
                 {{album.author}}
               </h3>
@@ -74,7 +74,7 @@
                v-for="musician in musicianList">
             <div class="flex relative">
               <img class="absolute inset-0 w-full h-full object-cover object-center"
-                   src={{musician.photo}}>
+                   :src=musician.photo>
               <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
                 <h2 class="tracking-wide text-sm title-font font-medium text-emerald-500 mb-1 hover:text-emerald-600"
                     @click="toMusician(musician.musicianID)">

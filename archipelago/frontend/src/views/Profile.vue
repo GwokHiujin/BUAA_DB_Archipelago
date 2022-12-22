@@ -14,6 +14,7 @@
             class="w-full h-full absolute opacity-50 bg-black"
           ></span>
         </div>
+
         <div
           class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
           style="transform: translateZ(0);"
@@ -47,12 +48,12 @@
                   <div class="relative">
                     <img
                       :src="team2"
-                      class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                      class="shadow-xl rounded-full h-auto align-middle border-none -m-16 -ml-20 lg:-ml-16 max-w-200-px"
                       v-if="musicianInfo.photo === ''"
                     />
                     <img
-                        src={{musicianInfo.photo}}
-                        class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                        :src=musicianInfo.photo
+                        class="shadow-xl rounded-full h-auto align-middle border-none -m-16 -ml-20 lg:-ml-16 max-w-200-px"
                         v-else
                     />
                   </div>

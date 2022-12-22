@@ -370,7 +370,6 @@
                   @change="readAvatarFile($event)"
                   accept="image/*"
                   placeholder="请上传头像图片"
-                  id="uploadAvatar"
               />
             </div>
           </div>
@@ -497,8 +496,8 @@
                   type="file"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="请上传音乐人照片"
-                  id="new_musician_photo"
-                  accept=".jpg,.gif,.png,.bmp"
+                  @change="readPhotoFile($event)"
+                  accept="image/*"
               />
             </div>
           </div>
@@ -785,15 +784,9 @@ export default {
           padding: CryptoJS.pad.Pkcs7
         }).toString();
 
-        //let forms = new FormData()
-        //let file = getFile.value.files[0]
-        //forms.append('file', file)
-        //forms.append('filePath', `pc/client-${moment().format('YYYY-MM-DD')}/`)
-        //getFile.value.value = '' // 清空内容
-
         newUserInfo = {
           name: that.userInfo.name,
-          avatar: '',
+          avatar: that.userInfo.avatar,
           oldPassword: old_pwd_key,
           password: new_pwd_key,
           bio: that.userInfo.bio
@@ -809,6 +802,7 @@ export default {
           if (res.data.errno === 0) {
             this.alertOpen3 = true;
             this.getUserInfo();
+            location.reload()
           } else {
             that.alertOpen = true;
           }
@@ -865,6 +859,7 @@ export default {
       let data = {
         name: that.toBeDelete
       };
+      console.log(data)
       axios({
         method: 'post',
         url: "/del_musician_member/",
@@ -911,29 +906,36 @@ export default {
         console.log(err)
       })
     },
-    avatarClick() {
-      document.getElementById("uploadAvatar").click()
-    },
     readAvatarFile(e) {
-      let that = this;
       const file = e.target.files[0];
-      console.log(file)
-      let data = {
-        img: file,
-      };
+      const formData = new FormData();
+      formData.append("file", file);
+      console.log(formData)
       axios({
         method: 'post',
         url: "/upload_img/",
         baseURL: '/api',
-        data: JSON.stringify(data)
+        data: formData
       }).then(res => {
-        if (res.data.errno === 0) {
-          console.log(res.data)
-          this.alertOpen3 = true;
-          this.userInfo.avatar = res.data.img_url;
-          this.$cookies.set("userInfo_avatar", res.data.img_url, '', '/');
-          location.reload()
-        }
+        console.log(res.data)
+        this.userInfo.avatar = res.data.img_url;
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    readPhotoFile(e) {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+      console.log(formData)
+      axios({
+        method: 'post',
+        url: "/upload_img/",
+        baseURL: '/api',
+        data: formData
+      }).then(res => {
+        console.log(res.data)
+        this.musicianInfo.photo = res.data.img_url
       }).catch(err => {
         console.log(err)
       })

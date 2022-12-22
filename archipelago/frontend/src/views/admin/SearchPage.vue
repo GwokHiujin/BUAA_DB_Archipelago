@@ -9,6 +9,12 @@
           v-else>
         🔎 {{keyWord}} 的搜索结果
       </h1>
+      <span
+          class="text-xs font-semibold inline-block py-1 px-0.5 rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
+          v-if="$route.query.type === 'tag'"
+      >
+        🔥 标签热度：{{musicianList.length + albumList.length}}
+      </span>
     </div>
 
     <div class="w-full">
@@ -46,13 +52,13 @@
 
               <section class="text-gray-600 body-font" v-else>
                 <div class="container px-5 py-24 mx-auto items-center">
-                  <div class="w-full -m-4 justify-center flex flex-wrap relative">
+                  <div class="w-full -m-4 flex flex-wrap relative">
                     <div class="lg:w-3/12 md:w-6/12 p-4 w-full"
                          v-for="musician in musicianList">
                       <a class="block relative h-48 rounded overflow-hidden">
                         <img alt="ecommerce"
                              class="object-cover object-center w-full h-full block"
-                             src={{musician.photo}}>
+                             :src=musician.photo>
                       </a>
                       <div class="mt-4">
                         <h2 class="text-gray-900 title-font text-lg font-medium hover:text-emerald-600"
@@ -84,13 +90,13 @@
 
               <section class="text-gray-600 body-font">
                 <div class="container px-5 py-24 mx-auto">
-                  <div class="flex flex-wrap -m-4 justify-center flex flex-wrap relative">
+                  <div class="flex flex-wrap -m-4 flex flex-wrap relative">
                     <div class="lg:w-3/12 md:w-6/12 p-4 w-full"
                          v-for="album in albumList">
                       <a class="block relative h-48 rounded overflow-hidden">
                         <img alt="ecommerce"
                              class="object-cover object-center w-full h-full block"
-                             src={{album.cover}}>
+                             :src=album.cover>
                       </a>
                       <div class="mt-4">
                         <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">

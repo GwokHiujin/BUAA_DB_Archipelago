@@ -205,8 +205,8 @@
                   type="file"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="请上传封面图片"
-                  id="album_cover"
-                  accept=".jpg,.gif,.png,.bmp"
+                  @change="readCoverFile($event)"
+                  accept="image/*"
               />
             </div>
           </div>
@@ -500,6 +500,23 @@ export default {
       this.showModal = false;
       console.log(that.discInfo.songs)
     },
+    readCoverFile(e) {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+      console.log(formData)
+      axios({
+        method: 'post',
+        url: "/upload_img/",
+        baseURL: '/api',
+        data: formData
+      }).then(res => {
+        console.log(res.data)
+        this.discInfo.cover = res.data.img_url
+      }).catch(err => {
+        console.log(err)
+      })
+    }
   }
 }
 </script>
