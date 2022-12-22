@@ -140,9 +140,10 @@ export default {
           userEmail: this.$cookies.get("userInfo_email"),
           password: password0,
         };
+        console.log(password0)
         axios.request({
           method: 'post',
-          url: "/delete_account",
+          url: "/delete_account/",
           baseURL: '/api',
           data: JSON.stringify(data)
         }).then(

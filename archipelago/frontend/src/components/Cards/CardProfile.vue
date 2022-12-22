@@ -62,7 +62,7 @@ export default {
       team2,
       userInfo: {
         name: '',
-        avatar: '',
+        avatar: '-1',
         type: '',
         bio: ''
       },
@@ -70,6 +70,7 @@ export default {
   },
   mounted() {
     this.getUserInfo();
+    console.log(this.userInfo.avatar)
   },
   methods: {
     getUserInfo: function () {
@@ -81,14 +82,7 @@ export default {
       })
           .then(function (response) {
             console.log(response.data)
-            that.userInfo = response.data
-            that.$cookies.set("userInfo_bio", response.data.data.bio)
-            that.$cookies.set("userInfo_avatar", response.data.data.avatar)
-            that.$cookies.set("userInfo_username", response.data.data.name)
-            that.userInfo.name = response.data.data.name
-            that.userInfo.avatar = response.data.avatar
-            that.userInfo.type = response.data.data.type
-            that.userInfo.bio = response.data.data.bio
+            that.userInfo = response.data.data
           }).catch(function (error) {
         console.log(error)
       })
