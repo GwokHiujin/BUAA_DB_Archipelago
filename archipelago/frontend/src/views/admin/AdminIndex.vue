@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="flex flex-wrap">
-    <section class="text-gray-600 body-font mx-8 mt-24  w-full items-center">
+    <section class="text-gray-600 body-font mx-8 mt-24 w-full items-center">
       <div class="container px-5 py-24 mx-auto items-center">
         <div class="w-full mb-20 justify-center flex flex-wrap relative">
           <div class="lg:w-6/12 mb-6 lg:mb-0">
@@ -92,8 +92,10 @@
         </div>
         
         <div class="flex flex-wrap justify-center flex flex-wrap relative">
-          <div class="p-2 lg:w-4/12 md:w-6/12 w-full" v-for="tag in tagList">
-            <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+          <div class="p-2 lg:w-4/12 md:w-6/12 w-full"
+               v-for="tag in tagList">
+            <div class="h-full flex items-center p-4 rounded-lg"
+                 style="background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/stripes-light.png')">
               <div class="flex-grow">
                 <h2 class="text-gray-900 title-font font-medium hover:text-emerald-600"
                     @click="search(tag.tag)">
