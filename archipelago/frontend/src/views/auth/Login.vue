@@ -94,7 +94,6 @@ export default {
   methods: {
     login: function () {
       let params;
-      let that = this;
       let password = document.getElementById("password").value;
       let password_key = CryptoJS.AES.encrypt(password, CryptoJS.enc.Utf8.parse(this.$cookies.get("aseKey")), {
         mode: CryptoJS.mode.ECB,
@@ -121,13 +120,7 @@ export default {
             if (res.data.errno === 0) {
               this.$cookies.set("userInfo_email", res.data.email, '', '/')
               this.$cookies.set("userInfo_username", res.data.name, '', '/')
-              if (res.data.avatar !== '') {
-                // const myBlob = new window.Blob(res.data.avatar, {type: 'image/jpeg'})
-                // this.$cookies.set("userInfo_avatar", window.URL.createObjectURL(myBlob))
-                this.$cookies.set("userInfo_avatar", res.data.avatar, '', '/')
-              } else {
-                this.$cookies.set("userInfo_avatar", "@/assets/img/avatar-default.jpg", '', '/')
-              }
+              this.$cookies.set("userInfo_avatar", "", '', '/')
               this.$cookies.set("mid", res.data.musicianID, '', '/')
               this.$cookies.set("userInfo_usertype", res.data.type, '', '/')
               this.$cookies.set("userInfo_bio", res.data.bio !== '' ? res.data.bio : "江空岛石出，霜落天宇净 :)", '', '/')

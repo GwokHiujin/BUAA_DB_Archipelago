@@ -367,10 +367,10 @@
               <input
                   type="file"
                   class="upload"
-                  @change="addImg"
-                  ref="inputer"
-                  accept="image/png,image/jpeg,image/gif,image/jpg"
+                  @change="readAvatarFile($event)"
+                  accept="image/*"
                   placeholder="请上传头像图片"
+                  id="uploadAvatar"
               />
             </div>
           </div>
@@ -911,7 +911,33 @@ export default {
         console.log(err)
       })
     },
-
+    avatarClick() {
+      document.getElementById("uploadAvatar").click()
+    },
+    readAvatarFile(e) {
+      let that = this;
+      const file = e.target.files[0];
+      console.log(file)
+      let data = {
+        img: file,
+      };
+      axios({
+        method: 'post',
+        url: "/upload_img/",
+        baseURL: '/api',
+        data: JSON.stringify(data)
+      }).then(res => {
+        if (res.data.errno === 0) {
+          console.log(res.data)
+          this.alertOpen3 = true;
+          this.userInfo.avatar = res.data.img_url;
+          this.$cookies.set("userInfo_avatar", res.data.img_url, '', '/');
+          location.reload()
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
   }
 }
 </script>

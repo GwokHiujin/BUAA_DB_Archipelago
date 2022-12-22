@@ -40,16 +40,18 @@
         <span
             class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"
         >
-          <img
-              class="w-full rounded-full align-middle border-none shadow-lg"
-              :src=avatar
-              v-if="this.$cookies.get('userInfo_avatar') !== ''"
-          />
-           <img
-               class="w-full rounded-full align-middle border-none shadow-lg"
-               :src=team2
-               v-else
-           />
+          <router-link to="/admin/settings">
+            <img
+                class="w-full rounded-full align-middle border-none shadow-lg"
+                :src=avatar
+                v-if="this.$cookies.get('userInfo_avatar') !== null"
+            />
+             <img
+                 class="w-full rounded-full align-middle border-none shadow-lg"
+                 :src=team2
+                 v-else
+             />
+            </router-link>
         </span>
         </div>
       </ul>
@@ -66,6 +68,9 @@ export default {
       avatar: this.$cookies.get('userInfo_avatar'),
       team2,
     }
+  },
+  mounted() {
+    console.log(this.avatar)
   },
   methods: {
     search: function () {
