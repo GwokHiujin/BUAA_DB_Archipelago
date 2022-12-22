@@ -237,12 +237,15 @@ def set_album(request):
         musician = musician_list[0]
         new_data = payload['generalInfo']
         tag = new_data['Tag']
+        cover = "http://127.0.0.1:8000/media/imgs/albumCover.jpg"
+        if new_data.get('cover') != '':
+            cover = new_data.get('cover')
         if tag < 0:
             new_album = Album(album_name=new_data['albumName'],
                               album_price=new_data['price'],
                               album_producer=new_data['author'],
                               release_year=new_data['releaseYear'],
-                              cover="http://127.0.0.1:8000/media/imgs/albumCover.jpg",
+                              cover=cover,
                               type=new_data['type'],
                               source=new_data['resource'],
                               sales_volume=0,
