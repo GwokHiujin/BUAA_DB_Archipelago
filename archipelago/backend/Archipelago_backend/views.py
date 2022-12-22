@@ -65,18 +65,8 @@ def register(request):
         nickname = payload.get("name")
         if nickname == '':
             return JsonResponse({"errno": 4, "msg": "用户名不能为空"})
-        # TODO useravatar = payload.get("useravatar")
+        avatar = payload.get("avatar")
         password = payload.get("password_1")
-        # if len(password) < 3:
-        #     return JsonResponse({"errno": 5, "msg": "您输入的密码过短，至少为3位"})
-        # password_c = [False, False]
-        # for c in password:
-        #     if c.isupper():
-        #         password_c[0] = True
-        #     if c.islower():
-        #         password_c[1] = True
-        # if not (password_c[0] and password_c[1]):
-        #     return JsonResponse({"errno": 6, "msg": "您输入的密码至少应包含大小写字母"})
         password_check = payload.get("password_2")
         if password_check != password:
             return JsonResponse({"errno": 1, "msg": "两次输入的密码不一致"})
@@ -85,11 +75,12 @@ def register(request):
         user = User.objects.filter(user_id=email)
         if len(user) != 0:
             return JsonResponse({"errno": 2, "msg": "邮箱已注册"})
-        new_user = User(user_id=email, user_name=nickname, user_type=type_id, password=password, bio=bio)
+        new_user = User(user_id=email, user_name=nickname, user_type=type_id, password=password, bio=bio,
+                        avatar=avatar)
         new_user.save()
         if type_id == 1:
             print('user is musician')
-            new_musician = Musician(user=new_user, musician_name=nickname, nationality='Default_OC', photo='',
+            new_musician = Musician(user=new_user, musician_name=nickname, nationality='Default_OC', photo=avatar,
                                     location='China', theme=' ', found_year=' ', info=' ')
             new_musician.save()
         return JsonResponse({"errno": 0, "msg": "注册成功"})
@@ -822,4 +813,4 @@ def upload_img(request):
         img = request.FILES.get('img')
         saved_img = Image(img=img)
         saved_img.save()
-        return JsonResponse({'img_url': saved_img.id})
+        return JsonResponse({'img_url': saved_img.img})
