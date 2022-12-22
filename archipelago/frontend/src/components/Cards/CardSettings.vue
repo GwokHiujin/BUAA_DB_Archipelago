@@ -502,7 +502,8 @@
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   rows="4"
-                  :placeholder="musicianInfo.lyricalThemes"
+                  v-model.lazy="musicianInfo.lyricalThemes"
+                  placeholder="请输入您的创作主题"
               >
                   </textarea
                   >
