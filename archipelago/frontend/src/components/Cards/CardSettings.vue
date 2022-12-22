@@ -852,7 +852,6 @@ export default {
         console.log(res.data)
         if (res.data.errno === 0) {
           that.showModal = false;
-          that.CardMusicianMems.getMemInfo()
         } else {
           that.alertOpen2 = true;
           console.log(res.data.msg)

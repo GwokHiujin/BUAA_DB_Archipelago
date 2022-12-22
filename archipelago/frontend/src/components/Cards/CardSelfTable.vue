@@ -249,8 +249,11 @@ export default {
         data: JSON.stringify(data)
       }).then(res => {
         console.log(res.data)
-        location.reload()
+        this.alertOpen = false;
+        this.showModal = false;
+        this.getAlbumInfo();
       }).catch(err => {
+        this.alertOpen = true;
         console.log(err)
       })
     },

@@ -13,7 +13,7 @@
 
           <div class="lg:w-6/12 mb-6 lg:mb-0">
             <p class="leading-relaxed text-gray-500 mt-2 text-sm">
-              🏞  群岛为您精选了上周销售量最高和点赞数最高的一批唱片，点击下方的唱片链接看看大家都在关注什么！<br>
+              🏞  群岛为您精选了上周销售量最高的一批唱片——点击下方的唱片链接，看看大家都在关注什么！<br>
               ✨  当然，欢迎您使用搜索功能，探索自己喜爱的音乐岛屿！
             </p>
           </div>
@@ -24,12 +24,12 @@
             <div class="bg-gray-100 p-6 rounded-lg h-500-px">
               <img class="h-40 rounded w-auto object-cover object-center mb-6"
                    src={{album.cover}}>
-              <h3 class="tracking-wide text-emerald-500 text-xs font-medium title-font hover:text-emerald-600"
+              <h3 class="tracking-wide text-emerald-500 text-xs font-medium title-font">
+                {{album.author}}
+              </h3>
+              <h2 class="text-lg text-gray-900 font-medium title-font mb-4 hover:text-emerald-600"
                   @click="toAlbum(album.albumID)">
                 {{ album.albumName }}
-              </h3>
-              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-                {{album.author}}
               </h2>
               <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5 pb-6">
                 <span
@@ -192,7 +192,9 @@ export default {
           albumName: '',
           author: '',
           cover: '',
-          tagList: []
+          tagList: [{
+            tag: ''
+          }]
         }
       ],
       tagList: [
@@ -232,6 +234,7 @@ export default {
             that.musicianList = response.data.musicianList
             that.albumList = response.data.albumList
             that.tagList = response.data.tagList
+            console.log(response.data.albumList.tagList)
           }).catch(function (error) {
         console.log(error)
       })
