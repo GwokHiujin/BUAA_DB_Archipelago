@@ -120,7 +120,7 @@ export default {
             if (res.data.errno === 0) {
               this.$cookies.set("userInfo_email", res.data.email, '', '/')
               this.$cookies.set("userInfo_username", res.data.name, '', '/')
-              this.$cookies.set("userInfo_avatar", "", '', '/')
+              this.$cookies.set("userInfo_avatar", res.data.avatar, '', '/')
               this.$cookies.set("mid", res.data.musicianID, '', '/')
               this.$cookies.set("userInfo_usertype", res.data.type, '', '/')
               this.$cookies.set("userInfo_bio", res.data.bio !== '' ? res.data.bio : "江空岛石出，霜落天宇净 :)", '', '/')

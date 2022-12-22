@@ -50,7 +50,8 @@
           </div>
           <p class="leading-relaxed">
             由 {{generalInfo.author}} 制作，
-            <t class="hover:text-emerald-600" @click="gotoMusician()">
+            <t class="hover:text-emerald-600"
+               @click="gotoMusician(generalInfo.musicianID)">
               {{generalInfo.releaser}}
             </t> 发布
           </p>
@@ -184,6 +185,7 @@ export default {
         type: -1,
         resource: '',
         salesVolume: -1,
+        musicianID: -1,
       },
       songList: [
         {
@@ -270,7 +272,16 @@ export default {
       }).catch(err => {
         console.log(err)
       })
-    }
+    },
+    gotoMusician: function (mid) {
+      let that = this;
+      that.$router.push({
+        path: '/profile',
+        query: {
+          mid: mid
+        }
+      })
+    },
   }
 }
 </script>

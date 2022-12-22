@@ -6,7 +6,7 @@
         <div
           class="absolute top-0 w-full h-full bg-center bg-cover"
           style="
-            background-image: url('https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
+            background-image: url({{musicianInfo.photo}});
           "
         >
           <span
@@ -52,7 +52,7 @@
                       v-if="musicianInfo.photo === ''"
                     />
                     <img
-                        :src=musicianInfo.photo
+                        :src=musicianInfo.avatar
                         class="shadow-xl rounded-full h-auto align-middle border-none -m-16 -ml-20 lg:-ml-16 max-w-200-px"
                         v-else
                     />
@@ -159,6 +159,7 @@ export default {
         lyricalThemes: '',
         formedYear: '',
         introduction: '',
+        avatar: '',
       },
     };
   },
