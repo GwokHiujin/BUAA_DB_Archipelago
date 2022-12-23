@@ -27,7 +27,7 @@
           <ul class="flex flex-wrap list-none md:justify-end justify-center">
             <li>
               <a
-                href="/"
+                href="https://github.com/GwokHiujin/BUAA_DB_Archipelago/"
                 class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
               >
                 Github

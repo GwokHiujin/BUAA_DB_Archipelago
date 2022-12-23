@@ -7,16 +7,9 @@
         <div class="w-full px-4 flex justify-center">
           <div class="relative">
             <img
-              alt="..."
-              :src="team2"
-              class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
-              v-if="userInfo.avatar === ''"
-            />
-            <img
                 alt="..."
                 :src="userInfo.avatar"
                 class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
-                v-else
             />
           </div>
         </div>

@@ -46,7 +46,7 @@
                       <span
                           class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
                       >
-                        {{musicianInfo.followersNum === '' ? 0 : musicianInfo.followersNum}}
+                        {{musicianInfo.followerNum}}
                       </span>
                       <span class="text-sm text-blueGray-400">
                         关注者
@@ -201,7 +201,7 @@ export default {
         formedYear: '',
         introduction: '',
         avatar: '',
-        followersNum: 0,
+        followerNum: 0,
       },
       followed: false,
     };
@@ -231,6 +231,7 @@ export default {
           .then(function (response) {
             console.log(response.data)
             that.musicianInfo = response.data.data
+            console.log(that.musicianInfo.followerNum)
           }).catch(function (error) {
         console.log(error)
       })

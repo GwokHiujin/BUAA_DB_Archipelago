@@ -16,7 +16,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -24,6 +23,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Follows",
   data() {
@@ -31,8 +32,8 @@ export default {
       followList: [
         {
           musicianID: -1,
-          musicianName: "Havok",
-          avatar: 'https://images.unsplash.com/photo-1507808973436-a4ed7b5e87c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
+          musicianName: '',
+          avatar: '',
         }
       ]
     }
@@ -42,7 +43,18 @@ export default {
   },
   methods: {
     getFollowList: function () {
-
+      let that = this;
+      axios.request({
+        url: "/get_subscribe/",
+        baseURL: '/api',
+        method: 'get',
+      })
+          .then(function (response) {
+            console.log(response.data)
+            that.followList = response.data.concernList
+          }).catch(function (error) {
+        console.log(error)
+      })
     },
     gotoMusician: function (mid) {
       let that = this;
