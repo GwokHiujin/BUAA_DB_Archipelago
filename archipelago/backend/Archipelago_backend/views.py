@@ -835,7 +835,7 @@ def subscribe(request):
         email = request.session.get('email')
         if email is None:
             return JsonResponse({"errno": 1, "msg": "用户未登录"})
-        user = User.objects.get(email=email)
+        user = User.objects.get(user_id=email)
         musician_id = payload.get('musicianID')
         musician_list = Musician.objects.filter(id=musician_id)
         if len(musician_list) == 0:
@@ -868,7 +868,7 @@ def test_subscribe(request):
         email = request.session.get('email')
         if email is None:
             return JsonResponse({"errno": 1, "msg": "用户未登录"})
-        user = User.objects.get(email=email)
+        user = User.objects.get(user_id=email)
         musician_id = payload.get('musicianID')
         subscribe_list = Subscribe.objects.filter(user=user, musician_id=musician_id)
         if len(subscribe_list) == 0:
