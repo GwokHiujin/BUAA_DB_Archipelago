@@ -345,7 +345,8 @@ def get_musician(request):
                 'lyricalThemes': musician.theme,
                 'formedYear': musician.found_year,
                 'introduction': musician.info,
-                'avatar': musician.user.avatar
+                'avatar': musician.user.avatar,
+                'followerNum': Subscribe.objects.filter(musician=musician).count()
             }
         })
     if request.method == "POST":
@@ -365,7 +366,8 @@ def get_musician(request):
                 'lyricalThemes': musician.theme,
                 'formedYear': musician.found_year,
                 'introduction': musician.info,
-                'avatar': musician.user.avatar
+                'avatar': musician.user.avatar,
+                'followerNum': Subscribe.objects.filter(musician=musician).count()
             }
         })
 
