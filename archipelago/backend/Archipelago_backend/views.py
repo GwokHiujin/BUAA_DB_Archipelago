@@ -857,7 +857,7 @@ def get_subscribe(request):
         email = request.session.get('email')
         if email is None:
             return JsonResponse({"errno": 1, "msg": "用户未登录"})
-        user = User.objects.get(email=email)
+        user = User.objects.get(user_id=email)
         subscribe_list = Subscribe.objects.filter(user=user)
         return JsonResponse({'errno': 0, 'msg': "成功", 'concernList': [
             {'musicianID': s.musician.id, 'musicianName': s.musician.musician_name, 'avatar': s.musician.user.avatar}
