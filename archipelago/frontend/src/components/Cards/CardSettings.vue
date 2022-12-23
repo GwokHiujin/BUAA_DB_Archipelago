@@ -1,6 +1,7 @@
 <template>
+  <div class="w-full flex-wrap flex justify-center">
   <div
-    class="flex flex-wrap mt-32 flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
+    class="flex flex-wrap mt-32 flex-col break-words mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 lg:w-8/12"
   >
     <div v-if="showModal"
          class="top-25-px px-12 mx-32 overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex" >
@@ -643,12 +644,18 @@
       </form>
     </div>
   </div>
+
+    <div class="lg:w-4/12 px-8 pt-20">
+      <CardProfile :key="componentKey1"/>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import CryptoJS from 'crypto-js'
 import CardMusicianMems from "@/components/Cards/CardMusicianMems.vue";
+import CardProfile from "@/components/Cards/CardProfile.vue";
 
 axios.defaults.withCredentials = true;
 
@@ -656,6 +663,7 @@ export default {
   name: "settings",
   components: {
     CardMusicianMems,
+    CardProfile,
   },
   data() {
     return {
@@ -710,6 +718,7 @@ export default {
       tag1: '',
       tag2: '',
       componentKey: 0,
+      componentKey1: 0,
     }
   },
   mounted() {
@@ -802,7 +811,7 @@ export default {
           if (res.data.errno === 0) {
             this.alertOpen3 = true;
             this.getUserInfo();
-            this.$router.go(0)
+            this.componentKey1 += 1;
           } else {
             that.alertOpen = true;
           }

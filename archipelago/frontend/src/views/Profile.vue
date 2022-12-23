@@ -56,7 +56,7 @@
                       <span
                           class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
                       >
-                        2
+                        {{musicianInfo.albumNum}}
                       </span>
                       <span class="text-sm text-blueGray-400">
                         唱片数
@@ -202,6 +202,7 @@ export default {
         introduction: '',
         avatar: '',
         followerNum: 0,
+        albumNum: 0,
       },
       followed: false,
     };
