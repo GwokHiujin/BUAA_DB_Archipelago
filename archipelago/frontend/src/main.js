@@ -26,6 +26,7 @@ import Album from "@/views/admin/Album.vue";
 import Orders from "@/views/admin/OrderList.vue";
 import AddAlbum from "@/views/admin/AddAlbum.vue";
 import SearchPage from "@/views/admin/SearchPage.vue";
+import Follows from "@/views/admin/Follows.vue";
 
 // views for Auth layout
 
@@ -71,6 +72,10 @@ const routes = [
       {
         path: "/admin/search",
         component: SearchPage,
+      },
+      {
+        path: "/admin/follows",
+        component: Follows
       }
     ],
   },

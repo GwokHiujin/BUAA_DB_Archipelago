@@ -19,12 +19,22 @@
           </div>
         </div>
 
+        <div class="lg:w-6/12 mt-10">
+          <p class="leading-relaxed text-gray-500 mt-2 text-sm text-left underline hover:text-emerald-600"
+             @click="getData()">
+            没有喜欢的？点击换一批：
+          </p>
+        </div>
+
         <div class="flex flex-wrap -m-4 justify-center flex flex-wrap relative mt-12">
           <div class="xl:w-3/12 md:w-6/12 p-4" v-for="album in albumList">
             <div class="bg-gray-100 p-6 rounded-lg h-500-px"
                  style="background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/papyrus.png')">
-              <img class="h-40 rounded w-auto object-cover object-center mb-6"
-                   :src=album.cover>
+              <a class="block relative square-60 rounded overflow-hidden object-cover object-center mb-6 shadow-2xl">
+                <img alt="cover"
+                     class="object-cover object-center w-full h-full block"
+                     :src=album.cover>
+              </a>
               <h3 class="tracking-wide text-emerald-500 text-xs font-medium title-font">
                 {{album.author}}
               </h3>
@@ -35,7 +45,7 @@
               <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5 pb-6">
                 <span
                     class="text-xs font-semibold inline-block py-1 px-0.5 hover:text-emerald-600 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
-                    v-for="tag in album.tagList.slice(0, 3)"
+                    v-for="tag in album.tagList.slice(0, 2)"
                     @click="search(tag.tag)"
                 >
                   {{tag.tag}}

@@ -98,7 +98,7 @@
 
           <li
               class="items-center"
-              v-if="this.$cookies.get('userInfo_usertype') === '1'"
+              v-if="userInfo.type === '1'"
               @click="gotoMusician()"
           >
             <a
@@ -118,7 +118,7 @@
 
           <li
               class="items-center"
-              v-if="this.$cookies.get('userInfo_usertype') === '1'"
+              v-if="userInfo.type === '1'"
           >
             <router-link
               to="/admin/tables"
@@ -165,6 +165,32 @@
                     :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
                 我的订单
+              </a>
+            </router-link>
+          </li>
+
+          <li
+              class="items-center"
+          >
+            <router-link
+                to="/admin/follows"
+                v-slot="{ href, navigate, isActive }"
+            >
+              <a
+                  :href="href"
+                  @click="navigate"
+                  class="text-base uppercase py-4 font-bold block"
+                  :class="[
+                  isActive
+                    ? 'text-emerald-500 hover:text-emerald-600'
+                    : 'text-blueGray-600 hover:text-blueGray-400',
+                ]"
+              >
+                <i
+                    class="fas fa-heart mr-2 text-base"
+                    :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
+                ></i>
+                我的关注列表
               </a>
             </router-link>
           </li>
@@ -230,10 +256,16 @@ export default {
   data() {
     return {
       collapseShow: "hidden",
+      userInfo: {
+        name: '',
+        avatar: '-1',
+        type: '',
+        bio: ''
+      },
     };
   },
   mounted() {
-    //
+    this.getUserInfo();
   },
   components: {
     CardLogout,
@@ -269,6 +301,20 @@ export default {
         query: {
           mid: this.$cookies.get("mid")
         }
+      })
+    },
+    getUserInfo: function () {
+      let that = this;
+      axios.request({
+        url: "/get_user_info/",
+        baseURL: '/api',
+        method: 'get'
+      })
+          .then(function (response) {
+            console.log(response.data)
+            that.userInfo = response.data.data
+          }).catch(function (error) {
+        console.log(error)
       })
     }
   }

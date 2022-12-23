@@ -39,15 +39,50 @@
             class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
           >
             <div class="px-6">
-              <div class="flex flex-wrap justify-center">
+              <div class="flex flex-wrap justify-center justify-center">
+                <div class="w-full lg:w-4/12 px-4 lg:order-1">
+                  <div class="flex justify-center py-4 lg:pt-4 pt-8">
+                    <div class="mr-4 p-3 text-center">
+                      <span
+                          class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
+                      >
+                        {{musicianInfo.followersNum === '' ? 0 : musicianInfo.followersNum}}
+                      </span>
+                      <span class="text-sm text-blueGray-400">
+                        关注者
+                      </span>
+                    </div>
+                    <div class="mr-4 p-3 text-center">
+                      <span
+                          class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
+                      >
+                        2
+                      </span>
+                      <span class="text-sm text-blueGray-400">
+                        唱片数
+                      </span>
+                    </div>
+                    <div class="lg:mr-4 p-3 text-center">
+                      <span
+                          class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
+                      >
+                        1
+                      </span>
+                      <span class="text-sm text-blueGray-400">
+                        评论数
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
                 <div
-                  class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center"
+                    class="w-full lg:w-3/12 px-4 lg:order-1 justify-center flex"
                 >
                   <div class="relative">
                     <img
-                      :src="team2"
-                      class="shadow-xl rounded-full h-auto align-middle border-none -m-16 -ml-20 lg:-ml-16 max-w-200-px"
-                      v-if="musicianInfo.photo === ''"
+                        :src="team2"
+                        class="shadow-xl rounded-full h-auto align-middle border-none -m-16 -ml-20 lg:-ml-16 max-w-200-px"
+                        v-if="musicianInfo.photo === ''"
                     />
                     <img
                         :src=musicianInfo.avatar
@@ -56,12 +91,19 @@
                     />
                   </div>
                 </div>
-                <div
-                  class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center"
-                >
-                </div>
+
                 <div class="w-full lg:w-4/12 px-4 lg:order-1">
-                  <div class="flex justify-center py-4 lg:pt-4 pt-8">
+                  <div class="flex justify-center py-4 lg:pt-4 pt-8" v-if="this.$route.query.mid !== this.$cookies.get('mid')">
+                    <button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button"
+                            v-if="followed === false" @click="follow()">
+                      <i class="fas fa-heart"></i> 关注
+                    </button>
+                    <button class="bg-blueGray-600 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button"
+                            v-if="followed === true" @click="follow()">
+                      <i class="fas fa-leaf"></i> 取关
+                    </button>
                   </div>
                 </div>
               </div>
@@ -159,7 +201,9 @@ export default {
         formedYear: '',
         introduction: '',
         avatar: '',
+        followersNum: 0,
       },
+      followed: false,
     };
   },
   components: {
@@ -170,6 +214,7 @@ export default {
   },
   mounted() {
     this.getMusicianInfo();
+    this.getFollowed();
   },
   methods: {
     getMusicianInfo: function () {
@@ -216,6 +261,41 @@ export default {
           }
         })
       }
+    },
+    getFollowed() {
+      let that = this;
+      let musician_id = this.$route.query.mid;
+      let data = {
+        musicianID: musician_id,
+      }
+      axios.request({
+        url: "api/test_subscribe/",
+        method: 'post',
+        data: JSON.stringify(data)
+      })
+          .then(function (response) {
+            console.log(response.data)
+            that.followed = response.data.data.exist
+          }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    follow() {
+      this.followed = !this.followed;
+      let data = {
+        musicianID: this.$route.query.mid,
+      };
+      axios.request({
+        url: "api/subscribe/",
+        method: 'post',
+        data: JSON.stringify(data)
+      })
+          .then(function (response) {
+            console.log(response.data)
+            this.getMusicianInfo();
+          }).catch(function (error) {
+        console.log(error)
+      })
     }
   }
 };

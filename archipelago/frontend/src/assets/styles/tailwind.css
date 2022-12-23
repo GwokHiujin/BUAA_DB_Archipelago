@@ -1692,6 +1692,10 @@ select {
   border-top-width: 1px;
 }
 
+.border-t-2 {
+  border-top-width: 2px;
+}
+
 .border-r {
   border-right-width: 1px;
 }
@@ -2184,6 +2188,10 @@ select {
   height: 6rem;
 }
 
+.h-40 {
+  height: 10rem;
+}
+
 .h-auto {
   height: auto;
 }
@@ -2209,7 +2217,7 @@ select {
 }
 
 .h-500-px {
-  height: 500px;
+  height: 450px;
 }
 
 .h-600-px {
@@ -2609,6 +2617,10 @@ select {
   min-width: 12rem;
 }
 
+.w-button {
+  width: 10rem;
+}
+
 .square-60 {
   width: 15rem;
   height: 15rem;
@@ -2969,6 +2981,10 @@ select {
   padding-top: 5rem;
 }
 
+.pt-24 {
+  padding-top: 7rem;
+}
+
 .pb-20 {
   padding-bottom: 5rem;
 }
@@ -3016,6 +3032,31 @@ select {
 .placeholder-blueGray-300::placeholder {
   --tw-placeholder-opacity: 1;
   color: rgba(203, 213, 225, var(--tw-placeholder-opacity));
+}
+
+.placeholder-blueGray-400::-webkit-input-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(148, 163, 184, var(--tw-placeholder-opacity));
+}
+
+.placeholder-blueGray-400::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(148, 163, 184, var(--tw-placeholder-opacity));
+}
+
+.placeholder-blueGray-400:-ms-input-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(148, 163, 184, var(--tw-placeholder-opacity));
+}
+
+.placeholder-blueGray-400::-ms-input-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(148, 163, 184, var(--tw-placeholder-opacity));
+}
+
+.placeholder-blueGray-400::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(148, 163, 184, var(--tw-placeholder-opacity));
 }
 
 .pointer-events-none {
@@ -3968,6 +4009,11 @@ select {
 
   .sm\:w-6\/12 {
     width: 50%;
+  }
+
+  .sm\:square-8 {
+    width: 4.5rem;
+    height: 4.5rem;
   }
 }
 

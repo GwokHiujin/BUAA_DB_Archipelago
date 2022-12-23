@@ -29,9 +29,9 @@
   </div>
 
   <section class="text-gray-600 body-font w-full items-center">
-    <div class="container px-5 py-24 mx-auto">
+    <div class="container px-5 pt-24 pb-16 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
-        <img alt="ecommerce" class="lg:w-6/12 w-full lg:h-auto h-64 object-cover object-center rounded"
+        <img alt="ecommerce" class="lg:w-6/12 w-full lg:h-auto h-64 md:w-64 object-cover object-center rounded"
              :src=generalInfo.cover>
         <div class="lg:w-6/12 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 pl-10">
           <h2 class="text-sm title-font text-gray-500 tracking-widest">
@@ -55,21 +55,27 @@
               {{generalInfo.releaser}}
             </t> 发布
           </p>
-          <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5 pb-6">
+          <div class="flex mt-2 items-center"
+               v-if="showTags.length !== 0"
+               v-for="arr in showTags">
             <span
-                class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-100 uppercase last:mr-0 mr-2 mt-2"
-                v-for="tag in albumTags"
+                class="text-xs hover:text-emerald-600 font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-100 uppercase last:mr-0 mr-2 mt-2"
+                v-if="arr.length !== 0"
+                v-for="tag in arr"
+                @click="search(tag.tag)"
             >
               {{tag.tag}}
             </span>
+          </div>
+          <div class="flex mt-2 items-center"
+               v-else>
             <span
                 class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-100 uppercase last:mr-0 mr-2 mt-2"
-                v-if="albumTags.length === 0"
             >
               该唱片未填写标签
             </span>
           </div>
-          <div class="flex">
+          <div class="flex mt-10 border-gray-200 border-t-2 pt-8">
             <span class="title-font font-medium text-2xl text-gray-900">
               ￥ {{generalInfo.price}}
             </span>
@@ -145,6 +151,47 @@
     </div>
     </div>
   </section>
+
+  <section class="text-gray-600 body-font w-full px-12 pt-12">
+    <div class="flex-grow pr-12 md:pr-16 flex flex-col items-start mb-16 text-left">
+      <h1 class="title-font text-4xl mb-4 font-medium text-gray-900">#评论区
+      </h1>
+      <div class="w-full lg:w-12/12 pt-2">
+        <div class="relative w-full mb-3">
+          <textarea
+              type="text"
+              class="border-0 bg-gray-100 px-3 py-3 placeholder-blueGray-400 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              rows="2"
+              placeholder="✨跟大家分享你的看法吧！:)"
+          >
+              </textarea
+              >
+        </div>
+      </div>
+      <button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+        发布评论
+      </button>
+      <strong class="mb-8 leading-relaxed mt-8">
+        最新评论(1)</strong>
+    </div>
+
+
+    <div class="flex w-full">
+      <div class="flex-shrink-0 mr-3">
+        <img class="rounded-full w-8 h-8 sm:square-8 border border-white"
+             src="https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=200&q=80" alt="">
+      </div>
+      <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
+        <strong>普通用户</strong> <span class="text-xs text-gray-400">20:17</span>
+        <p class="text-sm w-full">
+          好爱这张专辑！
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+
 </div>
 </template>
 
@@ -174,6 +221,13 @@ export default {
           tag: '',
         }
       ],
+      showTags: [
+        [
+          {
+            tag: '',
+          }
+        ]
+      ],
       generalInfo: {
         albumID: -1,
         albumName: '',
@@ -201,6 +255,7 @@ export default {
     }
   },
   mounted() {
+    console.log("hey")
     this.getAlbumInfo();
     this.getTags();
   },
@@ -246,6 +301,11 @@ export default {
           .then(function (response) {
             console.log(response.data.data)
             that.albumTags = response.data.data
+            let size = 4;
+            for(let i = 0; i < response.data.data.length; i += size){
+              that.showTags.push(response.data.data.slice(i, i+size));
+            }
+            that.showTags = that.showTags.slice(1)
           }).catch(function (error) {
         console.log(error)
       })
@@ -282,6 +342,18 @@ export default {
         }
       })
     },
+    search: function (tag) {
+      let toSearch = tag;
+      if (toSearch !== undefined && toSearch !== '') {
+        this.$router.push({
+          path: '/admin/search',
+          query: {
+            target: toSearch,
+            type: 'tag'
+          }
+        })
+      }
+    }
   }
 }
 </script>

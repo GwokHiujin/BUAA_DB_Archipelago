@@ -2,7 +2,7 @@
   <div>
     <index-navbar />
     <section
-      class="header relative pt-16 items-center flex h-screen max-h-860-px"
+      class="header relative pt-16 items-center flex h-screen max-h-860-px bg-white"
     >
       <div class="container mx-auto items-center flex flex-wrap">
         <div class="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
@@ -39,7 +39,7 @@
       />
     </section>
 
-    <section class="mt-48 md:mt-40 pb-40 relative bg-blueGray-100">
+    <section class="mt-48 md:mt-40 pb-40 relative bg-blueGray-200">
       <div
         class="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
         style="transform: translateZ(0);"
@@ -469,7 +469,7 @@
               Get it free on Github and give us a Star if you like this project!
             </p>
             <a
-              href="/"
+              href="https://github.com/GwokHiujin/BUAA_DB_Archipelago/"
               target="_blank"
               class="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
             >
@@ -533,7 +533,7 @@
                 Get started
               </a>
               <a
-                href="/"
+                href="https://github.com/GwokHiujin/BUAA_DB_Archipelago/"
                 target="_blank"
                 class="github-star sm:ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
               >

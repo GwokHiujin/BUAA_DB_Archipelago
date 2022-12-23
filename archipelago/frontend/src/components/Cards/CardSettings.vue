@@ -236,7 +236,7 @@
         <h6 class="text-blueGray-700 text-xl font-bold">欢迎您，{{userInfo.name}}！</h6>
         <span
             class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-200 uppercase last:mr-0 mr-2 mt-2"
-            v-if="this.$cookies.get(`userInfo_usertype`) === `1`"
+            v-if="userInfo.type === `1`"
         >
           音乐人用户
         </span>
@@ -398,10 +398,10 @@
       </form>
     </div>
 
-    <hr class="mt-6 border-b border-blueGray-50" />
+    <hr class="mt-6 border-b border-blueGray-50" v-if="userInfo.type === '1'"/>
 
     <!--Musician Info-->
-    <div class="flex-auto px-4 lg:px-10 py-10 pt-8 bg-white">
+    <div class="flex-auto px-4 lg:px-10 py-10 pt-8 bg-white" v-if="userInfo.type === '1'">
       <form>
         <div class="text-center flex justify-between">
           <h6 class="text-blueGray-700 text-xl font-bold">音乐人基本信息</h6>
@@ -548,7 +548,7 @@
     </div>
 
     <!--Musician Member-->
-    <div class="flex-auto px-4 lg:px-10 py-10 pt-8">
+    <div class="flex-auto px-4 lg:px-10 py-10 pt-8" v-if="userInfo.type === '1'">
       <form>
         <div class="text-center flex justify-between pb-16">
           <h6 class="text-blueGray-700 text-xl font-bold">音乐人成员信息</h6>
@@ -576,9 +576,9 @@
       </form>
     </div>
 
-    <hr class="mt-6 border-b-1 border-0" />
+    <hr class="mt-6 border-b-1 border-0" v-if="userInfo.type === '1'"/>
 
-    <div class="flex-auto px-4 lg:px-10 py-10 pt-8 bg-white">
+    <div class="flex-auto px-4 lg:px-10 py-10 pt-8 bg-white" v-if="userInfo.type === '1'">
       <form>
         <div class="text-center flex justify-between pb-16">
           <h6 class="text-blueGray-700 text-xl font-bold">音乐人标签信息</h6>
@@ -802,6 +802,7 @@ export default {
           if (res.data.errno === 0) {
             this.alertOpen3 = true;
             this.getUserInfo();
+            this.$router.go(0)
           } else {
             that.alertOpen = true;
           }
@@ -863,15 +864,14 @@ export default {
       let data = {
         name: that.toBeDelete
       };
-      console.log(data)
       axios({
         method: 'post',
         url: "/del_musician_member/",
         baseURL: '/api',
         data: JSON.stringify(data)
       }).then(res => {
+        console.log(res.data)
         if (res.data.errno === 0) {
-          console.log(res.data)
           that.showModal1 = false;
           this.alertOpen3 = true;
           this.componentKey += 1;

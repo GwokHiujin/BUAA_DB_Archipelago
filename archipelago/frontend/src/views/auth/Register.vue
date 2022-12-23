@@ -77,21 +77,21 @@
 
               <div class="relative w-full mt-8">
                 <div class="text-center">
-                  <button
-                      class="mx-8 bg-emerald-500 text-white focus:bg-blueGray-800 active:bg-emerald-600 font-bold uppercase text-sm px-4 py-4 rounded-full shadow hover:shadow-lg outline-none mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      @click="setMusician()"
+                  <a
+                      class="mx-8 font-bold uppercase text-sm px-4 py-4 rounded-full shadow hover:shadow-lg outline-none mb-1 ease-linear transition-all duration-150"
+                      v-bind:class="{'text-emerald-600 bg-white': userType !== 1, 'text-white bg-emerald-600': userType === 1}"
+                      v-on:click="setMusician()"
                   >
                     <i class="fas fa-guitar mr-2"></i> 我是音乐人
-                  </button>
+                  </a>
 
-                  <button
-                      class="mx-8 bg-emerald-500 text-white focus:bg-blueGray-800 active:bg-emerald-600 font-bold uppercase text-sm px-4 py-4 rounded-full shadow hover:shadow-lg outline-none mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      @click="setAudience()"
+                  <a
+                      class="mx-8 font-bold uppercase text-sm px-4 py-4 rounded-full shadow hover:shadow-lg outline-none mb-1 ease-linear transition-all duration-150"
+                      v-bind:class="{'text-emerald-600 bg-white': userType !== 0, 'text-white bg-emerald-600': userType === 0}"
+                      v-on:click="setAudience()"
                   >
                     <i class="fas fa-headphones mr-2"></i> 我是听众
-                  </button>
+                  </a>
                 </div>
               </div>
 
