@@ -739,6 +739,8 @@ export default {
     },
     closeAlert3: function () {
       this.alertOpen3 = false;
+      this.componentKey1 += 1;
+      this.$emit('change', this.componentKey1);
     },
     toggleModal: function () {
       this.showModal = !this.showModal;
@@ -832,10 +834,11 @@ export default {
         console.log(res.data)
         if (res.data.errno === 0) {
           this.alertOpen3 = true;
-          this.$route.push({
+          console.log("hey")
+          that.$router.push({
             path: '/profile',
             query: {
-              mid: that.$cookies.get("mid")
+              mid: this.$cookies.get("mid")
             }
           })
         } else {

@@ -41,7 +41,7 @@
             <div class="px-6">
               <div class="flex flex-wrap justify-center justify-center">
                 <div class="w-full lg:w-4/12 px-4 lg:order-1">
-                  <div class="flex justify-center py-4 lg:pt-4 pt-8">
+                  <div class="flex justify-center py-4 lg:pt-4 pt-8" :key="dataKey">
                     <div class="mr-4 p-3 text-center">
                       <span
                           class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
@@ -205,6 +205,7 @@ export default {
         albumNum: 0,
       },
       followed: false,
+      dataKey: 0,
     };
   },
   components: {
@@ -283,6 +284,7 @@ export default {
       })
     },
     follow() {
+      let that = this;
       this.followed = !this.followed;
       let data = {
         musicianID: this.$route.query.mid,
@@ -294,7 +296,8 @@ export default {
       })
           .then(function (response) {
             console.log(response.data)
-            this.getMusicianInfo();
+            that.getMusicianInfo();
+            this.dataKey += 1;
           }).catch(function (error) {
         console.log(error)
       })

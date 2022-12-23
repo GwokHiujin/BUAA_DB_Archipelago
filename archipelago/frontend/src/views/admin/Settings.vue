@@ -8,7 +8,7 @@
       <div class="px-4 md:px-10 mx-auto w-full -m-24">
         <div class="flex flex-wrap">
           <div class="w-full">
-            <CardSettings @change="changeNavBar()"/>
+            <CardSettings @change="changeNavBar(componentKey1=$event)"/>
           </div>
         </div>
         <footer-admin />
