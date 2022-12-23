@@ -1,6 +1,7 @@
 <template>
   <div
     class="flex flex-wrap mt-32 flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16"
+    style="background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/papyrus.png')"
   >
     <div class="px-6">
       <div class="flex flex-wrap justify-center">
@@ -9,7 +10,7 @@
             <img
                 alt="..."
                 :src="userInfo.avatar"
-                class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                class="shadow-xl rounded-full h-auto align-middle border-b-2 absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
             />
           </div>
         </div>
@@ -33,7 +34,7 @@
           普通用户
         </div>
       </div>
-      <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+      <div class="mt-10 py-10 border-t-2 border-blueGray-200 text-center">
         <div class="flex flex-wrap justify-center">
           <div class="w-full lg:w-9/12 px-4">
             <p class="mb-4 text-lg leading-relaxed text-blueGray-700">

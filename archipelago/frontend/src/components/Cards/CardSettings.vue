@@ -646,7 +646,7 @@
   </div>
 
     <div class="lg:w-4/12 px-8 pt-20">
-      <CardProfile :key="componentKey1"/>
+      <CardProfile :key="componentKey2"/>
     </div>
   </div>
 </template>
@@ -719,6 +719,7 @@ export default {
       tag2: '',
       componentKey: 0,
       componentKey1: 0,
+      componentKey2: 0,
     }
   },
   mounted() {
@@ -740,6 +741,7 @@ export default {
     closeAlert3: function () {
       this.alertOpen3 = false;
       this.componentKey1 += 1;
+      this.componentKey2 += 1;
       this.$emit('change', this.componentKey1);
     },
     toggleModal: function () {
