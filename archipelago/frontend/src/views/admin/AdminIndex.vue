@@ -34,8 +34,9 @@
               </h2>
               <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5 pb-6">
                 <span
-                    class="text-xs font-semibold inline-block py-1 px-0.5 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
+                    class="text-xs font-semibold inline-block py-1 px-0.5 hover:text-emerald-600 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2"
                     v-for="tag in album.tagList.slice(0, 3)"
+                    @click="search(tag.tag)"
                 >
                   {{tag.tag}}
                 </span>
@@ -225,7 +226,7 @@ export default {
     search: function (tag) {
       let toSearch = tag === undefined ? this.searchTag : tag;
       console.log(this.searchTag)
-      if (toSearch !== undefined) {
+      if (toSearch !== undefined && toSearch !== '') {
         this.$router.push({
           path: '/admin/search',
           query: {

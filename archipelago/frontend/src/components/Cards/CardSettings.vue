@@ -802,7 +802,6 @@ export default {
           if (res.data.errno === 0) {
             this.alertOpen3 = true;
             this.getUserInfo();
-            location.reload()
           } else {
             that.alertOpen = true;
           }
@@ -822,7 +821,12 @@ export default {
         console.log(res.data)
         if (res.data.errno === 0) {
           this.alertOpen3 = true;
-          that.getMusicianInfo();
+          this.$route.push({
+            path: '/profile',
+            query: {
+              mid: that.$cookies.get("mid")
+            }
+          })
         } else {
           that.alertOpen1 = true;
         }

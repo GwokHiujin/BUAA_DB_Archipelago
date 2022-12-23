@@ -2609,6 +2609,11 @@ select {
   min-width: 12rem;
 }
 
+.square-60 {
+  width: 15rem;
+  height: 15rem;
+}
+
 .min-w-140-px {
   min-width: 140px;
 }

@@ -43,13 +43,12 @@
             {{order.orderNum}}
           </td>
 
-          <router-link to="/admin/album">
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 hover:text-emerald-600"
+              @click="gotoAlbum(order.albumID)"
           >
             {{order.albumID}}
           </td>
-          </router-link>
 
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
@@ -95,6 +94,15 @@ export default {
             that.orderList = response.data.orderList
           }).catch(function (error) {
         console.log(error)
+      })
+    },
+    gotoAlbum: function (aid) {
+      let that = this;
+      that.$router.push({
+        path: '/admin/album',
+        query: {
+          aid: aid
+        }
       })
     }
   }
