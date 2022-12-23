@@ -100,7 +100,7 @@ def logoff(request):
 def delete_account(request):
     if request.method == "POST":
         payload = get_payload(request)
-        email = payload.get('email')
+        email = payload.get('userEmail')
         passwd = payload.get('password')
         user = User.objects.filter(user_id=email)
         if len(user) == 0:
@@ -500,6 +500,7 @@ def get_musician_member(request):
 def del_musician_member(request):
     if request.method == "POST":
         payload = get_payload(request)
+        print(payload)
         email = request.session.get('email')
         if email is None:
             return JsonResponse({"errno": 1, "msg": "未登录"})
@@ -510,7 +511,7 @@ def del_musician_member(request):
         musician = musician_list[0]
         # if musician.id != payload.get('MID'):
         #     return JsonResponse({"errno": 3, "msg": "错误绑定音乐人信息"})
-        old_member = MusicianMember.objects.filter(musician=musician, member_name=payload.get('N'))
+        old_member = MusicianMember.objects.filter(musician=musician, member_name=payload.get('name'))
         if len(old_member) != 1:
             return JsonResponse({"errno": 4, "msg": "该成员不存在"})
         old_member = old_member[0]
