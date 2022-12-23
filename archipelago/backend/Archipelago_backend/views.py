@@ -827,3 +827,36 @@ def upload_img(request):
         saved_img = Image(img=img)
         saved_img.save()
         return JsonResponse({'img_url': 'http://127.0.0.1:8000' + saved_img.img.url})
+
+
+def subscribe(request):
+    if request.method == 'POST':
+        payload = get_payload(request)
+        email = request.session.get('email')
+        if email is None:
+            return JsonResponse({"errno": 1, "msg": "用户未登录"})
+        user = User.objects.get(email=email)
+        musician_id = payload.get('musicianID')
+        musician_list = Musician.objects.filter(id=musician_id)
+        if len(musician_list) == 0:
+            return JsonResponse({'errno': 2, 'msg': '音乐人不存在'})
+        musician = musician_list[0]
+        old_subscribe = Subscribe.objects.filter(user=user, musician=musician)
+        if len(old_subscribe) != 0:
+            old_subscribe[0].delete()
+            return JsonResponse({'errno': 0, 'msg': "成功取消订阅"})
+        new_subscibe = Subscribe(user=user, musician=musician, time=datetime.datetime.now())
+        new_subscibe.save()
+        return JsonResponse({'errno': 0, 'msg': "成功新增订阅"})
+
+
+def get_subscribe(request):
+    if request.method == 'GET':
+        email = request.session.get('email')
+        if email is None:
+            return JsonResponse({"errno": 1, "msg": "用户未登录"})
+        user = User.objects.get(email=email)
+        subscribe_list = Subscribe.objects.filter(user=user)
+        return JsonResponse({'errno': 0, 'msg': "成功", 'concernList': [
+            {'musicianID': s.musician.id, 'musicianName': s.musician.musician_name, 'avatar': s.musician.user.avatar}
+            for s in subscribe_list]})
