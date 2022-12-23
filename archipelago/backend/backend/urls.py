@@ -52,5 +52,9 @@ urlpatterns = [
     path("api/search_tag/", views.search_tag),
     path("api/get_order/", views.get_order),
     path("api/gen_order/", views.gen_order),
-    path("api/upload_img/", views.upload_img)
+    path("api/upload_img/", views.upload_img),
+
+    path("api/subscribe/", views.subscribe),
+    path("api/get_subscribe/", views.get_subscribe),
+    path("api/test_subscribe/", views.test_subscribe)
 ]
