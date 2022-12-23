@@ -860,3 +860,17 @@ def get_subscribe(request):
         return JsonResponse({'errno': 0, 'msg': "成功", 'concernList': [
             {'musicianID': s.musician.id, 'musicianName': s.musician.musician_name, 'avatar': s.musician.user.avatar}
             for s in subscribe_list]})
+
+
+def test_subscribe(request):
+    if request.method == 'POST':
+        payload = get_payload(request)
+        email = request.session.get('email')
+        if email is None:
+            return JsonResponse({"errno": 1, "msg": "用户未登录"})
+        user = User.objects.get(email=email)
+        musician_id = payload.get('musicianID')
+        subscribe_list = Subscribe.objects.filter(user=user, musician_id=musician_id)
+        if len(subscribe_list) == 0:
+            return JsonResponse({"errno": 0, "msg": "用户未登录", "data": {"exist": False}})
+        return JsonResponse({"errno": 0, "msg": "用户未登录", "data": {"exist": True}})
