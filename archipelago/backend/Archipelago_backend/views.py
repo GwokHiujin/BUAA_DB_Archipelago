@@ -346,7 +346,8 @@ def get_musician(request):
                 'formedYear': musician.found_year,
                 'introduction': musician.info,
                 'avatar': musician.user.avatar,
-                'followerNum': Subscribe.objects.filter(musician=musician).count()
+                'followerNum': Subscribe.objects.filter(musician=musician).count(),
+                'albumNum': Album.objects.filter(musician=musician).count()
             }
         })
     if request.method == "POST":
@@ -367,7 +368,8 @@ def get_musician(request):
                 'formedYear': musician.found_year,
                 'introduction': musician.info,
                 'avatar': musician.user.avatar,
-                'followerNum': Subscribe.objects.filter(musician=musician).count()
+                'followerNum': Subscribe.objects.filter(musician=musician).count(),
+                'albumNum': Album.objects.filter(musician=musician).count()
             }
         })
 
