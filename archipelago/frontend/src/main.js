@@ -18,8 +18,6 @@ import Admin from "@/layouts/Admin.vue";
 import Auth from "@/layouts/Auth.vue";
 
 // views for Admin layout
-
-import Settings from "@/views/admin/Settings.vue";
 import Tables from "@/views/admin/Tables.vue";
 import AdminIndex from "@/views/admin/AdminIndex.vue";
 import Album from "@/views/admin/Album.vue";
@@ -36,6 +34,7 @@ import Register from "@/views/auth/Register.vue";
 // views without layouts
 import Profile from "@/views/Profile.vue";
 import Index from "@/views/Index.vue";
+import Settings from "@/views/admin/Settings.vue";
 
 // routes
 
@@ -45,10 +44,6 @@ const routes = [
     redirect: "/admin/index",
     component: Admin,
     children: [
-      {
-        path: "/admin/settings",
-        component: Settings,
-      },
       {
         path: "/admin/tables",
         component: Tables,
@@ -101,6 +96,10 @@ const routes = [
   {
     path: "/",
     component: Index,
+  },
+  {
+    path: "/admin/settings",
+    component: Settings,
   },
   { path: "/:pathMatch(.*)*", redirect: "/" },
 ];

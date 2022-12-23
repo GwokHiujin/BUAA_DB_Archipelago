@@ -812,6 +812,7 @@ export default {
             this.alertOpen3 = true;
             this.getUserInfo();
             this.componentKey1 += 1;
+            this.$emit('change', this.componentKey1);
           } else {
             that.alertOpen = true;
           }
