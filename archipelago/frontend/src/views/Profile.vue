@@ -89,7 +89,7 @@
                   <i
                     class="fas fa-music mr-2 text-lg text-blueGray-400"
                   ></i>
-                  音乐风格 - {{musicianInfo.lyricalThemes}}
+                  创作主题 - {{musicianInfo.lyricalThemes}}
                 </div>
               </div>
               <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
@@ -99,8 +99,9 @@
                       {{musicianInfo.introduction}}
                     </p>
                     <span
-                        class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-100 uppercase last:mr-0 mr-2 mt-2"
+                        class="text-xs font-semibold hover:text-emerald-600 inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-100 uppercase last:mr-0 mr-2 mt-2"
                         v-for="tag in musicianTags"
+                        @click="search(tag.tag)"
                     >
                       {{tag.tag}}
                     </span>
@@ -203,6 +204,18 @@ export default {
           }).catch(function (error) {
         console.log(error)
       })
+    },
+    search: function (tag) {
+      let toSearch = tag;
+      if (toSearch !== undefined) {
+        this.$router.push({
+          path: '/admin/search',
+          query: {
+            target: toSearch,
+            type: 'tag'
+          }
+        })
+      }
     }
   }
 };

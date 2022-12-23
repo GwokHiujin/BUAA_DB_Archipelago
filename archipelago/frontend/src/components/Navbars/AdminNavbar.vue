@@ -76,7 +76,7 @@ export default {
     search: function () {
       let that = this;
       let toSearch = document.getElementById("string").value;
-      if (toSearch !== '') {
+      if (toSearch !== '' && toSearch !== undefined) {
         let type = 'normal';
         if (toSearch.toString().at(0) === '#') {
           type = 'tag';
