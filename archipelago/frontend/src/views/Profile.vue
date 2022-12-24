@@ -79,16 +79,18 @@
                     class="w-full lg:w-3/12 px-4 lg:order-1 justify-center flex"
                 >
                   <div class="relative">
-                    <img
-                        :src="team2"
-                        class="shadow-xl rounded-full h-auto align-middle border-none -m-16 -ml-20 lg:-ml-16 max-w-200-px"
-                        v-if="musicianInfo.photo === ''"
-                    />
-                    <img
-                        :src=musicianInfo.avatar
-                        class="shadow-xl rounded-full h-auto align-middle border-none -m-16 -ml-20 lg:-ml-16 max-w-200-px"
-                        v-else
-                    />
+                    <a class="block relative square-60 rounded overflow-hidden -mt-20">
+                      <img
+                          :src="team2"
+                          class="shadow-xl rounded-full object-cover object-center w-full h-full block align-middle border-none -m-16 -ml-20 lg:-ml-16 max-w-200-px"
+                          v-if="musicianInfo.photo === ''"
+                      />
+                      <img
+                          :src=musicianInfo.avatar
+                          class="shadow-xl rounded-full object-cover object-center w-full h-full block align-middle border-none"
+                          v-else
+                      />
+                    </a>
                   </div>
                 </div>
 

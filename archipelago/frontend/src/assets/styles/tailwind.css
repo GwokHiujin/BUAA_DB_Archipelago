@@ -2626,6 +2626,16 @@ select {
   height: 15rem;
 }
 
+.square-avatar {
+  width: 12rem;
+  height: 12rem;
+}
+
+.square-navbar {
+  width: 3rem;
+  height: 3rem;
+}
+
 .min-w-140-px {
   min-width: 140px;
 }

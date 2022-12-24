@@ -7,14 +7,14 @@
       <div class="flex flex-wrap justify-center">
         <div class="w-full px-4 flex justify-center">
           <div class="relative">
-            <img
+            <a class="block relative square-avatar rounded overflow-hidden -mt-20">
+              <img
                 alt="..."
                 :src="userInfo.avatar"
-                class="shadow-xl rounded-full h-auto align-middle border-b-2 absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                class="shadow-xl rounded-full align-middle border-b-2 object-cover object-center w-full h-full block"
             />
+            </a>
           </div>
-        </div>
-        <div class="w-full px-4 text-center mt-20">
         </div>
       </div>
       <div class="text-center mt-12">

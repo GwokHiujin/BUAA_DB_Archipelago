@@ -41,16 +41,18 @@
             class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"
         >
           <router-link to="/admin/settings">
-            <img
-                class="w-full rounded-full align-middle border-none shadow-lg"
-                :src=avatar
-                v-if="this.$cookies.get('userInfo_avatar') !== null"
-            />
-             <img
-                 class="w-full rounded-full align-middle border-none shadow-lg"
-                 :src=team2
-                 v-else
-             />
+            <a class="block relative square-navbar rounded overflow-hidden">
+              <img
+                  class="object-cover object-center w-full h-full block rounded-full align-middle border-none shadow-lg"
+                  :src=avatar
+                  v-if="this.$cookies.get('userInfo_avatar') !== null"
+              />
+               <img
+                   class="object-cover object-center w-full h-full block rounded-full align-middle border-none shadow-lg"
+                   :src=team2
+                   v-else
+               />
+            </a>
             </router-link>
         </span>
         </div>
