@@ -11,6 +11,7 @@ from Archipelago_backend.models import *
 
 url_base = "http://43.143.200.141"
 
+
 def get_payload(request):
     json_str = request.body.decode()
     payload = json.loads(json_str)
@@ -28,6 +29,7 @@ def get_user(email):
 # Create your views here.
 # 10.12: 初步实验，注册及登录的部分逻辑
 def login(request):
+    update_database(request)
     if request.method == "POST":
         print(request.body)
         payload = get_payload(request)
@@ -912,3 +914,15 @@ def get_comment(request):
                              "commentList": [
                                  {"comment": c.content, "username": c.user.user_name, 'avatar': c.user.avatar,
                                   "setTime": c.time} for c in comment_list]})
+
+
+def update_database(request):
+    for elem in User.objects.all():
+        elem.avatar.replace('127.0.0.1:8000', '43.143.200.141:80')
+        elem.save()
+    for elem in Musician.objects.all():
+        elem.photo.replace('127.0.0.1:8000', '43.143.200.141:80')
+        elem.save()
+    for elem in Album.objects.all():
+        elem.cover.replace('127.0.0.1:8000', '43.143.200.141:80')
+        elem.save()
