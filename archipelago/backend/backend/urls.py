@@ -56,5 +56,8 @@ urlpatterns = [
 
     path("api/subscribe/", views.subscribe),
     path("api/get_subscribe/", views.get_subscribe),
-    path("api/test_subscribe/", views.test_subscribe)
+    path("api/test_subscribe/", views.test_subscribe),
+
+    path("api/get_comment/", views.get_comment),
+    path("api/add_comment/", views.add_comment)
 ]
