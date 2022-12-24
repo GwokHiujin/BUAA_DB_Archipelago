@@ -89,7 +89,9 @@ export default {
       let utc = require('dayjs/plugin/utc')
       dayjs.extend(utc)
 
-      time = this.dayjs(time).format('YYYY-MM-DD HH:mm:ss');
+      console.log(time, 'before')
+      time = this.dayjs.utc(time).format('YYYY-MM-DD HH:mm:ss');
+      console.log(time, 'after')
       return time;
     },
     getOrder: function () {
