@@ -181,7 +181,7 @@
     </div>
 
 
-    <div class="flex w-full" v-for="comment in commentList" :key="commentKey">
+    <div class="flex w-full" v-for="comment in commentList" v-if="commentList.length !== 0" :key="commentKey">
       <div class="flex-shrink-0 mr-3">
         <img class="rounded-full w-8 h-8 sm:square-8 border border-white"
              :src="comment.avatar">
@@ -352,6 +352,7 @@ export default {
         albumID: aid,
         comment: document.getElementById("curComment").value
       }
+      console.log(data)
       axios.request({
         url: "/add_comment/",
         baseURL: '/api',
