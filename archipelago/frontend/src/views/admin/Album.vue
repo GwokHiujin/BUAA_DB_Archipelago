@@ -202,6 +202,7 @@
 
 <script>
 import axios from "axios";
+import dayjs from "dayjs";
 
 const map = {
   albumType: {
@@ -287,7 +288,12 @@ export default {
   methods: {
     timeTrans: function (data) {
       let time = data //将需要格式化的数据传入
-      time = this.dayjs(time).format('YYYY-MM-DD HH:mm:ss');
+      let utc = require('dayjs/plugin/utc')
+      dayjs.extend(utc)
+
+      console.log(time, 'before')
+      time = this.dayjs.utc(time).format('YYYY-MM-DD HH:mm:ss');
+      console.log(time, 'after')
       return time;
     },
     closeAlert: function () {
