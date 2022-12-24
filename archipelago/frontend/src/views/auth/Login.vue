@@ -177,10 +177,7 @@ export default {
               console.log(res.data.type)
               console.log(this.$cookies.get("userInfo_usertype"))
 
-              if (this.$cookies.get("userInfo_usertype") === '0' ||
-                  this.$cookies.get("userInfo_usertype") === '1') {
-                this.$router.push("/admin/index");
-              }
+              this.$router.push("/admin/index");
             } else {
               this.alertOpen = true;
             }

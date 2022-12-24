@@ -64,6 +64,8 @@
 
 <script>
 import axios from "axios";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
 export default {
   name: "OrderList",
@@ -84,6 +86,9 @@ export default {
   methods: {
     timeTrans: function (data) {
       let time = data //将需要格式化的数据传入
+      let utc = require('dayjs/plugin/utc')
+      dayjs.extend(utc)
+
       time = this.dayjs(time).format('YYYY-MM-DD HH:mm:ss');
       return time;
     },

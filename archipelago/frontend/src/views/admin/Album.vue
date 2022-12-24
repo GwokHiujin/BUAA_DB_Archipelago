@@ -202,6 +202,7 @@
 
 <script>
 import axios from "axios";
+import dayjs from "dayjs";
 
 const map = {
   albumType: {
@@ -287,7 +288,12 @@ export default {
   methods: {
     timeTrans: function (data) {
       let time = data //将需要格式化的数据传入
-      time = this.dayjs(time).format('YYYY-MM-DD HH:mm:ss');
+      let utc = require('dayjs/plugin/utc')
+      dayjs.extend(utc)
+
+      console.log(time, 'before')
+      time = this.dayjs.utc(time).format('YYYY-MM-DD HH:mm:ss');
+      console.log(time, 'after')
       return time;
     },
     closeAlert: function () {
@@ -369,18 +375,20 @@ export default {
         comment: document.getElementById("curComment").value
       }
       console.log(data)
-      axios.request({
-        url: "/add_comment/",
-        baseURL: '/api',
-        method: 'post',
-        data: JSON.stringify(data)
-      })
-          .then(function (response) {
-            that.getComments();
-            that.commentKey += 1;
-          }).catch(function (error) {
-        console.log(error)
-      })
+      if (data.comment !== '' && data.comment !== undefined) {
+        axios.request({
+          url: "/add_comment/",
+          baseURL: '/api',
+          method: 'post',
+          data: JSON.stringify(data)
+        })
+            .then(function (response) {
+              that.getComments();
+              that.commentKey += 1;
+            }).catch(function (error) {
+          console.log(error)
+        })
+      }
     },
     buy: function () {
       let that = this;

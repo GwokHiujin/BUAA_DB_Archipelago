@@ -794,14 +794,19 @@ export default {
       if (that.new_password1 !== that.new_password2) {
         that.alertOpen = true;
       } else {
-        let old_pwd_key = CryptoJS.AES.encrypt(that.old_password, CryptoJS.enc.Utf8.parse(that.$cookies.get("aseKey")), {
-          mode: CryptoJS.mode.ECB,
-          padding: CryptoJS.pad.Pkcs7
-        }).toString();
-        let new_pwd_key = CryptoJS.AES.encrypt(that.new_password1, CryptoJS.enc.Utf8.parse(that.$cookies.get("aseKey")), {
-          mode: CryptoJS.mode.ECB,
-          padding: CryptoJS.pad.Pkcs7
-        }).toString();
+        let old_pwd_key = '';
+        let new_pwd_key = '';
+        if (that.new_password1 !== '' && that.new_password2 !== ''
+            && that.new_password1 !== undefined && that.new_password2 !== undefined) {
+          old_pwd_key = CryptoJS.AES.encrypt(that.old_password, CryptoJS.enc.Utf8.parse(that.$cookies.get("aseKey")), {
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+          }).toString();
+          new_pwd_key = CryptoJS.AES.encrypt(that.new_password1, CryptoJS.enc.Utf8.parse(that.$cookies.get("aseKey")), {
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+          }).toString();
+        }
 
         newUserInfo = {
           name: that.userInfo.name,
