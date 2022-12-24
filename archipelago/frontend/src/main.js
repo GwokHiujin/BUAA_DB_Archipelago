@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
 import axios from "axios";
 import VueCookies from "vue3-cookies";
+import dayjs from 'dayjs'
 
 // styles
 
@@ -111,6 +112,7 @@ const router = createRouter({
 
 const Vue = createApp(App);
 Vue.config.globalProperties.$axios = axios
+Vue.config.globalProperties.dayjs = dayjs;
 
 Vue.use(VueCookies, {
   expireTimes: "1d",

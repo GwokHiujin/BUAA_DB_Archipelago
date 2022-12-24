@@ -53,7 +53,7 @@
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
           >
-            {{order.setTime}}
+            {{timeTrans(order.setTime)}}
           </td>
         </tr>
         </tbody>
@@ -82,6 +82,11 @@ export default {
     this.getOrder();
   },
   methods: {
+    timeTrans: function (data) {
+      let time = data //将需要格式化的数据传入
+      time = this.dayjs(time).format('YYYY-MM-DD HH:mm:ss');
+      return time;
+    },
     getOrder: function () {
       let that = this;
       axios.request({

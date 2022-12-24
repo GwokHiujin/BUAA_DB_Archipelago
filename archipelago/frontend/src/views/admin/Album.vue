@@ -187,7 +187,7 @@
              :src="comment.avatar">
       </div>
       <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
-        <strong>{{comment.username}}</strong> <span class="text-xs text-gray-400">{{comment.setTime}}</span>
+        <strong>{{comment.username}}</strong> <span class="text-xs text-gray-400">{{timeTrans(comment.setTime)}}</span>
         <p class="text-sm w-full">
           {{comment.comment}}
         </p>
@@ -216,6 +216,16 @@ const map = {
     8: 'Original Soundtrack'
   }
 };
+
+let compareTime = function (x, y) {
+  let time1 = Date.parse(x.setTime);
+  let time2 = Date.parse(y.setTime);
+  if (time2 < time1) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
 
 export default {
   name: "Album",
@@ -275,6 +285,11 @@ export default {
     this.getComments();
   },
   methods: {
+    timeTrans: function (data) {
+      let time = data //将需要格式化的数据传入
+      time = this.dayjs(time).format('YYYY-MM-DD HH:mm:ss');
+      return time;
+    },
     closeAlert: function () {
       this.alertOpen = false;
     },
@@ -339,8 +354,8 @@ export default {
         data: JSON.stringify(data)
       })
           .then(function (response) {
+            that.commentList = response.data.commentList.sort(compareTime)
             console.log(response.data.commentList.setTime)
-            that.commentList = response.data.commentList
             console.log(that.commentList)
           }).catch(function (error) {
         console.log(error)
