@@ -66,7 +66,7 @@
                       <span
                           class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
                       >
-                        1
+                        {{musicianInfo.commentNum}}
                       </span>
                       <span class="text-sm text-blueGray-400">
                         评论数
@@ -205,6 +205,7 @@ export default {
         avatar: '',
         followerNum: 0,
         albumNum: 0,
+        commentNum: 0,
       },
       followed: false,
       dataKey: 0,

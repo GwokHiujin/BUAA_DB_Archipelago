@@ -165,28 +165,31 @@
               class="border-0 bg-gray-100 px-3 py-3 placeholder-blueGray-400 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               rows="2"
               placeholder="✨跟大家分享你的看法吧！:)"
+              id="curComment"
           >
               </textarea
               >
         </div>
       </div>
-      <button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+      <button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              @click="addComment()">
         发布评论
       </button>
       <strong class="mb-8 leading-relaxed mt-8">
-        最新评论(1)</strong>
+        最新评论({{commentList.length}})</strong>
     </div>
 
 
-    <div class="flex w-full">
+    <div class="flex w-full" v-for="comment in commentList" :key="commentKey">
       <div class="flex-shrink-0 mr-3">
         <img class="rounded-full w-8 h-8 sm:square-8 border border-white"
-             src="https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=200&q=80" alt="">
+             :src="comment.avatar">
       </div>
       <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
-        <strong>普通用户</strong> <span class="text-xs text-gray-400">20:17</span>
+        <strong>{{comment.username}}</strong> <span class="text-xs text-gray-400">{{comment.setTime}}</span>
         <p class="text-sm w-full">
-          好爱这张专辑！
+          {{comment.comment}}
         </p>
       </div>
     </div>
@@ -251,15 +254,25 @@ export default {
           albumID: -1,
         }
       ],
+      commentList: [
+        {
+          comment: '',
+          username: '',
+          avatar: '',
+          setTime: '',
+        }
+      ],
       alertOpen: false,
       alertOpen1: false,
       map,
+      commentKey: 0,
     }
   },
   mounted() {
     console.log("hey")
     this.getAlbumInfo();
     this.getTags();
+    this.getComments();
   },
   methods: {
     closeAlert: function () {
@@ -308,6 +321,46 @@ export default {
               that.showTags.push(response.data.data.slice(i, i+size));
             }
             that.showTags = that.showTags.slice(1)
+          }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    getComments: function () {
+      let that = this;
+      let aid = that.$route.query.aid;
+      let data = {
+        albumID: aid,
+      }
+      axios.request({
+        url: "/get_comment/",
+        baseURL: '/api',
+        method: 'post',
+        data: JSON.stringify(data)
+      })
+          .then(function (response) {
+            that.commentList = response.data.commentList
+            that.commentList = that.commentList.slice(1)
+            console.log(that.commentList)
+          }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    addComment: function () {
+      let that = this;
+      let aid = that.$route.query.aid;
+      let data = {
+        albumID: aid,
+        comment: document.getElementById("curComment").value
+      }
+      axios.request({
+        url: "/add_comment/",
+        baseURL: '/api',
+        method: 'post',
+        data: JSON.stringify(data)
+      })
+          .then(function (response) {
+            this.getComments();
+            this.commentKey += 1;
           }).catch(function (error) {
         console.log(error)
       })

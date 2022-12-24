@@ -346,7 +346,7 @@
           <form>
             <div class="text-center flex justify-between pb-16">
               <h6 class="text-blueGray-400 text-sm mt-6 mb-6 font-bold uppercase">
-                添加标签 | (请以 tag1;tag2;tag3;... 的格式填写，用分号区分标签！)
+                添加标签 | 请以 tag1;tag2;tag3;... 的格式填写，用分号区分标签
               </h6>
             </div>
 
