@@ -892,11 +892,11 @@ def add_comment(request):
         if email is None:
             return JsonResponse({"errno": 1, "msg": "用户未登录"})
         payload = get_payload(request)
-        album_list = Album.objects.filter(id=payload['data']['albumID'])
+        album_list = Album.objects.filter(id=payload['albumID'])
         if len(album_list) == 0:
             return JsonResponse({"errno": 2, "msg": "不存在此唱片"})
         album = album_list[0]
-        new_comment = Comment(user=User.objects.get(user_id=email), album=album, content=payload['data']['comment'],
+        new_comment = Comment(user=User.objects.get(user_id=email), album=album, content=payload['comment'],
                               time=datetime.datetime.now())
         new_comment.save()
         return JsonResponse({"errno": 0, "msg": "成功"})
@@ -905,7 +905,7 @@ def add_comment(request):
 def get_comment(request):
     if request.method == "POST":
         payload = get_payload(request)
-        album_list = Album.objects.filter(id=payload['data']['albumID'])
+        album_list = Album.objects.filter(id=payload['albumID'])
         if len(album_list) == 0:
             return JsonResponse({"errno": 2, "msg": "不存在此唱片"})
         comment_list = Comment.objects.filter(album=album_list[0])
