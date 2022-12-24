@@ -181,7 +181,7 @@
     </div>
 
 
-    <div class="flex w-full" v-for="comment in commentList" v-if="commentList.length !== 0" :key="commentKey">
+    <div class="flex w-full mt-4" v-for="comment in commentList" v-if="commentList.length !== 0" :key="commentKey">
       <div class="flex-shrink-0 mr-3">
         <img class="rounded-full w-8 h-8 sm:square-8 border border-white"
              :src="comment.avatar">
@@ -304,6 +304,7 @@ export default {
     getTags: function () {
       let that = this;
       let aid = that.$route.query.aid;
+      that.showTags = that.showTags.slice(1);
       let data = {
         albumID: aid,
       }
@@ -320,7 +321,6 @@ export default {
             for(let i = 0; i < response.data.data.length; i += size){
               that.showTags.push(response.data.data.slice(i, i+size));
             }
-            that.showTags = that.showTags.slice(1)
           }).catch(function (error) {
         console.log(error)
       })
@@ -339,6 +339,7 @@ export default {
         data: JSON.stringify(data)
       })
           .then(function (response) {
+            console.log(response.data.commentList.setTime)
             that.commentList = response.data.commentList
             console.log(that.commentList)
           }).catch(function (error) {
@@ -360,8 +361,8 @@ export default {
         data: JSON.stringify(data)
       })
           .then(function (response) {
-            this.getComments();
-            this.commentKey += 1;
+            that.getComments();
+            that.commentKey += 1;
           }).catch(function (error) {
         console.log(error)
       })

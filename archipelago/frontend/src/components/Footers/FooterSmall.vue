@@ -35,7 +35,7 @@
             </li>
             <li>
               <a
-                href="/"
+                href="https://github.com/GwokHiujin/BUAA_DB_Archipelago/blob/main/LICENSE"
                 class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
               >
                 MIT License
