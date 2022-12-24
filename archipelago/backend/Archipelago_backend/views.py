@@ -334,6 +334,8 @@ def get_musician(request):
         if len(musician_list) == 0:
             return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
         musician = musician_list[0]
+        album_list = Album.objects.filter(musician=musician)
+        comment_list = Comment.objects.filter(album__in=album_list)
         return JsonResponse({
             'errno': 0,
             'msg': '成功',
@@ -347,7 +349,8 @@ def get_musician(request):
                 'introduction': musician.info,
                 'avatar': musician.user.avatar,
                 'followerNum': Subscribe.objects.filter(musician=musician).count(),
-                'albumNum': Album.objects.filter(musician=musician).count()
+                'albumNum': album_list.count(),
+                'commentNum': comment_list.count()
             }
         })
     if request.method == "POST":
@@ -356,6 +359,8 @@ def get_musician(request):
         if len(musician_list) == 0:
             return JsonResponse({"errno": 2, "msg": "未绑定音乐人信息"})
         musician = musician_list[0]
+        album_list = Album.objects.filter(musician=musician)
+        comment_list = Comment.objects.filter(album__in=album_list)
         return JsonResponse({
             'errno': 0,
             'msg': '成功',
@@ -369,7 +374,8 @@ def get_musician(request):
                 'introduction': musician.info,
                 'avatar': musician.user.avatar,
                 'followerNum': Subscribe.objects.filter(musician=musician).count(),
-                'albumNum': Album.objects.filter(musician=musician).count()
+                'albumNum': album_list.count(),
+                'commentNum': comment_list.count()
             }
         })
 
@@ -904,5 +910,6 @@ def get_comment(request):
             return JsonResponse({"errno": 2, "msg": "不存在此唱片"})
         comment_list = Comment.objects.filter(album=album_list[0])
         return JsonResponse({"errno": 0, "msg": "成功",
-                             "commentList": [{"comment": c.content, "UE": c.user.user_id, "SetTime": c.time} for c in
-                                             comment_list]})
+                             "commentList": [
+                                 {"comment": c.content, "username": c.user.user_name, 'avatar': c.user.avatar,
+                                  "SetTime": c.time} for c in comment_list]})
