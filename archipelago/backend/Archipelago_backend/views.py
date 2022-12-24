@@ -837,7 +837,7 @@ def upload_img(request):
         # print(get_payload(request))
         saved_img = Image(img=img)
         saved_img.save()
-        return JsonResponse({'img_url': 'http://127.0.0.1:8000' + saved_img.img.url})
+        return JsonResponse({'img_url': url_base + saved_img.img.url})
 
 
 def subscribe(request):
