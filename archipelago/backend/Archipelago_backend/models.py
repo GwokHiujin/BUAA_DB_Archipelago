@@ -87,3 +87,10 @@ class Subscribe(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     musician = models.ForeignKey('Musician', on_delete=models.CASCADE)
     time = models.DateTimeField()
+
+
+class Comment(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    album = models.ForeignKey('Album', on_delete=models.CASCADE)
+    time = models.DateTimeField()
+    content = models.TextField()
