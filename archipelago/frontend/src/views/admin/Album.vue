@@ -375,18 +375,20 @@ export default {
         comment: document.getElementById("curComment").value
       }
       console.log(data)
-      axios.request({
-        url: "/add_comment/",
-        baseURL: '/api',
-        method: 'post',
-        data: JSON.stringify(data)
-      })
-          .then(function (response) {
-            that.getComments();
-            that.commentKey += 1;
-          }).catch(function (error) {
-        console.log(error)
-      })
+      if (data.comment !== '' && data.comment !== undefined) {
+        axios.request({
+          url: "/add_comment/",
+          baseURL: '/api',
+          method: 'post',
+          data: JSON.stringify(data)
+        })
+            .then(function (response) {
+              that.getComments();
+              that.commentKey += 1;
+            }).catch(function (error) {
+          console.log(error)
+        })
+      }
     },
     buy: function () {
       let that = this;
