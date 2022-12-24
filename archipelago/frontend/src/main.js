@@ -113,6 +113,7 @@ const router = createRouter({
 const Vue = createApp(App);
 Vue.config.globalProperties.$axios = axios
 Vue.config.globalProperties.dayjs = dayjs;
+axios.defaults.withCredentials = true;
 
 Vue.use(VueCookies, {
   expireTimes: "1d",

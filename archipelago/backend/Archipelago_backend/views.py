@@ -9,6 +9,7 @@ from django.db.models import F
 from django.http import JsonResponse
 from Archipelago_backend.models import *
 
+url_base = "http://43.143.200.141"
 
 def get_payload(request):
     json_str = request.body.decode()
@@ -65,7 +66,7 @@ def register(request):
         nickname = payload.get("name")
         if nickname == '':
             return JsonResponse({"errno": 4, "msg": "用户名不能为空"})
-        avatar = "http://127.0.0.1:8000/media/imgs/DefaultAvatar.jpg"
+        avatar = url_base + "/media/imgs/DefaultAvatar.jpg"
         password = payload.get("password_1")
         password_check = payload.get("password_2")
         if password_check != password:
@@ -81,7 +82,7 @@ def register(request):
         if type_id == 1:
             print('user is musician')
             new_musician = Musician(user=new_user, musician_name=nickname, nationality='Default_OC',
-                                    photo="http://127.0.0.1:8000/media/imgs/DefaultMusicianPhoto.jpg",
+                                    photo=url_base + "/media/imgs/DefaultMusicianPhoto.jpg",
                                     location='China', theme=' ', found_year=' ', info=' ')
             new_musician.save()
         return JsonResponse({"errno": 0, "msg": "注册成功"})
@@ -237,7 +238,7 @@ def set_album(request):
         musician = musician_list[0]
         new_data = payload['generalInfo']
         tag = new_data['Tag']
-        cover = "http://127.0.0.1:8000/media/imgs/albumCover.jpg"
+        cover = url_base + "/media/imgs/albumCover.jpg"
         if new_data.get('cover') != '':
             cover = new_data.get('cover')
         if tag < 0:
