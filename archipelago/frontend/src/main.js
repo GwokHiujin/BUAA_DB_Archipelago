@@ -118,7 +118,6 @@ axios.defaults.withCredentials = true;
 Vue.use(VueCookies, {
   expireTimes: "1d",
   path: "/",
-  domain: "",
-  secure: true,
+  domain: "43.143.200.141",
   sameSite: "None",
 }).use(router).mount("#app");
