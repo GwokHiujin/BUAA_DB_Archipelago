@@ -21,7 +21,7 @@ module.exports = {
     port: 8080, // 前端项目编译后使用的端口号，跟webpack配置的port同理
     proxy: {
       '/api': {
-        target: "http://43.143.200.141:8888",
+        target: "http://43.143.200.141:8000",
         secure: false,
         ws: true,
         changeOrigin: true,
