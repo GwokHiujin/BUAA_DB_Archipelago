@@ -140,7 +140,7 @@ def set_user_info(request):
                       ]
         payload = payload['newUserInfo']
         if payload.get('password') is not None:
-            if payload.get('password') == 'rBID9l7f56W7tMVYXVk3Jw==':
+            if payload.get('password') == '':
                 del payload['password']
             else:
                 old_password = user[0].password
