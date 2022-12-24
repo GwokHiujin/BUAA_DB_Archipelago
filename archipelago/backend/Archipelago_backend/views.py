@@ -263,8 +263,8 @@ def set_album(request):
             if payload.get('tagList') is None:
                 return JsonResponse({"errno": 0, "msg": "新建唱片并添加歌曲成功！", "albumID": new_album.id})
             for tag_group_json in payload['tagList']:
-                tag_list = [{'tag': elem, 'tagType': tag_group_json['tagType']} for elem in
-                            tag_group_json['tag'].split(';')]
+                text_set = re.split("[;；]", tag_group_json['tag'])
+                tag_list = [{'tag': elem, 'tagType': tag_group_json['tagType']} for elem in text_set]
                 for tag_json in tag_list:
                     if tag_json['tag'] == '':
                         continue
@@ -563,8 +563,8 @@ def add_del_musician_tag(request):
             return JsonResponse({"errno": 1, "msg": "该音乐人不存在"})
         musician = musician[0]
         for tag_group_json in payload['tagList']:
-            tag_list = [{'tag': elem, 'tagType': tag_group_json['tagType']} for elem in
-                        tag_group_json['tag'].split(';')]
+            text_set = re.split("[;；]", tag_group_json['tag'])
+            tag_list = [{'tag': elem, 'tagType': tag_group_json['tagType']} for elem in text_set]
             for tag_json in tag_list:
                 if tag_json['tag'] == '':
                     continue
@@ -712,8 +712,8 @@ def add_del_album_tag(request):
             return JsonResponse({"errno": 1, "msg": "该唱片不存在"})
         album = album[0]
         for tag_group_json in payload['tagList']:
-            tag_list = [{'tag': elem, 'tagType': tag_group_json['tagType']} for elem in
-                        tag_group_json['tag'].split(';')]
+            text_set = re.split("[;；]", tag_group_json['tag'])
+            tag_list = [{'tag': elem, 'tagType': tag_group_json['tagType']} for elem in text_set]
             for tag_json in tag_list:
                 if tag_json['tag'] == '':
                     continue
