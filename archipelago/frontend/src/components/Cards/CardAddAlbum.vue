@@ -48,10 +48,10 @@
                       class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                   >
-                    歌曲时长（单位：秒）
+                    歌曲时长（如 03：40）
                   </label>
                   <input
-                      type="number"
+                      type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       id="newSongTime"
                   />
@@ -346,7 +346,7 @@
           <form>
             <div class="text-center flex justify-between pb-16">
               <h6 class="text-blueGray-400 text-sm mt-6 mb-6 font-bold uppercase">
-                添加标签 | (请以 tag1;tag2;tag3;... 的格式填写，用半角分号区分标签！)
+                添加标签 | (请以 tag1;tag2;tag3;... 的格式填写，用分号区分标签！)
               </h6>
             </div>
 
@@ -489,10 +489,14 @@ export default {
       let name = document.getElementById("newSongName").value;
       let time = document.getElementById("newSongTime").value;
       let ADT = document.getElementById("newSongADT").value;
+      let min = parseInt(time.toString().split(/[:|：]/).at(0))
+      let sec = parseInt(time.toString().split(/[:|：]/).at(1))
+      console.log(min)
+      console.log(sec)
       if (name !== '' && time !== '' && ADT !== '') {
         let newData = {
           name: name,
-          songLast: time,
+          songLast: min * 60 + sec,
           ADT: ADT
         };
         that.discInfo.songs.push(newData);
