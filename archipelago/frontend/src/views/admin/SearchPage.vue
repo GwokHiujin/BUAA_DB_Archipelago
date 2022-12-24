@@ -121,7 +121,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="container px-5 py-24 mx-auto" :key="resultKey">
+                <div class="container px-5 py-8 mx-auto" :key="resultKey">
                   <div class="flex flex-wrap -m-4 flex flex-wrap relative">
                     <div class="lg:w-3/12 md:w-6/12 p-4 w-full"
                          v-for="album in albumList">
