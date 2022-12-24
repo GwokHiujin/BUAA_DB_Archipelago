@@ -9,7 +9,7 @@ from django.db.models import F
 from django.http import JsonResponse
 from Archipelago_backend.models import *
 
-url_base = 'http://43.143.200.141:8888'
+url_base = 'http://43.143.200.141:8000'
 
 
 def get_payload(request):
