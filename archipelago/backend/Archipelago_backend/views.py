@@ -918,14 +918,14 @@ def get_comment(request):
 
 def update_database(request):
     for elem in User.objects.all():
-        elem.avatar.replace('127.0.0.1:8000', '43.143.200.141:80')
+        elem.avatar = elem.avatar.replace('127.0.0.1:8000', '43.143.200.141:80')
         print(elem.avatar)
         elem.save()
     for elem in Musician.objects.all():
-        elem.photo.replace('127.0.0.1:8000', '43.143.200.141:80')
-        print(elem.avatar)
+        elem.photo = elem.photo.replace('127.0.0.1:8000', '43.143.200.141:80')
+        print(elem.photo)
         elem.save()
     for elem in Album.objects.all():
-        elem.cover.replace('127.0.0.1:8000', '43.143.200.141:80')
-        print(elem.avatar)
+        elem.cover = elem.cover.replace('127.0.0.1:8000', '43.143.200.141:80')
+        print(elem.cover)
         elem.save()
