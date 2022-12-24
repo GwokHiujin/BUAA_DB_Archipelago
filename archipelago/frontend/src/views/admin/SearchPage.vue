@@ -88,8 +88,40 @@
                 </div>
               </section>
 
-              <section class="text-gray-600 body-font">
-                <div class="container px-5 py-24 mx-auto">
+              <section class="text-gray-600 body-font"
+                       v-else>
+                <div class="w-full flex-wrap flex justify-center items-center">
+                  <div class="w-6/12 justify-center flex flex-wrap relative">
+                    <div class="lg:w-3/12 mt-0 lg:order-1">
+                      <p class="leading-relaxed mt-2 text-sm text-center underline hover:text-emerald-600" v-bind:class="{'text-emerald-600': optionNum === 1, 'text-gray-500': optionNum !== 1}"
+                         @click="option(1)">
+                        按销量排序 / 升序
+                      </p>
+                    </div>
+
+                    <div class="lg:w-3/12 mt-0 lg:order-1">
+                      <p class="leading-relaxed mt-2 text-sm text-center underline hover:text-emerald-600" v-bind:class="{'text-emerald-600': optionNum === 2, 'text-gray-500': optionNum !== 2}"
+                         @click="option(2)">
+                        按销量排序 / 降序
+                      </p>
+                    </div>
+
+                    <div class="lg:w-3/12 mt-0 lg:order-1">
+                      <p class="leading-relaxed mt-2 text-sm text-center underline hover:text-emerald-600" v-bind:class="{'text-emerald-600': optionNum === 3, 'text-gray-500': optionNum !== 3}"
+                         @click="option(3)">
+                        按名称排序 / 升序
+                      </p>
+                    </div>
+
+                    <div class="lg:w-3/12 mt-0 lg:order-1">
+                      <p class="leading-relaxed mt-2 text-sm text-center underline hover:text-emerald-600" v-bind:class="{'text-emerald-600': optionNum === 4, 'text-gray-500': optionNum !== 4}"
+                         @click="option(4)">
+                        按名称排序 / 降序
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="container px-5 py-24 mx-auto" :key="resultKey">
                   <div class="flex flex-wrap -m-4 flex flex-wrap relative">
                     <div class="lg:w-3/12 md:w-6/12 p-4 w-full"
                          v-for="album in albumList">
@@ -125,6 +157,46 @@
 <script>
 import axios from "axios";
 
+let compareBySV = function (x, y) {
+  let sv1 = x.salesVolume;
+  let sv2 = y.salesVolume;
+  if (sv1 > sv2) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+let compareBySV1 = function (x, y) {
+  let sv1 = x.salesVolume;
+  let sv2 = y.salesVolume;
+  if (sv1 < sv2) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+let compareByName = function (x, y) {
+  let name1 = x.albumName;
+  let name2 = y.albumName;
+  if (name1 < name2) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+let compareByName1 = function (x, y) {
+  let name1 = x.albumName;
+  let name2 = y.albumName;
+  if (name1 > name2) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
 export default {
   name: "SearchPage",
   data() {
@@ -148,6 +220,8 @@ export default {
         }
       ],
       keyWord: '',
+      optionNum: 1,
+      resultKey: 1,
     }
   },
   mounted() {
@@ -171,6 +245,20 @@ export default {
     toggleTabs: function (tabNum) {
       this.openTab = tabNum;
     },
+    option: function (op) {
+      let that = this;
+      this.optionNum = op;
+      if (op === 1) {
+        that.albumList.sort(compareBySV)
+      } else if (op === 2) {
+        that.albumList.sort(compareBySV1)
+      } else if (op === 3) {
+        that.albumList.sort(compareByName)
+      } else if (op === 4) {
+        that.albumList.sort(compareByName1)
+      }
+      this.resultKey += 1;
+    },
     searchString: function () {
       let question;
       let that = this;
@@ -193,6 +281,7 @@ export default {
           .then((response) => {
             that.musicianList = response.data.musicianList;
             that.albumList = response.data.albumList;
+            that.albumList = that.albumList.sort(compareBySV);
             console.log(response.data)
           }).catch((e) => {
         console.log(e)

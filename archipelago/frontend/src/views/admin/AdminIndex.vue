@@ -6,7 +6,7 @@
         <div class="w-full mb-20 justify-center flex flex-wrap relative">
           <div class="lg:w-6/12 mb-6 lg:mb-0">
             <h1 class="text-5xl font-semibold leading-normal mb-2 text-blueGray-700">
-              本周推荐 🎧
+              本周推荐 🏝
             </h1>
             <div class="h-1 w-16 bg-emerald-500 rounded"></div>
           </div>

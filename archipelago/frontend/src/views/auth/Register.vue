@@ -1,4 +1,32 @@
 <template>
+  <div v-if="alertOpen"
+       class="top-95-px px-12 mx-64 md:w-6/12 overflow-x-hidden overflow-y-auto rounded fixed inset-0 z-50 outline-none text-white py-4 border-0 fixed bg-pink-500 justify-center items-center flex">
+    <span class="text-xl inline-block mr-5 align-middle">
+      <i class="fas fa-bell"></i>
+    </span>
+    <span class="inline-block align-middle mr-8 px-2">
+      <b class="capitalize">注册失败！</b> ☹ 请检查您是否输入了正确的信息！
+    </span>
+    <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
+            v-on:click="closeAlert()">
+      <span>×</span>
+    </button>
+  </div>
+
+  <div v-if="alertOpen1"
+       class="top-95-px px-12 mx-64 md:w-6/12 overflow-x-hidden overflow-y-auto rounded fixed inset-0 z-50 outline-none text-white py-4 border-0 fixed bg-emerald-500 justify-center items-center flex">
+    <span class="text-xl inline-block mr-5 align-middle">
+      <i class="fas fa-bell"></i>
+    </span>
+    <span class="inline-block align-middle mr-8 px-2">
+      <b class="capitalize">注册成功！</b> ✨ 即将为您跳转到登录页...
+    </span>
+    <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
+            v-on:click="closeAlert1()">
+      <span>×</span>
+    </button>
+  </div>
+
   <div class="container mx-auto px-4 h-full">
     <div class="flex content-center items-center justify-center h-full">
       <div class="w-full lg:w-6/12 px-4">
@@ -122,7 +150,9 @@ export default {
   name: 'Register',
   data() {
     return {
-      userType: -1
+      userType: -1,
+      alertOpen: false,
+      alertOpen1: false,
     }
   },
   components: {
@@ -139,6 +169,12 @@ export default {
     setMusician: function () {
       let that = this;
       that.userType = 1;
+    },
+    closeAlert: function () {
+      this.alertOpen = false;
+    },
+    closeAlert1: function () {
+      this.alertOpen1 = false;
     },
     register: function () {
       let params;
@@ -164,7 +200,12 @@ export default {
         data: JSON.stringify(params)
       }).then(res => {
         console.log(res.data);
-        this.$router.push("/auth/login");
+        if (res.data.errno === 0) {
+          this.alertOpen1 = true;
+          this.$router.push("/auth/login");
+        } else {
+          this.alertOpen = true;
+        }
       }).catch(err => {
         console.log(err)
       })

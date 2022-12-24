@@ -14,7 +14,7 @@
             <p class="mt-4 text-lg leading-relaxed text-blueGray-500">
               <a
                 href="/"
-                class="text-blueGray-600"
+                class="text-blueGray-600 hover:text-emerald-600"
               >
                 群岛 Archipelago
               </a>
