@@ -12,12 +12,13 @@
               alt="..."
             />
             <p class="mt-4 text-lg leading-relaxed text-blueGray-500">
-              <a
-                href="/"
-                class="text-blueGray-600 hover:text-emerald-600"
-              >
-                群岛 Archipelago
-              </a>
+              <router-link to="/">
+                <a
+                  class="text-blueGray-600 hover:text-emerald-600"
+                >
+                  群岛 Archipelago
+                </a>
+              </router-link>
               是一款专注于独立音乐人的数字唱片销售平台，也是音乐发烧友们发掘优秀作品、联系并直接支持小众艺术家们的音乐交流社区。<br>欢迎加入我们，邂逅属于你的音乐岛屿！
             </p>
             <div class="mt-12">
@@ -228,13 +229,14 @@
                 ……
               </span>
             </div>
-            <a
-              href="/auth"
-              class="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-            >
-              加入群岛
-              <i class="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-            </a>
+            <router-link to="/auth">
+              <a
+                class="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+              >
+                加入群岛
+                <i class="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+              </a>
+            </router-link>
           </div>
 
           <div class="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
@@ -411,13 +413,14 @@
                 ……
               </span>
             </div>
-            <a
-                href="/auth"
-                class="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-            >
-              加入群岛
-              <i class="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-            </a>
+            <router-link to="/auth">
+              <a
+                  class="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+              >
+                加入群岛
+                <i class="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+              </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -432,13 +435,14 @@
             助力优秀的独立音乐创作。用户可以方便快捷地购买数字唱片,
             支持自己喜爱的艺术家。
           </p>
-          <a
-              href="/auth"
-              class="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-          >
-            加入群岛
-            <i class="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-          </a>
+          <router-link to="/auth">
+            <a
+                class="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+            >
+              加入群岛
+              <i class="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+            </a>
+          </router-link>
         </div>
       </div>
     </section>
@@ -526,12 +530,13 @@
               欢迎注册成为群岛的一员！开发者衷心希望你能够在此邂逅自己的音乐岛屿。
             </p>
             <div class="sm:block flex flex-col mt-10">
-              <a
-                href="/auth"
-                class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-emerald-500 active:bg-emerald-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-              >
-                Get started
-              </a>
+              <router-link to="/auth">
+                <a
+                  class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-emerald-500 active:bg-emerald-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                >
+                  Get started
+                </a>
+              </router-link>
               <a
                 href="https://github.com/GwokHiujin/BUAA_DB_Archipelago/"
                 target="_blank"
