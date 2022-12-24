@@ -71,12 +71,19 @@
 
     <section class="text-gray-600 body-font justify-center flex flex-wrap relative w-full items-center">
       <div class="container px-5 py-4 mx-auto">
-        <div class="flex flex-col text-center w-full mb-12 items-center">
+        <div class="flex flex-col text-center w-full items-center">
           <h1 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
             👨‍🎤 最受欢迎音乐人 👩‍🎤
           </h1>
-          <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+          <p class="lg:w-8/12 mx-auto leading-relaxed text-base">
             群岛为您推荐了这些平台最受欢迎音乐人——看看有没有您心仪的乐手吧！
+          </p>
+        </div>
+
+        <div class="lg:w-6/12 mt-10 mb-12 ml-3">
+          <p class="leading-relaxed text-gray-500 mt-2 text-sm text-left underline hover:text-emerald-600"
+             @click="getData()">
+            没有喜欢的？点击换一批：
           </p>
         </div>
 
@@ -103,15 +110,22 @@
 
     <section class="text-gray-600 body-font justify-center flex flex-wrap relative">
       <div class="container px-4 lg:pt-24 mx-auto">
-        <div class="flex flex-col text-center w-full mb-24">
+        <div class="flex flex-col text-center w-full">
           <h1 class="text-3xl font-semibold leading-normal mb-2 text-blueGray-700">
             自由探索心仪的流派标签
           </h1>
-          <p class="lg:w-2/3 mx-auto leading-relaxed text-base mt-2">
+          <p class="lg:w-8/12 mx-auto leading-relaxed text-base mt-2">
             🎸 群岛平台为您推荐这些音乐标签，点击即可自由探索音乐岛屿！
           </p>
-          <p class="lg:w-2/3 mx-auto leading-relaxed text-base mt-2">
+          <p class="lg:w-8/12 mx-auto leading-relaxed text-base mt-2">
             💖 邂逅喜欢的音乐后，别忘了分享给您的朋友~
+          </p>
+        </div>
+
+        <div class="lg:w-6/12 mt-10 mb-12 ml-3">
+          <p class="leading-relaxed text-gray-500 mt-2 text-sm text-left underline hover:text-emerald-600"
+             @click="getData()">
+            没有喜欢的？点击换一批：
           </p>
         </div>
         
