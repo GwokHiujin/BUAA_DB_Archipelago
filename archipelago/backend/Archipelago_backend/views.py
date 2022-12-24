@@ -910,5 +910,6 @@ def get_comment(request):
             return JsonResponse({"errno": 2, "msg": "不存在此唱片"})
         comment_list = Comment.objects.filter(album=album_list[0])
         return JsonResponse({"errno": 0, "msg": "成功",
-                             "commentList": [{"comment": c.content, "UE": c.user.user_id, "SetTime": c.time} for c in
-                                             comment_list]})
+                             "commentList": [
+                                 {"comment": c.content, "username": c.user.user_name, 'avatar': c.user.avatar,
+                                  "SetTime": c.time} for c in comment_list]})
