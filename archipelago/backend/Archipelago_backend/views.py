@@ -29,7 +29,7 @@ def get_user(email):
 # Create your views here.
 # 10.12: 初步实验，注册及登录的部分逻辑
 def login(request):
-    update_database(request)
+    # update_database(request)
     if request.method == "POST":
         print(request.body)
         payload = get_payload(request)
