@@ -298,7 +298,7 @@ def set_album(request):
             ('resource', 'source')
         ]
         for elem in cast_list:
-            if new_data.get(elem[0]) is not None:
+            if new_data.get(elem[0]) is not None and payload.get(elem[0]) != '':
                 update_data = {elem[1]: payload.get(elem[0])}
                 old_album.update(**update_data)
                 # old_album.save()
@@ -416,7 +416,7 @@ def set_musician(request):
             ('introduction', 'info')
         ]
         for elem in cast_list:
-            if payload.get(elem[0]) is not None:
+            if payload.get(elem[0]) is not None and payload.get(elem[0]) != '':
                 update_data = {elem[1]: payload.get(elem[0])}
                 print(update_data)
                 musician.update(**update_data)
@@ -438,9 +438,9 @@ def add_musician_member(request):
         musician = musician_list[0]
         if musician.id != int(payload.get('musicianID')):
             return JsonResponse({"errno": 3, "msg": "错误绑定音乐人信息", "correct_musicianID": musician.id})
-        old_member = MusicianMember.objects.filter(musician=musician, member_name=payload.get('N'))
+        old_member = MusicianMember.objects.filter(musician=musician, member_name=payload.get('name'))
         if len(old_member) != 0:
-            return JsonResponse({"errno": 4, "msg": "该成员已存在"})
+            return set_musician_member(request)
         new_member = MusicianMember(musician=musician,
                                     member_name=payload.get('name'),
                                     birthday=payload.get('birthday'),
@@ -470,9 +470,8 @@ def set_musician_member(request):
         #     return JsonResponse({"errno": 3, "msg": "错误绑定音乐人信息"})
         old_member = MusicianMember.objects.select_for_update().filter(musician=musician,
                                                                        member_name=payload.get('name'))
-        if len(old_member) != 1:
+        if len(old_member) < 1:
             return JsonResponse({"errno": 4, "msg": "该成员不存在"})
-        old_member = old_member[0]
         cast_list = [
             # ('N', 'member_name'),
             ('birthday', 'birthday'),
@@ -480,10 +479,9 @@ def set_musician_member(request):
             ('activeYear', 'active_year')
         ]
         for elem in cast_list:
-            if payload.get(elem[0]) is not None:
+            if payload.get(elem[0]) is not None and payload.get(elem[0]) != '':
                 update_data = {elem[1]: payload.get(elem[0])}
                 old_member.update(**update_data)
-                old_member.save()
         all_member = MusicianMember.objects.filter(musician=musician)
         all_member = [{"name": member.member_name,
                        "birthday": member.birthday,
@@ -522,7 +520,7 @@ def del_musician_member(request):
         # if musician.id != payload.get('MID'):
         #     return JsonResponse({"errno": 3, "msg": "错误绑定音乐人信息"})
         old_member = MusicianMember.objects.filter(musician=musician, member_name=payload.get('name'))
-        if len(old_member) != 1:
+        if len(old_member) < 1:
             return JsonResponse({"errno": 4, "msg": "该成员不存在"})
         old_member = old_member[0]
         old_member.delete()
@@ -811,7 +809,7 @@ def get_homepage_info(request):
                                                    min(6, Musician.objects.count()))]
         select_tags = [Tag.objects.all()[i] for i in
                        random.Random().sample(range(0, Tag.objects.count()), min(6, Tag.objects.count()))]
-        select_albums = Album.objects.filter().order_by('-sales_volume')[:min(4, Album.objects.count())]
+        select_albums = Album.objects.filter().order_by('-sales_volume')[:min(8, Album.objects.count())]
         musician_list = [
             {"musicianID": m.id, "musicianName": m.musician_name, "photo": m.photo} for m in select_musicians]
         album_list = [{"albumID": a.id, "albumName": a.album_name, "author": a.album_producer, "cover": a.cover,
