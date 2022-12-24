@@ -2626,6 +2626,11 @@ select {
   height: 15rem;
 }
 
+.square-album {
+  width: 25rem;
+  height: 25rem;
+}
+
 .square-avatar {
   width: 12rem;
   height: 12rem;

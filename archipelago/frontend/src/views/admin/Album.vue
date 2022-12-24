@@ -31,8 +31,10 @@
   <section class="text-gray-600 body-font w-full items-center">
     <div class="container px-5 pt-24 pb-16 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
-        <img alt="ecommerce" class="lg:w-6/12 w-full lg:h-auto h-64 md:w-64 object-cover object-center rounded"
-             :src=generalInfo.cover>
+        <a class="block relative square-album rounded overflow-hidden">
+          <img class="object-cover object-center w-full h-full block rounded"
+               :src=generalInfo.cover>
+        </a>
         <div class="lg:w-6/12 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 pl-10">
           <h2 class="text-sm title-font text-gray-500 tracking-widest">
             {{generalInfo.releaseYear}}
