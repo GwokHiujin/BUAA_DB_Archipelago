@@ -327,6 +327,7 @@ export default {
     },
     getComments: function () {
       let that = this;
+      that.commentList = that.commentList.slice(1);
       let aid = that.$route.query.aid;
       let data = {
         albumID: aid,
@@ -339,7 +340,6 @@ export default {
       })
           .then(function (response) {
             that.commentList = response.data.commentList
-            that.commentList = that.commentList.slice(1)
             console.log(that.commentList)
           }).catch(function (error) {
         console.log(error)
