@@ -19,13 +19,6 @@
           </div>
         </div>
 
-        <div class="lg:w-6/12 mt-10">
-          <p class="leading-relaxed text-gray-500 mt-2 text-sm text-left underline hover:text-emerald-600"
-             @click="getData()">
-            没有喜欢的？点击换一批：
-          </p>
-        </div>
-
         <div class="flex flex-wrap -m-4 justify-center flex flex-wrap relative mt-12">
           <div class="xl:w-3/12 md:w-6/12 p-4" v-for="album in albumList">
             <div class="bg-gray-100 p-6 rounded-lg h-500-px"
@@ -268,6 +261,7 @@ export default {
         method: 'get',
       })
           .then(function (response) {
+            console.log(response.data)
             that.musicianList = response.data.musicianList
             that.albumList = response.data.albumList
             that.tagList = response.data.tagList

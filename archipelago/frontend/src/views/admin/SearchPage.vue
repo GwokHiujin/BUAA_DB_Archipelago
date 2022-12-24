@@ -197,6 +197,36 @@ let compareByName1 = function (x, y) {
   }
 }
 
+let removeDuplicateMusician = function (obj) {
+  let len = obj.length;
+  for (let i = 0; i < len; i++) {
+    for (let j = i + 1; j < len; j++) {
+      if (obj[i].musicianID === obj[j].musicianID) {
+        obj.splice(j, 1);
+        len--;
+        j--;
+      }
+    }
+  }
+  return obj;
+}
+
+let removeDuplicateAlbum = function (obj) {
+  let len = obj.length;
+  console.log(obj, "before")
+  for (let i = 0; i < len; i++) {
+    for (let j = i + 1; j < len; j++) {
+      if (obj[i].albumID === obj[j].albumID) {
+        obj.splice(j, 1);
+        len--;
+        j--;
+      }
+    }
+  }
+  console.log(obj, "after")
+  return obj;
+}
+
 export default {
   name: "SearchPage",
   data() {
@@ -279,8 +309,8 @@ export default {
         data: JSON.stringify(question)
       })
           .then((response) => {
-            that.musicianList = response.data.musicianList;
-            that.albumList = response.data.albumList;
+            that.musicianList = removeDuplicateMusician(response.data.musicianList);
+            that.albumList = removeDuplicateAlbum(response.data.albumList);
             that.albumList = that.albumList.sort(compareBySV);
             console.log(response.data)
           }).catch((e) => {

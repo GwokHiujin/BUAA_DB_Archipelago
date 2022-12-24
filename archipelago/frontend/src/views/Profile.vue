@@ -6,7 +6,7 @@
         <div
           class="absolute top-0 w-full h-full bg-center bg-cover"
         >
-          <img :src="musicianInfo.photo" class="w-full bg-cover bg-center"/>
+          <img :src="musicianInfo.photo" class="w-full object-cover bg-cover"/>
           <span
             id="blackOverlay"
             class="w-full h-full absolute opacity-50 bg-black"

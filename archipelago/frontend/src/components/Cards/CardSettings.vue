@@ -794,8 +794,8 @@ export default {
       if (that.new_password1 !== that.new_password2) {
         that.alertOpen = true;
       } else {
-        let old_pwd_key = '';
-        let new_pwd_key = '';
+        let old_pwd_key = this.$cookies.get("userInfo_password");
+        let new_pwd_key = this.$cookies.get("userInfo_password");
         if (that.new_password1 !== '' && that.new_password2 !== ''
             && that.new_password1 !== undefined && that.new_password2 !== undefined) {
           old_pwd_key = CryptoJS.AES.encrypt(that.old_password, CryptoJS.enc.Utf8.parse(that.$cookies.get("aseKey")), {
@@ -829,6 +829,7 @@ export default {
             this.componentKey1 += 1;
             this.$emit('change', this.componentKey1);
           } else {
+            console.log(res.data)
             that.alertOpen = true;
           }
         }).catch(err => {
