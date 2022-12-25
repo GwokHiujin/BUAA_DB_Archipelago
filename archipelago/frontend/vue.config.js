@@ -18,10 +18,10 @@ module.exports = {
   },
   devServer: {
     host: '0.0.0.0', // 默认是localhost
-    port: 8000, // 前端项目编译后使用的端口号，跟webpack配置的port同理
+    port: 8080, // 前端项目编译后使用的端口号，跟webpack配置的port同理
     proxy: {
       '/api': {
-        target: "http://localhost:8000",
+        target: "http://43.143.200.141:8000",
         secure: false,
         ws: true,
         changeOrigin: true,
